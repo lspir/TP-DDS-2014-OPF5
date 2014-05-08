@@ -1,15 +1,15 @@
 package OPF5;
 
-public class Condicional implements TipoDeInscripcion{
-	public Boolean dejasPasar(){
+public class Condicional implements TipoDeInscripcion {
+	public Boolean dejasPasar() {
 		return true;
 	}
 
-public Boolean tePodesInscribirA(Partido partido){
-	return false;
+	public Boolean tePodesInscribirA(Partido partido) {
+		return false;
 	}
 
-public Boolean prioridadMinima(){
-	return true;
-}
+	public Boolean prioridadMinima() {
+		return true;
+	}
 }
