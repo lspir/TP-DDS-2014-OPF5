@@ -4,9 +4,9 @@ public class Inscripcion {
 	Jugador jugador;
 	TipoDeInscripcion tipoDeInscripcion;
 
-	public Inscripcion(Jugador jugadorI, TipoDeInscripcion tipoI) {
-		jugador = jugadorI;
-		tipoDeInscripcion = tipoI;
+	public Inscripcion(Jugador jugador, TipoDeInscripcion tipoDeInscripcion) {
+		this.jugador = jugador;
+		this.tipoDeInscripcion = tipoDeInscripcion;
 	}
 
 	public String nuevaInscripcionA(Partido partido) {
