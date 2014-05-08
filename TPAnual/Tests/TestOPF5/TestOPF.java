@@ -34,25 +34,25 @@ public class TestOPF {
 		for (int i = 0; i < 6; i++) {
 			jugador1 = new Jugador("Ronaldo", 28);
 			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
-			inscripcion1.nuevaInscripcionA(partido);
+			partido.intenatarInscribirA(inscripcion1);
 		}
 
 		for (int i = 0; i < 10; i++) {
 			jugador1 = new Jugador("Ronaldo", 28);
 			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
-			inscripcion1.nuevaInscripcionA(partido2);
+			partido2.intenatarInscribirA(inscripcion1);
 		}
 
 		for (int i = 0; i < 11; i++) {
 			jugador2 = new Jugador("nombre", 20);
 			inscripcion2 = new Inscripcion(jugador2, solidario);
-			inscripcion2.nuevaInscripcionA(partido3);
+			partido3.intenatarInscribirA(inscripcion2);
 		}
 
 		for (int i = 0; i < 11; i++) {
 			jugador1 = new Jugador("Ronaldo", 28);
 			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
-			inscripcion1.nuevaInscripcionA(partido4);
+			partido4.intenatarInscribirA(inscripcion1);
 		}
 
 	}
@@ -60,23 +60,23 @@ public class TestOPF {
 	@Test
 	public void Hay5EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRealiza() {
 		assertEquals("Inscripción realizada",
-				inscripcion2.nuevaInscripcionA(partido));
+				partido.intenatarInscribirA(inscripcion2));
 	}
 
 	@Test
 	public void Hay10EstandarSeQuiereAnotarUnEstandarMasYLaInscripcionSeRechaza() {
-		assertEquals("Cupos Llenos", inscripcion3.nuevaInscripcionA(partido2));
+		assertEquals("Cupos Llenos", partido2.intenatarInscribirA(inscripcion3));
 	}
 
 	@Test
 	public void Hay10SolidariosSeQuiereAnotar1EstandarYLaInscripcionEsCorrecta() {
 		assertEquals("inscripcion correcta",
-				inscripcion3.nuevaInscripcionA(partido3));
+				partido3.intenatarInscribirA(inscripcion3));
 	}
 
 	@Test
 	public void Hay10EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRechaza() {
-		assertEquals("Cupos Llenos", inscripcion2.nuevaInscripcionA(partido4));
+		assertEquals("Cupos Llenos", partido4.intenatarInscribirA(inscripcion2));
 	}
 
 }

@@ -16,13 +16,13 @@ public class Prueba {
 			Jugador jugador1 = new Jugador("Ronaldo", 28);
 
 			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
-			System.out.println(inscripcion1.nuevaInscripcionA(partido));
+			System.out.println(partido.intenatarInscribirA(inscripcion1));
 
 		}
 
 		Jugador jugador2 = new Jugador("Bely", 20);
 		Inscripcion inscripcion2 = new Inscripcion(jugador2, estandar);
-		System.out.println(inscripcion2.nuevaInscripcionA(partido));
+		System.out.println(partido.intenatarInscribirA(inscripcion2));
 
 		/*
 		 * List<Integer> lista = new ArrayList<Integer>(); for (int i=0; i<10;

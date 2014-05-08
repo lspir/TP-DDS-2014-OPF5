@@ -9,10 +9,6 @@ public class Inscripcion {
 		this.tipoDeInscripcion = tipoDeInscripcion;
 	}
 
-	public String nuevaInscripcionA(Partido partido) {
-		return partido.tenesNuevaInscripcion(this);
-	}
-
 	public Boolean dejasPasarTuTipo() {
 		return this.tipoDeInscripcion.dejasPasar();
 	}

@@ -22,7 +22,7 @@ public class Partido {
 		return this.inscripciones;
 	}
 
-	public String tenesNuevaInscripcion(Inscripcion inscripcion) {
+	public String intenatarInscribirA(Inscripcion inscripcion) {
 		if (this.inscripciones.size() < 10) {
 			inscripciones.add(inscripcion);
 
