@@ -22,19 +22,15 @@ public class Partido {
 		return this.inscripciones;
 	}
 
-	public String intenatarInscribirA(Inscripcion inscripcion) {
+	public void intenatarInscribirA(Inscripcion inscripcion) {
 		if (this.inscripciones.size() < 10) {
 			inscripciones.add(inscripcion);
-
-			return "Inscripción realizada";
 		} else {
-			if (((this.inscripciones.stream().filter(ins -> !(ins
-					.dejasPasarTuTipo()))).collect(Collectors.toList()).size()) == (10))
 			// si está lleno de gente que no deja pasar(estándares)
-			{
-				return "Cupos Llenos";
-			} else {
-				return inscripcion.inscribiteSiPodesA(this);
+			if (this.inscripciones.stream()
+					.filter(ins -> !ins.dejasPasarTuTipo())
+					.collect(Collectors.toList()).size() != (10)) {
+				inscripcion.inscribiteSiPodesA(this);
 			}
 		}
 	}

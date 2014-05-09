@@ -1,10 +1,13 @@
 package TestOPF5;
 
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import static org.junit.Assert.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Before;
+import org.junit.Test;
 
 import OPF5.Estandar;
 import OPF5.Inscripcion;
@@ -56,11 +59,17 @@ public class TestOPF {
 		}
 
 	}
+	
+	/*private void foo() {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("hola", 1);
+		map.get("hola");
+	}*/
 
 	@Test
 	public void Hay5EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRealiza() {
-		assertEquals("Inscripción realizada",
-				partido.intenatarInscribirA(inscripcion2));
+		partido.intenatarInscribirA(inscripcion2);
+		assertTrue(partido.inscripciones().contains(inscripcion2));
 	}
 
 	@Test
