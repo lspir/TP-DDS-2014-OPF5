@@ -14,6 +14,7 @@ import OPF5.Inscripcion;
 import OPF5.Jugador;
 import OPF5.Partido;
 import OPF5.Solidario;
+import OPF5.Condicional;
 
 public class TestOPF {
 
@@ -21,11 +22,14 @@ public class TestOPF {
 	Partido partido2 = new Partido("4/5", "21:00", "Campus");
 	Partido partido3 = new Partido("4/5", "21:00", "Campus");
 	Partido partido4 = new Partido("4/5", "21:00", "Campus");
+	Partido partido5 = new Partido("4/5", "21:00", "Campus");
+	
 	Estandar estandar = new Estandar();
 	Solidario solidario = new Solidario();
 	Jugador jugador1, jugador2, jugador3, jugador4;
 	Inscripcion inscripcion1, inscripcion2, inscripcion3;
-
+	Condicional condicional = new Condicional();
+	
 	@Before
 	public void setUp() {
 
@@ -37,28 +41,54 @@ public class TestOPF {
 		for (int i = 0; i < 6; i++) {
 			jugador1 = new Jugador("Ronaldo", 28);
 			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
-			partido.intenatarInscribirA(inscripcion1);
+			partido.intentarInscribirA(inscripcion1);
 		}
 
 		for (int i = 0; i < 10; i++) {
 			jugador1 = new Jugador("Ronaldo", 28);
 			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
-			partido2.intenatarInscribirA(inscripcion1);
+			partido2.intentarInscribirA(inscripcion1);
 		}
 
 		for (int i = 0; i < 11; i++) {
 			jugador2 = new Jugador("nombre", 20);
 			inscripcion2 = new Inscripcion(jugador2, solidario);
-			partido3.intenatarInscribirA(inscripcion2);
+			partido3.intentarInscribirA(inscripcion2);
 		}
 
 		for (int i = 0; i < 11; i++) {
 			jugador1 = new Jugador("Ronaldo", 28);
 			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
-			partido4.intenatarInscribirA(inscripcion1);
+			partido4.intentarInscribirA(inscripcion1);
 		}
 
+		
+		for (int i = 0; i < 9; i++) {
+			jugador1 = new Jugador("Ronaldo", 28);
+			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
+			partido5.intentarInscribirA(inscripcion1);
+		}
+		Inscripcion inscripcionSolidario = new Inscripcion(jugador2, solidario);
+		partido5. intentarInscribirA(inscripcionSolidario);
+		
+		
+		Inscripcion inscripcionCondicional = new Inscripcion(jugador2, condicional);
+		partido5. intentarInscribirA(inscripcionCondicional);
+		
+		
+		
 	}
+	
+
+	@Test
+	public void hola()
+	{
+		Jugador emiliano = new Jugador("Emiliano", 28);
+		Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
+		partido5.intentarInscribirA(inscripcionEmi);
+		assertTrue(partido5.inscripciones().contains(inscripcionEmi));
+	}
+	
 	
 	/*private void foo() {
 		Map<String, Integer> map = new HashMap<>();
@@ -68,24 +98,26 @@ public class TestOPF {
 
 	@Test
 	public void Hay5EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRealiza() {
-		partido.intenatarInscribirA(inscripcion2);
+		partido.intentarInscribirA(inscripcion2);
 		assertTrue(partido.inscripciones().contains(inscripcion2));
 	}
 
-	@Test
+	/*@Test
 	public void Hay10EstandarSeQuiereAnotarUnEstandarMasYLaInscripcionSeRechaza() {
-		assertEquals("Cupos Llenos", partido2.intenatarInscribirA(inscripcion3));
+		assertEquals("Cupos Llenos", partido2.intentarInscribirA(inscripcion3));
 	}
 
 	@Test
 	public void Hay10SolidariosSeQuiereAnotar1EstandarYLaInscripcionEsCorrecta() {
 		assertEquals("inscripcion correcta",
-				partido3.intenatarInscribirA(inscripcion3));
+				partido3.intentarInscribirA(inscripcion3));
 	}
 
 	@Test
 	public void Hay10EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRechaza() {
-		assertEquals("Cupos Llenos", partido4.intenatarInscribirA(inscripcion2));
-	}
+		assertEquals("Cupos Llenos", partido4.intentarInscribirA(inscripcion2));
+	}*/
+	
+	
 
 }

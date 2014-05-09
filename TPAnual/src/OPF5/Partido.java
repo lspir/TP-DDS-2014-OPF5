@@ -10,6 +10,7 @@ public class Partido {
 	private String horaPartido;
 	private String lugarPartido;
 	private List<Inscripcion> inscripciones;
+	private List<Inscripcion> rechazados;
 
 	public Partido(String dia, String hora, String lugar) {
 		diaPartido = dia;
@@ -22,11 +23,11 @@ public class Partido {
 		return this.inscripciones;
 	}
 
-	public void intenatarInscribirA(Inscripcion inscripcion) {
+	public void intentarInscribirA(Inscripcion inscripcion) {
 		if (this.inscripciones.size() < 10) {
 			inscripciones.add(inscripcion);
 		} else {
-			// si está lleno de gente que no deja pasar(estándares)
+			// si está lleno de estándares
 			if (this.inscripciones.stream()
 					.filter(ins -> !ins.dejasPasarTuTipo())
 					.collect(Collectors.toList()).size() != (10)) {
