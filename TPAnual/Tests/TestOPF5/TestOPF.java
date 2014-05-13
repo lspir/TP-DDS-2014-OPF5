@@ -90,11 +90,7 @@ public class TestOPF {
 	}
 	
 	
-	/*private void foo() {
-		Map<String, Integer> map = new HashMap<>();
-		map.put("hola", 1);
-		map.get("hola");
-	}*/
+
 
 	@Test
 	public void Hay5EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRealiza() {
