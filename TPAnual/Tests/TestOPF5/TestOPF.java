@@ -57,7 +57,7 @@ public class TestOPF {
 			partido3.intentarInscribirA(inscripcion2);
 		}
 
-		for (int i = 0; i < 11; i++) {
+		for (int i = 0; i <= 10; i++) {
 			jugador1 = new Jugador("Ronaldo", 28);
 			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
 			partido4.intentarInscribirA(inscripcion1);
@@ -103,11 +103,10 @@ public class TestOPF {
 		assertTrue(partido3.inscripciones().contains(inscripcion3));
 	}
 
-	/*
-	 * @Test public void
-	 * Hay10EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRechaza() {
-	 * assertEquals("Cupos Llenos", partido4.intentarInscribirA(inscripcion2));
-	 * }
-	 */
+	@Test
+	public void Hay10EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRechaza() {
+		partido4.intentarInscribirA(inscripcion2);
+		assertFalse(partido4.inscripciones().contains(inscripcion2));
+	}
 
 }
