@@ -30,7 +30,7 @@ public class TestOPF {
 	Jugador jugador1, jugador2, jugador3, jugador4;
 	Inscripcion inscripcion1, inscripcion2, inscripcion3;
 	Condicional condicional = new Condicional();
-
+	Inscripcion inscripcionCondicional, inscripcionSolidario;
 	@Before
 	public void setUp() {
 
@@ -68,11 +68,14 @@ public class TestOPF {
 			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
 			partido5.intentarInscribirA(inscripcion1);
 		}
-		Inscripcion inscripcionSolidario = new Inscripcion(jugador2, solidario);
+		
+		inscripcionSolidario = new Inscripcion(jugador2, solidario);
+		
 		partido5.intentarInscribirA(inscripcionSolidario);
-
-		Inscripcion inscripcionCondicional = new Inscripcion(jugador2,
+		
+		inscripcionCondicional = new Inscripcion(jugador2,
 				condicional);
+		
 		partido5.intentarInscribirA(inscripcionCondicional);
 
 	}
@@ -109,4 +112,12 @@ public class TestOPF {
 		assertFalse(partido4.inscripciones().contains(inscripcion2));
 	}
 
+	@Test
+	public void Hay8Estandares1CondicionalY1SolidarioCuandoSeAnotaUnEstandarSaleElCondicional() {
+
+		partido5.intentarInscribirA(inscripcion3);
+		assertFalse(partido5.inscripciones().contains(inscripcionCondicional));
+	
+
+	}
 }
