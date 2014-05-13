@@ -63,7 +63,7 @@ public class TestOPF {
 		}
 
 		
-		for (int i = 0; i < 9; i++) {
+		for (int i = 0; i <= 8; i++) {
 			jugador1 = new Jugador("Ronaldo", 28);
 			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
 			partido5.intentarInscribirA(inscripcion1);
@@ -71,17 +71,14 @@ public class TestOPF {
 		Inscripcion inscripcionSolidario = new Inscripcion(jugador2, solidario);
 		partido5. intentarInscribirA(inscripcionSolidario);
 		
-		
 		Inscripcion inscripcionCondicional = new Inscripcion(jugador2, condicional);
 		partido5. intentarInscribirA(inscripcionCondicional);
 		
 		
-		
 	}
-	
 
 	@Test
-	public void hola()
+	public void hay8Estandares1SolidarioY1CondicionalSiSeQuiereAnotarUnEstandarLaInscripcionSeRealiza()
 	{
 		Jugador emiliano = new Jugador("Emiliano", 28);
 		Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
@@ -89,8 +86,6 @@ public class TestOPF {
 		assertTrue(partido5.inscripciones().contains(inscripcionEmi));
 	}
 	
-	
-
 
 	@Test
 	public void Hay5EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRealiza() {
