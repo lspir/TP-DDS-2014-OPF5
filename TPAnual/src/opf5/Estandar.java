@@ -12,4 +12,8 @@ public class Estandar implements TipoDeInscripcion {
 	public Boolean prioridadMinima() {
 		return false;
 	}
+	
+	public Boolean teCumple(Partido partido){
+		return true;
+	}
 }

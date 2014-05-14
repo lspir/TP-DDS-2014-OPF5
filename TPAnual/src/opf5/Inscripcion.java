@@ -28,6 +28,10 @@ public class Inscripcion {
 
 	public void inscribiteA(Partido partido) {
 		partido.inscribiA(this);
+		}
+	
+	public Boolean teCumple (Partido partido){
+		return tipoDeInscripcion.teCumple(partido);
 	}
 
 	public Boolean tipoDePrioridadMinima() {

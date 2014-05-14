@@ -13,6 +13,10 @@ public class Condicional implements TipoDeInscripcion {
 	}
 
 	public Boolean tePodesInscribirA(Partido partido) {
+		return this.teCumple(partido);
+	}
+	
+	public Boolean teCumple(Partido partido){
 		return condicion.teCumple(partido);
 	}
 

@@ -60,11 +60,19 @@ public class Partido {
 		inscriptoAEliminar = genteAEliminar.get(0);
 		this.inscripciones.remove(inscriptoAEliminar);
 		this.inscripciones.add(inscripcion);
+		this.revisarCondicionales();
 		this.revisarSiEstaLlenoEInformar();
 		inscripcion.avisarATusAmigos();
 
 	}
 
+	public void revisarCondicionales(){
+	
+		for(int i=0;i < inscripciones.size();i++){
+			Inscripcion aux = inscripciones.get(i);
+			if (! aux.teCumple(this)) inscripciones.remove(aux);
+		}
+	} 
 	public void seDioDeBajaSinReemplazante(Inscripcion inscripcion) {
 		this.inscripciones.remove(inscripcion);
 		this.administrador.penaliza(inscripcion.jugador());
