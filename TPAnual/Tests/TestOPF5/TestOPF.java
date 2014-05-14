@@ -17,22 +17,30 @@ import opf5.Solidario;
 
 import org.junit.Before;
 import org.junit.Test;
+import opf5.Amigo;
+import opf5.MailSender;
+import opf5.StubMailSender;
 
 public class TestOPF {
-	Administrador adm = new Administrador();
+
+	Administrador adm = new Administrador("adm@hotmail.com");
 
 	Partido partido = new Partido("2/5", "14:00", "Campus", adm);
 	Partido partido2 = new Partido("4/5", "21:00", "Campus", adm);
 	Partido partido3 = new Partido("4/5", "21:00", "Campus", adm);
 	Partido partido4 = new Partido("4/5", "21:00", "Campus", adm);
 	Partido partido5 = new Partido("4/5", "21:00", "Campus", adm);
+	Partido partido6 = new Partido("4/5", "21:00", "Campus", adm);
 
 	Estandar estandar = new Estandar();
 	Solidario solidario = new Solidario();
-	Jugador jugador1, jugador2, jugador3, jugador4;
-	Inscripcion inscripcion1, inscripcion2, inscripcion3;
+	Jugador jugador1, jugador2, jugador3, jugador4, cr;
+	Inscripcion inscripcion1, inscripcion2, inscripcion3, inscripcion4;
 	Condicional condicional = new Condicional();
 	Inscripcion inscripcionCondicional, inscripcionSolidario;
+	Amigo luciano = new Amigo("lucho@gmail.com");
+	Amigo leandro = new Amigo("lean@gmail.com");
+	MailSender mailSender = new StubMailSender();
 
 	@Before
 	public void setUp() {
@@ -41,6 +49,10 @@ public class TestOPF {
 		jugador3 = new Jugador("nombre", 23);
 		inscripcion2 = new Inscripcion(jugador2, solidario);
 		inscripcion3 = new Inscripcion(jugador3, estandar);
+		cr = new Jugador("Cristiano Ronaldo", 28);
+		cr.agregarAmigo(luciano);
+		cr.agregarAmigo(leandro);
+		inscripcion4 = new Inscripcion(cr, estandar);
 
 		for (int i = 0; i < 6; i++) {
 			jugador1 = new Jugador("Ronaldo", 28);
@@ -120,4 +132,20 @@ public class TestOPF {
 		partido5.intentarInscribirA(inscripcion3);
 		assertFalse(partido5.inscripciones().contains(inscripcionCondicional));
 	}
+
+	/*@Test
+	public void SeAgreganAmigosALaLista() {
+	//	partido6.intentarInscribirA(inscripcion4);
+		assertEquals(2, cr.amigos().size());
+
+	}*/
+	
+	@Test
+	public void hola()
+	{
+		partido6.intentarInscribirA(inscripcion4);
+		assertEquals(2,((StubMailSender) mailSender).enviados().size());
+	}
+	
+	
 }

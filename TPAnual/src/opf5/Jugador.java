@@ -13,4 +13,18 @@ public class Jugador {
 		edadJ = edad;
 		amigos = new ArrayList<Amigo>();
 	}
+
+	public void agregarAmigo(Amigo amigo) {
+		this.amigos.add(amigo);
+	}
+
+	public void avisarATusAmigos() {
+
+		amigos.forEach(amigo -> MailSender.notificar(amigo.direccion()));
+
+	}
+
+	public List<Amigo> amigos() {
+		return amigos;
+	}
 }

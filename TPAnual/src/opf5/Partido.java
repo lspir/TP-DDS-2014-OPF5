@@ -29,7 +29,8 @@ public class Partido {
 		if (this.inscripciones.size() < 10) {
 			inscripciones.add(inscripcion);
 			this.revisarSiEstaLlenoEInformar();
-			// acá se le avisaría a los amigos del jugador que se inscribio
+			inscripcion.avisarATusAmigos();
+
 		} else {
 			// si está lleno de estándares
 			if (this.inscripciones.stream()
@@ -60,7 +61,7 @@ public class Partido {
 		this.inscripciones.remove(inscriptoAEliminar);
 		this.inscripciones.add(inscripcion);
 		this.revisarSiEstaLlenoEInformar();
-		// aca se le avisa a por mail a los amigos del jugador que se inscribio
+		inscripcion.avisarATusAmigos();
 
 	}
 
@@ -68,20 +69,23 @@ public class Partido {
 		this.inscripciones.remove(inscripcion);
 		this.administrador.penaliza(inscripcion.jugador());
 		if (this.inscripciones().size() == 9) {
-			// informar por mail que se vacio
+			this.avisarAAdministrador();
 		}
 	}
 
 	public void seDioDeBajaConReemplazante(Inscripcion inscripcion,
 			Jugador jugador) {
 		inscripcion.teReemplaza(jugador);
-		// mail
+		inscripcion.avisarATusAmigos();
 	}
 
 	public void revisarSiEstaLlenoEInformar() {
 		if (this.inscripciones.size() == 10) {
-			// avisar al administrador por mail que esta lleno
+			this.avisarAAdministrador();
 		}
 	}
 
+	public void avisarAAdministrador() {
+		MailSender.notificar(administrador.direccion());
+	}
 }
