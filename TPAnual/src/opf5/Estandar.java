@@ -1,8 +1,8 @@
-package OPF5;
+package opf5;
 
-public class Solidario implements TipoDeInscripcion {
+public class Estandar implements TipoDeInscripcion {
 	public Boolean dejasPasar() {
-		return true;
+		return false;
 	}
 
 	public Boolean tePodesInscribirA(Partido partido) {
@@ -12,5 +12,4 @@ public class Solidario implements TipoDeInscripcion {
 	public Boolean prioridadMinima() {
 		return false;
 	}
-
 }

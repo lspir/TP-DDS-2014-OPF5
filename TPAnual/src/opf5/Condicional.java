@@ -1,15 +1,15 @@
-package OPF5;
+package opf5;
 
-public class Estandar implements TipoDeInscripcion {
+public class Condicional implements TipoDeInscripcion {
 	public Boolean dejasPasar() {
-		return false;
-	}
-
-	public Boolean tePodesInscribirA(Partido partido) {
 		return true;
 	}
 
-	public Boolean prioridadMinima() {
+	public Boolean tePodesInscribirA(Partido partido) {
 		return false;
+	}
+
+	public Boolean prioridadMinima() {
+		return true;
 	}
 }

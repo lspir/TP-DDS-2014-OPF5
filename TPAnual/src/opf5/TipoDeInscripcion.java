@@ -1,4 +1,4 @@
-package OPF5;
+package opf5;
 
 public interface TipoDeInscripcion {
 	public Boolean dejasPasar();

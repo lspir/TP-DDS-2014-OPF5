@@ -7,23 +7,25 @@ import static org.junit.Assert.assertFalse;
 import java.util.HashMap;
 import java.util.Map;
 
+import opf5.Administrador;
+import opf5.Condicional;
+import opf5.Estandar;
+import opf5.Inscripcion;
+import opf5.Jugador;
+import opf5.Partido;
+import opf5.Solidario;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import OPF5.Estandar;
-import OPF5.Inscripcion;
-import OPF5.Jugador;
-import OPF5.Partido;
-import OPF5.Solidario;
-import OPF5.Condicional;
-
 public class TestOPF {
+	Administrador adm = new Administrador();
 
-	Partido partido = new Partido("2/5", "14:00", "Campus");
-	Partido partido2 = new Partido("4/5", "21:00", "Campus");
-	Partido partido3 = new Partido("4/5", "21:00", "Campus");
-	Partido partido4 = new Partido("4/5", "21:00", "Campus");
-	Partido partido5 = new Partido("4/5", "21:00", "Campus");
+	Partido partido = new Partido("2/5", "14:00", "Campus", adm);
+	Partido partido2 = new Partido("4/5", "21:00", "Campus", adm);
+	Partido partido3 = new Partido("4/5", "21:00", "Campus", adm);
+	Partido partido4 = new Partido("4/5", "21:00", "Campus", adm);
+	Partido partido5 = new Partido("4/5", "21:00", "Campus", adm);
 
 	Estandar estandar = new Estandar();
 	Solidario solidario = new Solidario();
@@ -31,6 +33,7 @@ public class TestOPF {
 	Inscripcion inscripcion1, inscripcion2, inscripcion3;
 	Condicional condicional = new Condicional();
 	Inscripcion inscripcionCondicional, inscripcionSolidario;
+
 	@Before
 	public void setUp() {
 
@@ -68,14 +71,13 @@ public class TestOPF {
 			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
 			partido5.intentarInscribirA(inscripcion1);
 		}
-		
+
 		inscripcionSolidario = new Inscripcion(jugador2, solidario);
-		
+
 		partido5.intentarInscribirA(inscripcionSolidario);
-		
-		inscripcionCondicional = new Inscripcion(jugador2,
-				condicional);
-		
+
+		inscripcionCondicional = new Inscripcion(jugador2, condicional);
+
 		partido5.intentarInscribirA(inscripcionCondicional);
 
 	}
@@ -117,7 +119,5 @@ public class TestOPF {
 
 		partido5.intentarInscribirA(inscripcion3);
 		assertFalse(partido5.inscripciones().contains(inscripcionCondicional));
-	
-
 	}
 }
