@@ -40,7 +40,7 @@ public class TestOPF {
 	Inscripcion inscripcionCondicional, inscripcionSolidario;
 	Amigo luciano = new Amigo("lucho@gmail.com");
 	Amigo leandro = new Amigo("lean@gmail.com");
-	MailSender mailSender = new StubMailSender();
+	StubMailSender mailSender = new StubMailSender();
 
 	@Before
 	public void setUp() {
@@ -53,6 +53,8 @@ public class TestOPF {
 		cr.agregarAmigo(luciano);
 		cr.agregarAmigo(leandro);
 		inscripcion4 = new Inscripcion(cr, estandar);
+	
+	
 
 		for (int i = 0; i < 6; i++) {
 			jugador1 = new Jugador("Ronaldo", 28);
@@ -66,19 +68,19 @@ public class TestOPF {
 			partido2.intentarInscribirA(inscripcion1);
 		}
 
-		for (int i = 0; i <= 10; i++) {
+		for (int i = 0; i < 10; i++) {
 			jugador2 = new Jugador("nombre", 20);
 			inscripcion2 = new Inscripcion(jugador2, solidario);
 			partido3.intentarInscribirA(inscripcion2);
 		}
 
-		for (int i = 0; i <= 10; i++) {
+		for (int i = 0; i < 10; i++) {
 			jugador1 = new Jugador("Ronaldo", 28);
 			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
 			partido4.intentarInscribirA(inscripcion1);
 		}
 
-		for (int i = 0; i <= 8; i++) {
+		for (int i = 0; i < 8; i++) {
 			jugador1 = new Jugador("Ronaldo", 28);
 			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
 			partido5.intentarInscribirA(inscripcion1);
@@ -138,13 +140,13 @@ public class TestOPF {
 	//	partido6.intentarInscribirA(inscripcion4);
 		assertEquals(2, cr.amigos().size());
 
-	}*/
+	}*/ 
 	
 	@Test
 	public void hola()
 	{
 		partido6.intentarInscribirA(inscripcion4);
-		assertEquals(2,((StubMailSender) mailSender).enviados().size());
+		assertEquals(2, mailSender.enviados().size());
 	}
 	
 	

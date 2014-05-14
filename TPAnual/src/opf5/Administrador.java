@@ -14,7 +14,9 @@ public class Administrador {
 	}
 
 	public void penaliza(Jugador jugador) {
-
+		Infraccion infraccion = new Infraccion();
+		jugador.tePenalizaron(infraccion);
+		
 	}
 
 }
