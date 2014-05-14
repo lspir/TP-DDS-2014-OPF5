@@ -20,13 +20,10 @@ public class Inscripcion {
 		return this.tipoDeInscripcion.dejasPasar();
 	}
 
-	public String inscribiteSiPodesA(Partido partido) {
-		if (this.tipoDeInscripcion.tePodesInscribirA(partido)) {
+	public void inscribiteSiPodesA(Partido partido) {
+		if (this.tipoDeInscripcion.tePodesInscribirA(partido)) 
 			this.inscribiteA(partido);
-			return "inscripcion correcta";
-		} else {
-			return "no te podes inscribir";
-		}
+		
 	}
 
 	public void inscribiteA(Partido partido) {
