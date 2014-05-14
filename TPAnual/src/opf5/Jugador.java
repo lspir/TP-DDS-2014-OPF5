@@ -21,7 +21,7 @@ public class Jugador {
 
 	public void avisarATusAmigos() {
 
-		amigos.forEach(amigo -> StubMailSender.notificar(amigo.direccion()));
+		amigos.forEach(amigo -> StubMailSender.notificar(amigo.direccion(), this));
 
 	}
 

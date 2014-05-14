@@ -86,6 +86,6 @@ public class Partido {
 	}
 
 	public void avisarAAdministrador() {
-		StubMailSender.notificar(administrador.direccion());
+		StubMailSender.notificar(administrador.direccion(), this);
 	}
 }

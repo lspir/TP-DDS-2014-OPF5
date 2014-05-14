@@ -7,8 +7,8 @@ public class StubMailSender extends MailSender {
 
 	private static List<Mail> enviados = new ArrayList<Mail>();
 
-	public static void notificar(String direccion) {
-		Mail mail = new Mail();
+	public static void notificar(String direccion, Object remitente) {
+		Mail mail = new Mail(remitente);
 		enviados.add(mail);
 
 	}

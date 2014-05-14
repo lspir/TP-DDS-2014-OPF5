@@ -6,6 +6,7 @@ import static org.junit.Assert.assertFalse;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import opf5.Administrador;
 import opf5.Condicional;
@@ -17,6 +18,7 @@ import opf5.Solidario;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import opf5.Amigo;
 import opf5.MailSender;
 import opf5.StubMailSender;
@@ -134,20 +136,23 @@ public class TestOPF {
 		partido5.intentarInscribirA(inscripcion3);
 		assertFalse(partido5.inscripciones().contains(inscripcionCondicional));
 	}
-
-	/*@Test
-	public void SeAgreganAmigosALaLista() {
-	//	partido6.intentarInscribirA(inscripcion4);
-		assertEquals(2, cr.amigos().size());
-
-	}*/ 
 	
 	@Test
-	public void hola()
+	public void UnJugadorCon2AmigosSeInscribeYSeEnvia1MailACadaAmigo()
 	{
 		partido6.intentarInscribirA(inscripcion4);
-		assertEquals(2, mailSender.enviados().size());
+		assertEquals(2, mailSender.enviados().stream().filter(mail-> mail.remitente() == inscripcion4.jugador()).collect(Collectors.toList()).size());
 	}
 	
+	@Test
+	public void UnPartidoSeLlenaYSeEnviaUnMailAlAdministrador()
+	{
+		assertEquals(1, mailSender.enviados().stream().filter(mail-> mail.remitente() == partido3).collect(Collectors.toList()).size());
+	}
 	
+	@Test
+	public void asd()
+	{
+		assertEquals(1, mailSender.enviados().stream().filter(mail-> mail.remitente() == partido3).collect(Collectors.toList()).size());
+	}
 }
