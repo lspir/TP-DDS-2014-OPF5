@@ -13,15 +13,21 @@ public class Jugador {
 		nombreJ = nombre;
 		edadJ = edad;
 		amigos = new ArrayList<Amigo>();
+		infracciones = new ArrayList<Infraccion>();
 	}
 
 	public void agregarAmigo(Amigo amigo) {
 		this.amigos.add(amigo);
 	}
 
+	public List<Infraccion> infracciones() {
+		return this.infracciones;
+	}
+
 	public void avisarATusAmigos() {
 
-		amigos.forEach(amigo -> StubMailSender.notificar(amigo.direccion(), this));
+		amigos.forEach(amigo -> StubMailSender.notificar(amigo.direccion(),
+				this));
 
 	}
 

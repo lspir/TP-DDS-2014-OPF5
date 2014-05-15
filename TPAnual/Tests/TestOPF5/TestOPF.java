@@ -58,12 +58,13 @@ public class TestOPF {
 	
 	
 
-		for (int i = 0; i < 6; i++) {
+		for (int i = 0; i < 5; i++) {
 			jugador1 = new Jugador("Ronaldo", 28);
 			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
 			partido.intentarInscribirA(inscripcion1);
 		}
-
+		
+		
 		for (int i = 0; i < 10; i++) {
 			jugador1 = new Jugador("Ronaldo", 28);
 			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
@@ -95,6 +96,8 @@ public class TestOPF {
 		inscripcionCondicional = new Inscripcion(jugador2, condicional);
 
 		partido5.intentarInscribirA(inscripcionCondicional);
+		
+		partido6.intentarInscribirA(inscripcion3);
 
 	}
 
@@ -151,8 +154,22 @@ public class TestOPF {
 	}
 	
 	@Test
-	public void asd()
+	public void SiUnPartidoSeLlenaSeLeEnviaUnMailAlAdministrador()
 	{
 		assertEquals(1, mailSender.enviados().stream().filter(mail-> mail.remitente() == partido3).collect(Collectors.toList()).size());
+	}
+	
+	@Test
+	public void ElPartidoTieneUnSoloJugadorYEsteSeDaDeBajaSinReemplazanteElPartidoQuedaCon0Inscriptos()
+	{
+		partido6.seDioDeBajaSinReemplazante(inscripcion3);
+		assertEquals(0, partido6.inscripciones().size());
+	}
+	
+	@Test
+	public void UnJugadorSeDaDeBajaSinReemplazanteEntoncesSeLoPenaliza()
+	{
+		partido6.seDioDeBajaSinReemplazante(inscripcion3);
+		assertEquals(1, inscripcion3.jugador().infracciones().size());
 	}
 }
