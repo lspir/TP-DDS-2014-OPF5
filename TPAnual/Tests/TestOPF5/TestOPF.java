@@ -20,7 +20,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import opf5.Amigo;
-import opf5.MailSender;
 import opf5.StubMailSender;
 
 public class TestOPF {

@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Jugador {
-	private String nombreJ;
-	private int edadJ;
+	private String nombre;
+	private int edad;
 	private List<Amigo> amigos;
 	private List<Infraccion> infracciones;
 
 	public Jugador(String nombre, int edad) {
-		nombreJ = nombre;
-		edadJ = edad;
+		this.nombre = nombre;
+		this.edad = edad;
 		amigos = new ArrayList<Amigo>();
 		infracciones = new ArrayList<Infraccion>();
 	}

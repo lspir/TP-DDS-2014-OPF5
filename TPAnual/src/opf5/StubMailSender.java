@@ -3,7 +3,7 @@ package opf5;
 import java.util.List;
 import java.util.ArrayList;
 
-public class StubMailSender extends MailSender {
+public class StubMailSender {
 
 	private static List<Mail> enviados = new ArrayList<Mail>();
 
