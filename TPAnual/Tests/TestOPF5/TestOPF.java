@@ -36,7 +36,7 @@ public class TestOPF {
 
 	Estandar estandar = new Estandar();
 	Solidario solidario = new Solidario();
-	Jugador jugador1, jugador2, jugador3, jugador4, cr;
+	Jugador jugador1, jugador2, jugador3, jugador4, cristianoRonaldo, messi;
 	Inscripcion inscripcion1, inscripcion2, inscripcion3, inscripcion4;
 	Condicional condicional = new Condicional();
 	Inscripcion inscripcionCondicional, inscripcionSolidario;
@@ -51,20 +51,19 @@ public class TestOPF {
 		jugador3 = new Jugador("nombre", 23);
 		inscripcion2 = new Inscripcion(jugador2, solidario);
 		inscripcion3 = new Inscripcion(jugador3, estandar);
-		cr = new Jugador("Cristiano Ronaldo", 28);
-		cr.agregarAmigo(luciano);
-		cr.agregarAmigo(leandro);
-		inscripcion4 = new Inscripcion(cr, estandar);
-	
-	
+		cristianoRonaldo = new Jugador("Cristiano Ronaldo", 28);
+		cristianoRonaldo.agregarAmigo(luciano);
+		cristianoRonaldo.agregarAmigo(leandro);
+		inscripcion4 = new Inscripcion(cristianoRonaldo, estandar);
+		messi = new Jugador("Messi", 29);
+		messi.agregarAmigo(luciano);
 
 		for (int i = 0; i < 5; i++) {
 			jugador1 = new Jugador("Ronaldo", 28);
 			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
 			partido.intentarInscribirA(inscripcion1);
 		}
-		
-		
+
 		for (int i = 0; i < 10; i++) {
 			jugador1 = new Jugador("Ronaldo", 28);
 			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
@@ -96,7 +95,7 @@ public class TestOPF {
 		inscripcionCondicional = new Inscripcion(jugador2, condicional);
 
 		partido5.intentarInscribirA(inscripcionCondicional);
-		
+
 		partido6.intentarInscribirA(inscripcion3);
 
 	}
@@ -139,37 +138,56 @@ public class TestOPF {
 		partido5.intentarInscribirA(inscripcion3);
 		assertFalse(partido5.inscripciones().contains(inscripcionCondicional));
 	}
-	
+
 	@Test
-	public void UnJugadorCon2AmigosSeInscribeYSeEnvia1MailACadaAmigo()
-	{
+	public void UnJugadorCon2AmigosSeInscribeYSeEnvia1MailACadaAmigo() {
 		partido6.intentarInscribirA(inscripcion4);
-		assertEquals(2, mailSender.enviados().stream().filter(mail-> mail.remitente() == inscripcion4.jugador()).collect(Collectors.toList()).size());
+		assertEquals(
+				2,
+				mailSender
+						.enviados()
+						.stream()
+						.filter(mail -> mail.remitente() == inscripcion4
+								.jugador()).collect(Collectors.toList()).size());
 	}
-	
+
 	@Test
-	public void UnPartidoSeLlenaYSeEnviaUnMailAlAdministrador()
-	{
-		assertEquals(1, mailSender.enviados().stream().filter(mail-> mail.remitente() == partido3).collect(Collectors.toList()).size());
+	public void UnPartidoSeLlenaYSeEnviaUnMailAlAdministrador() {
+		assertEquals(
+				1,
+				mailSender.enviados().stream()
+						.filter(mail -> mail.remitente() == partido3)
+						.collect(Collectors.toList()).size());
 	}
-	
+
 	@Test
-	public void SiUnPartidoSeLlenaSeLeEnviaUnMailAlAdministrador()
-	{
-		assertEquals(1, mailSender.enviados().stream().filter(mail-> mail.remitente() == partido3).collect(Collectors.toList()).size());
+	public void SiUnPartidoSeLlenaSeLeEnviaUnMailAlAdministrador() {
+		assertEquals(
+				1,
+				mailSender.enviados().stream()
+						.filter(mail -> mail.remitente() == partido3)
+						.collect(Collectors.toList()).size());
 	}
-	
+
 	@Test
-	public void ElPartidoTieneUnSoloJugadorYEsteSeDaDeBajaSinReemplazanteElPartidoQuedaCon0Inscriptos()
-	{
+	public void ElPartidoTieneUnSoloJugadorYEsteSeDaDeBajaSinReemplazanteElPartidoQuedaCon0Inscriptos() {
 		partido6.seDioDeBajaSinReemplazante(inscripcion3);
 		assertEquals(0, partido6.inscripciones().size());
 	}
-	
+
 	@Test
-	public void UnJugadorSeDaDeBajaSinReemplazanteEntoncesSeLoPenaliza()
-	{
+	public void UnJugadorSeDaDeBajaSinReemplazanteEntoncesSeLoPenaliza() {
 		partido6.seDioDeBajaSinReemplazante(inscripcion3);
 		assertEquals(1, inscripcion3.jugador().infracciones().size());
+	}
+
+	@Test
+	public void UnJugadorSeBajaConReemplazanteEntoncesALosAmigosDelReemplazanteLesLlegaUnMail() {
+		partido6.seDioDeBajaConReemplazante(inscripcion3, messi);
+		assertEquals(
+				1,
+				mailSender.enviados().stream()
+						.filter(mail -> mail.remitente() == messi)
+						.collect(Collectors.toList()).size());
 	}
 }
