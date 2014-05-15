@@ -160,14 +160,6 @@ public class TestOPF {
 						.collect(Collectors.toList()).size());
 	}
 
-	@Test
-	public void SiUnPartidoSeLlenaSeLeEnviaUnMailAlAdministrador() {
-		assertEquals(
-				1,
-				mailSender.enviados().stream()
-						.filter(mail -> mail.remitente() == partido3)
-						.collect(Collectors.toList()).size());
-	}
 
 	@Test
 	public void ElPartidoTieneUnSoloJugadorYEsteSeDaDeBajaSinReemplazanteElPartidoQuedaCon0Inscriptos() {
