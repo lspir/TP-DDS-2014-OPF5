@@ -9,12 +9,14 @@ public class Jugador {
 	private List<Amigo> amigos;
 	private List<Infraccion> infracciones;
 	private MailSender mailSender;
+	private List<Critica> criticas;
 
 	public Jugador(String nombre, int edad) {
 		this.nombre = nombre;
 		this.edad = edad;
 		amigos = new ArrayList<Amigo>();
 		infracciones = new ArrayList<Infraccion>();
+		criticas = new ArrayList<Critica>();
 	}
 
 	public void agregarAmigo(Amigo amigo) {
@@ -25,17 +27,22 @@ public class Jugador {
 		return this.infracciones;
 	}
 
-	/*public void avisarATusAmigos() {
-
-		amigos.forEach(amigo -> mailSender.notificar(amigo.direccion(), this));
-
-	}*/
-
 	public List<Amigo> amigos() {
 		return amigos;
 	}
 
 	public void tePenalizaron(Infraccion infraccion) {
 		infracciones.add(infraccion);
+	}
+
+	public void critica(Jugador jugador, int nota, String texto, Partido partido) {
+		if (partido.verificarSiJugaron(this, jugador)) {
+			Critica critica = new Critica(nota, texto);
+			jugador.agregarCritica(critica);
+		}
+	}
+
+	public void agregarCritica(Critica critica) {
+		criticas.add(critica);
 	}
 }

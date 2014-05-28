@@ -4,18 +4,17 @@ public class ObservadorJugadorInscripto implements Observador {
 
 	private AdaptadorMailSender adaptadorMailSender;
 
-	public ObservadorNotificarAdmin() {
-
-		AdaptadorMailSender adaptadorMailSender = new AdaptadorMailSender();
+	public ObservadorJugadorInscripto()
+	{
+		adaptadorMailSender= new AdaptadorMailSender();
 	}
-
 	public void notificarPartidoLleno() {
 
 	}
 
 	public void notificarJugadorInscripto(Jugador jugador) {
 
-		jugador.amigos().forEach(amigo -> mailSender.notificar(amigo.mail()));
+		jugador.amigos().forEach(amigo -> adaptadorMailSender.notificar(amigo.direccion()));
 
 	}
 

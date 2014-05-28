@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import opf5.Administrador;
 import opf5.Condicional;
 import opf5.Estandar;
 import opf5.Inscripcion;
@@ -21,6 +20,8 @@ import org.junit.Test;
 
 import opf5.Amigo;
 import opf5.MailSender;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class TestOPF {
 
@@ -44,6 +45,7 @@ public class TestOPF {
 	MailSender mailSender;
 	@Before
 	public void setUp() {
+		
 		mailSender = mock(MailSender.class);
 		jugador2 = new Jugador("nombre", 20);
 		jugador3 = new Jugador("nombre", 23);
@@ -140,7 +142,7 @@ public class TestOPF {
 	@Test
 	public void UnJugadorCon2AmigosSeInscribeYSeEnvia1MailACadaAmigo() {
 		partido6.intentarInscribirA(inscripcion4);
-		
+
 		exactly(mailSender.notificar(any(String.class), any(Object.class)), 2);
 	}
 

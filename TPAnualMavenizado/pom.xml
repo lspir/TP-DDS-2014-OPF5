@@ -6,6 +6,11 @@
   <artifactId>TPAnualMavenizado</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
+  
+ <groupId>org.mockito</groupId>
+  <artifactId>mockito-all</artifactId>
+  <version>1.9.5</version>
+  <scope>test</scope>
 
   <name>TPAnualMavenizado</name>
   <url>http://maven.apache.org</url>
