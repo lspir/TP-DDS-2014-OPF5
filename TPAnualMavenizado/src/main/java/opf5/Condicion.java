@@ -1,9 +1,6 @@
 package opf5;
 
-public class Condicion {
+public interface Condicion {
 	
-	public boolean teCumple(Partido unPartido)
-	{
-		return false;
-	}
+	public boolean teCumple(Partido unPartido);
 }

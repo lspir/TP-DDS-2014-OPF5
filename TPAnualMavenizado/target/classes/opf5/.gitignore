@@ -11,3 +11,8 @@
 /Solidario.class
 /StubMailSender.class
 /TipoDeInscripcion.class
+/MailSender.class
+/Observador.class
+/ObservadorPartidoLleno.class
+/ObservadorJugadorInscripto.class
+/ObservadorNotificarAdmin.class

@@ -8,6 +8,7 @@ public class Jugador {
 	private int edad;
 	private List<Amigo> amigos;
 	private List<Infraccion> infracciones;
+	private MailSender mailSender;
 
 	public Jugador(String nombre, int edad) {
 		this.nombre = nombre;
@@ -26,8 +27,7 @@ public class Jugador {
 
 	public void avisarATusAmigos() {
 
-		amigos.forEach(amigo -> StubMailSender.notificar(amigo.direccion(),
-				this));
+		amigos.forEach(amigo -> mailSender.notificar(amigo.direccion(), this));
 
 	}
 

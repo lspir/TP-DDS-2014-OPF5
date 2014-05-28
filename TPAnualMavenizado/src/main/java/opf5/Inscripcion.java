@@ -12,9 +12,14 @@ public class Inscripcion {
 	public Jugador jugador(){
 		return this.jugador;
 	}
+	
+	public Inscripcion conJugador(Jugador jugador) {
+		return new Inscripcion(jugador, tipoDeInscripcion);
+	}
 
-	public void teReemplaza (Jugador jugador){
+	public void teReemplaza (Jugador jugador, TipoDeInscripcion tipo){
 		this.jugador= jugador;
+		this.tipoDeInscripcion= tipo;
 	}
 	public Boolean tuTipoDejaPasar() {
 		return this.tipoDeInscripcion.dejasPasar();

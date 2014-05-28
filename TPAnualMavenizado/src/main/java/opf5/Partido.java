@@ -10,15 +10,14 @@ public class Partido {
 	private String hora;
 	private String lugar;
 	private List<Inscripcion> inscripciones;
-	private Administrador administrador;
+	private List<Observador> observadores;
 
-	public Partido(String dia, String hora, String lugar,
-			Administrador administrador) {
+	public Partido(String dia, String hora, String lugar) {
 		this.dia = dia;
 		this.hora = hora;
 		this.lugar = lugar;
 		inscripciones = new ArrayList<Inscripcion>();
-		this.administrador = administrador;
+
 	}
 
 	public List<Inscripcion> inscripciones() {
@@ -30,9 +29,9 @@ public class Partido {
 			inscripciones.add(inscripcion);
 			this.revisarSiEstaLlenoEInformar();
 			inscripcion.avisarATusAmigos();
-
+			
 		} else {
-			// si está lleno de estándares
+			// si esta lleno de estandares
 			if (this.inscripciones.stream()
 					.filter(ins -> !ins.tuTipoDejaPasar())
 					.collect(Collectors.toList()).size() != (10)) {
@@ -66,24 +65,27 @@ public class Partido {
 
 	}
 
-	public void revisarCondicionales(){
-	
-		for(int i=0;i < inscripciones.size();i++){
+	public void revisarCondicionales() {
+
+		for (int i = 0; i < inscripciones.size(); i++) {
 			Inscripcion aux = inscripciones.get(i);
-			if (! aux.teCumple(this)) inscripciones.remove(aux);
+			if (!aux.teCumple(this))
+				inscripciones.remove(aux);
 		}
-	} 
+	}
+
 	public void seDioDeBajaSinReemplazante(Inscripcion inscripcion) {
 		this.inscripciones.remove(inscripcion);
-		this.administrador.penaliza(inscripcion.jugador());
+		Infraccion infraccion = new Infraccion();
+		inscripcion.jugador().tePenalizaron(infraccion);
 		if (this.inscripciones().size() == 9) {
 			this.avisarAAdministrador();
 		}
 	}
 
 	public void seDioDeBajaConReemplazante(Inscripcion inscripcion,
-			Jugador jugador) {
-		inscripcion.teReemplaza(jugador);
+			Jugador jugador, TipoDeInscripcion tipo) {
+		inscripcion.teReemplaza(jugador, tipo);
 		inscripcion.avisarATusAmigos();
 	}
 
@@ -94,6 +96,6 @@ public class Partido {
 	}
 
 	public void avisarAAdministrador() {
-		StubMailSender.notificar(administrador.direccion(), this);
+		MailSender.notificar(administrador.direccion(), this);
 	}
 }

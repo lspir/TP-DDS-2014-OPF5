@@ -20,18 +20,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import opf5.Amigo;
-import opf5.StubMailSender;
+import opf5.MailSender;
 
 public class TestOPF {
 
-	Administrador adm = new Administrador("adm@hotmail.com");
 
-	Partido partido = new Partido("2/5", "14:00", "Campus", adm);
-	Partido partido2 = new Partido("4/5", "21:00", "Campus", adm);
-	Partido partido3 = new Partido("4/5", "21:00", "Campus", adm);
-	Partido partido4 = new Partido("4/5", "21:00", "Campus", adm);
-	Partido partido5 = new Partido("4/5", "21:00", "Campus", adm);
-	Partido partido6 = new Partido("4/5", "21:00", "Campus", adm);
+
+	Partido partido = new Partido("2/5", "14:00", "Campus");
+	Partido partido2 = new Partido("4/5", "21:00", "Campus");
+	Partido partido3 = new Partido("4/5", "21:00", "Campus");
+	Partido partido4 = new Partido("4/5", "21:00", "Campus");
+	Partido partido5 = new Partido("4/5", "21:00", "Campus");
+	Partido partido6 = new Partido("4/5", "21:00", "Campus");
 
 	Estandar estandar = new Estandar();
 	Solidario solidario = new Solidario();
@@ -41,11 +41,10 @@ public class TestOPF {
 	Inscripcion inscripcionCondicional, inscripcionSolidario;
 	Amigo luciano = new Amigo("lucho@gmail.com");
 	Amigo leandro = new Amigo("lean@gmail.com");
-	StubMailSender mailSender = new StubMailSender();
-
+	MailSender mailSender;
 	@Before
 	public void setUp() {
-
+		mailSender = mock(MailSender.class);
 		jugador2 = new Jugador("nombre", 20);
 		jugador3 = new Jugador("nombre", 23);
 		inscripcion2 = new Inscripcion(jugador2, solidario);
@@ -141,13 +140,8 @@ public class TestOPF {
 	@Test
 	public void UnJugadorCon2AmigosSeInscribeYSeEnvia1MailACadaAmigo() {
 		partido6.intentarInscribirA(inscripcion4);
-		assertEquals(
-				2,
-				mailSender
-						.enviados()
-						.stream()
-						.filter(mail -> mail.remitente() == inscripcion4
-								.jugador()).collect(Collectors.toList()).size());
+		
+		exactly(mailSender.notificar(any(String.class), any(Object.class)), 2);
 	}
 
 	@Test
@@ -158,7 +152,6 @@ public class TestOPF {
 						.filter(mail -> mail.remitente() == partido3)
 						.collect(Collectors.toList()).size());
 	}
-
 
 	@Test
 	public void ElPartidoTieneUnSoloJugadorYEsteSeDaDeBajaSinReemplazanteElPartidoQuedaCon0Inscriptos() {
@@ -181,4 +174,5 @@ public class TestOPF {
 						.filter(mail -> mail.remitente() == messi)
 						.collect(Collectors.toList()).size());
 	}
+
 }
