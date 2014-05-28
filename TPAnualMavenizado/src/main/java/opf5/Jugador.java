@@ -25,11 +25,11 @@ public class Jugador {
 		return this.infracciones;
 	}
 
-	public void avisarATusAmigos() {
+	/*public void avisarATusAmigos() {
 
 		amigos.forEach(amigo -> mailSender.notificar(amigo.direccion(), this));
 
-	}
+	}*/
 
 	public List<Amigo> amigos() {
 		return amigos;

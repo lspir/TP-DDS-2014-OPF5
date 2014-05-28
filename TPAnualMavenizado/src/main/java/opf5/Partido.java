@@ -91,7 +91,7 @@ public class Partido {
 
 	public void revisarSiEstaLlenoEInformar() {
 		if (this.inscripciones.size() == 10) {
-			this.avisarAAdministrador();
+			observadores.forEach(obs-> obs.notificarPartidoLleno());
 		}
 	}
 

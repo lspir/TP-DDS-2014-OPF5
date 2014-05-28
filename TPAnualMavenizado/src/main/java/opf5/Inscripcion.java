@@ -43,8 +43,8 @@ public class Inscripcion {
 		return tipoDeInscripcion.prioridadMinima();
 	}
 
-	public void avisarATusAmigos()
+	/*public void avisarATusAmigos()
 	{
 		this.jugador.avisarATusAmigos();
-	}
+	}*/
 }
