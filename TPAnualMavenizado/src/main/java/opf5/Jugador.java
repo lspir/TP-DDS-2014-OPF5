@@ -8,7 +8,6 @@ public class Jugador {
 	private int edad;
 	private List<Amigo> amigos;
 	private List<Infraccion> infracciones;
-	//FIXME esto no lo estan usando!
 	private List<Critica> criticas;
 
 	public Jugador(String nombre, int edad) {

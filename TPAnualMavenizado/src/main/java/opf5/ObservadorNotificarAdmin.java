@@ -8,7 +8,7 @@ public class ObservadorNotificarAdmin implements Observador {
 	public ObservadorNotificarAdmin (String mailAdmin)
 	{
 		this.mailAdmin = mailAdmin;
-		adaptadorMailSender =  new AdaptadorMailSender();
+		adaptadorMailSender = new AdaptadorMailSender();
 	}
 
 	public void notificarPartidoLleno() {
