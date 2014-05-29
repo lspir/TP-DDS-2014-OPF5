@@ -1,30 +1,21 @@
 package opf5;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.*;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import opf5.Condicional;
-import opf5.Estandar;
-import opf5.Inscripcion;
-import opf5.Jugador;
-import opf5.Partido;
-import opf5.Solidario;
-
+import opf5.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import opf5.Amigo;
-import opf5.MailSender;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class TestOPF {
 
+	//FIXME les parece cohesivo esta clase de tests? Miren el nombre: básicamente esta diciendo "soy un tests que prueba el sistema completo"
+	//FIXME Por otro lado, capaz seria interesane complemetnar este tests de integracion con tests mas unitarios
 	Partido partido = new Partido("2/5", "14:00", "Campus");
 	Partido partido2 = new Partido("4/5", "21:00", "Campus");
 	Partido partido3 = new Partido("4/5", "21:00", "Campus");
@@ -40,12 +31,17 @@ public class TestOPF {
 	Inscripcion inscripcionCondicional, inscripcionSolidario;
 	Amigo luciano = new Amigo("lucho@gmail.com");
 	Amigo leandro = new Amigo("lean@gmail.com");
+
 	MailSender mailSender;
+	ObservadorJugadorInscripto observadorJugador;
+	ObservadorNotificarAdmin observadorAdmin;
 
 	@Before
 	public void setUp() {
 
 		mailSender = mock(MailSender.class);
+		observadorJugador = new ObservadorJugadorInscripto();
+		observadorAdmin = new ObservadorNotificarAdmin("admin@admin.com.ar");
 		jugador2 = new Jugador("nombre", 20);
 		jugador3 = new Jugador("nombre", 23);
 		inscripcion2 = new Inscripcion(jugador2, solidario);
@@ -137,22 +133,27 @@ public class TestOPF {
 		partido5.intentarInscribirA(inscripcion3);
 		assertFalse(partido5.inscripciones().contains(inscripcionCondicional));
 	}
-
+/*
+ *  FIXME no comenten codigo 
 	@Test
 	public void UnJugadorCon2AmigosSeInscribeYSeEnvia1MailACadaAmigo() {
 		partido6.intentarInscribirA(inscripcion4);
 
 		exactly(adaptadorMailSender.notificar(any(String.class),
 				any(Object.class)), 2);
-	}
+	}*/
 
+	//FIXME este test falla
 	@Test
 	public void UnPartidoSeLlenaYSeEnviaUnMailAlAdministrador() {
-		assertEquals(
+		/*assertEquals(
 				1,
 				mailSender.enviados().stream()
 						.filter(mail -> mail.remitente() == partido3)
-						.collect(Collectors.toList()).size());
+						.collect(Collectors.toList()).size());*/
+		partido3.agregarObservador(observadorAdmin);
+		partido3.agregarObservador(observadorJugador);
+		verify(mailSender,times(1)).notificar("admin@admin.com.ar");
 	}
 
 	@Test
@@ -167,7 +168,7 @@ public class TestOPF {
 		assertEquals(1, inscripcion3.jugador().infracciones().size());
 	}
 
-	@Test
+	/*@Test
 	public void UnJugadorSeBajaConReemplazanteEntoncesALosAmigosDelReemplazanteLesLlegaUnMail() {
 		partido6.seDioDeBajaConReemplazante(inscripcion3, messi);
 		assertEquals(
@@ -176,7 +177,7 @@ public class TestOPF {
 						.filter(mail -> mail.remitente() == messi)
 						.collect(Collectors.toList()).size());
 	}
-
+*/
 	@Test
 	public void unJugadorQueNoParticipoIntentaCalificarParaEsePartidoEntoncesEsaCalificacionNoEsTenidaEnCuenta() {
 		jugador2.critica(jugador3, 8, "Se atajó todo", partido6);
@@ -213,6 +214,7 @@ public class TestOPF {
 		Inscripcion inscripcionPropuesta = new Inscripcion(jugador2, estandar);
 		partido6.posiblesJugadores().add(inscripcionPropuesta);
 		partido6.administradorRechazo(inscripcionPropuesta, "Me cae mal");
+		//FIXME mas que preguntar la cantidad de denegaciones, podrian preguntar si existe una denegacion para esa inscripcion
 		assertEquals(1, partido6.denegaciones().size());
 	}
 

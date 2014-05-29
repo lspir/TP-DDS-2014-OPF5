@@ -8,7 +8,7 @@ public class Jugador {
 	private int edad;
 	private List<Amigo> amigos;
 	private List<Infraccion> infracciones;
-	private MailSender mailSender;
+	//FIXME esto no lo estan usando!
 	private List<Critica> criticas;
 
 	public Jugador(String nombre, int edad) {
@@ -39,7 +39,17 @@ public class Jugador {
 		if (partido.verificarSiJugaron(this, jugador)) {
 			Critica critica = new Critica(nota, texto);
 			jugador.agregarCritica(critica);
-		}
+		} else 
+			throw 
+		//FIXME y si no? Está bien que deje a un jugador criticar a otro aun si no le corresponde?
+		//La respuesta en realidad es filosófica, pero ustedes acá escribieron un método critica (que supongo es un 
+		//criticá, el español no es bueno para codificar :P) que, entiendo, lo que hace es criticar (y para criticar, 
+		//la precondición es haber jugado en ese partido). 
+		//Ustedes acá están haciendo más bien un criticáSiPuede o intentáCriticar, que tienen otra semántica:
+		//no tienen la precondicion de estar en el juego. 
+		//En definitiva, acá tienen dos opciones: o renombran el método o hacen que falle de no cumplirse la condición.
+		//Dado lo que hablamos de fail fast, siempre es más seguro fallar que seguir adelante en un posible 
+		//estado de inconsistencia, asi que mi sugerencia es que vayan por lanzar una excepcion en lugar de renombrar este método
 	}
 
 	public void agregarCritica(Critica critica) {
