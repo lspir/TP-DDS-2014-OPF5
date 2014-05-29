@@ -114,17 +114,27 @@ public class Partido {
 		this.intentarInscribirA(inscripcion);
 	}
 
-	public void administradorRechazo(Inscripcion inscripcion, String motivo){
+	public void administradorRechazo(Inscripcion inscripcion, String motivo) {
 		Date date = new Date();
 		posiblesJugadores.remove(inscripcion);
 		Denegacion denegacion = new Denegacion(motivo, inscripcion, date);
 		denegaciones.add(denegacion);
 	}
-	
 
 	public boolean verificarSiJugaron(Jugador jugador, Jugador otroJugador) {
-		
-		return (inscripciones.stream().anyMatch(inscripcion -> inscripcion.jugador() == jugador) && inscripciones.stream().anyMatch(inscripcion -> inscripcion.jugador() == otroJugador));
-		
+
+		return (inscripciones.stream().anyMatch(
+				inscripcion -> inscripcion.jugador() == jugador) && inscripciones
+				.stream().anyMatch(
+						inscripcion -> inscripcion.jugador() == otroJugador));
+
+	}
+
+	public List<Denegacion> denegaciones() {
+		return denegaciones;
+	}
+
+	public List<Inscripcion> posiblesJugadores() {
+		return posiblesJugadores;
 	}
 }

@@ -45,4 +45,8 @@ public class Jugador {
 	public void agregarCritica(Critica critica) {
 		criticas.add(critica);
 	}
+
+	public List<Critica> criticas() {
+		return criticas;
+	}
 }

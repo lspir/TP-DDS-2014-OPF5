@@ -25,8 +25,6 @@ import static org.mockito.Mockito.verify;
 
 public class TestOPF {
 
-
-
 	Partido partido = new Partido("2/5", "14:00", "Campus");
 	Partido partido2 = new Partido("4/5", "21:00", "Campus");
 	Partido partido3 = new Partido("4/5", "21:00", "Campus");
@@ -43,9 +41,10 @@ public class TestOPF {
 	Amigo luciano = new Amigo("lucho@gmail.com");
 	Amigo leandro = new Amigo("lean@gmail.com");
 	MailSender mailSender;
+
 	@Before
 	public void setUp() {
-		
+
 		mailSender = mock(MailSender.class);
 		jugador2 = new Jugador("nombre", 20);
 		jugador3 = new Jugador("nombre", 23);
@@ -143,7 +142,8 @@ public class TestOPF {
 	public void UnJugadorCon2AmigosSeInscribeYSeEnvia1MailACadaAmigo() {
 		partido6.intentarInscribirA(inscripcion4);
 
-		exactly(mailSender.notificar(any(String.class), any(Object.class)), 2);
+		exactly(adaptadorMailSender.notificar(any(String.class),
+				any(Object.class)), 2);
 	}
 
 	@Test
@@ -175,6 +175,55 @@ public class TestOPF {
 				mailSender.enviados().stream()
 						.filter(mail -> mail.remitente() == messi)
 						.collect(Collectors.toList()).size());
+	}
+
+	@Test
+	public void unJugadorQueNoParticipoIntentaCalificarParaEsePartidoEntoncesEsaCalificacionNoEsTenidaEnCuenta() {
+		jugador2.critica(jugador3, 8, "Se atajó todo", partido6);
+		assertEquals(0, jugador3.criticas().size());
+	}
+
+	@Test
+	public void unJugadorQueParticipoIntentaCalificarParaEsePartidoEntoncesEsaCalificacionSeGuardaEnLaListaDelJugadorCalificado() {
+		partido6.intentarInscribirA(inscripcion2);
+		jugador2.critica(jugador3, 8, "Se atajó todo", partido6);
+		assertEquals(1, jugador3.criticas().size());
+	}
+
+	@Test
+	public void unJugadorPropuestoEsAceptadoYPuedeInscribirseEnElPartidoEntoncesApareceEnLaListaDeJugadores() {
+		Inscripcion inscripcionPropuesta = new Inscripcion(jugador2, estandar);
+		partido6.posiblesJugadores().add(inscripcionPropuesta);
+		partido6.administradorAcepto(inscripcionPropuesta);
+		assertTrue(partido6.inscripciones().stream()
+				.anyMatch(inscripcion -> inscripcion.jugador() == jugador2));
+	}
+
+	@Test
+	public void unJugadorPropuestoEsRechazadoNoApareceEnLaListaDeJugadores() {
+		Inscripcion inscripcionPropuesta = new Inscripcion(jugador2, estandar);
+		partido6.posiblesJugadores().add(inscripcionPropuesta);
+		partido6.administradorRechazo(inscripcionPropuesta, "Me cae mal");
+		assertFalse(partido6.inscripciones().stream()
+				.anyMatch(inscripcion -> inscripcion.jugador() == jugador2));
+	}
+
+	@Test
+	public void unJugadorPropuestoEsRechazadoEntoncesSeAgregaUnaDenegacion() {
+		Inscripcion inscripcionPropuesta = new Inscripcion(jugador2, estandar);
+		partido6.posiblesJugadores().add(inscripcionPropuesta);
+		partido6.administradorRechazo(inscripcionPropuesta, "Me cae mal");
+		assertEquals(1, partido6.denegaciones().size());
+	}
+
+	@Test
+	public void unJugadorPropuestoEsAceptadoPeroNoPuedeInscribirseAlPartidoEntoncesNoApareceEnLaListaDeJugadores() {
+		Inscripcion inscripcionPropuesta = new Inscripcion(jugador2, solidario);
+		partido2.posiblesJugadores().add(inscripcionPropuesta);
+		partido2.administradorAcepto(inscripcionPropuesta);
+		assertFalse(partido2.inscripciones().stream()
+				.anyMatch(inscripcion -> inscripcion.jugador() == jugador2));
+
 	}
 
 }
