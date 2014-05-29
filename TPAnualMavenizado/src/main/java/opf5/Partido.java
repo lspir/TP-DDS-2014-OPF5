@@ -137,4 +137,8 @@ public class Partido {
 	public List<Inscripcion> posiblesJugadores() {
 		return posiblesJugadores;
 	}
+
+	public void agregarObservador(Observador observador) {
+		observadores.add(observador);
+	}
 }
