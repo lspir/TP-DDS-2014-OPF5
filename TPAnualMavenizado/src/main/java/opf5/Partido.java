@@ -62,8 +62,7 @@ public class Partido {
 
 		if ((this.inscripciones.stream().filter(i -> i.tipoDePrioridadMinima()))
 				//FIXME idem comentario anterior sobre el count()
-				//FIXME además tienen el isEmpty, donde hay menos lugar para manquearla que en un == 0
-				.collect(toList()).size() == (0)) {
+				.collect(toList()).isEmpty()) {
 			genteAEliminar = inscripciones.stream()
 					.filter(ins -> ins.tuTipoDejaPasar())
 					//FIXME pavada de la tecnologia: no es necesario hacer Collectors.toList, 
