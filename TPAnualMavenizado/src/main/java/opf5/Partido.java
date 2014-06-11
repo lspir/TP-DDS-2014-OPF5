@@ -147,6 +147,6 @@ public class Partido {
 	}
 
 	public void ordenarSegun(Criterio criterio, AlgoritmoDivision algoritmo) {
-		inscripciones.stream().map(insc -> criterio.funcion(insc.jugador()));
-	}
+		
+		}
 }
