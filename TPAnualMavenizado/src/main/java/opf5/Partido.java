@@ -145,4 +145,8 @@ public class Partido {
 	public void agregarObservador(Observador observador) {
 		observadores.add(observador);
 	}
+
+	public void ordenarSegun(Criterio criterio, AlgoritmoDivision algoritmo) {
+		inscripciones.stream().map(insc -> criterio.funcion(insc.jugador()));
+	}
 }

@@ -15,8 +15,11 @@ import static org.mockito.Mockito.*;
 
 public class TestOPF {
 
-	//FIXME les parece cohesivo esta clase de tests? Miren el nombre: básicamente esta diciendo "soy un tests que prueba el sistema completo"
-	//FIXME Por otro lado, capaz seria interesane complemetnar este tests de integracion con tests mas unitarios
+	// les parece cohesivo esta clase de tests? Miren el nombre: básicamente esta diciendo 
+	//"soy un tests que prueba el sistema completo"
+	//Por otro lado, capaz seria interesane complemetnar este tests de integracion
+	//con tests mas unitarios
+	
 	Partido partido = new Partido("2/5", "14:00", "Campus");
 	Partido partido2 = new Partido("4/5", "21:00", "Campus");
 	Partido partido3 = new Partido("4/5", "21:00", "Campus");
@@ -33,14 +36,15 @@ public class TestOPF {
 	Amigo luciano = new Amigo("lucho@gmail.com");
 	Amigo leandro = new Amigo("lean@gmail.com");
 
-	MailSender mailSender;
+	AdaptadorMailSender adaptadorMailSender = mock(AdaptadorMailSender.class);
 	ObservadorJugadorInscripto observadorJugador;
 	ObservadorNotificarAdmin observadorAdmin;
+	
 
 	@Before
 	public void setUp() {
 
-		mailSender = mock(MailSender.class);
+		//mailSender = mock(MailSender.class);
 		observadorJugador = new ObservadorJugadorInscripto();
 		observadorAdmin = new ObservadorNotificarAdmin("admin@admin.com.ar");
 		jugador2 = new Jugador("nombre", 20);
@@ -134,23 +138,19 @@ public class TestOPF {
 		partido5.intentarInscribirA(inscripcion3);
 		assertFalse(partido5.inscripciones().contains(inscripcionCondicional));
 	}
-/*
+
 	@Test
 	public void UnJugadorCon2AmigosSeInscribeYSeEnvia1MailACadaAmigo() {
+		observadorJugador.adaptador(adaptadorMailSender);
+		partido6.agregarObservador(observadorJugador);
+		partido6.agregarObservador(observadorAdmin);
 		partido6.intentarInscribirA(inscripcion4);
-
-		exactly(adaptadorMailSender.notificar(any(String.class),
-				any(Object.class)), 2);
-	}*/
+		verify(adaptadorMailSender, times(2)).notificar(any(String.class));
+	}
 
 
-/*	@Test
+	/*@Test
 	public void UnPartidoSeLlenaYSeEnviaUnMailAlAdministrador() {
-		/*assertEquals(
-				1,
-				mailSender.enviados().stream()
-						.filter(mail -> mail.remitente() == partido3)
-						.collect(Collectors.toList()).size());
 		partido3.agregarObservador(observadorAdmin);
 		partido3.agregarObservador(observadorJugador);
 		verify(mailSender,times(1)).notificar("admin@admin.com.ar");
@@ -176,8 +176,9 @@ public class TestOPF {
 				mailSender.enviados().stream()
 						.filter(mail -> mail.remitente() == messi)
 						.collect(Collectors.toList()).size());
-	}
-*/
+	}*/
+	
+	
 	@Test(expected=NoSePuedeCalificarException.class)
 	public void unJugadorQueNoParticipoIntentaCalificarParaEsePartidoEntoncesEsaCalificacionNoEsTenidaEnCuenta()throws NoSePuedeCalificarException  {
 		jugador2.critica(jugador3, 8, "Se atajó todo", partido6);
