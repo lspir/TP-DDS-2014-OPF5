@@ -10,7 +10,6 @@ import java.util.Optional;
 import java.util.stream.*;
 import java.util.Date;
 
-
 public class Partido {
 	private String dia;
 	private String hora;
@@ -21,36 +20,28 @@ public class Partido {
 	// menos cohesivo.
 	// No es que tengan que hacer algo ya, pero tenganlo en cuenta en proximas
 	// entregas
-	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
-	private List<Observador> observadores = new ArrayList<Observador>();
+	public List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
+	public List<Observador> observadores = new ArrayList<Observador>();
 	private List<Inscripcion> posiblesJugadores = new ArrayList<Inscripcion>();
 	private List<Denegacion> denegaciones = new ArrayList<Denegacion>();
 	private List<Inscripcion> equipoA = new ArrayList<Inscripcion>();
 	private List<Inscripcion> equipoB = new ArrayList<Inscripcion>();
-	private List<Inscripcion> posiblesEquipos = new ArrayList<Inscripcion>();
+	private Estado estado;
 
 	public Partido(String dia, String hora, String lugar) {
 		this.dia = dia;
 		this.hora = hora;
 		this.lugar = lugar;
+		this.estado = new SinConfirmar();
 	}
 
 	public List<Inscripcion> inscripciones() {
 		return this.inscripciones;
 	}
 
-	public void intentarInscribirA(Inscripcion inscripcion) {
-		if (this.inscripciones.size() < 10) {
-			inscripciones.add(inscripcion);
-			this.revisarSiEstaLlenoEInformar();
-			observadores.forEach(observador -> observador
-					.notificarJugadorInscripto(inscripcion.jugador()));
-
-		} else {
-			if (this.estaLlenoDeEstandares()) {
-				inscripcion.inscribiteSiPodesA(this);
-			}
-		}
+	public void intentarInscribirA(Inscripcion inscripcion)
+			throws ElPartidoYaEstaConfirmadoException {
+		estado.intentarInscribirA(inscripcion, this);
 	}
 
 	public boolean estaLlenoDeEstandares() {
@@ -86,20 +77,17 @@ public class Partido {
 		inscripciones.removeIf(inscripcion -> !inscripcion.teCumple(this));
 	}
 
-	public void seDioDeBajaSinReemplazante(Inscripcion inscripcion) {
-		this.inscripciones.remove(inscripcion);
-		Infraccion infraccion = new Infraccion();
-		inscripcion.jugador().tePenalizaron(infraccion);
-		if (this.inscripciones().size() == 9) {
-			observadores.forEach(obs -> obs.notificarPartidoIncompleto());
-		}
+	public void seDioDeBajaSinReemplazante(Inscripcion inscripcion)
+			throws ElPartidoYaEstaConfirmadoException {
+		estado.seDioDeBajaSinReemplazante(inscripcion, this);
+
 	}
 
 	public void seDioDeBajaConReemplazante(Inscripcion inscripcion,
-			Jugador jugador, TipoDeInscripcion tipo) {
-		inscripcion.teReemplaza(jugador, tipo);
-		observadores.forEach(observador -> observador
-				.notificarJugadorInscripto(inscripcion.jugador()));
+			Jugador jugador, TipoDeInscripcion tipo)
+			throws ElPartidoYaEstaConfirmadoException {
+		estado.seDioDeBajaConReemplazante(inscripcion, jugador, tipo, this);
+
 	}
 
 	public void revisarSiEstaLlenoEInformar() {
@@ -113,7 +101,8 @@ public class Partido {
 		posiblesJugadores.add(inscripcion);
 	}
 
-	public void administradorAcepto(Inscripcion inscripcion) {
+	public void administradorAcepto(Inscripcion inscripcion)
+			throws ElPartidoYaEstaConfirmadoException {
 		posiblesJugadores.remove(inscripcion);
 		this.intentarInscribirA(inscripcion);
 	}
@@ -145,20 +134,23 @@ public class Partido {
 	}
 
 	public void armarEquipos(Criterio criterio, AlgoritmoDivision algoritmo) {
-		//para cada jugador aplicar el criterio.
-		this.inscripciones().stream().forEach(inscrip->inscrip.settearValorCriterio(criterio.funcion(inscrip.jugador())));
-		// a eso hay que ordenarlo
-		List<Inscripcion> listaOrdenada = this.inscripciones().stream().sorted(comparing(x -> x.valorDeCriterio())).collect(toList());
-		// y dividirlo segun el algoritmo de division
-		this.posiblesEquipos= algoritmo.dameLista(listaOrdenada);
+		this.inscripciones()
+				.stream()
+				.forEach(
+						inscrip -> inscrip.settearValorCriterio(criterio
+								.funcion(inscrip.jugador())));
+		List<Inscripcion> listaOrdenada = this.inscripciones().stream()
+				.sorted(comparing(x -> x.valorDeCriterio())).collect(toList());
+		this.inscripciones = algoritmo.dameLista(listaOrdenada);
 	}
 
 	public void aceptarEquipos() {
-		equipoA= posiblesEquipos.stream().limit(5).collect(toList());
-		equipoB= posiblesEquipos.stream().skip(5).collect(toList());
-		// TODO dividir la lista en dos, asignar esas listas
-		// a los atributos equipoA y equipoB
-		// y BORRAR la lista, así nadie más se puede anotar ni dar de baja
-		// hay que agregar las excepciones en esos casos
+		equipoA = inscripciones.stream().limit(5).collect(toList());
+		equipoB = inscripciones.stream().skip(5).collect(toList());
+		this.confirmar();
+	}
+
+	public void confirmar() {
+		estado = new Confirmado();
 	}
 }

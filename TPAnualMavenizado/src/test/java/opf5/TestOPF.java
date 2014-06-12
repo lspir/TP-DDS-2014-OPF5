@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import opf5.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -44,7 +45,7 @@ public class TestOPF {
 	ObservadorNotificarAdmin observadorAdmin;
 
 	@Before
-	public void setUp() {
+	public void setUp() throws ElPartidoYaEstaConfirmadoException{
 
 		observadorJugador1 = new ObservadorJugadorInscripto();
 		observadorJugador2 = new ObservadorJugadorInscripto();
@@ -63,7 +64,7 @@ public class TestOPF {
 		messi = new Jugador("Messi", 29);
 		messi.agregarAmigo(luciano);
 
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 5; i++)  {
 			jugador1 = new Jugador("Ronaldo", 28);
 			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
 			partido.intentarInscribirA(inscripcion1);
@@ -107,46 +108,55 @@ public class TestOPF {
 	}
 
 	@Test
-	public void hay8Estandares1SolidarioY1CondicionalSiSeQuiereAnotarUnEstandarLaInscripcionSeRealiza() {
+	public void hay8Estandares1SolidarioY1CondicionalSiSeQuiereAnotarUnEstandarLaInscripcionSeRealiza() throws ElPartidoYaEstaConfirmadoException{
 		Jugador emiliano = new Jugador("Emiliano", 28);
 		Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
 		partido5.intentarInscribirA(inscripcionEmi);
 		assertTrue(partido5.inscripciones().contains(inscripcionEmi));
 	}
 
+	@Test (expected = ElPartidoYaEstaConfirmadoException.class)
+	public void intentaInscribirseEnPartidoConfirmado() throws ElPartidoYaEstaConfirmadoException{
+		Jugador emiliano = new Jugador("Emiliano", 28);
+		Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
+		partido5.confirmar();
+		partido5.intentarInscribirA(inscripcionEmi);
+		
+	}
+
 	@Test
-	public void Hay5EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRealiza() {
+	public void Hay5EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRealiza() throws ElPartidoYaEstaConfirmadoException{
 		partido.intentarInscribirA(inscripcion2);
 		assertTrue(partido.inscripciones().contains(inscripcion2));
 	}
 
 	@Test
-	public void Hay10EstandarSeQuiereAnotarUnEstandarMasYLaInscripcionSeRechaza() {
+	public void Hay10EstandarSeQuiereAnotarUnEstandarMasYLaInscripcionSeRechaza()throws ElPartidoYaEstaConfirmadoException {
 		partido2.intentarInscribirA(inscripcion3);
 		assertFalse(partido2.inscripciones().contains(inscripcion3));
 	}
 
 	@Test
-	public void Hay10SolidariosSeQuiereAnotar1EstandarYLaInscripcionEsCorrecta() {
+	public void Hay10SolidariosSeQuiereAnotar1EstandarYLaInscripcionEsCorrecta() throws ElPartidoYaEstaConfirmadoException{
 		partido3.intentarInscribirA(inscripcion3);
 		assertTrue(partido3.inscripciones().contains(inscripcion3));
 	}
 
 	@Test
-	public void Hay10EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRechaza() {
+	public void Hay10EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRechaza() throws ElPartidoYaEstaConfirmadoException{
 		partido4.intentarInscribirA(inscripcion2);
 		assertFalse(partido4.inscripciones().contains(inscripcion2));
 	}
 
 	@Test
-	public void Hay8Estandares1CondicionalY1SolidarioCuandoSeAnotaUnEstandarSaleElCondicional() {
+	public void Hay8Estandares1CondicionalY1SolidarioCuandoSeAnotaUnEstandarSaleElCondicional() throws ElPartidoYaEstaConfirmadoException {
 
 		partido5.intentarInscribirA(inscripcion3);
 		assertFalse(partido5.inscripciones().contains(inscripcionCondicional));
 	}
 
 	@Test
-	public void UnJugadorCon2AmigosSeInscribeYSeEnvia1MailACadaAmigo() {
+	public void UnJugadorCon2AmigosSeInscribeYSeEnvia1MailACadaAmigo() throws ElPartidoYaEstaConfirmadoException {
 		observadorJugador1.adaptador(adaptadorMailSender);
 		partido6.agregarObservador(observadorJugador1);
 		partido6.agregarObservador(observadorAdmin);
@@ -161,19 +171,33 @@ public class TestOPF {
 	}
 
 	@Test
-	public void ElPartidoTieneUnSoloJugadorYEsteSeDaDeBajaSinReemplazanteElPartidoQuedaCon0Inscriptos() {
+	public void ElPartidoTieneUnSoloJugadorYEsteSeDaDeBajaSinReemplazanteElPartidoQuedaCon0Inscriptos() throws ElPartidoYaEstaConfirmadoException {
 		partido6.seDioDeBajaSinReemplazante(inscripcion3);
 		assertEquals(0, partido6.inscripciones().size());
 	}
 
 	@Test
-	public void UnJugadorSeDaDeBajaSinReemplazanteEntoncesSeLoPenaliza() {
+	public void UnJugadorSeDaDeBajaSinReemplazanteEntoncesSeLoPenaliza() throws ElPartidoYaEstaConfirmadoException {
 		partido6.seDioDeBajaSinReemplazante(inscripcion3);
 		assertEquals(1, inscripcion3.jugador().infracciones().size());
 	}
+	
+	@Test (expected = ElPartidoYaEstaConfirmadoException.class)
+	public void UnJugadorIntentaDarseDeBajaSinReemplzanteEnPartidoConfirmadoTiraError() throws ElPartidoYaEstaConfirmadoException {
+		partido6.confirmar();
+		partido6.seDioDeBajaSinReemplazante(inscripcion3);
+		
+	}
+	
+	@Test (expected = ElPartidoYaEstaConfirmadoException.class)
+	public void UnJugadorIntentaDarseDeBajaConReemplzanteEnPartidoConfirmadoTiraError() throws ElPartidoYaEstaConfirmadoException {
+		partido6.confirmar();
+		partido6.seDioDeBajaConReemplazante(inscripcion3,jugador1,solidario);
+		
+	}
 
 	@Test
-	public void UnJugadorSeBajaConReemplazanteEntoncesALosAmigosDelReemplazanteLesLlegaUnMail() {
+	public void UnJugadorSeBajaConReemplazanteEntoncesALosAmigosDelReemplazanteLesLlegaUnMail() throws ElPartidoYaEstaConfirmadoException {
 		partido6.seDioDeBajaConReemplazante(inscripcion3, messi, estandar);
 		verify(adaptadorMailSender3, times(messi.amigos().size())).notificar(
 				any(String.class));
@@ -187,14 +211,14 @@ public class TestOPF {
 
 	@Test
 	public void unJugadorQueParticipoIntentaCalificarParaEsePartidoEntoncesEsaCalificacionSeGuardaEnLaListaDelJugadorCalificado()
-			throws NoSePuedeCalificarException {
+			throws NoSePuedeCalificarException,ElPartidoYaEstaConfirmadoException {
 		partido6.intentarInscribirA(inscripcion2);
 		jugador2.criticar(jugador3, 8, "Se atajó todo", partido6);
 		assertEquals(1, jugador3.criticas().size());
 	}
 
 	@Test
-	public void unJugadorPropuestoEsAceptadoYPuedeInscribirseEnElPartidoEntoncesApareceEnLaListaDeJugadores() {
+	public void unJugadorPropuestoEsAceptadoYPuedeInscribirseEnElPartidoEntoncesApareceEnLaListaDeJugadores() throws ElPartidoYaEstaConfirmadoException{
 		Inscripcion inscripcionPropuesta = new Inscripcion(jugador2, estandar);
 		partido6.posiblesJugadores().add(inscripcionPropuesta);
 		partido6.administradorAcepto(inscripcionPropuesta);
@@ -225,7 +249,7 @@ public class TestOPF {
 	}
 
 	@Test
-	public void unJugadorPropuestoEsAceptadoPeroNoPuedeInscribirseAlPartidoEntoncesNoApareceEnLaListaDeJugadores() {
+	public void unJugadorPropuestoEsAceptadoPeroNoPuedeInscribirseAlPartidoEntoncesNoApareceEnLaListaDeJugadores() throws ElPartidoYaEstaConfirmadoException {
 		Inscripcion inscripcionPropuesta = new Inscripcion(jugador2, solidario);
 		partido2.posiblesJugadores().add(inscripcionPropuesta);
 		partido2.administradorAcepto(inscripcionPropuesta);
@@ -235,3 +259,4 @@ public class TestOPF {
 	}
 
 }
+
