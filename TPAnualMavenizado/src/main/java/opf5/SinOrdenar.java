@@ -15,7 +15,7 @@ public class SinOrdenar implements Estado {
 					.notificarJugadorInscripto(inscripcion.jugador()));
 
 		} else {
-			if (partido.estaLlenoDeEstandares()) {
+			if (partido.noEstaLlenoDeEstandares()) {
 				inscripcion.inscribiteSiPodesA(partido);
 			}
 		}

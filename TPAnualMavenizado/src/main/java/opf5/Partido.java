@@ -45,7 +45,7 @@ public class Partido {
 		estado.intentarInscribirA(inscripcion, this);
 	}
 
-	public boolean estaLlenoDeEstandares() {
+	public boolean noEstaLlenoDeEstandares() {
 		return (this.inscripciones.stream()
 				.filter(ins -> !ins.tuTipoDejaPasar()).count() != 10);
 	}

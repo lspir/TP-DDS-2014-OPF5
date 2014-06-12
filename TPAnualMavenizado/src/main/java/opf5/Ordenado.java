@@ -3,6 +3,11 @@ package opf5;
 import static java.util.stream.Collectors.toList;
 
 public class Ordenado extends SinOrdenar {
+	
+	public void intentarInscribirA(Inscripcion inscripcion, Partido partido){
+		super.intentarInscribirA(inscripcion, partido);
+		partido.tuEstadoEs(new SinOrdenar());
+	}
 
 	public void aceptarEquipos(Partido partido) throws ElPartidoNoEstaCompleto {
 		partido.tenes10Jugadores();
