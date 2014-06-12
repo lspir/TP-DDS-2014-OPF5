@@ -121,9 +121,6 @@ public class Partido {
 		// FIXME no usen Date, usen LocalDate o LocalDateTime o LocalTime segun
 		// su necesidad, ya que tienen interfaces mas ricas
 		posiblesJugadores.remove(inscripcion);
-		// sugerencia: eviten las variables locales, hacen que el codigo
-		// sea mas largo, se vea mas imperativo,
-		// y sea por tanto mas complejo de seguir
 		Denegacion denegacion = new Denegacion(motivo, inscripcion, new Date(),
 				inscripcion.jugador());
 		denegaciones.add(denegacion);
