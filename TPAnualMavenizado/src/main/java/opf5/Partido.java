@@ -150,4 +150,9 @@ public class Partido {
 	public void confirmar() {
 		estado = new Confirmado();
 	}
+
+	public void asd(Ordenado ordenado) {
+		estado= ordenado;
+		
+	}
 }

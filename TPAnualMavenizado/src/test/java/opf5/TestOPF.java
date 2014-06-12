@@ -123,6 +123,15 @@ public class TestOPF {
 		partido5.intentarInscribirA(inscripcionEmi);
 		
 	}
+	
+	@Test 
+	public void intentaInscribirseEnPartidoOrdenado() throws ElPartidoYaEstaConfirmadoException{
+		Jugador emiliano = new Jugador("Emiliano", 28);
+		Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
+		partido5.asd(new Ordenado());
+		partido5.intentarInscribirA(inscripcionEmi);
+		
+	}
 
 	@Test
 	public void Hay5EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRealiza() throws ElPartidoYaEstaConfirmadoException{
