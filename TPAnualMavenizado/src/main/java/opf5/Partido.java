@@ -154,6 +154,8 @@ public class Partido {
 	}
 
 	public void aceptarEquipos() {
+		equipoA= posiblesEquipos.stream().limit(5).collect(toList());
+		equipoB= posiblesEquipos.stream().skip(5).collect(toList());
 		// TODO dividir la lista en dos, asignar esas listas
 		// a los atributos equipoA y equipoB
 		// y BORRAR la lista, así nadie más se puede anotar ni dar de baja
