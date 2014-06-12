@@ -14,9 +14,9 @@ public class MixDeCriterios implements Criterio {
 		criterios.add(criterio);
 	}
 
-	public int funcion(Jugador jugador) {
-		List<Integer> lista = criterios.stream()
+	public double funcion(Jugador jugador) {
+		List<Double> lista = criterios.stream()
 				.map(criterio -> criterio.funcion(jugador)).collect(toList());
-		return (lista.sum() / lista.size());
+		return lista.stream().mapToDouble(i -> i).average().orElse(0);
 	}
 }

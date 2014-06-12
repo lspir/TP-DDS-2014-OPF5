@@ -20,14 +20,14 @@ public class AlgoritmoDivision {
 		return listaAux;
 	}
 
-	public List<Inscripcion>  dameLista1(List<Inscripcion>  lista) {
-		List<Inscripcion>  listaAux = new ArrayList<Inscripcion> ();
+	public List<Inscripcion> dameLista1(List<Inscripcion> lista) {
+		List<Inscripcion> listaAux = new ArrayList<Inscripcion>();
 		posicionesLista1.forEach(posicion -> listaAux.add(lista.get(posicion)));
-		return listaAux;
+		return listaAux; 
 	}
 
-	public List<Inscripcion>  dameLista2(List<Inscripcion>  lista) {
-		List<Inscripcion>  listaAux = new ArrayList<Inscripcion> ();
+	public List<Inscripcion> dameLista2(List<Inscripcion> lista) {
+		List<Inscripcion> listaAux = new ArrayList<Inscripcion>();
 		posicionesLista2.forEach(posicion -> listaAux.add(lista.get(posicion)));
 		return listaAux;
 	}
