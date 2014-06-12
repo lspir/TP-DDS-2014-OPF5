@@ -2,7 +2,6 @@ package opf5;
 
 import static org.junit.Assert.*;
 
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -15,11 +14,13 @@ import static org.mockito.Mockito.*;
 
 public class TestOPF {
 
-	// les parece cohesivo esta clase de tests? Miren el nombre: básicamente esta diciendo 
-	//"soy un tests que prueba el sistema completo"
-	//Por otro lado, capaz seria interesane complemetnar este tests de integracion
-	//con tests mas unitarios
-	
+	// les parece cohesivo esta clase de tests? Miren el nombre: básicamente
+	// esta diciendo
+	// "soy un tests que prueba el sistema completo"
+	// Por otro lado, capaz seria interesane complemetnar este tests de
+	// integracion
+	// con tests mas unitarios
+
 	Partido partido = new Partido("2/5", "14:00", "Campus");
 	Partido partido2 = new Partido("4/5", "21:00", "Campus");
 	Partido partido3 = new Partido("4/5", "21:00", "Campus");
@@ -37,16 +38,20 @@ public class TestOPF {
 	Amigo leandro = new Amigo("lean@gmail.com");
 
 	AdaptadorMailSender adaptadorMailSender = mock(AdaptadorMailSender.class);
-	ObservadorJugadorInscripto observadorJugador;
+	AdaptadorMailSender adaptadorMailSender2 = mock(AdaptadorMailSender.class);
+	AdaptadorMailSender adaptadorMailSender3 = mock(AdaptadorMailSender.class);
+	ObservadorJugadorInscripto observadorJugador1, observadorJugador2;
 	ObservadorNotificarAdmin observadorAdmin;
-	
 
 	@Before
 	public void setUp() {
 
-		//mailSender = mock(MailSender.class);
-		observadorJugador = new ObservadorJugadorInscripto();
+		observadorJugador1 = new ObservadorJugadorInscripto();
+		observadorJugador2 = new ObservadorJugadorInscripto();
+		observadorJugador2.adaptador(adaptadorMailSender3);
+		partido6.agregarObservador(observadorJugador2);
 		observadorAdmin = new ObservadorNotificarAdmin("admin@admin.com.ar");
+		observadorAdmin.adaptador(adaptadorMailSender2);
 		jugador2 = new Jugador("nombre", 20);
 		jugador3 = new Jugador("nombre", 23);
 		inscripcion2 = new Inscripcion(jugador2, solidario);
@@ -69,6 +74,7 @@ public class TestOPF {
 			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
 			partido2.intentarInscribirA(inscripcion1);
 		}
+		partido3.agregarObservador(observadorAdmin);
 
 		for (int i = 0; i < 10; i++) {
 			jugador2 = new Jugador("nombre", 20);
@@ -141,21 +147,19 @@ public class TestOPF {
 
 	@Test
 	public void UnJugadorCon2AmigosSeInscribeYSeEnvia1MailACadaAmigo() {
-		observadorJugador.adaptador(adaptadorMailSender);
-		partido6.agregarObservador(observadorJugador);
+		observadorJugador1.adaptador(adaptadorMailSender);
+		partido6.agregarObservador(observadorJugador1);
 		partido6.agregarObservador(observadorAdmin);
 		partido6.intentarInscribirA(inscripcion4);
 		verify(adaptadorMailSender, times(2)).notificar(any(String.class));
 	}
 
-
-	/*@Test
+	@Test
 	public void UnPartidoSeLlenaYSeEnviaUnMailAlAdministrador() {
-		partido3.agregarObservador(observadorAdmin);
-		partido3.agregarObservador(observadorJugador);
-		verify(mailSender,times(1)).notificar("admin@admin.com.ar");
-	}*/
-	
+		verify(adaptadorMailSender2, times(1)).notificar("admin@admin.com.ar");
+
+	}
+
 	@Test
 	public void ElPartidoTieneUnSoloJugadorYEsteSeDaDeBajaSinReemplazanteElPartidoQuedaCon0Inscriptos() {
 		partido6.seDioDeBajaSinReemplazante(inscripcion3);
@@ -168,24 +172,22 @@ public class TestOPF {
 		assertEquals(1, inscripcion3.jugador().infracciones().size());
 	}
 
-	/*@Test
+	@Test
 	public void UnJugadorSeBajaConReemplazanteEntoncesALosAmigosDelReemplazanteLesLlegaUnMail() {
-		partido6.seDioDeBajaConReemplazante(inscripcion3, messi);
-		assertEquals(
-				1,
-				mailSender.enviados().stream()
-						.filter(mail -> mail.remitente() == messi)
-						.collect(Collectors.toList()).size());
-	}*/
-	
-	
-	@Test(expected=NoSePuedeCalificarException.class)
-	public void unJugadorQueNoParticipoIntentaCalificarParaEsePartidoEntoncesEsaCalificacionNoEsTenidaEnCuenta()throws NoSePuedeCalificarException  {
+		partido6.seDioDeBajaConReemplazante(inscripcion3, messi, estandar);
+		verify(adaptadorMailSender3, times(messi.amigos().size())).notificar(
+				any(String.class));
+	}
+
+	@Test(expected = NoSePuedeCalificarException.class)
+	public void unJugadorQueNoParticipoIntentaCalificarParaEsePartidoEntoncesEsaCalificacionNoEsTenidaEnCuenta()
+			throws NoSePuedeCalificarException {
 		jugador2.critica(jugador3, 8, "Se atajó todo", partido6);
 	}
 
 	@Test
-	public void unJugadorQueParticipoIntentaCalificarParaEsePartidoEntoncesEsaCalificacionSeGuardaEnLaListaDelJugadorCalificado() throws NoSePuedeCalificarException {
+	public void unJugadorQueParticipoIntentaCalificarParaEsePartidoEntoncesEsaCalificacionSeGuardaEnLaListaDelJugadorCalificado()
+			throws NoSePuedeCalificarException {
 		partido6.intentarInscribirA(inscripcion2);
 		jugador2.critica(jugador3, 8, "Se atajó todo", partido6);
 		assertEquals(1, jugador3.criticas().size());
@@ -214,7 +216,12 @@ public class TestOPF {
 		Inscripcion inscripcionPropuesta = new Inscripcion(jugador2, estandar);
 		partido6.posiblesJugadores().add(inscripcionPropuesta);
 		partido6.seRechazoInscripcion(inscripcionPropuesta, "Me cae mal");
-		assertTrue(partido6.denegaciones().stream().anyMatch(denegacion->denegacion.jugador()==inscripcionPropuesta.jugador()));
+		assertTrue(partido6
+				.denegaciones()
+				.stream()
+				.anyMatch(
+						denegacion -> denegacion.jugador() == inscripcionPropuesta
+								.jugador()));
 	}
 
 	@Test

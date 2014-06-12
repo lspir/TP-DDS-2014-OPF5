@@ -3,6 +3,7 @@ package opf5;
 public class Inscripcion {
 	Jugador jugador;
 	TipoDeInscripcion tipoDeInscripcion;
+	int valorDeCriterio;
 
 	public Inscripcion(Jugador jugador, TipoDeInscripcion tipoDeInscripcion) {
 		this.jugador = jugador;

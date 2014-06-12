@@ -146,7 +146,7 @@ public class Partido {
 		observadores.add(observador);
 	}
 
-	public void ordenarSegun(Criterio criterio, AlgoritmoDivision algoritmo) {
+	public void aplicarCriterio(Criterio criterio, AlgoritmoDivision algoritmo) {
 		
 		}
 }
