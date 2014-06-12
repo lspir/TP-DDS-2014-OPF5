@@ -1,14 +1,15 @@
 package opf5;
 
+import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.*;
 import java.util.Date;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
 public class Partido {
 	private String dia;
@@ -26,6 +27,7 @@ public class Partido {
 	private List<Denegacion> denegaciones = new ArrayList<Denegacion>();
 	private List<Inscripcion> equipoA = new ArrayList<Inscripcion>();
 	private List<Inscripcion> equipoB = new ArrayList<Inscripcion>();
+	private List<Inscripcion> posiblesEquipos = new ArrayList<Inscripcion>();
 
 	public Partido(String dia, String hora, String lugar) {
 		this.dia = dia;
@@ -143,11 +145,12 @@ public class Partido {
 	}
 
 	public void armarEquipos(Criterio criterio, AlgoritmoDivision algoritmo) {
-		// TODO para cada jugador aplicar el criterio.
+		//para cada jugador aplicar el criterio.
 		this.inscripciones().stream().forEach(inscrip->inscrip.settearValorCriterio(criterio.funcion(inscrip.jugador())));
 		// a eso hay que ordenarlo
-		this.inscripciones().sort((ins1,ins2)-> ins1.valorDeCriterio()  ins2.valorDeCriterio());
+		List<Inscripcion> listaOrdenada = this.inscripciones().stream().sorted(comparing(x -> x.valorDeCriterio())).collect(toList());
 		// y dividirlo segun el algoritmo de division
+		this.posiblesEquipos= algoritmo.dameLista(listaOrdenada);
 	}
 
 	public void aceptarEquipos() {
