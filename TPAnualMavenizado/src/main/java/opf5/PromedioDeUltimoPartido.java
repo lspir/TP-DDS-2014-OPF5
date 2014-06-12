@@ -9,7 +9,7 @@ import static java.util.stream.Collectors.toList;
 public class PromedioDeUltimoPartido implements Criterio {
 
 	public double funcion(Jugador jugador) {
-		Partido ultimoPartidoJugado = jugador.criticas().get(jugador.criticas().size()).partido();
+		Partido ultimoPartidoJugado = jugador.criticas().get(jugador.criticas().size()-1).partido();
 		List<Integer> lista = jugador.criticas().stream().filter(critica-> critica.partido() == ultimoPartidoJugado).map(critica->critica.nota()).collect(toList());
 		return lista.stream().mapToInt(i -> i).average().orElse(0);
 	}
