@@ -9,6 +9,7 @@ public class Jugador {
 	private List<Amigo> amigos;
 	private List<Infraccion> infracciones;
 	private List<Critica> criticas;
+	private int handicap;
 
 	public Jugador(String nombre, int edad) {
 		this.nombre = nombre;
@@ -18,6 +19,15 @@ public class Jugador {
 		criticas = new ArrayList<Critica>();
 	}
 
+	public void handicap(int handicap) {
+		this.handicap = handicap;
+	}
+
+	public int handicap() {
+		return this.handicap;
+	}
+
+	
 	public void agregarAmigo(Amigo amigo) {
 		this.amigos.add(amigo);
 	}
@@ -34,10 +44,10 @@ public class Jugador {
 		infracciones.add(infraccion);
 	}
 
-	public void critica(Jugador jugador, int nota, String texto, Partido partido)
+	public void criticar(Jugador jugador, int nota, String texto, Partido partido)
 			throws NoSePuedeCalificarException {
 		if (partido.verificarSiJugo(this) && partido.verificarSiJugo(jugador)) {
-			Critica critica = new Critica(nota, texto);
+			Critica critica = new Critica(nota, texto,partido);
 			jugador.agregarCritica(critica);
 		} else
 			throw new NoSePuedeCalificarException();

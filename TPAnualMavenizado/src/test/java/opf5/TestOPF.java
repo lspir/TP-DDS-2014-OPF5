@@ -182,14 +182,14 @@ public class TestOPF {
 	@Test(expected = NoSePuedeCalificarException.class)
 	public void unJugadorQueNoParticipoIntentaCalificarParaEsePartidoEntoncesEsaCalificacionNoEsTenidaEnCuenta()
 			throws NoSePuedeCalificarException {
-		jugador2.critica(jugador3, 8, "Se atajó todo", partido6);
+		jugador2.criticar(jugador3, 8, "Se atajó todo", partido6);
 	}
 
 	@Test
 	public void unJugadorQueParticipoIntentaCalificarParaEsePartidoEntoncesEsaCalificacionSeGuardaEnLaListaDelJugadorCalificado()
 			throws NoSePuedeCalificarException {
 		partido6.intentarInscribirA(inscripcion2);
-		jugador2.critica(jugador3, 8, "Se atajó todo", partido6);
+		jugador2.criticar(jugador3, 8, "Se atajó todo", partido6);
 		assertEquals(1, jugador3.criticas().size());
 	}
 

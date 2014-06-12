@@ -13,21 +13,21 @@ public class AlgoritmoDivision {
 		this.posicionesLista2 = lista2;
 	}
 
-	public List<Integer> dameLista(List<Integer> lista) {
-		List<Integer> listaAux = new ArrayList<Integer>();
+	public List<Inscripcion> dameLista(List<Inscripcion> lista) {
+		List<Inscripcion> listaAux = new ArrayList<Inscripcion>();
 		listaAux.addAll(this.dameLista1(lista));
 		listaAux.addAll(this.dameLista2(lista));
 		return listaAux;
 	}
 
-	public List<Integer> dameLista1(List<Integer> lista) {
-		List<Integer> listaAux = new ArrayList<Integer>();
+	public List<Inscripcion>  dameLista1(List<Inscripcion>  lista) {
+		List<Inscripcion>  listaAux = new ArrayList<Inscripcion> ();
 		posicionesLista1.forEach(posicion -> listaAux.add(lista.get(posicion)));
 		return listaAux;
 	}
 
-	public List<Integer> dameLista2(List<Integer> lista) {
-		List<Integer> listaAux = new ArrayList<Integer>();
+	public List<Inscripcion>  dameLista2(List<Inscripcion>  lista) {
+		List<Inscripcion>  listaAux = new ArrayList<Inscripcion> ();
 		posicionesLista2.forEach(posicion -> listaAux.add(lista.get(posicion)));
 		return listaAux;
 	}

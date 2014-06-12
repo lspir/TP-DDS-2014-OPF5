@@ -18,20 +18,17 @@ public class Partido {
 	// menos cohesivo.
 	// No es que tengan que hacer algo ya, pero tenganlo en cuenta en proximas
 	// entregas
-	private List<Inscripcion> inscripciones;
-	private List<Observador> observadores;
-	private List<Inscripcion> posiblesJugadores;
-	private List<Denegacion> denegaciones;
+	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
+	private List<Observador> observadores = new ArrayList<Observador>();
+	private List<Inscripcion> posiblesJugadores = new ArrayList<Inscripcion>();
+	private List<Denegacion> denegaciones = new ArrayList<Denegacion>();
+	private List<Inscripcion> equipoA = new ArrayList<Inscripcion>();
+	private List<Inscripcion> equipoB = new ArrayList<Inscripcion>();
 
 	public Partido(String dia, String hora, String lugar) {
 		this.dia = dia;
 		this.hora = hora;
 		this.lugar = lugar;
-		inscripciones = new ArrayList<Inscripcion>();
-		observadores = new ArrayList<Observador>();
-		posiblesJugadores = new ArrayList<Inscripcion>();
-		denegaciones = new ArrayList<Denegacion>();
-
 	}
 
 	public List<Inscripcion> inscripciones() {
@@ -143,7 +140,16 @@ public class Partido {
 		observadores.add(observador);
 	}
 
-	public void aplicarCriterio(Criterio criterio, AlgoritmoDivision algoritmo) {
-		
-		}
+	public void armarEquipos(Criterio criterio, AlgoritmoDivision algoritmo) {
+		// TODO para cada jugador aplicar el criterio.
+		// a eso hay que ordenarlo
+		// y dividirlo segun el algoritmo de division
+	}
+
+	public void aceptarEquipos() {
+		// TODO dividir la lista en dos, asignar esas listas
+		// a los atributos equipoA y equipoB
+		// y BORRAR la lista, así nadie más se puede anotar ni dar de baja
+		// hay que agregar las excepciones en esos casos
+	}
 }
