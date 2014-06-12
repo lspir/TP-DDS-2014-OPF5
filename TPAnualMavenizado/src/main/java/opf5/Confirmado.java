@@ -16,4 +16,11 @@ public class Confirmado implements Estado {
 			throws ElPartidoYaEstaConfirmadoException {
 		throw new ElPartidoYaEstaConfirmadoException();
 	}
+	
+	public void armarEquipos(Criterio criterio, AlgoritmoDivision algoritmo,Partido partido) throws ElPartidoYaEstaConfirmadoException{
+		throw new ElPartidoYaEstaConfirmadoException();
+	}
+	public void aceptarEquipos(Partido partido){
+	}
 }
+

@@ -25,15 +25,15 @@ public class Partido {
 	public List<Observador> observadores = new ArrayList<Observador>();
 	private List<Inscripcion> posiblesJugadores = new ArrayList<Inscripcion>();
 	private List<Denegacion> denegaciones = new ArrayList<Denegacion>();
-	private List<Inscripcion> equipoA = new ArrayList<Inscripcion>();
-	private List<Inscripcion> equipoB = new ArrayList<Inscripcion>();
+	public List<Inscripcion> equipoA = new ArrayList<Inscripcion>();
+	public List<Inscripcion> equipoB = new ArrayList<Inscripcion>();
 	private Estado estado;
 
 	public Partido(String dia, String hora, String lugar) {
 		this.dia = dia;
 		this.hora = hora;
 		this.lugar = lugar;
-		this.estado = new SinConfirmar();
+		this.estado = new SinOrdenar();
 	}
 
 	public List<Inscripcion> inscripciones() {
@@ -134,25 +134,23 @@ public class Partido {
 		observadores.add(observador);
 	}
 
-	public void armarEquipos(Criterio criterio, AlgoritmoDivision algoritmo) {
-		this.inscripciones().stream().forEach(inscrip->inscrip.settearValorCriterio(criterio.funcion(inscrip.jugador())));
-		List<Inscripcion> listaOrdenada = this.inscripciones().stream().sorted(comparing(x -> x.valorDeCriterio())).collect(toList());
-		this.inscripciones= algoritmo.dameLista(listaOrdenada);
+	public void armarEquipos(Criterio criterio, AlgoritmoDivision algoritmo) throws ElPartidoYaEstaConfirmadoException,ElPartidoNoEstaCompleto{
+		estado.armarEquipos(criterio, algoritmo, this);
 	}
 	
 
-	public void aceptarEquipos() {
-		equipoA = inscripciones.stream().limit(5).collect(toList());
-		equipoB = inscripciones.stream().skip(5).collect(toList());
-		this.confirmar();
+	public void aceptarEquipos()throws NoSePuedeAceptarEquiposElPartidoNoEstaOrdenadoException,ElPartidoNoEstaCompleto {
+		estado.aceptarEquipos(this);
 	}
 
-	public void confirmar() {
-		estado = new Confirmado();
-	}
-
-	public void asd(Ordenado ordenado) {
-		estado= ordenado;
+	public void tuEstadoEs(Estado unEstado) {
+		estado= unEstado;
 		
+	}
+
+	public void tenes10Jugadores() throws ElPartidoNoEstaCompleto{
+		if (inscripciones.size()<10){
+			throw new ElPartidoNoEstaCompleto();
+		}
 	}
 }

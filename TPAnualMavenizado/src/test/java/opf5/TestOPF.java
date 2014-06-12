@@ -119,16 +119,16 @@ public class TestOPF {
 	public void intentaInscribirseEnPartidoConfirmado() throws ElPartidoYaEstaConfirmadoException{
 		Jugador emiliano = new Jugador("Emiliano", 28);
 		Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
-		partido5.confirmar();
+		partido5.tuEstadoEs(new Confirmado());
 		partido5.intentarInscribirA(inscripcionEmi);
 		
 	}
 	
 	@Test 
-	public void intentaInscribirseEnPartidoOrdenado() throws ElPartidoYaEstaConfirmadoException{
+	public void seInscribirseEnPartidoOrdenado() throws ElPartidoYaEstaConfirmadoException{
 		Jugador emiliano = new Jugador("Emiliano", 28);
 		Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
-		partido5.asd(new Ordenado());
+		partido5.tuEstadoEs(new Ordenado());
 		partido5.intentarInscribirA(inscripcionEmi);
 		
 	}
@@ -193,14 +193,14 @@ public class TestOPF {
 	
 	@Test (expected = ElPartidoYaEstaConfirmadoException.class)
 	public void UnJugadorIntentaDarseDeBajaSinReemplzanteEnPartidoConfirmadoTiraError() throws ElPartidoYaEstaConfirmadoException {
-		partido6.confirmar();
+		partido6.tuEstadoEs(new Confirmado());
 		partido6.seDioDeBajaSinReemplazante(inscripcion3);
 		
 	}
 	
 	@Test (expected = ElPartidoYaEstaConfirmadoException.class)
 	public void UnJugadorIntentaDarseDeBajaConReemplzanteEnPartidoConfirmadoTiraError() throws ElPartidoYaEstaConfirmadoException {
-		partido6.confirmar();
+		partido6.tuEstadoEs(new Confirmado());
 		partido6.seDioDeBajaConReemplazante(inscripcion3,jugador1,solidario);
 		
 	}

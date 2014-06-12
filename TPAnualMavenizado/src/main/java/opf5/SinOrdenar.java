@@ -1,6 +1,11 @@
 package opf5;
 
-public class SinConfirmar implements Estado {
+import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.toList;
+
+import java.util.List;
+
+public class SinOrdenar implements Estado {
 
 	public void intentarInscribirA(Inscripcion inscripcion, Partido partido) {
 		if (partido.inscripciones().size() < 10) {
@@ -33,6 +38,19 @@ public class SinConfirmar implements Estado {
 		partido.observadores.forEach(observador -> observador
 				.notificarJugadorInscripto(inscripcion.jugador()));
 	}
-}
 
+
+	public void armarEquipos(Criterio criterio, AlgoritmoDivision algoritmo,Partido partido) throws ElPartidoNoEstaCompleto {
+	partido.tenes10Jugadores();
+	partido.inscripciones().stream().forEach(inscrip->inscrip.settearValorCriterio(criterio.funcion(inscrip.jugador())));
+	List<Inscripcion> listaOrdenada = partido.inscripciones().stream().sorted(comparing(x -> x.valorDeCriterio())).collect(toList());
+	partido.inscripciones= algoritmo.dameLista(listaOrdenada);
+	partido.tuEstadoEs(new Ordenado());
+	}
+	
+	public void aceptarEquipos(Partido partido) throws NoSePuedeAceptarEquiposElPartidoNoEstaOrdenadoException,ElPartidoNoEstaCompleto {
+		throw new NoSePuedeAceptarEquiposElPartidoNoEstaOrdenadoException();
+	}
+	
+}
 	

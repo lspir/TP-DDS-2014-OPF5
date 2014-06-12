@@ -1,5 +1,26 @@
 package opf5;
 
-public class Ordenado extends SinConfirmar {
+import static java.util.stream.Collectors.toList;
 
+public class Ordenado extends SinOrdenar {
+
+	public void aceptarEquipos(Partido partido) throws ElPartidoNoEstaCompleto {
+		partido.tenes10Jugadores();
+		partido.equipoA = partido.inscripciones.stream().limit(5).collect(toList());
+		partido.equipoB = partido.inscripciones.stream().skip(5).collect(toList());
+		partido.tuEstadoEs(new Confirmado());
+	
+	}
+	
+	public void seDioDeBajaConReemplazante(Inscripcion inscripcion,
+			Jugador jugador, TipoDeInscripcion tipo, Partido partido) {
+		super.seDioDeBajaConReemplazante(inscripcion, jugador, tipo, partido);
+		partido.tuEstadoEs(new SinOrdenar());
+	}
+	
+	public void seDioDeBajaSinReemplazante(Inscripcion inscripcion,
+			Partido partido) {
+		super.seDioDeBajaSinReemplazante(inscripcion, partido);
+		partido.tuEstadoEs(new SinOrdenar());
+	}
 }
