@@ -8,6 +8,8 @@ import java.util.Optional;
 import java.util.stream.*;
 import java.util.Date;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
+
 public class Partido {
 	private String dia;
 	private String hora;
@@ -142,7 +144,9 @@ public class Partido {
 
 	public void armarEquipos(Criterio criterio, AlgoritmoDivision algoritmo) {
 		// TODO para cada jugador aplicar el criterio.
+		this.inscripciones().stream().forEach(inscrip->inscrip.settearValorCriterio(criterio.funcion(inscrip.jugador())));
 		// a eso hay que ordenarlo
+		this.inscripciones().sort((ins1,ins2)-> ins1.valorDeCriterio()  ins2.valorDeCriterio());
 		// y dividirlo segun el algoritmo de division
 	}
 

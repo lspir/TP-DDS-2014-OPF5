@@ -4,6 +4,7 @@ import java.util.function.Function;
 
 public interface Criterio {
 
-	public int funcion(Jugador jugador);
+	public double funcion(Jugador jugador);
 
 }
+

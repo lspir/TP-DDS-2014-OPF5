@@ -10,11 +10,10 @@ public class UltimasNCalificaciones implements Criterio {
 	public UltimasNCalificaciones(int n){
 		this.n= n;
 	}
-	public int funcion(Jugador jugador) {
+	public double funcion(Jugador jugador) {
 		List<Critica> criticas = jugador.criticas();
 		List<Integer> lista = criticas.subList(criticas.size() - n, criticas.size()).stream().map(critica-> critica.nota()).collect(toList());
-		int promedio = lista.sum() / lista.size();
-		return promedio;
+		return lista.stream().mapToInt(i -> i).average().orElse(0);
 	}
 
 }
