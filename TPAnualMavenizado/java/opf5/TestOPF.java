@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.List;
+import java.util.ArrayList;
 
 import opf5.*;
 
@@ -308,6 +310,7 @@ public class TestOPF {
 
 	@Test
 	public void aplicarCriterioUltimas3CalificacionesDe7AJugadorDevuelve7() {
+
 		Critica criticaDe7 = new Critica(7, "bueno", partido6);
 		UltimasNCalificaciones criterioUltimasN = new UltimasNCalificaciones(3);
 		for (int i = 0; i < 5; i++) {
@@ -317,4 +320,40 @@ public class TestOPF {
 
 	}
 
+	@Test
+	public void aplicarCriterioMixDeCriterioAJugador() {
+		Critica criticaDe7 = new Critica(7, "bueno", partido6);
+		Critica criticaDe5 = new Critica(5, "regular", partido5);
+		UltimasNCalificaciones criterioUltimasN = new UltimasNCalificaciones(2);
+		PromedioDeUltimoPartido criterioPromedioDeUltimoPartido = new PromedioDeUltimoPartido();
+		MixDeCriterios criterioMix = new MixDeCriterios();
+		for (int i = 0; i < 6; i++) {
+			jugador4.agregarCritica(criticaDe7);
+			jugador4.agregarCritica(criticaDe5);
+		}
+		criterioMix.agregarCriterio(criterioPromedioDeUltimoPartido);
+		criterioMix.agregarCriterio(criterioUltimasN);
+		assertEquals(5.5, criterioMix.funcion(jugador4), 0);
+	}
+/*
+	@Test
+	public void aplicarAlgoritmoDivisionDeParesAListaDel1Al10() {
+		List<Integer> pares = new ArrayList<Integer>();
+		List<Integer> impares = new ArrayList<Integer>();
+
+		for (int i = 1; i < 11; i++) {
+			if (i % 2 == 0) {
+				pares.add(i);
+
+			} else {
+				impares.add(i);
+
+			}
+
+		}
+		AlgoritmoDivision divisionDePares = new AlgoritmoDivision(pares,
+				impares);
+
+	}
+*/
 }

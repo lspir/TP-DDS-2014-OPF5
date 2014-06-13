@@ -136,6 +136,7 @@ public class Partido {
 
 	public void armarEquipos(Criterio criterio, AlgoritmoDivision algoritmo) throws ElPartidoYaEstaConfirmadoException,ElPartidoNoEstaCompleto{
 		estado.armarEquipos(criterio, algoritmo, this);
+		
 	}
 	
 
