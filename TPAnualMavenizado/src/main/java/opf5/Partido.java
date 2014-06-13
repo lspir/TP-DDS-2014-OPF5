@@ -10,17 +10,10 @@ import java.util.Optional;
 import java.util.stream.*;
 import java.util.Date;
 
-
 public class Partido {
 	private String dia;
 	private String hora;
 	private String lugar;
-	// quizas aun no es tan evidente, pero no ven que de a poco el partido
-	// empieza a crecer en cosas que hace?
-	// Es decir, lentamente y con cada entrega el partido se está volviendo
-	// menos cohesivo.
-	// No es que tengan que hacer algo ya, pero tenganlo en cuenta en proximas
-	// entregas
 	public List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
 	public List<Observador> observadores = new ArrayList<Observador>();
 	private List<Inscripcion> posiblesJugadores = new ArrayList<Inscripcion>();
@@ -109,8 +102,7 @@ public class Partido {
 	}
 
 	public void seRechazoInscripcion(Inscripcion inscripcion, String motivo) {
-		// FIXME no usen Date, usen LocalDate o LocalDateTime o LocalTime segun
-		// su necesidad, ya que tienen interfaces mas ricas
+
 		posiblesJugadores.remove(inscripcion);
 		Denegacion denegacion = new Denegacion(motivo, inscripcion, new Date(),
 				inscripcion.jugador());
@@ -134,23 +126,25 @@ public class Partido {
 		observadores.add(observador);
 	}
 
-	public void armarEquipos(Criterio criterio, AlgoritmoDivision algoritmo) throws ElPartidoYaEstaConfirmadoException,ElPartidoNoEstaCompleto{
+	public void armarEquipos(Criterio criterio, AlgoritmoDivision algoritmo)
+			throws ElPartidoYaEstaConfirmadoException, ElPartidoNoEstaCompleto {
 		estado.armarEquipos(criterio, algoritmo, this);
-		
-	}
-	
 
-	public void aceptarEquipos()throws NoSePuedeAceptarEquiposElPartidoNoEstaOrdenadoException,ElPartidoNoEstaCompleto {
+	}
+
+	public void aceptarEquipos()
+			throws NoSePuedeAceptarEquiposElPartidoNoEstaOrdenadoException,
+			ElPartidoNoEstaCompleto {
 		estado.aceptarEquipos(this);
 	}
 
 	public void tuEstadoEs(Estado unEstado) {
-		estado= unEstado;
-		
+		estado = unEstado;
+
 	}
 
-	public void tenes10Jugadores() throws ElPartidoNoEstaCompleto{
-		if (inscripciones.size()<10){
+	public void tenes10Jugadores() throws ElPartidoNoEstaCompleto {
+		if (inscripciones.size() < 10) {
 			throw new ElPartidoNoEstaCompleto();
 		}
 	}

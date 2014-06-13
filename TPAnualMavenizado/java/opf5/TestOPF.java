@@ -17,13 +17,6 @@ import static org.mockito.Mockito.*;
 
 public class TestOPF {
 
-	// les parece cohesivo esta clase de tests? Miren el nombre: básicamente
-	// esta diciendo
-	// "soy un tests que prueba el sistema completo"
-	// Por otro lado, capaz seria interesane complemetnar este tests de
-	// integracion
-	// con tests mas unitarios
-
 	Partido partido = new Partido("2/5", "14:00", "Campus");
 	Partido partido2 = new Partido("4/5", "21:00", "Campus");
 	Partido partido3 = new Partido("4/5", "21:00", "Campus");
