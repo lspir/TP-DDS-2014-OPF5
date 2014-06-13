@@ -335,25 +335,34 @@ public class TestOPF {
 		criterioMix.agregarCriterio(criterioUltimasN);
 		assertEquals(5.5, criterioMix.funcion(jugador4), 0);
 	}
-/*
+
 	@Test
 	public void aplicarAlgoritmoDivisionDeParesAListaDel1Al10() {
 		List<Integer> pares = new ArrayList<Integer>();
 		List<Integer> impares = new ArrayList<Integer>();
-
+		List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
+		List<Inscripcion> inscripcionesValidada = new ArrayList<Inscripcion>();
 		for (int i = 1; i < 11; i++) {
 			if (i % 2 == 0) {
 				pares.add(i);
+				inscripciones.add(inscripcion2);
+				inscripcionesValidada.add(inscripcion2);
 
 			} else {
 				impares.add(i);
+				inscripciones.add(inscripcion3);
 
 			}
 
 		}
-		AlgoritmoDivision divisionDePares = new AlgoritmoDivision(pares,
-				impares);
+		for (int j = 1; j < 11; j++) {
+			if (j % 2 == 1) {
+				inscripcionesValidada.add(inscripcion3);
+			}
+		}
+		AlgoritmoDivision divisionDePares = new AlgoritmoDivision(pares, impares);
+		assertEquals(inscripcionesValidada,	divisionDePares.dameLista(inscripciones));
 
 	}
-*/
+
 }
