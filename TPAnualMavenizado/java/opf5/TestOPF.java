@@ -342,7 +342,7 @@ public class TestOPF {
 		List<Integer> impares = new ArrayList<Integer>();
 		List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
 		List<Inscripcion> inscripcionesValidada = new ArrayList<Inscripcion>();
-		for (int i = 1; i < 11; i++) {
+		for (int i = 0; i < 10; i++) {
 			if (i % 2 == 0) {
 				pares.add(i);
 				inscripciones.add(inscripcion2);
@@ -361,7 +361,7 @@ public class TestOPF {
 			}
 		}
 		AlgoritmoDivision divisionDePares = new AlgoritmoDivision(pares, impares);
-		assertEquals(inscripcionesValidada,	divisionDePares.dameLista(inscripciones));
+		assertEquals(inscripcionesValidada,divisionDePares.dameLista(inscripciones));
 
 	}
 
