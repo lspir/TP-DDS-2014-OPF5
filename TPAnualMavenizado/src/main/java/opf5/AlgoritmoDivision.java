@@ -3,6 +3,8 @@ package opf5;
 import java.util.ArrayList;
 import java.util.List;
 
+//FIXME expresividad. ¿Algoritmo de división de qué? 
+//Algoritmo de división "solo"me suena a algoritmo de divión numérica xD
 public class AlgoritmoDivision {
 
 	private List<Integer> posicionesLista1 = new ArrayList<Integer>();
@@ -20,6 +22,7 @@ public class AlgoritmoDivision {
 		return listaAux;
 	}
 
+	//FIXME lógica repetida entre ambos métodos
 	public List<Inscripcion> dameLista1(List<Inscripcion> lista) {
 		List<Inscripcion> listaAux = new ArrayList<Inscripcion>();
 		posicionesLista1.forEach(posicion -> listaAux.add(lista.get(posicion)));

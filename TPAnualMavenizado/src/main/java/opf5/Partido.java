@@ -11,6 +11,7 @@ import java.util.stream.*;
 import java.util.Date;
 
 public class Partido {
+  //FIXME ¿por qué querrían modelar a una fecha con tres campos string?
 	private String dia;
 	private String hora;
 	private String lugar;
@@ -19,6 +20,7 @@ public class Partido {
 	private List<Inscripcion> posiblesJugadores = new ArrayList<Inscripcion>();
 	private List<Denegacion> denegaciones = new ArrayList<Denegacion>();
 	public List<Inscripcion> equipoA = new ArrayList<Inscripcion>();
+	//FIXME mantengan siempre a sus atributos privados, para favorecer al encapsulamiento
 	public List<Inscripcion> equipoB = new ArrayList<Inscripcion>();
 	private Estado estado;
 
@@ -44,6 +46,8 @@ public class Partido {
 	}
 
 	public void inscribiA(Inscripcion inscripcion) {
+	  //FIXME Long Method. Si me dicen que después de tres meses pueden seguir entendiendo este código
+	  //tengo dos opciones: o darles un premio o no creerles:P
 		Inscripcion inscriptoAEliminar;
 		List<Inscripcion> genteAEliminar;
 
@@ -104,12 +108,15 @@ public class Partido {
 	public void seRechazoInscripcion(Inscripcion inscripcion, String motivo) {
 
 		posiblesJugadores.remove(inscripcion);
+		//FIXME no usen Date, usen LocalDate, que tienen una interfaz más simple de usar y 
+		//presentan mejores cualidade de diseño
 		Denegacion denegacion = new Denegacion(motivo, inscripcion, new Date(),
 				inscripcion.jugador());
 		denegaciones.add(denegacion);
 	}
 
 	public boolean verificarSiJugo(Jugador jugador) {
+	  //FIXME usar equals (equivalencia) y no == (identidad)
 		return (inscripciones.stream().anyMatch(inscripcion -> inscripcion
 				.jugador() == jugador));
 	}
@@ -138,6 +145,8 @@ public class Partido {
 		estado.aceptarEquipos(this);
 	}
 
+	//FIXME la convención de Java para los setters es setXYZ, y no 
+	//"tuXyzEs"
 	public void tuEstadoEs(Estado unEstado) {
 		estado = unEstado;
 

@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import static org.mockito.Mockito.*;
 
+//FIXME es un buen momento para separar los tests en varias clases 
 public class TestOPF {
 
 	Partido partido = new Partido("2/5", "14:00", "Campus");
@@ -201,6 +202,8 @@ public class TestOPF {
 	@Test(expected = ElPartidoYaEstaConfirmadoException.class)
 	public void UnJugadorIntentaDarseDeBajaSinReemplzanteEnPartidoConfirmadoTiraError()
 			throws ElPartidoYaEstaConfirmadoException {
+	  //FIXME que piensan de que esté seteando el estado desde afuera?
+	  //Eso respeta la idea del patrón state?
 		partido6.tuEstadoEs(new Confirmado());
 		partido6.seDioDeBajaSinReemplazante(inscripcion3);
 
@@ -331,6 +334,9 @@ public class TestOPF {
 
 	@Test
 	public void aplicarAlgoritmoDivisionDeParesAListaDel1Al10() {
+	  //FIXME esto (el criterio de división por pares) es parte de los requerimientos, 
+	  //por lo que esta lógica no debería ser parte de un tests sino estar implementada 
+	  //en el dominio
 		List<Integer> pares = new ArrayList<Integer>();
 		List<Integer> impares = new ArrayList<Integer>();
 		List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();

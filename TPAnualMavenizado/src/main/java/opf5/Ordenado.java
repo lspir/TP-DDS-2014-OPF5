@@ -2,6 +2,7 @@ package opf5;
 
 import static java.util.stream.Collectors.toList;
 
+//FIXME ¿les parece una buena abstracción decir que "todo estado ordenado es un estado sin ordenar"?
 public class Ordenado extends SinOrdenar {
 
 	public void intentarInscribirA(Inscripcion inscripcion, Partido partido) {
