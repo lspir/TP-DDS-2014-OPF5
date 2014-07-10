@@ -1,6 +1,6 @@
-package ar.edu.futbol5.inscripcion;
+package refactor.inscripcion;
 
-import ar.edu.futbol5.inscripcion.CriterioInscripcion;
+import refactor.inscripcion.CriterioInscripcion;
 
 public class ModoSolidario implements CriterioInscripcion {
 

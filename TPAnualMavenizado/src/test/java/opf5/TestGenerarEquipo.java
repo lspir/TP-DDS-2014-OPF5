@@ -1,4 +1,4 @@
-package ar.edu.futbol5;
+package opf5;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,11 +7,13 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import ar.edu.futbol5.excepciones.BusinessException;
-import ar.edu.futbol5.ordenamiento.OrdenamientoCalificacionUltimos2Partidos;
-import ar.edu.futbol5.ordenamiento.OrdenamientoMix;
-import ar.edu.futbol5.ordenamiento.OrdenamientoPorHandicap;
-import ar.edu.futbol5.utilitarios.Lists;
+import refactor.excepciones.BusinessException;
+import refactor.ordenamiento.OrdenamientoCalificacionUltimos2Partidos;
+import refactor.ordenamiento.OrdenamientoMix;
+import refactor.ordenamiento.OrdenamientoPorHandicap;
+import refactor.utilitarios.Lists;
+import refactor.Partido;
+import refactor.Jugador;
 public class TestGenerarEquipo {
 
 	private Partido partidoPocosJugadores;

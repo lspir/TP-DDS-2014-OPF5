@@ -1,12 +1,12 @@
-package ar.edu.futbol5;
+package refactor;
 
-import ar.edu.futbol5.inscripcion.CriterioInscripcion;
-import ar.edu.futbol5.inscripcion.ModoSolidario;
+import refactor.inscripcion.CriterioInscripcion;
+import refactor.inscripcion.ModoSolidario;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import ar.edu.futbol5.inscripcion.ModoEstandar;
+import refactor.inscripcion.ModoEstandar;
 
 public class Jugador {
 
@@ -29,7 +29,7 @@ public class Jugador {
 		this.nombre = nombre;
 	}
 	
-	void modoSolidario() {
+	public void modoSolidario() {
 		criterioInscripcion = new ModoSolidario();
 	}
 	

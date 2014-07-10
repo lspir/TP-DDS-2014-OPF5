@@ -1,7 +1,7 @@
-package ar.edu.futbol5.ordenamiento;
+package refactor.ordenamiento;
 
-import ar.edu.futbol5.Jugador;
-import ar.edu.futbol5.Partido;
+import refactor.Jugador;
+import refactor.Partido;
 
 import java.util.Comparator;
 import java.util.List;

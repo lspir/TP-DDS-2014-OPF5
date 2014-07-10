@@ -1,8 +1,8 @@
-package ar.edu.futbol5;
+package refactor;
 
 import java.util.List;
 
-class Equipo {
+public class Equipo {
 	
 	private List<Jugador> jugadores;
 

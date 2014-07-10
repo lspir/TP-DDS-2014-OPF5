@@ -1,15 +1,14 @@
-package ar.edu.futbol5.ordenamiento;
+package refactor.ordenamiento;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import ar.edu.futbol5.Jugador;
-import ar.edu.futbol5.Partido;
+import refactor.Jugador;
+import refactor.Partido;
 
-public class OrdenamientoCalificacionUltimos2Partidos implements CriterioOrdenamiento {
-	
+public class OrdenamientoPorHandicap implements CriterioOrdenamiento {
 	
 	public List<Jugador> ordenar(Partido partido) {
 		Collections.sort(partido.getInscriptos(), new Comparator<Jugador>() {
@@ -27,21 +26,7 @@ public class OrdenamientoCalificacionUltimos2Partidos implements CriterioOrdenam
 	}
 	
 	public Double calcularValor(Jugador jugador) {
-		List<Double> puntajes=jugador.getPuntajes();
-		List<Double> misPuntajes=new ArrayList<Double>(); 
-		if(!puntajes.isEmpty()){
-			misPuntajes.add(jugador.getPuntajes().get(puntajes.size()-1));
-		}
-		if(puntajes.size()>1){
-			misPuntajes.add(jugador.getPuntajes().get(puntajes.size()-2));
-		}
-		
-		Double promedio=0d;
-		for (Double puntaje : misPuntajes) {
-			promedio+=puntaje;
-		}
-		promedio/=misPuntajes.size();
-		return promedio;
+		return jugador.getCalificacion();
 	}
 	
 }

@@ -1,4 +1,4 @@
-package ar.edu.futbol5.excepciones;
+package refactor.excepciones;
 
 import java.lang.RuntimeException;
 

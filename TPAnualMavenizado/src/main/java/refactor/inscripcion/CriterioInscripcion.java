@@ -1,4 +1,4 @@
-package ar.edu.futbol5.inscripcion;
+package refactor.inscripcion;
 
 public interface CriterioInscripcion {
 	

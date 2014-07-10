@@ -1,21 +1,15 @@
-package ar.edu.futbol5.ordenamiento;
+package refactor.ordenamiento;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import ar.edu.futbol5.Jugador;
-import ar.edu.futbol5.Partido;
+import refactor.Jugador;
+import refactor.Partido;
 
-public class OrdenamientoMix implements CriterioOrdenamiento {
+public class OrdenamientoCalificacionUltimos2Partidos implements CriterioOrdenamiento {
 	
-	List<CriterioOrdenamiento> criterios;
-	
-	public OrdenamientoMix() {
-		criterios = new ArrayList<CriterioOrdenamiento>();
-	}
 	
 	public List<Jugador> ordenar(Partido partido) {
 		Collections.sort(partido.getInscriptos(), new Comparator<Jugador>() {
@@ -32,17 +26,22 @@ public class OrdenamientoMix implements CriterioOrdenamiento {
 		return jugadores;
 	}
 	
-	public void addCriterio(CriterioOrdenamiento criterio) {
-		criterios.add(criterio);
-	}
-	
 	public Double calcularValor(Jugador jugador) {
-		Double acumulador=0d;
-		for (CriterioOrdenamiento criterio : criterios) {
-			acumulador+=criterio.calcularValor(jugador);
+		List<Double> puntajes=jugador.getPuntajes();
+		List<Double> misPuntajes=new ArrayList<Double>(); 
+		if(!puntajes.isEmpty()){
+			misPuntajes.add(jugador.getPuntajes().get(puntajes.size()-1));
+		}
+		if(puntajes.size()>1){
+			misPuntajes.add(jugador.getPuntajes().get(puntajes.size()-2));
 		}
 		
-		return acumulador;
+		Double promedio=0d;
+		for (Double puntaje : misPuntajes) {
+			promedio+=puntaje;
+		}
+		promedio/=misPuntajes.size();
+		return promedio;
 	}
 	
 }

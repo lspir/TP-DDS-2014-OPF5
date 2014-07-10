@@ -1,9 +1,9 @@
-package ar.edu.futbol5;
+package refactor;
 
-import ar.edu.futbol5.excepciones.BusinessException;
-import ar.edu.futbol5.ordenamiento.CriterioOrdenamiento;
-import ar.edu.futbol5.ordenamiento.OrdenamientoPorHandicap;
-import ar.edu.futbol5.utilitarios.Lists;
+import refactor.excepciones.BusinessException;
+import refactor.ordenamiento.CriterioOrdenamiento;
+import refactor.ordenamiento.OrdenamientoPorHandicap;
+import refactor.utilitarios.Lists;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +64,7 @@ public class Partido {
 		return criterioOrdenamiento.ordenar(this);
 	}
 
-	void inscribir(Jugador jugador) {
+	public void inscribir(Jugador jugador) {
 		if (inscriptos.size() < 10) {
 			this.inscriptos.add(jugador);
 		} else {
