@@ -8,12 +8,12 @@ public class Lleno implements EstadoDelPartido {
 				partido.getInscriptos().remove(partido.jugadorQueCedeLugar());
 				partido.getInscriptos().add(jugador);
 			} else {
-				throw new BusinessException("No hay más lugar");
+				throw new BusinessException("No hay mï¿½s lugar");
 		}
 		
 
 	}
-
+//FIXME indentaciÃ³n
 		public void dividirEnEquipos(Partido partido){
 		partido.distribuirEquipos(partido.ordenarEquipos());
 		partido.setEstado(new Distribuido());

@@ -99,6 +99,7 @@ public class TestGenerarEquipo {
 
 	@Test
 	public void generarEquiposPorHandicap() {
+	  //FIXME no les hace ruido que haya impresiones por pantalla en un test?
 		System.out.println("******************************************");
 		System.out.println("ordenamiento por handicap");
 		List<Jugador> jugadores=partido1.ordenarEquipos();
@@ -115,7 +116,10 @@ public class TestGenerarEquipo {
 		System.out.println("******************************************");
 		System.out.println("ordenamiento por ultimas 2 calificaciones");
 		List<Jugador> jugadores=partido1.ordenarEquipos();
+		//FIXME no les hace ruido que haya tanta lógica dentro de un test?
+		//No se supone que los test existen para probar la lógica del sistema, en lugar de repetirla?
 		for (Jugador jugador : jugadores) {
+		  
 			//Tomando los 2 últimos puntajes
 			List<Double> puntajes=jugador.getPuntajes();
 			List<Double> misPuntajes=new ArrayList<Double>(); 

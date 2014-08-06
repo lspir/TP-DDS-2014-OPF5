@@ -9,6 +9,7 @@ import java.util.List;
 import refactor.Jugador;
 import refactor.Partido;
 
+//FIXME no ven código repetido entre esa clase y los otros criterios de ordenamiento?
 public class OrdenamientoMix implements CriterioOrdenamiento {
 	
 	List<CriterioOrdenamiento> criterios;

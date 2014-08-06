@@ -33,6 +33,8 @@ public class Partido {
 	public void distribuirEquipos(List<Jugador> jugadores) {
 		equipo1 = new Equipo();
 		equipo2 = new Equipo();
+		//FIXME no ven nada mal en esto????
+		//Que es un "distribuciónEquipos"? 
 		if (distribucionEquipos == 5) {
 			equipo1.setJugadores(Lists.newArrayList(jugadores.get(0),
 					jugadores.get(2), jugadores.get(4), jugadores.get(6),

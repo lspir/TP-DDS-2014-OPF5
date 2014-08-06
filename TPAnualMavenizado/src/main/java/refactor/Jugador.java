@@ -19,9 +19,12 @@ public class Jugador {
 		this.puntajes = new ArrayList<Double>();
 		this.calificacion = null;
 		this.criterioInscripcion = new ModoEstandar();
+		//FIXME se inicializa nombre en ""? Por qué? Les parece una buena idea inicializar
+		//a nombre en un estado inconsistente?
 		this.nombre = "";
 	}
 
+	//FIXME no ven logia repetida entre los constructores?
 	public Jugador(String nombre, double calificacion, List<Double> puntajes) {
 		this.calificacion = calificacion;
 		this.puntajes = puntajes;
@@ -37,6 +40,7 @@ public class Jugador {
 		return (criterioInscripcion.dejaLugarAOtro());
 	}
 
+	//FIXME el código comentario ES un codesmell
 	public String toString() {
 		// "Jugador (" + calificacion + ") - modo " +
 		// criterioInscripcion.toString()
