@@ -1,5 +1,6 @@
 package opf5.observers;
 import opf5.*;
+import opf5.mailSender.*;
 
 public class ObservadorNotificarAdmin implements Observador {
 

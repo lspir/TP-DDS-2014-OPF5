@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import opf5.*;
 import opf5.excepciones.*;
 import opf5.observers.*;
+import opf5.mailSender.*;
 
 import org.junit.Before;
 import org.junit.Test;
