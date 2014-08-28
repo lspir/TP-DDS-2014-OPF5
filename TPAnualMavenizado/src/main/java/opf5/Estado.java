@@ -1,5 +1,5 @@
 package opf5;
-
+import opf5.inscripcion.*;
 
 public interface Estado {
 

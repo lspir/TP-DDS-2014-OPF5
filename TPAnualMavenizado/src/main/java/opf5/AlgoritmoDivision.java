@@ -2,6 +2,7 @@ package opf5;
 
 import java.util.ArrayList;
 import java.util.List;
+import opf5.inscripcion.*;
 
 //FIXME expresividad. ¿Algoritmo de división de qué? 
 //Algoritmo de división "solo"me suena a algoritmo de divión numérica xD
