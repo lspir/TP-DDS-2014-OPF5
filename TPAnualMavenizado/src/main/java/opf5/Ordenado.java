@@ -1,5 +1,5 @@
 package opf5;
-import opf5.excepciones.*;
+
 import static java.util.stream.Collectors.toList;
 
 //FIXME ¿les parece una buena abstracción decir que "todo estado ordenado es un estado sin ordenar"?
@@ -10,7 +10,7 @@ public class Ordenado extends SinOrdenar {
 		partido.tuEstadoEs(new SinOrdenar());
 	}
 
-	public void aceptarEquipos(Partido partido) throws ElPartidoNoEstaCompleto {
+	public void aceptarEquipos(Partido partido){
 		partido.tenes10Jugadores();
 		partido.equipoA = partido.inscripciones.stream().limit(5)
 				.collect(toList());

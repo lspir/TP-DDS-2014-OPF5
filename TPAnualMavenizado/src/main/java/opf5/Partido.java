@@ -36,7 +36,7 @@ public class Partido {
 	}
 
 	public void intentarInscribirA(Inscripcion inscripcion)
-			throws ElPartidoYaEstaConfirmadoException {
+			{
 		estado.intentarInscribirA(inscripcion, this);
 	}
 
@@ -76,14 +76,14 @@ public class Partido {
 	}
 
 	public void seDioDeBajaSinReemplazante(Inscripcion inscripcion)
-			throws ElPartidoYaEstaConfirmadoException {
+			{
 		estado.seDioDeBajaSinReemplazante(inscripcion, this);
 
 	}
 
 	public void seDioDeBajaConReemplazante(Inscripcion inscripcion,
 			Jugador jugador, TipoDeInscripcion tipo)
-			throws ElPartidoYaEstaConfirmadoException {
+			{
 		estado.seDioDeBajaConReemplazante(inscripcion, jugador, tipo, this);
 
 	}
@@ -134,14 +134,13 @@ public class Partido {
 	}
 
 	public void armarEquipos(Criterio criterio, AlgoritmoDivision algoritmo)
-			throws ElPartidoYaEstaConfirmadoException, ElPartidoNoEstaCompleto {
+			{
 		estado.armarEquipos(criterio, algoritmo, this);
 
 	}
 
 	public void aceptarEquipos()
-			throws NoSePuedeAceptarEquiposElPartidoNoEstaOrdenadoException,
-			ElPartidoNoEstaCompleto {
+			{
 		estado.aceptarEquipos(this);
 	}
 
