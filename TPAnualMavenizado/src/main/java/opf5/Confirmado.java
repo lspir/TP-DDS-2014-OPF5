@@ -1,4 +1,5 @@
 package opf5;
+import opf5.excepciones.*;
 
 public class Confirmado implements Estado {
 	public void intentarInscribirA(Inscripcion inscripcion, Partido partido)

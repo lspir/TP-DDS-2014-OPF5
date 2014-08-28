@@ -1,5 +1,5 @@
 package opf5;
-
+import opf5.excepciones.*;
 import static java.util.stream.Collectors.toList;
 
 //FIXME ¿les parece una buena abstracción decir que "todo estado ordenado es un estado sin ordenar"?

@@ -2,6 +2,7 @@ package opf5;
 
 import java.util.ArrayList;
 import java.util.List;
+import opf5.excepciones.*;
 
 public class Jugador {
 	private String nombre;
