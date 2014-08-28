@@ -1,6 +1,5 @@
 package opf5;
 
-
 import static org.junit.Assert.*;
 
 import java.util.HashMap;
@@ -11,7 +10,6 @@ import java.util.ArrayList;
 
 import opf5.*;
 import opf5.excepciones.*;
-
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,7 +42,7 @@ public class TestOPF {
 	ObservadorNotificarAdmin observadorAdmin;
 
 	@Before
-	public void setUp() throws ElPartidoYaEstaConfirmadoException {
+	public void setUp() {
 
 		observadorJugador1 = new ObservadorJugadorInscripto();
 		observadorJugador2 = new ObservadorJugadorInscripto();
@@ -108,8 +106,7 @@ public class TestOPF {
 	}
 
 	@Test
-	public void hay8Estandares1SolidarioY1CondicionalSiSeQuiereAnotarUnEstandarLaInscripcionSeRealiza()
-			throws ElPartidoYaEstaConfirmadoException {
+	public void hay8Estandares1SolidarioY1CondicionalSiSeQuiereAnotarUnEstandarLaInscripcionSeRealiza() {
 		Jugador emiliano = new Jugador("Emiliano", 28);
 		Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
 		partido5.intentarInscribirA(inscripcionEmi);
@@ -117,8 +114,7 @@ public class TestOPF {
 	}
 
 	@Test(expected = ElPartidoYaEstaConfirmadoException.class)
-	public void intentaInscribirseEnPartidoConfirmado()
-			throws ElPartidoYaEstaConfirmadoException {
+	public void intentaInscribirseEnPartidoConfirmado() {
 		Jugador emiliano = new Jugador("Emiliano", 28);
 		Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
 		partido5.tuEstadoEs(new Confirmado());
@@ -127,8 +123,7 @@ public class TestOPF {
 	}
 
 	@Test
-	public void seInscribirseEnPartidoOrdenado()
-			throws ElPartidoYaEstaConfirmadoException {
+	public void seInscribirseEnPartidoOrdenado() {
 		Jugador emiliano = new Jugador("Emiliano", 28);
 		Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
 		partido5.tuEstadoEs(new Ordenado());
@@ -137,44 +132,38 @@ public class TestOPF {
 	}
 
 	@Test
-	public void Hay5EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRealiza()
-			throws ElPartidoYaEstaConfirmadoException {
+	public void Hay5EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRealiza() {
 		partido.intentarInscribirA(inscripcion2);
 		assertTrue(partido.inscripciones().contains(inscripcion2));
 	}
 
 	@Test
-	public void Hay10EstandarSeQuiereAnotarUnEstandarMasYLaInscripcionSeRechaza()
-			throws ElPartidoYaEstaConfirmadoException {
+	public void Hay10EstandarSeQuiereAnotarUnEstandarMasYLaInscripcionSeRechaza() {
 		partido2.intentarInscribirA(inscripcion3);
 		assertFalse(partido2.inscripciones().contains(inscripcion3));
 	}
 
 	@Test
-	public void Hay10SolidariosSeQuiereAnotar1EstandarYLaInscripcionEsCorrecta()
-			throws ElPartidoYaEstaConfirmadoException {
+	public void Hay10SolidariosSeQuiereAnotar1EstandarYLaInscripcionEsCorrecta() {
 		partido3.intentarInscribirA(inscripcion3);
 		assertTrue(partido3.inscripciones().contains(inscripcion3));
 	}
 
 	@Test
-	public void Hay10EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRechaza()
-			throws ElPartidoYaEstaConfirmadoException {
+	public void Hay10EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRechaza() {
 		partido4.intentarInscribirA(inscripcion2);
 		assertFalse(partido4.inscripciones().contains(inscripcion2));
 	}
 
 	@Test
-	public void Hay8Estandares1CondicionalY1SolidarioCuandoSeAnotaUnEstandarSaleElCondicional()
-			throws ElPartidoYaEstaConfirmadoException {
+	public void Hay8Estandares1CondicionalY1SolidarioCuandoSeAnotaUnEstandarSaleElCondicional() {
 
 		partido5.intentarInscribirA(inscripcion3);
 		assertFalse(partido5.inscripciones().contains(inscripcionCondicional));
 	}
 
 	@Test
-	public void UnJugadorCon2AmigosSeInscribeYSeEnvia1MailACadaAmigo()
-			throws ElPartidoYaEstaConfirmadoException {
+	public void UnJugadorCon2AmigosSeInscribeYSeEnvia1MailACadaAmigo() {
 		observadorJugador1.adaptador(adaptadorMailSender);
 		partido6.agregarObservador(observadorJugador1);
 		partido6.agregarObservador(observadorAdmin);
@@ -189,63 +178,54 @@ public class TestOPF {
 	}
 
 	@Test
-	public void ElPartidoTieneUnSoloJugadorYEsteSeDaDeBajaSinReemplazanteElPartidoQuedaCon0Inscriptos()
-			throws ElPartidoYaEstaConfirmadoException {
+	public void ElPartidoTieneUnSoloJugadorYEsteSeDaDeBajaSinReemplazanteElPartidoQuedaCon0Inscriptos() {
 		partido6.seDioDeBajaSinReemplazante(inscripcion3);
 		assertEquals(0, partido6.inscripciones().size());
 	}
 
 	@Test
-	public void UnJugadorSeDaDeBajaSinReemplazanteEntoncesSeLoPenaliza()
-			throws ElPartidoYaEstaConfirmadoException {
+	public void UnJugadorSeDaDeBajaSinReemplazanteEntoncesSeLoPenaliza() {
 		partido6.seDioDeBajaSinReemplazante(inscripcion3);
 		assertEquals(1, inscripcion3.jugador().infracciones().size());
 	}
 
 	@Test(expected = ElPartidoYaEstaConfirmadoException.class)
-	public void UnJugadorIntentaDarseDeBajaSinReemplzanteEnPartidoConfirmadoTiraError()
-			throws ElPartidoYaEstaConfirmadoException {
-	  //FIXME que piensan de que esté seteando el estado desde afuera?
-	  //Eso respeta la idea del patrón state?
+	public void UnJugadorIntentaDarseDeBajaSinReemplzanteEnPartidoConfirmadoTiraError() {
+		// FIXME que piensan de que esté seteando el estado desde afuera?
+		// Eso respeta la idea del patrón state?
 		partido6.tuEstadoEs(new Confirmado());
 		partido6.seDioDeBajaSinReemplazante(inscripcion3);
 
 	}
 
 	@Test(expected = ElPartidoYaEstaConfirmadoException.class)
-	public void UnJugadorIntentaDarseDeBajaConReemplzanteEnPartidoConfirmadoTiraError()
-			throws ElPartidoYaEstaConfirmadoException {
+	public void UnJugadorIntentaDarseDeBajaConReemplzanteEnPartidoConfirmadoTiraError() {
 		partido6.tuEstadoEs(new Confirmado());
 		partido6.seDioDeBajaConReemplazante(inscripcion3, jugador1, solidario);
 
 	}
 
 	@Test
-	public void UnJugadorSeBajaConReemplazanteEntoncesALosAmigosDelReemplazanteLesLlegaUnMail()
-			throws ElPartidoYaEstaConfirmadoException {
+	public void UnJugadorSeBajaConReemplazanteEntoncesALosAmigosDelReemplazanteLesLlegaUnMail() {
 		partido6.seDioDeBajaConReemplazante(inscripcion3, messi, estandar);
 		verify(adaptadorMailSender3, times(messi.amigos().size())).notificar(
 				any(String.class));
 	}
 
 	@Test(expected = NoSePuedeCalificarException.class)
-	public void unJugadorQueNoParticipoIntentaCalificarParaEsePartidoEntoncesEsaCalificacionNoEsTenidaEnCuenta()
-			throws NoSePuedeCalificarException {
+	public void unJugadorQueNoParticipoIntentaCalificarParaEsePartidoEntoncesEsaCalificacionNoEsTenidaEnCuenta() {
 		jugador2.criticar(jugador3, 8, "Se atajó todo", partido6);
 	}
 
 	@Test
-	public void unJugadorQueParticipoIntentaCalificarParaEsePartidoEntoncesEsaCalificacionSeGuardaEnLaListaDelJugadorCalificado()
-			throws NoSePuedeCalificarException,
-			ElPartidoYaEstaConfirmadoException {
+	public void unJugadorQueParticipoIntentaCalificarParaEsePartidoEntoncesEsaCalificacionSeGuardaEnLaListaDelJugadorCalificado() {
 		partido6.intentarInscribirA(inscripcion2);
 		jugador2.criticar(jugador3, 8, "Se atajó todo", partido6);
 		assertEquals(1, jugador3.criticas().size());
 	}
 
 	@Test
-	public void unJugadorPropuestoEsAceptadoYPuedeInscribirseEnElPartidoEntoncesApareceEnLaListaDeJugadores()
-			throws ElPartidoYaEstaConfirmadoException {
+	public void unJugadorPropuestoEsAceptadoYPuedeInscribirseEnElPartidoEntoncesApareceEnLaListaDeJugadores() {
 		Inscripcion inscripcionPropuesta = new Inscripcion(jugador2, estandar);
 		partido6.posiblesJugadores().add(inscripcionPropuesta);
 		partido6.administradorAcepto(inscripcionPropuesta);
@@ -276,8 +256,7 @@ public class TestOPF {
 	}
 
 	@Test
-	public void unJugadorPropuestoEsAceptadoPeroNoPuedeInscribirseAlPartidoEntoncesNoApareceEnLaListaDeJugadores()
-			throws ElPartidoYaEstaConfirmadoException {
+	public void unJugadorPropuestoEsAceptadoPeroNoPuedeInscribirseAlPartidoEntoncesNoApareceEnLaListaDeJugadores() {
 		Inscripcion inscripcionPropuesta = new Inscripcion(jugador2, solidario);
 		partido2.posiblesJugadores().add(inscripcionPropuesta);
 		partido2.administradorAcepto(inscripcionPropuesta);
@@ -337,9 +316,11 @@ public class TestOPF {
 
 	@Test
 	public void aplicarAlgoritmoDivisionDeParesAListaDel1Al10() {
-	  //FIXME esto (el criterio de división por pares) es parte de los requerimientos, 
-	  //por lo que esta lógica no debería ser parte de un tests sino estar implementada 
-	  //en el dominio
+		// FIXME esto (el criterio de división por pares) es parte de los
+		// requerimientos,
+		// por lo que esta lógica no debería ser parte de un tests sino estar
+		// implementada
+		// en el dominio
 		List<Integer> pares = new ArrayList<Integer>();
 		List<Integer> impares = new ArrayList<Integer>();
 		List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
@@ -362,8 +343,10 @@ public class TestOPF {
 				inscripcionesValidada.add(inscripcion3);
 			}
 		}
-		AlgoritmoDivision divisionDePares = new AlgoritmoDivision(pares, impares);
-		assertEquals(inscripcionesValidada,divisionDePares.dameLista(inscripciones));
+		AlgoritmoDivision divisionDePares = new AlgoritmoDivision(pares,
+				impares);
+		assertEquals(inscripcionesValidada,
+				divisionDePares.dameLista(inscripciones));
 
 	}
 

@@ -46,7 +46,7 @@ public class Jugador {
 	}
 
 	public void criticar(Jugador jugador, int nota, String texto, Partido partido)
-			throws NoSePuedeCalificarException {
+			{
 		if (partido.verificarSiJugo(this) && partido.verificarSiJugo(jugador)) {
 			Critica critica = new Critica(nota, texto,partido);
 			jugador.agregarCritica(critica);

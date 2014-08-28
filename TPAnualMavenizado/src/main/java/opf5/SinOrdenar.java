@@ -74,7 +74,7 @@ public class SinOrdenar implements Estado {
 	partido.tuEstadoEs(new Ordenado());
 	}
 	
-	public void aceptarEquipos(Partido partido) throws NoSePuedeAceptarEquiposElPartidoNoEstaOrdenadoException,ElPartidoNoEstaCompleto {
+	public void aceptarEquipos(Partido partido) {
 		throw new NoSePuedeAceptarEquiposElPartidoNoEstaOrdenadoException();
 	}
 	

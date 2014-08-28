@@ -100,7 +100,7 @@ public class Partido {
 	}
 
 	public void administradorAcepto(Inscripcion inscripcion)
-			throws ElPartidoYaEstaConfirmadoException {
+			{
 		posiblesJugadores.remove(inscripcion);
 		this.intentarInscribirA(inscripcion);
 	}
@@ -152,7 +152,7 @@ public class Partido {
 
 	}
 
-	public void tenes10Jugadores() throws ElPartidoNoEstaCompleto {
+	public void tenes10Jugadores() {
 		if (inscripciones.size() < 10) {
 			throw new ElPartidoNoEstaCompleto();
 		}
