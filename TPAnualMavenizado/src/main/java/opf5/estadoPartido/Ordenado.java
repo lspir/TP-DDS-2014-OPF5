@@ -1,4 +1,6 @@
-package opf5;
+package opf5.estadoPartido;
+import opf5.*;
+
 
 import static java.util.stream.Collectors.toList;
 import opf5.inscripcion.*;
