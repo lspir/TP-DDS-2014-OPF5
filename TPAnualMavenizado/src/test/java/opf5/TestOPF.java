@@ -272,9 +272,9 @@ public class TestOPF {
 
 	@Test
 	public void aplicarCriterioHandicapAUnJugadorConValor8Es8() {
-		Handicap criterioHandicap = new Handicap();
+		CriterioHandicap criterioHandicap = new CriterioHandicap();
 		messi.handicap(8);
-		assertEquals(8, criterioHandicap.funcion(messi), 1);
+		assertEquals(8, criterioHandicap.ponderate(messi), 1);
 	}
 
 	@Test
@@ -287,7 +287,7 @@ public class TestOPF {
 		for (int i = 0; i < 3; i++) {
 			jugador1.agregarCritica(criticaDe8);
 		}
-		assertEquals(8, criterioPromedioDeUltimoPartido.funcion(jugador1), 0);
+		assertEquals(8, criterioPromedioDeUltimoPartido.ponderate(jugador1), 0);
 
 	}
 
@@ -299,7 +299,7 @@ public class TestOPF {
 		for (int i = 0; i < 5; i++) {
 			jugador4.agregarCritica(criticaDe7);
 		}
-		assertEquals(7, criterioUltimasN.funcion(jugador4), 1);
+		assertEquals(7, criterioUltimasN.ponderate(jugador4), 1);
 
 	}
 
@@ -316,7 +316,7 @@ public class TestOPF {
 		}
 		criterioMix.agregarCriterio(criterioPromedioDeUltimoPartido);
 		criterioMix.agregarCriterio(criterioUltimasN);
-		assertEquals(5.5, criterioMix.funcion(jugador4), 0);
+		assertEquals(5.5, criterioMix.ponderate(jugador4), 0);
 	}
 
 	@Test

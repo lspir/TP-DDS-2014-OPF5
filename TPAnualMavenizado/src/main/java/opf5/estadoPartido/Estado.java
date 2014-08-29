@@ -13,6 +13,6 @@ public interface Estado {
 
 	public void seDioDeBajaConReemplazante(Inscripcion inscripcion,
 			Jugador jugador, TipoDeInscripcion tipo, Partido partido) ;
-	public void armarEquipos(Criterio criterio, AlgoritmoDivision algoritmo,Partido partido);
+	public void armarEquipos(CriterioOrdenamientoEquipos criterio, AlgoritmoDivision algoritmo,Partido partido);
 	public void aceptarEquipos(Partido partido);
 }

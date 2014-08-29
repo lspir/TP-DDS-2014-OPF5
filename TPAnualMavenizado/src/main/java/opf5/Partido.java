@@ -137,7 +137,7 @@ public class Partido {
 		observadores.add(observador);
 	}
 
-	public void armarEquipos(Criterio criterio, AlgoritmoDivision algoritmo)
+	public void armarEquipos(CriterioOrdenamientoEquipos criterio, AlgoritmoDivision algoritmo)
 			{
 		estado.armarEquipos(criterio, algoritmo, this);
 

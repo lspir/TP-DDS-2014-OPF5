@@ -4,14 +4,14 @@ import opf5.*;
 import java.util.ArrayList;
 import static java.util.stream.Collectors.toList;
 
-public class UltimasNCalificaciones implements Criterio {
+public class UltimasNCalificaciones implements CriterioOrdenamientoEquipos {
 
 	private int n;
 	
 	public UltimasNCalificaciones(int n){
 		this.n= n;
 	}
-	public double funcion(Jugador jugador) {
+	public double ponderate(Jugador jugador) {
 		List<Critica> criticas = jugador.criticas();
 		//FIXME esto no es un skip?
 		List<Integer> lista = criticas.subList(criticas.size() - (n+1), criticas.size()-1).stream().map(critica-> critica.nota()).collect(toList());

@@ -7,10 +7,10 @@ import java.util.Optional;
 import java.util.stream.*;
 import static java.util.stream.Collectors.toList;
 
-public class PromedioDeUltimoPartido implements Criterio {
+public class PromedioDeUltimoPartido implements CriterioOrdenamientoEquipos {
 
   //FIXME no ven lógica repetida entre PromedioUltimoPartido y UltimasNCalificaciones?
-	public double funcion(Jugador jugador) {
+	public double ponderate(Jugador jugador) {
 		Partido ultimoPartidoJugado = jugador.criticas().get(jugador.criticas().size()-1).partido();
 		//FIXME ojo, == compara por identidad, equals compara por equivalencia
 		List<Integer> lista = jugador.criticas().stream().filter(critica-> critica.partido() == ultimoPartidoJugado).map(critica->critica.nota()).collect(toList());

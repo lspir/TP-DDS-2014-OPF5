@@ -7,20 +7,20 @@ import java.util.stream.*;
 import opf5.*;
 import static java.util.stream.Collectors.toList;
 
-public class MixDeCriterios implements Criterio {
+public class MixDeCriterios implements CriterioOrdenamientoEquipos {
 
-	private List<Criterio> criterios = new ArrayList<Criterio>();
+	private List<CriterioOrdenamientoEquipos> criterios = new ArrayList<CriterioOrdenamientoEquipos>();
 
 	//FIXME para qué hacerlo mutable al criterio? No podrían simplemente inyectar las dependencias
 	//por constructor?
-	public void agregarCriterio(Criterio criterio) {
+	public void agregarCriterio(CriterioOrdenamientoEquipos criterio) {
 		criterios.add(criterio);
 	}
 
-	public double funcion(Jugador jugador) {
+	public double ponderate(Jugador jugador) {
 	  //FIXME nuevamente, ¿por qué la List intermedia?
 		List<Double> lista = criterios.stream()
-				.map(criterio -> criterio.funcion(jugador)).collect(toList());
+				.map(criterio -> criterio.ponderate(jugador)).collect(toList());
 		return lista.stream().mapToDouble(i -> i).average().orElse(0);
 	}
 }
