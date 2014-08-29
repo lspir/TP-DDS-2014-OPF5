@@ -1,6 +1,7 @@
 package opf5;
 
 import java.util.Date;
+import opf5.jugador.*;
 import opf5.inscripcion.*;
 
 public class Denegacion {

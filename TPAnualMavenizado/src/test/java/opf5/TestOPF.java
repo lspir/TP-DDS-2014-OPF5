@@ -1,7 +1,7 @@
 package opf5;
 
 import static org.junit.Assert.*;
-
+import opf5.jugador.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -348,7 +348,7 @@ public class TestOPF {
 				inscripcionesValidada.add(inscripcion3);
 			}
 		}
-		AlgoritmoDivision divisionDePares = new AlgoritmoDivision(pares,
+		AlgoritmoDivisionDeEquipos divisionDePares = new AlgoritmoDivisionDeEquipos(pares,
 				impares);
 		assertEquals(inscripcionesValidada,
 				divisionDePares.dameLista(inscripciones));

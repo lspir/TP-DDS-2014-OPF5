@@ -1,5 +1,6 @@
 package opf5.criteriosDeOrdenamientoDeEquipos;
 import java.util.List;
+import opf5.jugador.*;
 import opf5.*;
 import java.util.ArrayList;
 import static java.util.stream.Collectors.toList;

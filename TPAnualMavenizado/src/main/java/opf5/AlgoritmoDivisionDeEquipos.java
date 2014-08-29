@@ -4,14 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 import opf5.inscripcion.*;
 
-//FIXME expresividad. ¿Algoritmo de división de qué? 
-//Algoritmo de división "solo"me suena a algoritmo de divión numérica xD
-public class AlgoritmoDivision {
+public class AlgoritmoDivisionDeEquipos {
 
 	private List<Integer> posicionesLista1 = new ArrayList<Integer>();
 	private List<Integer> posicionesLista2 = new ArrayList<Integer>();
 
-	public AlgoritmoDivision(List<Integer> lista1, List<Integer> lista2) {
+	public AlgoritmoDivisionDeEquipos(List<Integer> lista1, List<Integer> lista2) {
 		this.posicionesLista1 = lista1;
 		this.posicionesLista2 = lista2;
 	}

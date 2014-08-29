@@ -1,5 +1,6 @@
 package opf5.estadoPartido;
 import opf5.*;
+import opf5.jugador.*;
 
 
 import static java.util.stream.Collectors.toList;

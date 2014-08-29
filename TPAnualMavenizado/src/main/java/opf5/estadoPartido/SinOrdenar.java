@@ -1,5 +1,6 @@
 package opf5.estadoPartido;
 import opf5.*;
+import opf5.jugador.*;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
 
 
@@ -71,7 +72,7 @@ public class SinOrdenar implements Estado {
 	//la que contiene a un equipo hasta la mitad y al otro equipo a partir de la segunda mitda 
 	//Acá les está faltando la abstracción de equipo o de formación 
  
-	public void armarEquipos(CriterioOrdenamientoEquipos criterio, AlgoritmoDivision algoritmo,Partido partido) {
+	public void armarEquipos(CriterioOrdenamientoEquipos criterio, AlgoritmoDivisionDeEquipos algoritmo,Partido partido) {
 	partido.tenes10Jugadores();
 	partido.inscripciones().stream().forEach(inscrip->inscrip.settearValorCriterio(criterio.ponderate(inscrip.jugador())));
 	List<Inscripcion> listaOrdenada = partido.inscripciones().stream().sorted(comparing(x -> x.valorDeCriterio())).collect(toList());

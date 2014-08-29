@@ -1,5 +1,6 @@
 package opf5.estadoPartido;
 import opf5.excepciones.*;
+import opf5.jugador.*;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
 import opf5.inscripcion.*;
 import opf5.*;
@@ -19,7 +20,7 @@ public class Confirmado implements Estado {
 		throw new ElPartidoYaEstaConfirmadoException();
 	}
 	
-	public void armarEquipos(CriterioOrdenamientoEquipos criterio, AlgoritmoDivision algoritmo,Partido partido){
+	public void armarEquipos(CriterioOrdenamientoEquipos criterio, AlgoritmoDivisionDeEquipos algoritmo,Partido partido){
 		throw new ElPartidoYaEstaConfirmadoException();
 	}
 	public void aceptarEquipos(Partido partido){

@@ -1,5 +1,6 @@
 package opf5.inscripcion;
 import opf5.*;
+import opf5.jugador.*;
 
 
 public class Inscripcion {

@@ -1,5 +1,6 @@
 package opf5;
 import opf5.excepciones.*;
+import opf5.jugador.*;
 import opf5.inscripcion.*;
 import opf5.observers.*;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
@@ -137,7 +138,7 @@ public class Partido {
 		observadores.add(observador);
 	}
 
-	public void armarEquipos(CriterioOrdenamientoEquipos criterio, AlgoritmoDivision algoritmo)
+	public void armarEquipos(CriterioOrdenamientoEquipos criterio, AlgoritmoDivisionDeEquipos algoritmo)
 			{
 		estado.armarEquipos(criterio, algoritmo, this);
 

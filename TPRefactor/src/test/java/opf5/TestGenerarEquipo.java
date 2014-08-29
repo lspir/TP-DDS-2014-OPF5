@@ -180,7 +180,7 @@ public class TestGenerarEquipo {
 		partido1.generarEquipos();
 		partido1.generarEquipos();
 	}
-
+	
 	/** *************************************************************************
 	 * METODOS AUXILIARES DE LOS TESTS
 	 ****************************************************************************/
