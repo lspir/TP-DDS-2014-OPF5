@@ -1,8 +1,12 @@
 package opf5.criteriosDeOrdenamientoDeEquipos;
 import java.util.List;
+
 import opf5.jugador.*;
 import opf5.*;
+
 import java.util.ArrayList;
+import java.util.stream.Stream;
+
 import static java.util.stream.Collectors.toList;
 
 public class UltimasNCalificaciones implements CriterioOrdenamientoEquipos {
@@ -13,10 +17,17 @@ public class UltimasNCalificaciones implements CriterioOrdenamientoEquipos {
 		this.n= n;
 	}
 	public double ponderate(Jugador jugador) {
-		List<Critica> criticas = jugador.criticas();
-		//FIXME esto no es un skip?
-		List<Integer> lista = criticas.subList(criticas.size() - (n+1), criticas.size()-1).stream().map(critica-> critica.nota()).collect(toList());
-		return lista.stream().mapToInt(i -> i).average().orElse(0);
+		return calcularPromedioOdevolver0(calcularUltimasNcalificaciones(jugador));
 	}
 
+
+	private List<Integer> calcularUltimasNcalificaciones(Jugador jugador) {
+		return jugador.criticas().stream().skip(n).map(critica-> critica.nota()).collect(toList());
+	}
+	
+	private double calcularPromedioOdevolver0(List<Integer> lista){
+		return lista.stream().mapToInt(i -> i).average().orElse(0);
+	}
 }
+
+

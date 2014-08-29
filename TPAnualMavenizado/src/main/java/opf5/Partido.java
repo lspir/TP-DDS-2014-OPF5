@@ -18,8 +18,7 @@ import java.util.stream.*;
 
 
 public class Partido {
-  //FIXME ¿por qué querrían modelar a una fecha con tres campos string?
-	private LocalDate fecha;
+  	private LocalDate fecha;
 	private LocalTime horario;
 	private String lugar;
 	public List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
