@@ -2,6 +2,10 @@ package opf5;
 
 import static org.junit.Assert.*;
 import opf5.jugador.*;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Month;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -24,12 +28,12 @@ import static org.mockito.Mockito.*;
 //FIXME es un buen momento para separar los tests en varias clases 
 public class TestOPF {
 
-	Partido partido = new Partido("2/5", "14:00", "Campus");
-	Partido partido2 = new Partido("4/5", "21:00", "Campus");
-	Partido partido3 = new Partido("4/5", "21:00", "Campus");
-	Partido partido4 = new Partido("4/5", "21:00", "Campus");
-	Partido partido5 = new Partido("4/5", "21:00", "Campus");
-	Partido partido6 = new Partido("4/5", "21:00", "Campus");
+	Partido partido = new Partido(LocalDate.now(),LocalTime.now(), "Campus");
+	Partido partido2 = new Partido(LocalDate.of(2014, Month.JANUARY, 1), LocalTime.now(), "Campus");
+	Partido partido3 = new Partido(LocalDate.now().plusDays(10), LocalTime.now(), "Campus");
+	Partido partido4 = new Partido(LocalDate.of(2014, Month.AUGUST, 13),LocalTime.of(12,30), "Campus");
+	Partido partido5 = new Partido(LocalDate.of(2014, Month.APRIL, 29), LocalTime.of(21,30), "Campus");
+	Partido partido6 = new Partido(LocalDate.of(2014, Month.AUGUST, 29), LocalTime.of(20,00), "Mario Bravo");
 
 	Estandar estandar = new Estandar();
 	Solidario solidario = new Solidario();

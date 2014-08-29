@@ -8,17 +8,19 @@ import opf5.estadoPartido.*;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.*;
-import java.util.Date;
+
 
 public class Partido {
   //FIXME ¿por qué querrían modelar a una fecha con tres campos string?
-	private String dia;
-	private String hora;
+	private LocalDate fecha;
+	private LocalTime horario;
 	private String lugar;
 	public List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
 	public List<Observador> observadores = new ArrayList<Observador>();
@@ -29,9 +31,9 @@ public class Partido {
 	public List<Inscripcion> equipoB = new ArrayList<Inscripcion>();
 	private Estado estado;
 
-	public Partido(String dia, String hora, String lugar) {
-		this.dia = dia;
-		this.hora = hora;
+	public Partido(LocalDate fecha, LocalTime horario, String lugar) {
+		this.fecha = fecha;
+		this.horario = horario;
 		this.lugar = lugar;
 		this.estado = new SinOrdenar();
 	}
@@ -113,9 +115,7 @@ public class Partido {
 	public void seRechazoInscripcion(Inscripcion inscripcion, String motivo) {
 
 		posiblesJugadores.remove(inscripcion);
-		//FIXME no usen Date, usen LocalDate, que tienen una interfaz más simple de usar y 
-		//presentan mejores cualidade de diseño
-		Denegacion denegacion = new Denegacion(motivo, inscripcion, new Date(),
+		Denegacion denegacion = new Denegacion(motivo, inscripcion, LocalDate.now(),
 				inscripcion.jugador());
 		denegaciones.add(denegacion);
 	}
