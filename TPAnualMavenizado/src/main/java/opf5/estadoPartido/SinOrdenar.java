@@ -1,5 +1,6 @@
 package opf5.estadoPartido;
 import opf5.*;
+import opf5.criteriosDeOrdenamientoDeEquipos.*;
 
 
 import static java.util.Comparator.comparing;

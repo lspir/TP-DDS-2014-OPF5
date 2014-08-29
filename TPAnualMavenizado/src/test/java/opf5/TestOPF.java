@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import opf5.*;
+import opf5.criteriosDeOrdenamientoDeEquipos.*;
 import opf5.estadoPartido.*;
 import opf5.inscripcion.*;
 import opf5.excepciones.*;

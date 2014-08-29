@@ -2,6 +2,7 @@ package opf5;
 import opf5.excepciones.*;
 import opf5.inscripcion.*;
 import opf5.observers.*;
+import opf5.criteriosDeOrdenamientoDeEquipos.*;
 import opf5.estadoPartido.*;
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
