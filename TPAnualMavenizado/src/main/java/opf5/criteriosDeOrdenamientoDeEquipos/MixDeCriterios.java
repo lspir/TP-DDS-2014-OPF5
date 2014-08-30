@@ -12,16 +12,16 @@ public class MixDeCriterios implements CriterioOrdenamientoEquipos {
 
 	private List<CriterioOrdenamientoEquipos> criterios = new ArrayList<CriterioOrdenamientoEquipos>();
 
-	//FIXME para qué hacerlo mutable al criterio? No podrían simplemente inyectar las dependencias
-	//por constructor?
-	public void agregarCriterio(CriterioOrdenamientoEquipos criterio) {
-		criterios.add(criterio);
+	public MixDeCriterios(List<CriterioOrdenamientoEquipos> criterios){
+		this.criterios=criterios;
 	}
-
+	
 	public double ponderate(Jugador jugador) {
-	  //FIXME nuevamente, ¿por qué la List intermedia?
-		List<Double> lista = criterios.stream()
+	return obtenerListaCriteriosPonderados(jugador).stream().mapToDouble(i -> i).average().orElse(0);
+	}
+	
+	public List<Double> obtenerListaCriteriosPonderados(Jugador jugador){
+		return criterios.stream()
 				.map(criterio -> criterio.ponderate(jugador)).collect(toList());
-		return lista.stream().mapToDouble(i -> i).average().orElse(0);
 	}
 }

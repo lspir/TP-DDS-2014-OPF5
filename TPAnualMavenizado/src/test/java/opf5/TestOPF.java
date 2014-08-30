@@ -313,13 +313,14 @@ public class TestOPF {
 		Critica criticaDe5 = new Critica(5, "regular", partido5);
 		UltimasNCalificaciones criterioUltimasN = new UltimasNCalificaciones(2);
 		PromedioDeUltimoPartido criterioPromedioDeUltimoPartido = new PromedioDeUltimoPartido();
-		MixDeCriterios criterioMix = new MixDeCriterios();
+		List<CriterioOrdenamientoEquipos> criterios = new ArrayList<CriterioOrdenamientoEquipos>();
+		criterios.add(criterioPromedioDeUltimoPartido);
+		criterios.add(criterioUltimasN);
+		MixDeCriterios criterioMix = new MixDeCriterios(criterios);
 		for (int i = 0; i < 6; i++) {
 			jugador4.agregarCritica(criticaDe7);
 			jugador4.agregarCritica(criticaDe5);
 		}
-		criterioMix.agregarCriterio(criterioPromedioDeUltimoPartido);
-		criterioMix.agregarCriterio(criterioUltimasN);
 		assertEquals(5.5, criterioMix.ponderate(jugador4), 0);
 	}
 
