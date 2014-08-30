@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
-public class UltimasNCalificaciones implements CriterioOrdenamientoEquipos {
+public class UltimasNCalificaciones extends PromedioDeUltimoPartido {
 
 	private int n;
 	
@@ -21,13 +21,11 @@ public class UltimasNCalificaciones implements CriterioOrdenamientoEquipos {
 	}
 
 
-	private List<Integer> calcularUltimasNcalificaciones(Jugador jugador) {
-		return jugador.criticas().stream().skip(n).map(critica-> critica.nota()).collect(toList());
+	public List<Integer> calcularUltimasNcalificaciones(Jugador jugador) {
+		Stream<Critica> ultimasNcriticas =jugador.criticas().stream().skip(n);
+		return calcularCalificacionesDeUnaListaDeCriticas(ultimasNcriticas);
 	}
 	
-	private double calcularPromedioOdevolver0(List<Integer> lista){
-		return lista.stream().mapToInt(i -> i).average().orElse(0);
-	}
 }
 
 

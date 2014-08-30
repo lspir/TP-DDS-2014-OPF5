@@ -1,22 +1,36 @@
 package opf5.criteriosDeOrdenamientoDeEquipos;
 
 import java.util.ArrayList;
+
 import opf5.jugador.*;
 import opf5.*;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.*;
+
 import static java.util.stream.Collectors.toList;
 
 public class PromedioDeUltimoPartido implements CriterioOrdenamientoEquipos {
 
-  //FIXME no ven lógica repetida entre PromedioUltimoPartido y UltimasNCalificaciones?
-	public double ponderate(Jugador jugador) {
+  	public double ponderate(Jugador jugador) {
+		return calcularPromedioOdevolver0(calcularCalificacionesDeUnaListaDeCriticas(obtenerListaDeCriticasUltimoPartido(jugador)));
+	}
+	
+	public List<Integer> calcularCalificacionesDeUnaListaDeCriticas(Stream<Critica> calificaciones){
+		return calificaciones.map(critica-> critica.nota()).collect(toList());
+		
+	}
+	
+	public double calcularPromedioOdevolver0(List<Integer> lista){
+		return lista.stream().mapToDouble(i -> i).average().orElse(0);
+	}
+	
+	private Stream<Critica> obtenerListaDeCriticasUltimoPartido(Jugador jugador){
 		Partido ultimoPartidoJugado = jugador.criticas().get(jugador.criticas().size()-1).partido();
-		//FIXME ojo, == compara por identidad, equals compara por equivalencia
-		List<Integer> lista = jugador.criticas().stream().filter(critica-> critica.partido() == ultimoPartidoJugado).map(critica->critica.nota()).collect(toList());
-		//FIXME para que construyen un List<Integer> intermedio?
-		return lista.stream().mapToInt(i -> i).average().orElse(0);
+		return jugador.criticas().stream().filter(critica-> critica.partido().equals(ultimoPartidoJugado));
 	}
 
 }
+
+
