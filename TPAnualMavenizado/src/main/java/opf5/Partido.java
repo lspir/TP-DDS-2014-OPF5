@@ -120,9 +120,8 @@ public class Partido {
 	}
 
 	public boolean verificarSiJugo(Jugador jugador) {
-	  //FIXME usar equals (equivalencia) y no == (identidad)
 		return (inscripciones.stream().anyMatch(inscripcion -> inscripcion
-				.jugador() == jugador));
+				.jugador().equals(jugador)));
 	}
 
 	public List<Denegacion> denegaciones() {

@@ -25,3 +25,4 @@ public class MixDeCriterios implements CriterioOrdenamientoEquipos {
 				.map(criterio -> criterio.ponderate(jugador)).collect(toList());
 	}
 }
+

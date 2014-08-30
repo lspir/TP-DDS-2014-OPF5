@@ -16,21 +16,14 @@ public class AlgoritmoDivisionDeEquipos {
 
 	public List<Inscripcion> dameLista(List<Inscripcion> lista) {
 		List<Inscripcion> listaAux = new ArrayList<Inscripcion>();
-		listaAux.addAll(this.dameLista1(lista));
-		listaAux.addAll(this.dameLista2(lista));
+		listaAux.addAll(this.dameListaSegunPosiciones(lista,this.posicionesLista1));
+		listaAux.addAll(this.dameListaSegunPosiciones(lista,this.posicionesLista2));
 		return listaAux;
 	}
 
-	//FIXME lógica repetida entre ambos métodos
-	public List<Inscripcion> dameLista1(List<Inscripcion> lista) {
+	public List<Inscripcion> dameListaSegunPosiciones(List<Inscripcion> lista,List<Integer>posiciones) {
 		List<Inscripcion> listaAux = new ArrayList<Inscripcion>();
-		posicionesLista1.forEach(posicion -> listaAux.add(lista.get(posicion)));
-		return listaAux;
-	}
-
-	public List<Inscripcion> dameLista2(List<Inscripcion> lista) {
-		List<Inscripcion> listaAux = new ArrayList<Inscripcion>();
-		posicionesLista2.forEach(posicion -> listaAux.add(lista.get(posicion)));
+		posiciones.forEach(posicion -> listaAux.add(lista.get(posicion)));
 		return listaAux;
 	}
 
