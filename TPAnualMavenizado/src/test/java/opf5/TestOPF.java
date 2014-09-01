@@ -360,4 +360,27 @@ public class TestOPF {
 
 	}
 
+
+@Test(expected = ElPartidoYaEstaConfirmadoException.class)
+public void testAuxiliar() {
+	List<Integer> pares = new ArrayList<Integer>();
+	List<Integer> impares = new ArrayList<Integer>();
+	for (int i = 0; i < 10; i++) {
+		if (i % 2 == 0) {
+			pares.add(i);
+			
+		} else {
+			impares.add(i);
+		}
+
+	}
+	AlgoritmoDivisionDeEquipos divisionDePares = new AlgoritmoDivisionDeEquipos(pares,
+			impares);
+	Jugador emiliano = new Jugador("Emiliano", 28);
+	CriterioHandicap criterioHandicap = new CriterioHandicap();
+	Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
+	partido5.armarEquipos(criterioHandicap, divisionDePares);
+	partido5.aceptarEquipos();
+	partido5.intentarInscribirA(inscripcionEmi);
+}
 }

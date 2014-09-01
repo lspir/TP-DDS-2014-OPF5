@@ -6,7 +6,7 @@ import opf5.jugador.*;
 public class Inscripcion {
 	Jugador jugador;
 	TipoDeInscripcion tipoDeInscripcion;
-	double valorDeCriterio;
+	
 
 	public Inscripcion(Jugador jugador, TipoDeInscripcion tipoDeInscripcion) {
 		this.jugador = jugador;
@@ -46,14 +46,5 @@ public class Inscripcion {
 	public Boolean tipoDePrioridadMinima() {
 		return tipoDeInscripcion.prioridadMinima();
 	}
-
-	public void settearValorCriterio(double pesoCriterio) {
-		this.valorDeCriterio=pesoCriterio;
-	}
-
-	public double valorDeCriterio() {
-		return this.valorDeCriterio;
-	}
-
 
 }
