@@ -10,7 +10,7 @@ public class Ordenado extends SinOrdenar {
 
 	public void intentarInscribirA(Inscripcion inscripcion, Partido partido) {
 		super.intentarInscribirA(inscripcion, partido);
-		partido.tuEstadoEs(new SinOrdenar());
+		partido.setEstado(new SinOrdenar());
 	}
 
 	public void aceptarEquipos(Partido partido){
@@ -19,20 +19,20 @@ public class Ordenado extends SinOrdenar {
 				.collect(toList());
 		partido.equipoB = partido.inscripciones.stream().skip(5)
 				.collect(toList());
-		partido.tuEstadoEs(new Confirmado());
+		partido.setEstado(new Confirmado());
 
 	}
 
 	public void seDioDeBajaConReemplazante(Inscripcion inscripcion,
 			Jugador jugador, TipoDeInscripcion tipo, Partido partido) {
 		super.seDioDeBajaConReemplazante(inscripcion, jugador, tipo, partido);
-		partido.tuEstadoEs(new SinOrdenar());
+		partido.setEstado(new SinOrdenar());
 	}
 
 	public void seDioDeBajaSinReemplazante(Inscripcion inscripcion,
 			Partido partido) {
 		super.seDioDeBajaSinReemplazante(inscripcion, partido);
-		partido.tuEstadoEs(new SinOrdenar());
+		partido.setEstado(new SinOrdenar());
 	}
 
 }

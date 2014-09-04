@@ -147,9 +147,8 @@ public class Partido {
 		estado.aceptarEquipos(this);
 	}
 
-	//FIXME la convención de Java para los setters es setXYZ, y no 
-	//"tuXyzEs"
-	public void tuEstadoEs(Estado unEstado) {
+	
+	public void setEstado(Estado unEstado) {
 		estado = unEstado;
 
 	}

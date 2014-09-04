@@ -76,7 +76,7 @@ public class SinOrdenar implements Estado {
 	partido.tenes10Jugadores();
 	List<Inscripcion> listaOrdenada = partido.inscripciones().stream().sorted(comparing(inscrip -> criterio.ponderate(inscrip.jugador()))).collect(toList());
 	partido.inscripciones= algoritmo.dameLista(listaOrdenada);
-	partido.tuEstadoEs(new Ordenado());
+	partido.setEstado(new Ordenado());
 	}
 	
 	public void aceptarEquipos(Partido partido) {

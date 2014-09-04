@@ -28,89 +28,99 @@ import static org.mockito.Mockito.*;
 //FIXME es un buen momento para separar los tests en varias clases 
 public class TestOPF {
 
-	Partido partido = new Partido(LocalDate.now(),LocalTime.now(), "Campus");
-	Partido partido2 = new Partido(LocalDate.of(2014, Month.JANUARY, 1), LocalTime.now(), "Campus");
-	Partido partido3 = new Partido(LocalDate.now().plusDays(10), LocalTime.now(), "Campus");
-	Partido partido4 = new Partido(LocalDate.of(2014, Month.AUGUST, 13),LocalTime.of(12,30), "Campus");
-	Partido partido5 = new Partido(LocalDate.of(2014, Month.APRIL, 29), LocalTime.of(21,30), "Campus");
-	Partido partido6 = new Partido(LocalDate.of(2014, Month.AUGUST, 29), LocalTime.of(20,00), "Mario Bravo");
-
-	Estandar estandar = new Estandar();
-	Solidario solidario = new Solidario();
-	Jugador jugador1, jugador2, jugador3, jugador4, cristianoRonaldo, messi;
-	Inscripcion inscripcion1, inscripcion2, inscripcion3, inscripcion4;
-	Condicional condicional = new Condicional();
-	Inscripcion inscripcionCondicional, inscripcionSolidario;
+	private Partido partidoCon5Estandares;
+	private Partido partidoCon10Solidarios;
+	private	Partido partidoLleno;
+	private Partido partidoCon8Estandares1Solidario1Condicional;
+	private Partido partidoCon1Estandar;
+	private	Estandar estandar;
+	private Solidario solidario;
+	private Condicional condicional;
+	private ObservadorJugadorInscripto observadorJugador;
+	private ObservadorNotificarAdmin observadorAdmin;
+	private AdaptadorMailSender adaptadorMailSenderJugador;
+	private AdaptadorMailSender adaptadorMailSenderAdmin;
+	private Inscripcion inscripcionCondicional, inscripcionSolidario,inscripcionEstandar;
+	private Jugador jugadorNoInicializado, jugadorInicializado, jugadorConAmigos;
+	
+	Inscripcion inscripcion1, inscripcion2, inscripcion4;
+	
+	
 	Amigo luciano = new Amigo("lucho@gmail.com");
 	Amigo leandro = new Amigo("lean@gmail.com");
 
-	AdaptadorMailSender adaptadorMailSender = mock(AdaptadorMailSender.class);
-	AdaptadorMailSender adaptadorMailSender2 = mock(AdaptadorMailSender.class);
-	AdaptadorMailSender adaptadorMailSender3 = mock(AdaptadorMailSender.class);
-	ObservadorJugadorInscripto observadorJugador1, observadorJugador2;
-	ObservadorNotificarAdmin observadorAdmin;
+		
 
 	@Before
 	public void setUp() {
-
-		observadorJugador1 = new ObservadorJugadorInscripto();
-		observadorJugador2 = new ObservadorJugadorInscripto();
-		observadorJugador2.adaptador(adaptadorMailSender3);
-		partido6.agregarObservador(observadorJugador2);
+		partidoCon5Estandares= new Partido(LocalDate.now(),LocalTime.now(), "Campus");
+		partidoCon10Solidarios= new Partido(LocalDate.now().plusDays(10), LocalTime.now(), "Campus");
+		partidoLleno = new Partido(LocalDate.of(2014, Month.AUGUST, 13),LocalTime.of(12,30), "Campus");
+		partidoCon8Estandares1Solidario1Condicional= new Partido(LocalDate.of(2014, Month.APRIL, 29), LocalTime.of(21,30), "Campus");
+		partidoCon1Estandar = new Partido(LocalDate.of(2014, Month.AUGUST, 29), LocalTime.of(20,00), "Mario Bravo");
+		estandar = new Estandar();
+		solidario = new Solidario();
+		condicional= new Condicional();
+		observadorJugador = new ObservadorJugadorInscripto();
+		adaptadorMailSenderAdmin= mock(AdaptadorMailSender.class);
+		adaptadorMailSenderJugador = mock(AdaptadorMailSender.class);
+		observadorJugador.adaptador(adaptadorMailSenderJugador);
 		observadorAdmin = new ObservadorNotificarAdmin("admin@admin.com.ar");
-		observadorAdmin.adaptador(adaptadorMailSender2);
-		jugador2 = new Jugador("nombre", 20);
-		jugador3 = new Jugador("nombre", 23);
-		jugador4 = new Jugador("hola", 4);
-		inscripcion2 = new Inscripcion(jugador2, solidario);
-		inscripcion3 = new Inscripcion(jugador3, estandar);
-		cristianoRonaldo = new Jugador("Cristiano Ronaldo", 28);
-		cristianoRonaldo.agregarAmigo(luciano);
-		cristianoRonaldo.agregarAmigo(leandro);
-		inscripcion4 = new Inscripcion(cristianoRonaldo, estandar);
-		messi = new Jugador("Messi", 29);
-		messi.agregarAmigo(luciano);
+		observadorAdmin.adaptador(adaptadorMailSenderAdmin);
+		partidoCon1Estandar.agregarObservador(observadorAdmin);
+		partidoCon1Estandar.agregarObservador(observadorJugador);
+		partidoCon10Solidarios.agregarObservador(observadorAdmin);
+		partidoCon10Solidarios.agregarObservador(observadorJugador);
+		partidoCon5Estandares.agregarObservador(observadorAdmin);
+		partidoCon5Estandares.agregarObservador(observadorJugador);
+		partidoCon8Estandares1Solidario1Condicional.agregarObservador(observadorAdmin);
+		partidoCon8Estandares1Solidario1Condicional.agregarObservador(observadorJugador);
+		partidoLleno.agregarObservador(observadorAdmin);
+		partidoLleno.agregarObservador(observadorJugador);
+		jugadorInicializado = new Jugador("nombre", 20);
+		inscripcionEstandar = new Inscripcion(jugadorInicializado, estandar);
+		inscripcionSolidario = new Inscripcion(jugadorInicializado, solidario);
+		inscripcionCondicional = new Inscripcion(jugadorInicializado, condicional);
+		jugadorConAmigos = new Jugador("Cristiano Ronaldo", 28);
+		jugadorConAmigos.agregarAmigo(luciano);
+		jugadorConAmigos.agregarAmigo(leandro);
+		
+	
+		inscripcion2 = new Inscripcion(jugadorInicializado, solidario);
+		
+		
+
 
 		for (int i = 0; i < 5; i++) {
-			jugador1 = new Jugador("Ronaldo", 28);
-			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
-			partido.intentarInscribirA(inscripcion1);
+			jugadorNoInicializado = new Jugador("Ronaldo", 28);
+			Inscripcion inscripcion1 = new Inscripcion(jugadorNoInicializado, estandar);
+			partidoCon5Estandares.intentarInscribirA(inscripcion1);
 		}
 
 		for (int i = 0; i < 10; i++) {
-			jugador1 = new Jugador("Ronaldo", 28);
-			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
-			partido2.intentarInscribirA(inscripcion1);
+			jugadorNoInicializado = new Jugador("Ronaldo", 28);
+			Inscripcion inscripcion1 = new Inscripcion(jugadorNoInicializado, estandar);
+			partidoLleno.intentarInscribirA(inscripcion1);
 		}
-		partido3.agregarObservador(observadorAdmin);
+		
 
 		for (int i = 0; i < 10; i++) {
-			jugador2 = new Jugador("nombre", 20);
-			inscripcion2 = new Inscripcion(jugador2, solidario);
-			partido3.intentarInscribirA(inscripcion2);
-		}
-
-		for (int i = 0; i < 10; i++) {
-			jugador1 = new Jugador("Ronaldo", 28);
-			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
-			partido4.intentarInscribirA(inscripcion1);
+			jugadorInicializado = new Jugador("nombre", 20);
+			inscripcion2 = new Inscripcion(jugadorInicializado, solidario);
+			partidoCon10Solidarios.intentarInscribirA(inscripcion2);
 		}
 
 		for (int i = 0; i < 8; i++) {
-			jugador1 = new Jugador("Ronaldo", 28);
-			Inscripcion inscripcion1 = new Inscripcion(jugador1, estandar);
-			partido5.intentarInscribirA(inscripcion1);
+			jugadorNoInicializado = new Jugador("Ronaldo", 28);
+			Inscripcion inscripcion1 = new Inscripcion(jugadorNoInicializado, estandar);
+			partidoCon8Estandares1Solidario1Condicional.intentarInscribirA(inscripcion1);
 		}
 
-		inscripcionSolidario = new Inscripcion(jugador2, solidario);
+		
 
-		partido5.intentarInscribirA(inscripcionSolidario);
-
-		inscripcionCondicional = new Inscripcion(jugador2, condicional);
-
-		partido5.intentarInscribirA(inscripcionCondicional);
-
-		partido6.intentarInscribirA(inscripcion3);
+		partidoCon8Estandares1Solidario1Condicional.intentarInscribirA(inscripcionSolidario);
+		partidoCon8Estandares1Solidario1Condicional.intentarInscribirA(inscripcionCondicional);
+		partidoCon1Estandar.intentarInscribirA(inscripcionEstandar);
 
 	}
 
@@ -118,16 +128,16 @@ public class TestOPF {
 	public void hay8Estandares1SolidarioY1CondicionalSiSeQuiereAnotarUnEstandarLaInscripcionSeRealiza() {
 		Jugador emiliano = new Jugador("Emiliano", 28);
 		Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
-		partido5.intentarInscribirA(inscripcionEmi);
-		assertTrue(partido5.inscripciones().contains(inscripcionEmi));
+		partidoCon8Estandares1Solidario1Condicional.intentarInscribirA(inscripcionEmi);
+		assertTrue(partidoCon8Estandares1Solidario1Condicional.inscripciones().contains(inscripcionEmi));
 	}
 
 	@Test(expected = ElPartidoYaEstaConfirmadoException.class)
 	public void intentaInscribirseEnPartidoConfirmado() {
 		Jugador emiliano = new Jugador("Emiliano", 28);
 		Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
-		partido5.tuEstadoEs(new Confirmado());
-		partido5.intentarInscribirA(inscripcionEmi);
+		partidoCon8Estandares1Solidario1Condicional.setEstado(new Confirmado());
+		partidoCon8Estandares1Solidario1Condicional.intentarInscribirA(inscripcionEmi);
 
 	}
 
@@ -135,128 +145,125 @@ public class TestOPF {
 	public void seInscribirseEnPartidoOrdenado() {
 		Jugador emiliano = new Jugador("Emiliano", 28);
 		Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
-		partido5.tuEstadoEs(new Ordenado());
-		partido5.intentarInscribirA(inscripcionEmi);
+		partidoCon8Estandares1Solidario1Condicional.setEstado(new Ordenado());
+		partidoCon8Estandares1Solidario1Condicional.intentarInscribirA(inscripcionEmi);
 
 	}
 
 	@Test
 	public void Hay5EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRealiza() {
-		partido.intentarInscribirA(inscripcion2);
-		assertTrue(partido.inscripciones().contains(inscripcion2));
+		partidoCon5Estandares.intentarInscribirA(inscripcion2);
+		assertTrue(partidoCon5Estandares.inscripciones().contains(inscripcion2));
 	}
 
 	@Test
 	public void Hay10EstandarSeQuiereAnotarUnEstandarMasYLaInscripcionSeRechaza() {
-		partido2.intentarInscribirA(inscripcion3);
-		assertFalse(partido2.inscripciones().contains(inscripcion3));
+		partidoLleno.intentarInscribirA(inscripcionEstandar);
+		assertFalse(partidoLleno.inscripciones().contains(inscripcionEstandar));
 	}
 
 	@Test
 	public void Hay10SolidariosSeQuiereAnotar1EstandarYLaInscripcionEsCorrecta() {
-		partido3.intentarInscribirA(inscripcion3);
-		assertTrue(partido3.inscripciones().contains(inscripcion3));
+		partidoCon10Solidarios.intentarInscribirA(inscripcionEstandar);
+		assertTrue(partidoCon10Solidarios.inscripciones().contains(inscripcionEstandar));
 	}
 
 	@Test
 	public void Hay10EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRechaza() {
-		partido4.intentarInscribirA(inscripcion2);
-		assertFalse(partido4.inscripciones().contains(inscripcion2));
+		partidoLleno.intentarInscribirA(inscripcion2);
+		assertFalse(partidoLleno.inscripciones().contains(inscripcion2));
 	}
 
 	@Test
 	public void Hay8Estandares1CondicionalY1SolidarioCuandoSeAnotaUnEstandarSaleElCondicional() {
 
-		partido5.intentarInscribirA(inscripcion3);
-		assertFalse(partido5.inscripciones().contains(inscripcionCondicional));
+		partidoCon8Estandares1Solidario1Condicional.intentarInscribirA(inscripcionEstandar);
+		assertFalse(partidoCon8Estandares1Solidario1Condicional.inscripciones().contains(inscripcionCondicional));
 	}
 
 	@Test
 	public void UnJugadorCon2AmigosSeInscribeYSeEnvia1MailACadaAmigo() {
-		observadorJugador1.adaptador(adaptadorMailSender);
-		partido6.agregarObservador(observadorJugador1);
-		partido6.agregarObservador(observadorAdmin);
-		partido6.intentarInscribirA(inscripcion4);
-		verify(adaptadorMailSender, times(2)).notificar(any(String.class));
+		partidoCon1Estandar.intentarInscribirA(new Inscripcion(jugadorConAmigos, estandar));
+		verify(adaptadorMailSenderJugador, times(2)).notificar(any(String.class));
 	}
 
 	@Test
-	public void UnPartidoSeLlenaYSeEnviaUnMailAlAdministrador() {
-		verify(adaptadorMailSender2, times(1)).notificar("admin@admin.com.ar");
+	public void TresPartidosSeLlenaronYSeEnvianTresMailsAlAdministrador() {
+		verify(adaptadorMailSenderAdmin, times(3)).notificar("admin@admin.com.ar");
 
 	}
 
 	@Test
 	public void ElPartidoTieneUnSoloJugadorYEsteSeDaDeBajaSinReemplazanteElPartidoQuedaCon0Inscriptos() {
-		partido6.seDioDeBajaSinReemplazante(inscripcion3);
-		assertEquals(0, partido6.inscripciones().size());
+		partidoCon1Estandar.seDioDeBajaSinReemplazante(inscripcionEstandar);
+		assertEquals(0, partidoCon1Estandar.inscripciones().size());
 	}
 
 	@Test
 	public void UnJugadorSeDaDeBajaSinReemplazanteEntoncesSeLoPenaliza() {
-		partido6.seDioDeBajaSinReemplazante(inscripcion3);
-		assertEquals(1, inscripcion3.jugador().infracciones().size());
+		partidoCon1Estandar.seDioDeBajaSinReemplazante(inscripcionEstandar);
+		assertEquals(1, inscripcionEstandar.jugador().infracciones().size());
 	}
 
 	@Test(expected = ElPartidoYaEstaConfirmadoException.class)
 	public void UnJugadorIntentaDarseDeBajaSinReemplzanteEnPartidoConfirmadoTiraError() {
 		// FIXME que piensan de que esté seteando el estado desde afuera?
 		// Eso respeta la idea del patrón state?
-		partido6.tuEstadoEs(new Confirmado());
-		partido6.seDioDeBajaSinReemplazante(inscripcion3);
+		partidoCon1Estandar.setEstado(new Confirmado());
+		partidoCon1Estandar.seDioDeBajaSinReemplazante(inscripcionEstandar);
 
 	}
 
 	@Test(expected = ElPartidoYaEstaConfirmadoException.class)
 	public void UnJugadorIntentaDarseDeBajaConReemplzanteEnPartidoConfirmadoTiraError() {
-		partido6.tuEstadoEs(new Confirmado());
-		partido6.seDioDeBajaConReemplazante(inscripcion3, jugador1, solidario);
+		partidoCon1Estandar.setEstado(new Confirmado());
+		partidoCon1Estandar.seDioDeBajaConReemplazante(inscripcionEstandar, jugadorConAmigos, solidario);
 
 	}
 
 	@Test
 	public void UnJugadorSeBajaConReemplazanteEntoncesALosAmigosDelReemplazanteLesLlegaUnMail() {
-		partido6.seDioDeBajaConReemplazante(inscripcion3, messi, estandar);
-		verify(adaptadorMailSender3, times(messi.amigos().size())).notificar(
+		partidoCon1Estandar.seDioDeBajaConReemplazante(inscripcionEstandar, jugadorConAmigos, estandar);
+		verify(adaptadorMailSenderJugador, times(jugadorConAmigos.amigos().size())).notificar(
 				any(String.class));
 	}
 
 	@Test(expected = NoSePuedeCalificarException.class)
 	public void unJugadorQueNoParticipoIntentaCalificarParaEsePartidoEntoncesEsaCalificacionNoEsTenidaEnCuenta() {
-		jugador2.criticar(jugador3, 8, "Se atajó todo", partido6);
+		jugadorInicializado.criticar(jugadorInicializado, 8, "Se atajó todo", partidoCon1Estandar);
 	}
 
 	@Test
 	public void unJugadorQueParticipoIntentaCalificarParaEsePartidoEntoncesEsaCalificacionSeGuardaEnLaListaDelJugadorCalificado() {
-		partido6.intentarInscribirA(inscripcion2);
-		jugador2.criticar(jugador3, 8, "Se atajó todo", partido6);
-		assertEquals(1, jugador3.criticas().size());
+		partidoCon1Estandar.intentarInscribirA(inscripcion2);
+		jugadorInicializado.criticar(jugadorInicializado, 8, "Se atajó todo", partidoCon1Estandar);
+		assertEquals(1, jugadorInicializado.criticas().size());
 	}
 
 	@Test
 	public void unJugadorPropuestoEsAceptadoYPuedeInscribirseEnElPartidoEntoncesApareceEnLaListaDeJugadores() {
-		Inscripcion inscripcionPropuesta = new Inscripcion(jugador2, estandar);
-		partido6.posiblesJugadores().add(inscripcionPropuesta);
-		partido6.administradorAcepto(inscripcionPropuesta);
-		assertTrue(partido6.inscripciones().stream()
-				.anyMatch(inscripcion -> inscripcion.jugador() == jugador2));
+		Inscripcion inscripcionPropuesta = new Inscripcion(jugadorInicializado, estandar);
+		partidoCon1Estandar.posiblesJugadores().add(inscripcionPropuesta);
+		partidoCon1Estandar.administradorAcepto(inscripcionPropuesta);
+		assertTrue(partidoCon1Estandar.inscripciones().stream()
+				.anyMatch(inscripcion -> inscripcion.jugador() == jugadorInicializado));
 	}
 
 	@Test
 	public void unJugadorPropuestoEsRechazadoNoApareceEnLaListaDeJugadores() {
-		Inscripcion inscripcionPropuesta = new Inscripcion(jugador2, estandar);
-		partido6.posiblesJugadores().add(inscripcionPropuesta);
-		partido6.seRechazoInscripcion(inscripcionPropuesta, "Me cae mal");
-		assertFalse(partido6.inscripciones().stream()
-				.anyMatch(inscripcion -> inscripcion.jugador() == jugador2));
+		Inscripcion inscripcionPropuesta = new Inscripcion(jugadorInicializado, estandar);
+		partidoCon1Estandar.posiblesJugadores().add(inscripcionPropuesta);
+		partidoCon1Estandar.seRechazoInscripcion(inscripcionPropuesta, "Me cae mal");
+		assertFalse(partidoCon1Estandar.inscripciones().stream()
+				.anyMatch(inscripcion -> inscripcion.jugador() == jugadorInicializado));
 	}
 
 	@Test
 	public void unJugadorPropuestoEsRechazadoEntoncesSeAgregaUnaDenegacion() {
-		Inscripcion inscripcionPropuesta = new Inscripcion(jugador2, estandar);
-		partido6.posiblesJugadores().add(inscripcionPropuesta);
-		partido6.seRechazoInscripcion(inscripcionPropuesta, "Me cae mal");
-		assertTrue(partido6
+		Inscripcion inscripcionPropuesta = new Inscripcion(jugadorInicializado, estandar);
+		partidoCon1Estandar.posiblesJugadores().add(inscripcionPropuesta);
+		partidoCon1Estandar.seRechazoInscripcion(inscripcionPropuesta, "Me cae mal");
+		assertTrue(partidoCon1Estandar
 				.denegaciones()
 				.stream()
 				.anyMatch(
@@ -266,51 +273,51 @@ public class TestOPF {
 
 	@Test
 	public void unJugadorPropuestoEsAceptadoPeroNoPuedeInscribirseAlPartidoEntoncesNoApareceEnLaListaDeJugadores() {
-		Inscripcion inscripcionPropuesta = new Inscripcion(jugador2, solidario);
-		partido2.posiblesJugadores().add(inscripcionPropuesta);
-		partido2.administradorAcepto(inscripcionPropuesta);
-		assertFalse(partido2.inscripciones().stream()
-				.anyMatch(inscripcion -> inscripcion.jugador() == jugador2));
+		Inscripcion inscripcionPropuesta = new Inscripcion(jugadorInicializado, solidario);
+		partidoLleno.posiblesJugadores().add(inscripcionPropuesta);
+		partidoLleno.administradorAcepto(inscripcionPropuesta);
+		assertFalse(partidoLleno.inscripciones().stream()
+				.anyMatch(inscripcion -> inscripcion.jugador() == jugadorInicializado));
 
 	}
 
 	@Test
 	public void aplicarCriterioHandicapAUnJugadorConValor8Es8() {
 		CriterioHandicap criterioHandicap = new CriterioHandicap();
-		messi.handicap(8);
-		assertEquals(8, criterioHandicap.ponderate(messi), 1);
+		jugadorConAmigos.handicap(8);
+		assertEquals(8, criterioHandicap.ponderate(jugadorConAmigos), 1);
 	}
 
 	@Test
 	public void aplicarCriterioPromedioDeUltimoPartidoAJugadorConPromedioDe8Es8() {
 
 		PromedioDeUltimoPartido criterioPromedioDeUltimoPartido = new PromedioDeUltimoPartido();
-		Critica criticaDe8 = new Critica(8, "recomendable", partido6);
-		Critica criticaDe2 = new Critica(2, "malo", partido5);
-		jugador1.agregarCritica(criticaDe2);
+		Critica criticaDe8 = new Critica(8, "recomendable", partidoCon1Estandar);
+		Critica criticaDe2 = new Critica(2, "malo", partidoCon8Estandares1Solidario1Condicional);
+		jugadorInicializado.agregarCritica(criticaDe2);
 		for (int i = 0; i < 3; i++) {
-			jugador1.agregarCritica(criticaDe8);
+			jugadorInicializado.agregarCritica(criticaDe8);
 		}
-		assertEquals(8, criterioPromedioDeUltimoPartido.ponderate(jugador1), 0);
+		assertEquals(8, criterioPromedioDeUltimoPartido.ponderate(jugadorInicializado), 0);
 
 	}
 
 	@Test
 	public void aplicarCriterioUltimas3CalificacionesDe7AJugadorDevuelve7() {
 
-		Critica criticaDe7 = new Critica(7, "bueno", partido6);
+		Critica criticaDe7 = new Critica(7, "bueno", partidoCon1Estandar);
 		UltimasNCalificaciones criterioUltimasN = new UltimasNCalificaciones(3);
 		for (int i = 0; i < 5; i++) {
-			jugador4.agregarCritica(criticaDe7);
+			jugadorInicializado.agregarCritica(criticaDe7);
 		}
-		assertEquals(7, criterioUltimasN.ponderate(jugador4), 1);
+		assertEquals(7, criterioUltimasN.ponderate(jugadorInicializado), 1);
 
 	}
 
 	@Test
 	public void aplicarCriterioMixDeCriterioAJugador() {
-		Critica criticaDe7 = new Critica(7, "bueno", partido6);
-		Critica criticaDe5 = new Critica(5, "regular", partido5);
+		Critica criticaDe7 = new Critica(7, "bueno", partidoCon1Estandar);
+		Critica criticaDe5 = new Critica(5, "regular", partidoCon8Estandares1Solidario1Condicional);
 		UltimasNCalificaciones criterioUltimasN = new UltimasNCalificaciones(2);
 		PromedioDeUltimoPartido criterioPromedioDeUltimoPartido = new PromedioDeUltimoPartido();
 		List<CriterioOrdenamientoEquipos> criterios = new ArrayList<CriterioOrdenamientoEquipos>();
@@ -318,10 +325,10 @@ public class TestOPF {
 		criterios.add(criterioUltimasN);
 		MixDeCriterios criterioMix = new MixDeCriterios(criterios);
 		for (int i = 0; i < 6; i++) {
-			jugador4.agregarCritica(criticaDe7);
-			jugador4.agregarCritica(criticaDe5);
+			jugadorInicializado.agregarCritica(criticaDe7);
+			jugadorInicializado.agregarCritica(criticaDe5);
 		}
-		assertEquals(5.5, criterioMix.ponderate(jugador4), 0);
+		assertEquals(5.5, criterioMix.ponderate(jugadorInicializado), 0);
 	}
 
 	@Test
@@ -343,14 +350,14 @@ public class TestOPF {
 
 			} else {
 				impares.add(i);
-				inscripciones.add(inscripcion3);
+				inscripciones.add(inscripcionEstandar);
 
 			}
 
 		}
 		for (int j = 1; j < 11; j++) {
 			if (j % 2 == 1) {
-				inscripcionesValidada.add(inscripcion3);
+				inscripcionesValidada.add(inscripcionEstandar);
 			}
 		}
 		AlgoritmoDivisionDeEquipos divisionDePares = new AlgoritmoDivisionDeEquipos(pares,
@@ -379,8 +386,8 @@ public void testAuxiliar() {
 	Jugador emiliano = new Jugador("Emiliano", 28);
 	CriterioHandicap criterioHandicap = new CriterioHandicap();
 	Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
-	partido5.armarEquipos(criterioHandicap, divisionDePares);
-	partido5.aceptarEquipos();
-	partido5.intentarInscribirA(inscripcionEmi);
+	partidoCon8Estandares1Solidario1Condicional.armarEquipos(criterioHandicap, divisionDePares);
+	partidoCon8Estandares1Solidario1Condicional.aceptarEquipos();
+	partidoCon8Estandares1Solidario1Condicional.intentarInscribirA(inscripcionEmi);
 }
 }
