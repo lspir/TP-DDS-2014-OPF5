@@ -10,10 +10,10 @@ public class Ordenado extends NoConfirmado {
 
 	public void aceptarEquipos(Partido partido){
 		partido.tenes10Jugadores();
-		partido.equipoA = partido.inscripciones.stream().limit(5)
-				.collect(toList());
-		partido.equipoB = partido.inscripciones.stream().skip(5)
-				.collect(toList());
+		partido.setEquipoA(partido.getInscripciones().stream().limit(5)
+				.collect(toList()));
+		partido.setEquipoB(partido.getInscripciones().stream().skip(5)
+				.collect(toList()));
 		partido.setEstado(new Confirmado());
 
 	}

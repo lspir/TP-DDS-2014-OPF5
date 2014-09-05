@@ -93,7 +93,7 @@ public class TestOPF {
 		Jugador emiliano = new Jugador("Emiliano", 28);
 		Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
 		partidoCon8Estandares1Solidario1Condicional.intentarInscribirA(inscripcionEmi);
-		assertTrue(partidoCon8Estandares1Solidario1Condicional.inscripciones().contains(inscripcionEmi));
+		assertTrue(partidoCon8Estandares1Solidario1Condicional.getInscripciones().contains(inscripcionEmi));
 	}
 
 	@Test(expected = ElPartidoYaEstaConfirmadoException.class)
@@ -117,32 +117,32 @@ public class TestOPF {
 	@Test
 	public void Hay5EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRealiza() {
 		partidoCon5Estandares.intentarInscribirA(inscripcionSolidario);
-		assertTrue(partidoCon5Estandares.inscripciones().contains(inscripcionSolidario));
+		assertTrue(partidoCon5Estandares.getInscripciones().contains(inscripcionSolidario));
 	}
 
 	@Test
 	public void Hay10EstandarSeQuiereAnotarUnEstandarMasYLaInscripcionSeRechaza() {
 		partidoLleno.intentarInscribirA(inscripcionEstandar);
-		assertFalse(partidoLleno.inscripciones().contains(inscripcionEstandar));
+		assertFalse(partidoLleno.getInscripciones().contains(inscripcionEstandar));
 	}
 
 	@Test
 	public void Hay10SolidariosSeQuiereAnotar1EstandarYLaInscripcionEsCorrecta() {
 		partidoCon10Solidarios.intentarInscribirA(inscripcionEstandar);
-		assertTrue(partidoCon10Solidarios.inscripciones().contains(inscripcionEstandar));
+		assertTrue(partidoCon10Solidarios.getInscripciones().contains(inscripcionEstandar));
 	}
 
 	@Test
 	public void Hay10EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRechaza() {
 		partidoLleno.intentarInscribirA(inscripcionSolidario);
-		assertFalse(partidoLleno.inscripciones().contains(inscripcionSolidario));
+		assertFalse(partidoLleno.getInscripciones().contains(inscripcionSolidario));
 	}
 
 	@Test
 	public void Hay8Estandares1CondicionalY1SolidarioCuandoSeAnotaUnEstandarSaleElCondicional() {
 
 		partidoCon8Estandares1Solidario1Condicional.intentarInscribirA(inscripcionEstandar);
-		assertFalse(partidoCon8Estandares1Solidario1Condicional.inscripciones().contains(inscripcionCondicional));
+		assertFalse(partidoCon8Estandares1Solidario1Condicional.getInscripciones().contains(inscripcionCondicional));
 	}
 
 	@Test
@@ -160,7 +160,7 @@ public class TestOPF {
 	@Test
 	public void ElPartidoTieneUnSoloJugadorYEsteSeDaDeBajaSinReemplazanteElPartidoQuedaCon0Inscriptos() {
 		partidoCon1Estandar.seDioDeBajaSinReemplazante(inscripcionEstandar);
-		assertEquals(0, partidoCon1Estandar.inscripciones().size());
+		assertEquals(0, partidoCon1Estandar.getInscripciones().size());
 	}
 
 	@Test
@@ -209,7 +209,7 @@ public class TestOPF {
 		Inscripcion inscripcionPropuesta = new Inscripcion(jugador, estandar);
 		partidoCon1Estandar.posiblesJugadores().add(inscripcionPropuesta);
 		partidoCon1Estandar.administradorAcepto(inscripcionPropuesta);
-		assertTrue(partidoCon1Estandar.inscripciones().stream()
+		assertTrue(partidoCon1Estandar.getInscripciones().stream()
 				.anyMatch(inscripcion -> inscripcion.jugador().equals(jugador)));
 	}
 
@@ -218,7 +218,7 @@ public class TestOPF {
 		Inscripcion inscripcionPropuesta = new Inscripcion(jugadorCritico, estandar);
 		partidoCon1Estandar.posiblesJugadores().add(inscripcionPropuesta);
 		partidoCon1Estandar.seRechazoInscripcion(inscripcionPropuesta, "Me cae mal");
-		assertFalse(partidoCon1Estandar.inscripciones().stream()
+		assertFalse(partidoCon1Estandar.getInscripciones().stream()
 				.anyMatch(inscripcion -> inscripcion.jugador().equals(jugadorCritico)));
 	}
 
@@ -240,7 +240,7 @@ public class TestOPF {
 		Inscripcion inscripcionPropuesta = new Inscripcion(jugador, solidario);
 		partidoLleno.posiblesJugadores().add(inscripcionPropuesta);
 		partidoLleno.administradorAcepto(inscripcionPropuesta);
-		assertFalse(partidoLleno.inscripciones().stream()
+		assertFalse(partidoLleno.getInscripciones().stream()
 				.anyMatch(inscripcion -> inscripcion.jugador().equals(jugador)));
 
 	}

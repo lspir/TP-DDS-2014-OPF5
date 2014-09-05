@@ -21,13 +21,12 @@ public class Partido {
   	private LocalDate fecha;
 	private LocalTime horario;
 	private String lugar;
-	public List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
-	public List<Observador> observadores = new ArrayList<Observador>();
+	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
+	private List<Observador> observadores = new ArrayList<Observador>();
 	private List<Inscripcion> posiblesJugadores = new ArrayList<Inscripcion>();
 	private List<Denegacion> denegaciones = new ArrayList<Denegacion>();
-	public List<Inscripcion> equipoA = new ArrayList<Inscripcion>();
-	//FIXME mantengan siempre a sus atributos privados, para favorecer al encapsulamiento
-	public List<Inscripcion> equipoB = new ArrayList<Inscripcion>();
+	private List<Inscripcion> equipoA = new ArrayList<Inscripcion>();
+	private List<Inscripcion> equipoB = new ArrayList<Inscripcion>();
 	private Estado estado;
 
 	public Partido(LocalDate fecha, LocalTime horario, String lugar) {
@@ -37,17 +36,14 @@ public class Partido {
 		this.estado = new SinOrdenar();
 	}
 
-	public List<Inscripcion> inscripciones() {
-		return this.inscripciones;
-	}
-
+	
 	public void intentarInscribirA(Inscripcion inscripcion)
 			{
 		estado.intentarInscribirA(inscripcion, this);
 	}
 
 	public boolean noEstaLlenoDeEstandares() {
-		return (this.inscripciones.stream()
+		return (this.getInscripciones().stream()
 				.filter(ins -> !ins.tuTipoDejaPasar()).count() != 10);
 	}
 
@@ -57,28 +53,28 @@ public class Partido {
 		Inscripcion inscriptoAEliminar;
 		List<Inscripcion> genteAEliminar;
 
-		if ((this.inscripciones.stream().filter(i -> i.tipoDePrioridadMinima()))
+		if ((this.getInscripciones().stream().filter(i -> i.tipoDePrioridadMinima()))
 				.count() == 0) {
-			genteAEliminar = inscripciones.stream()
+			genteAEliminar = getInscripciones().stream()
 					.filter(ins -> ins.tuTipoDejaPasar()).collect(toList());
 		} else {
-			genteAEliminar = (inscripciones.stream().filter(
+			genteAEliminar = (getInscripciones().stream().filter(
 					ins -> ins.tipoDePrioridadMinima()).collect(toList()));
 
 		}
 
 		inscriptoAEliminar = genteAEliminar.get(0);
-		this.inscripciones.remove(inscriptoAEliminar);
-		this.inscripciones.add(inscripcion);
+		this.getInscripciones().remove(inscriptoAEliminar);
+		this.getInscripciones().add(inscripcion);
 		this.revisarCondicionales();
 		this.revisarSiEstaLlenoEInformar();
-		observadores.forEach(observador -> observador
+		getObservadores().forEach(observador -> observador
 				.notificarJugadorInscripto(inscripcion.jugador()));
 
 	}
 
 	public void revisarCondicionales() {
-		inscripciones.removeIf(inscripcion -> !inscripcion.teCumple(this));
+		getInscripciones().removeIf(inscripcion -> !inscripcion.teCumple(this));
 	}
 
 	public void seDioDeBajaSinReemplazante(Inscripcion inscripcion)
@@ -95,8 +91,8 @@ public class Partido {
 	}
 
 	public void revisarSiEstaLlenoEInformar() {
-		if (this.inscripciones.size() == 10) {
-			observadores.forEach(obs -> obs.notificarPartidoLleno());
+		if (this.getInscripciones().size() == 10) {
+			getObservadores().forEach(obs -> obs.notificarPartidoLleno());
 		}
 	}
 
@@ -120,7 +116,7 @@ public class Partido {
 	}
 
 	public boolean verificarSiJugo(Jugador jugador) {
-		return (inscripciones.stream().anyMatch(inscripcion -> inscripcion
+		return (getInscripciones().stream().anyMatch(inscripcion -> inscripcion
 				.jugador().equals(jugador)));
 	}
 
@@ -133,7 +129,7 @@ public class Partido {
 	}
 
 	public void agregarObservador(Observador observador) {
-		observadores.add(observador);
+		getObservadores().add(observador);
 	}
 
 	public void armarEquipos(CriterioOrdenamientoEquipos criterio, AlgoritmoDivisionDeEquipos algoritmo)
@@ -154,8 +150,40 @@ public class Partido {
 	}
 
 	public void tenes10Jugadores() {
-		if (inscripciones.size() < 10) {
+		if (getInscripciones().size() < 10) {
 			throw new ElPartidoNoEstaCompleto();
 		}
+	}
+
+	public List<Inscripcion> getInscripciones() {
+		return inscripciones;
+	}
+
+	public void setInscripciones(List<Inscripcion> inscripciones) {
+		this.inscripciones = inscripciones;
+	}
+
+	public List<Observador> getObservadores() {
+		return observadores;
+	}
+
+	public void setObservadores(List<Observador> observadores) {
+		this.observadores = observadores;
+	}
+
+	public List<Inscripcion> getEquipoA() {
+		return equipoA;
+	}
+
+	public void setEquipoA(List<Inscripcion> equipoA) {
+		this.equipoA = equipoA;
+	}
+
+	public List<Inscripcion> getEquipoB() {
+		return equipoB;
+	}
+
+	public void setEquipoB(List<Inscripcion> equipoB) {
+		this.equipoB = equipoB;
 	}
 }

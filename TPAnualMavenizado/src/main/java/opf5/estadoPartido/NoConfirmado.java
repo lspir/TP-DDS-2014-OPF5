@@ -16,10 +16,10 @@ import opf5.jugador.Jugador;
 public abstract class NoConfirmado implements Estado {
 	
 	public void intentarInscribirA(Inscripcion inscripcion, Partido partido) {
-		if (partido.inscripciones().size() < 10) {
-			partido.inscripciones.add(inscripcion);
+		if (partido.getInscripciones().size() < 10) {
+			partido.getInscripciones().add(inscripcion);
 			partido.revisarSiEstaLlenoEInformar();
-			partido.observadores.forEach(observador -> observador
+			partido.getObservadores().forEach(observador -> observador
 					.notificarJugadorInscripto(inscripcion.jugador()));
 			partido.setEstado(new SinOrdenar());
 			
@@ -35,19 +35,19 @@ public abstract class NoConfirmado implements Estado {
 
 	public void armarEquipos(CriterioOrdenamientoEquipos criterio, AlgoritmoDivisionDeEquipos algoritmo,Partido partido) {
 		partido.tenes10Jugadores();
-		List<Inscripcion> listaOrdenada = partido.inscripciones().stream().sorted(comparing(inscrip -> criterio.ponderate(inscrip.jugador()))).collect(toList());
-		partido.inscripciones= algoritmo.dameLista(listaOrdenada);
+		List<Inscripcion> listaOrdenada = partido.getInscripciones().stream().sorted(comparing(inscrip -> criterio.ponderate(inscrip.jugador()))).collect(toList());
+		partido.setInscripciones(algoritmo.dameLista(listaOrdenada));
 		partido.setEstado(new Ordenado());
 		}
 	
 	
 	public void seDioDeBajaSinReemplazante(Inscripcion inscripcion,
 			Partido partido) {
-		partido.inscripciones.remove(inscripcion);
+		partido.getInscripciones().remove(inscripcion);
 		Infraccion infraccion = new Infraccion();
 		inscripcion.jugador().tePenalizaron(infraccion);
-		if (partido.inscripciones().size() == 9) {
-			partido.observadores.forEach(obs -> obs.notificarPartidoIncompleto());
+		if (partido.getInscripciones().size() == 9) {
+			partido.getObservadores().forEach(obs -> obs.notificarPartidoIncompleto());
 		}
 		partido.setEstado(new SinOrdenar());
 	}
@@ -55,7 +55,7 @@ public abstract class NoConfirmado implements Estado {
 	public void seDioDeBajaConReemplazante(Inscripcion inscripcion,
 			Jugador jugador, TipoDeInscripcion tipo, Partido partido) {
 		inscripcion.teReemplaza(jugador, tipo);
-		partido.observadores.forEach(observador -> observador
+		partido.getObservadores().forEach(observador -> observador
 				.notificarJugadorInscripto(inscripcion.jugador()));
 		partido.setEstado(new SinOrdenar());
 	}
