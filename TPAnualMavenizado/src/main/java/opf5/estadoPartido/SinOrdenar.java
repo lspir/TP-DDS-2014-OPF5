@@ -12,39 +12,7 @@ import opf5.inscripcion.*;
 
 import java.util.List;
 
-public class SinOrdenar implements Estado {
-
-	public void intentarInscribirA(Inscripcion inscripcion, Partido partido) {
-		if (partido.inscripciones().size() < 10) {
-			partido.inscripciones.add(inscripcion);
-			partido.revisarSiEstaLlenoEInformar();
-			partido.observadores.forEach(observador -> observador
-					.notificarJugadorInscripto(inscripcion.jugador()));
-
-		} else {
-			if (partido.noEstaLlenoDeEstandares()) {
-				inscripcion.inscribiteSiPodesA(partido);
-			}
-		}
-	}
-
-
-	public void seDioDeBajaSinReemplazante(Inscripcion inscripcion,
-			Partido partido) {
-		partido.inscripciones.remove(inscripcion);
-		Infraccion infraccion = new Infraccion();
-		inscripcion.jugador().tePenalizaron(infraccion);
-		if (partido.inscripciones().size() == 9) {
-			partido.observadores.forEach(obs -> obs.notificarPartidoIncompleto());
-		}
-	}
-	
-	public void seDioDeBajaConReemplazante(Inscripcion inscripcion,
-			Jugador jugador, TipoDeInscripcion tipo, Partido partido) {
-		inscripcion.teReemplaza(jugador, tipo);
-		partido.observadores.forEach(observador -> observador
-				.notificarJugadorInscripto(inscripcion.jugador()));
-	}
+public class SinOrdenar extends NoConfirmado {
 
     //FIXME probablemete el problema más importante que presenta esta solución es que modifica 
  //el estado interno del partido cada vez que se solicita generar los equipos tenativos, 
@@ -71,13 +39,7 @@ public class SinOrdenar implements Estado {
 	//ejecutar varias veces la genreación tentativa de equipos para ver "como queda", no es evidente que están en la lista de inscripciones,
 	//la que contiene a un equipo hasta la mitad y al otro equipo a partir de la segunda mitda 
 	//Acá les está faltando la abstracción de equipo o de formación 
- 
-	public void armarEquipos(CriterioOrdenamientoEquipos criterio, AlgoritmoDivisionDeEquipos algoritmo,Partido partido) {
-	partido.tenes10Jugadores();
-	List<Inscripcion> listaOrdenada = partido.inscripciones().stream().sorted(comparing(inscrip -> criterio.ponderate(inscrip.jugador()))).collect(toList());
-	partido.inscripciones= algoritmo.dameLista(listaOrdenada);
-	partido.setEstado(new Ordenado());
-	}
+ 	
 	
 	public void aceptarEquipos(Partido partido) {
 		throw new NoSePuedeAceptarEquiposElPartidoNoEstaOrdenadoException();

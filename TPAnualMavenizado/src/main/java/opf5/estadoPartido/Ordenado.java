@@ -5,13 +5,8 @@ import opf5.jugador.*;
 
 import static java.util.stream.Collectors.toList;
 import opf5.inscripcion.*;
-//FIXME ¿les parece una buena abstracción decir que "todo estado ordenado es un estado sin ordenar"?
-public class Ordenado extends SinOrdenar {
 
-	public void intentarInscribirA(Inscripcion inscripcion, Partido partido) {
-		super.intentarInscribirA(inscripcion, partido);
-		partido.setEstado(new SinOrdenar());
-	}
+public class Ordenado extends NoConfirmado {
 
 	public void aceptarEquipos(Partido partido){
 		partido.tenes10Jugadores();
@@ -21,18 +16,6 @@ public class Ordenado extends SinOrdenar {
 				.collect(toList());
 		partido.setEstado(new Confirmado());
 
-	}
-
-	public void seDioDeBajaConReemplazante(Inscripcion inscripcion,
-			Jugador jugador, TipoDeInscripcion tipo, Partido partido) {
-		super.seDioDeBajaConReemplazante(inscripcion, jugador, tipo, partido);
-		partido.setEstado(new SinOrdenar());
-	}
-
-	public void seDioDeBajaSinReemplazante(Inscripcion inscripcion,
-			Partido partido) {
-		super.seDioDeBajaSinReemplazante(inscripcion, partido);
-		partido.setEstado(new SinOrdenar());
 	}
 
 }
