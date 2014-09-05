@@ -47,30 +47,47 @@ public class Partido {
 	}
 
 	public void inscribiA(Inscripcion inscripcion) {
-	  //FIXME Long Method. Si me dicen que después de tres meses pueden seguir entendiendo este código
-	  //tengo dos opciones: o darles un premio o no creerles:P
-		Inscripcion inscriptoAEliminar;
-		List<Inscripcion> genteAEliminar;
+		this.reemplazarInscripcion(this.obtenerInscripcionesQuePuedenBorrarse().get(0),inscripcion);
+	}
 
-		if ((this.getInscripciones().stream().filter(i -> i.tipoDePrioridadMinima()))
-				.count() == 0) {
-			genteAEliminar = getInscripciones().stream()
-					.filter(ins -> ins.tuTipoDejaPasar()).collect(toList());
+	private List<Inscripcion> obtenerInscripcionesQuePuedenBorrarse() {
+		if (this.hayCondicionales()) {
+			return this.condicional();
 		} else {
-			genteAEliminar = (getInscripciones().stream().filter(
-					ins -> ins.tipoDePrioridadMinima()).collect(toList()));
+			return  this.solidarios();
 
 		}
+	}
 
-		inscriptoAEliminar = genteAEliminar.get(0);
-		this.getInscripciones().remove(inscriptoAEliminar);
-		this.getInscripciones().add(inscripcion);
+	private List<Inscripcion> condicional() {
+		return ((getInscripciones().stream().filter(
+				ins -> ins.tipoDePrioridadMinima()).collect(toList())));
+	}
+	
+	private List<Inscripcion> solidarios() {
+		return (getInscripciones().stream()
+				.filter(ins -> ins.tuTipoDejaPasar()).collect(toList()));
+	}
+
+
+	private boolean hayCondicionales() {
+		return (this.getInscripciones().stream().filter(i -> i.tipoDePrioridadMinima())
+				.count() > 0);
+	}
+	
+
+
+	private void reemplazarInscripcion(Inscripcion inscripcionAEliminar,
+			Inscripcion nuevaInscripcion) {
+		this.getInscripciones().remove(inscripcionAEliminar);
+		this.getInscripciones().add(nuevaInscripcion);
 		this.revisarCondicionales();
 		this.revisarSiEstaLlenoEInformar();
 		getObservadores().forEach(observador -> observador
-				.notificarJugadorInscripto(inscripcion.jugador()));
-
+				.notificarJugadorInscripto(nuevaInscripcion.jugador()));
+		
 	}
+
 
 	public void revisarCondicionales() {
 		getInscripciones().removeIf(inscripcion -> !inscripcion.teCumple(this));
