@@ -25,8 +25,7 @@ public class Partido {
 	private List<Observador> observadores = new ArrayList<Observador>();
 	private List<Inscripcion> posiblesJugadores = new ArrayList<Inscripcion>();
 	private List<Denegacion> denegaciones = new ArrayList<Denegacion>();
-	private List<Inscripcion> equipoA = new ArrayList<Inscripcion>();
-	private List<Inscripcion> equipoB = new ArrayList<Inscripcion>();
+	private List<FormacionPartido> formacionesTentativas = new ArrayList<FormacionPartido>();
 	private Estado estado;
 
 	public Partido(LocalDate fecha, LocalTime horario, String lugar) {
@@ -34,7 +33,7 @@ public class Partido {
 		this.horario = horario;
 		this.lugar = lugar;
 		this.estado = new SinOrdenar();
-	}
+}
 
 	
 	public void intentarInscribirA(Inscripcion inscripcion)
@@ -138,9 +137,9 @@ public class Partido {
 
 	}
 
-	public void aceptarEquipos()
+	public void aceptarEquipos(FormacionPartido formacion)
 			{
-		estado.aceptarEquipos(this);
+		estado.aceptarEquipos(this,formacion);
 	}
 
 	
@@ -171,19 +170,26 @@ public class Partido {
 		this.observadores = observadores;
 	}
 
-	public List<Inscripcion> getEquipoA() {
-		return equipoA;
+
+	public List<FormacionPartido> getFormacionesTentativas() {
+		return formacionesTentativas;
 	}
 
-	public void setEquipoA(List<Inscripcion> equipoA) {
-		this.equipoA = equipoA;
+
+	public void setFormacionesTentativas(List<FormacionPartido> formacionesTentativas) {
+		this.formacionesTentativas = formacionesTentativas;
 	}
 
-	public List<Inscripcion> getEquipoB() {
-		return equipoB;
+
+	public void limpiarFormaciones() {
+		this.formacionesTentativas.clear();
+		
 	}
 
-	public void setEquipoB(List<Inscripcion> equipoB) {
-		this.equipoB = equipoB;
+
+	public void agregarFormacion(FormacionPartido formacionPartido) {
+		this.formacionesTentativas.add(formacionPartido);
+		
 	}
+
 }

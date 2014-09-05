@@ -1,20 +1,11 @@
 package opf5.estadoPartido;
 import opf5.*;
-import opf5.jugador.*;
-
-
-import static java.util.stream.Collectors.toList;
-import opf5.inscripcion.*;
 
 public class Ordenado extends NoConfirmado {
 
-	public void aceptarEquipos(Partido partido){
+	public void aceptarEquipos(Partido partido, FormacionPartido formacion){
 		partido.tenes10Jugadores();
-		partido.setEquipoA(partido.getInscripciones().stream().limit(5)
-				.collect(toList()));
-		partido.setEquipoB(partido.getInscripciones().stream().skip(5)
-				.collect(toList()));
-		partido.setEstado(new Confirmado());
+		partido.setEstado(new Confirmado(formacion.getEquipoA(),formacion.getEquipoB()));
 
 	}
 

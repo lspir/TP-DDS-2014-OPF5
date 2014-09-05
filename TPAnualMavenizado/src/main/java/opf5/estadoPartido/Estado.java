@@ -15,5 +15,5 @@ public interface Estado {
 	public void seDioDeBajaConReemplazante(Inscripcion inscripcion,
 			Jugador jugador, TipoDeInscripcion tipo, Partido partido) ;
 	public void armarEquipos(CriterioOrdenamientoEquipos criterio, AlgoritmoDivisionDeEquipos algoritmo,Partido partido);
-	public void aceptarEquipos(Partido partido);
+	public void aceptarEquipos(Partido partido, FormacionPartido formacion);
 }
