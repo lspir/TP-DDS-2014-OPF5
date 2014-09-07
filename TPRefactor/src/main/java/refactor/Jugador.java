@@ -15,16 +15,8 @@ public class Jugador {
 	private List<Double> puntajes;
 	CriterioInscripcion criterioInscripcion;
 
-	public Jugador() {
-		this.puntajes = new ArrayList<Double>();
-		this.calificacion = null;
-		this.criterioInscripcion = new ModoEstandar();
-		//FIXME se inicializa nombre en ""? Por qué? Les parece una buena idea inicializar
-		//a nombre en un estado inconsistente?
-		this.nombre = "";
-	}
+// SACO  MÉTODO JUGADOR() PORQUE YA NO SE USA 
 
-	//FIXME no ven logia repetida entre los constructores?
 	public Jugador(String nombre, double calificacion, List<Double> puntajes) {
 		this.calificacion = calificacion;
 		this.puntajes = puntajes;

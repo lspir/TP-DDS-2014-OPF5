@@ -35,7 +35,7 @@ public class TestGenerarEquipo {
 	public void init() {
 		partidoPocosJugadores = new Partido();
 		for (int i = 0; i < 6; i++) {
-			inscribir(partidoPocosJugadores, new Jugador());
+			inscribir(partidoPocosJugadores, new Jugador("sytek", 3d,Lists.newArrayList(5d,8d))); //pongo un jugador cualquiera
 		}
 		partidoOk = new Partido();
 		partido1 = new Partido();
@@ -84,7 +84,8 @@ public class TestGenerarEquipo {
 	@Test(expected=BusinessException.class)
 	public void partidoSinIniciarNoPuedeGenerarEquipos() {
 		for (int i = 0; i < 3; i++) {
-			inscribir(partidoPocosJugadores, new Jugador());
+			inscribir(partidoPocosJugadores, new Jugador("sytek", 3d,Lists.newArrayList(5d,8d))); //pongo un jugador cualquiera
+//			inscribir(partidoPocosJugadores, new Jugador());
 		}
 		partidoPocosJugadores.generarEquipos();
 	}
@@ -99,13 +100,7 @@ public class TestGenerarEquipo {
 
 	@Test
 	public void generarEquiposPorHandicap() {
-	  //FIXME no les hace ruido que haya impresiones por pantalla en un test?
-		System.out.println("******************************************");
-		System.out.println("ordenamiento por handicap");
 		List<Jugador> jugadores=partido1.ordenarEquipos();
-		for (Jugador jugador : jugadores) {
-			System.out.println("Jugador: " + jugador + " - calificacion: " + jugador.getCalificacion());
-		}	
 		Assert.assertEquals(Lists.newArrayList(ferme, roly, pato, dodi, lechu, chicho, rodri, sytek, leo, mike),
 				jugadores);
 	}
@@ -113,8 +108,6 @@ public class TestGenerarEquipo {
 	@Test
 	public void generarEquiposPorCalificacionUltimos2Partidos() {
 		partido1.setCriterioOrdenamiento(new OrdenamientoCalificacionUltimos2Partidos());
-		System.out.println("******************************************");
-		System.out.println("ordenamiento por ultimas 2 calificaciones");
 		List<Jugador> jugadores=partido1.ordenarEquipos();
 		//FIXME no les hace ruido que haya tanta lógica dentro de un test?
 		//No se supone que los test existen para probar la lógica del sistema, en lugar de repetirla?
@@ -137,7 +130,6 @@ public class TestGenerarEquipo {
 			}
 			promedio/=misPuntajes.size();
 			
-			System.out.println("Jugador: " + jugador + " puntajes: " + jugador.getPuntajes() + " ult.puntajes: " + misPuntajes +" promedio: " + promedio);
 		}
 		Assert.assertEquals(Lists.newArrayList(ferme, pato, lechu, roly, mike, chicho, dodi, rodri, sytek, leo),
 				jugadores);
@@ -149,10 +141,7 @@ public class TestGenerarEquipo {
 		ordenamientoMix.addCriterio(new OrdenamientoCalificacionUltimos2Partidos());
 		ordenamientoMix.addCriterio(new OrdenamientoPorHandicap());
 		partido1.setCriterioOrdenamiento(ordenamientoMix);
-		System.out.println("******************************************");
-		System.out.println("ordenamiento por mix");
 		List<Jugador> jugadores=partido1.ordenarEquipos();
-		System.out.println(jugadores);
 		Assert.assertEquals(Lists.newArrayList(ferme, roly, pato, lechu, dodi, chicho, rodri, sytek, leo, mike),
 				jugadores);
 	}
