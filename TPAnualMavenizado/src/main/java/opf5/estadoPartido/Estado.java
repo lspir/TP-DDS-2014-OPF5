@@ -3,6 +3,7 @@ import opf5.inscripcion.*;
 import opf5.jugador.*;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
 import opf5.*;
+import opf5.AlgoritmosDivisionDeEquipos.*;
 
 
 public interface Estado {

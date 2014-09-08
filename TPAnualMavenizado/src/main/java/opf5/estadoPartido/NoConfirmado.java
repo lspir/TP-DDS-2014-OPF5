@@ -5,7 +5,7 @@ import static java.util.stream.Collectors.toList;
 
 import java.util.List;
 
-import opf5.AlgoritmoDivisionDeEquipos;
+import opf5.AlgoritmosDivisionDeEquipos.*;
 import opf5.FormacionPartido;
 import opf5.Partido;
 import opf5.criteriosDeOrdenamientoDeEquipos.CriterioOrdenamientoEquipos;

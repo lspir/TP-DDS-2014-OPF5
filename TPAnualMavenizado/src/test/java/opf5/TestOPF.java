@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 import opf5.*;
+import opf5.AlgoritmosDivisionDeEquipos.*;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
 import opf5.estadoPartido.*;
 import opf5.inscripcion.*;
@@ -324,8 +325,7 @@ public class TestOPF {
 				inscripcionesValidada.add(inscripcionEstandar);
 			}
 		}
-		AlgoritmoDivisionDeEquipos divisionDePares = new AlgoritmoDivisionDeEquipos(pares,
-				impares);
+		AlgoritmoDivisionDeEquipos divisionDePares = new DivisionPorPares();
 		assertEquals(inscripcionesValidada,
 				divisionDePares.dameLista(inscripciones));
 
@@ -345,8 +345,7 @@ public void testAuxiliar() {
 		}
 
 	}
-	AlgoritmoDivisionDeEquipos divisionDePares = new AlgoritmoDivisionDeEquipos(pares,
-			impares);
+	AlgoritmoDivisionDeEquipos divisionDePares = new DivisionPorPares();
 	Jugador emiliano = new Jugador("Emiliano", 28);
 	CriterioHandicap criterioHandicap = new CriterioHandicap();
 	Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
