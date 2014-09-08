@@ -14,6 +14,9 @@ import refactor.ordenamiento.OrdenamientoPorHandicap;
 import refactor.utilitarios.Lists;
 import refactor.Partido;
 import refactor.Jugador;
+import refactor.OrdenamientoLoco;
+import refactor.ParImpar;
+
 public class TestGenerarEquipo {
 
 	private Partido partidoPocosJugadores;
@@ -33,13 +36,20 @@ public class TestGenerarEquipo {
 
 	@Before
 	public void init() {
+
 		partidoPocosJugadores = new Partido();
 		for (int i = 0; i < 6; i++) {
-			inscribir(partidoPocosJugadores, new Jugador("sytek", 3d,Lists.newArrayList(5d,8d))); //pongo un jugador cualquiera
+			inscribir(partidoPocosJugadores,
+					new Jugador("sytek", 3d, Lists.newArrayList(5d, 8d))); // pongo
+																			// un
+																			// jugador
+																			// cualquiera
 		}
+
+		OrdenamientoLoco ordenamiento = new OrdenamientoLoco();
 		partidoOk = new Partido();
 		partido1 = new Partido();
-		sytek = new Jugador("sytek", 3d,Lists.newArrayList(5d,8d) );
+		sytek = new Jugador("sytek", 3d, Lists.newArrayList(5d, 8d));
 		chicho = new Jugador("chicho", 5d, Lists.newArrayList(6d, 8d, 6d));
 		pato = new Jugador("pato", 8d, Lists.newArrayList(9d, 8d));
 		lechu = new Jugador("lechu", 6d, Lists.newArrayList(7d, 9d));
@@ -76,16 +86,19 @@ public class TestGenerarEquipo {
 		inscribir(partido1, ferme);
 	}
 
-	@Test(expected=BusinessException.class)
+	@Test(expected = BusinessException.class)
 	public void pocosInscriptosNoGeneranEquipos() {
 		partidoPocosJugadores.generarEquipos();
 	}
 
-	@Test(expected=BusinessException.class)
+	@Test(expected = BusinessException.class)
 	public void partidoSinIniciarNoPuedeGenerarEquipos() {
 		for (int i = 0; i < 3; i++) {
-			inscribir(partidoPocosJugadores, new Jugador("sytek", 3d,Lists.newArrayList(5d,8d))); //pongo un jugador cualquiera
-//			inscribir(partidoPocosJugadores, new Jugador());
+			inscribir(partidoPocosJugadores,
+					new Jugador("sytek", 3d, Lists.newArrayList(5d, 8d))); // pongo
+																			// un
+																			// jugador
+																			// cualquiera
 		}
 		partidoPocosJugadores.generarEquipos();
 	}
@@ -100,70 +113,77 @@ public class TestGenerarEquipo {
 
 	@Test
 	public void generarEquiposPorHandicap() {
-		List<Jugador> jugadores=partido1.ordenarEquipos();
-		Assert.assertEquals(Lists.newArrayList(ferme, roly, pato, dodi, lechu, chicho, rodri, sytek, leo, mike),
-				jugadores);
+		List<Jugador> jugadores = partido1.ordenarEquipos();
+		Assert.assertEquals(Lists.newArrayList(ferme, roly, pato, dodi, lechu,
+				chicho, rodri, sytek, leo, mike), jugadores);
 	}
 
 	@Test
 	public void generarEquiposPorCalificacionUltimos2Partidos() {
 		partido1.setCriterioOrdenamiento(new OrdenamientoCalificacionUltimos2Partidos());
-		List<Jugador> jugadores=partido1.ordenarEquipos();
-		
+		List<Jugador> jugadores = partido1.ordenarEquipos();
+
 		for (Jugador jugador : jugadores) {
-		  
-			//Tomando los 2 últimos puntajes
-			List<Double> puntajes=jugador.getPuntajes();
-			List<Double> misPuntajes=new ArrayList<Double>(); 
-			if(!puntajes.isEmpty()){
-				misPuntajes.add(jugador.getPuntajes().get(puntajes.size()-1));
+
+			// Tomando los 2 últimos puntajes
+			List<Double> puntajes = jugador.getPuntajes();
+			List<Double> misPuntajes = new ArrayList<Double>();
+			if (!puntajes.isEmpty()) {
+				misPuntajes.add(jugador.getPuntajes().get(puntajes.size() - 1));
+			} else {
+				misPuntajes.add(jugador.getPuntajes().get(puntajes.size() - 2));
 			}
-			else{
-				misPuntajes.add(jugador.getPuntajes().get(puntajes.size()-2));
-			}
-			
-			
+
 		}
-		Assert.assertEquals(Lists.newArrayList(ferme, pato, lechu, roly, mike, chicho, dodi, rodri, sytek, leo),
-				jugadores);
+		Assert.assertEquals(Lists.newArrayList(ferme, pato, lechu, roly, mike,
+				chicho, dodi, rodri, sytek, leo), jugadores);
 	}
 
 	@Test
 	public void generarEquiposPorMixDeCriterios() {
 		OrdenamientoMix ordenamientoMix = new OrdenamientoMix();
-		ordenamientoMix.addCriterio(new OrdenamientoCalificacionUltimos2Partidos());
+		ordenamientoMix
+				.addCriterio(new OrdenamientoCalificacionUltimos2Partidos());
 		ordenamientoMix.addCriterio(new OrdenamientoPorHandicap());
 		partido1.setCriterioOrdenamiento(ordenamientoMix);
-		List<Jugador> jugadores=partido1.ordenarEquipos();
-		Assert.assertEquals(Lists.newArrayList(ferme, roly, pato, lechu, dodi, chicho, rodri, sytek, leo, mike),
-				jugadores);
+		List<Jugador> jugadores = partido1.ordenarEquipos();
+		Assert.assertEquals(Lists.newArrayList(ferme, roly, pato, lechu, dodi,
+				chicho, rodri, sytek, leo, mike), jugadores);
 	}
 
 	@Test
 	public void distribuirEquiposParEImpar() {
+
 		partido1.cerrar();
 		partido1.generarEquipos();
-		Assert.assertEquals(Lists.newArrayList(ferme, pato, lechu, rodri, leo), partido1.getEquipo1().getJugadores());
-		Assert.assertEquals(Lists.newArrayList(roly, dodi, chicho, sytek, mike), partido1.getEquipo2().getJugadores());
+		Assert.assertEquals(Lists.newArrayList(ferme, pato, lechu, rodri, leo),
+				partido1.getEquipo1().getJugadores());
+		Assert.assertEquals(
+				Lists.newArrayList(roly, dodi, chicho, sytek, mike), partido1
+						.getEquipo2().getJugadores());
 	}
+
 	@Test
 	public void distribuirEquipos14589() {
-		partido1.setDistribucionEquipos(16); // ordenamiento
+		partido1.setDistribucionEquipos(new OrdenamientoLoco());
 		partido1.cerrar();
 		partido1.generarEquipos();
-		Assert.assertEquals(Lists.newArrayList(ferme, dodi, lechu, sytek, leo), partido1.getEquipo1().getJugadores());
-		Assert.assertEquals(Lists.newArrayList(roly, pato, chicho, rodri, mike), partido1.getEquipo2().getJugadores());
+		Assert.assertEquals(Lists.newArrayList(ferme, dodi, lechu, sytek, leo),
+				partido1.getEquipo1().getJugadores());
+		Assert.assertEquals(
+				Lists.newArrayList(roly, pato, chicho, rodri, mike), partido1
+						.getEquipo2().getJugadores());
 	}
-	
-	@Test(expected=BusinessException.class)
+
+	@Test(expected = BusinessException.class)
 	public void generarEquiposCuandoSeCierra() {
-		partido1.setDistribucionEquipos(16); // ordenamiento
 		partido1.cerrar();
 		partido1.generarEquipos();
 		partido1.generarEquipos();
 	}
-	
-	/** *************************************************************************
+
+	/**
+	 * *************************************************************************
 	 * METODOS AUXILIARES DE LOS TESTS
 	 ****************************************************************************/
 	public void inscribir(Partido partido, Jugador jugador) {
