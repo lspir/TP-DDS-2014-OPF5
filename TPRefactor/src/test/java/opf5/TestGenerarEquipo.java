@@ -153,14 +153,13 @@ public class TestGenerarEquipo {
 
 	@Test
 	public void distribuirEquiposParEImpar() {
-
 		partido1.cerrar();
 		partido1.generarEquipos();
 		Assert.assertEquals(Lists.newArrayList(ferme, pato, lechu, rodri, leo),
-				partido1.getEquipo1().getJugadores());
+				partido1.getEquipo1());
 		Assert.assertEquals(
 				Lists.newArrayList(roly, dodi, chicho, sytek, mike), partido1
-						.getEquipo2().getJugadores());
+						.getEquipo2());
 	}
 
 	@Test
@@ -169,10 +168,10 @@ public class TestGenerarEquipo {
 		partido1.cerrar();
 		partido1.generarEquipos();
 		Assert.assertEquals(Lists.newArrayList(ferme, dodi, lechu, sytek, leo),
-				partido1.getEquipo1().getJugadores());
+				partido1.getEquipo1());
 		Assert.assertEquals(
 				Lists.newArrayList(roly, pato, chicho, rodri, mike), partido1
-						.getEquipo2().getJugadores());
+						.getEquipo2());
 	}
 
 	@Test(expected = BusinessException.class)

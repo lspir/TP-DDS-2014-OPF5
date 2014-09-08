@@ -11,8 +11,8 @@ import java.util.List;
 public class Partido {
 
 	private List<Jugador> inscriptos;
-	private Equipo equipo1;
-	private Equipo equipo2;
+	private List<Jugador> equipo1;
+	private List<Jugador>equipo2;
 	private EstadoDelPartido estado;
 	private CriterioOrdenamiento criterioOrdenamiento;
 	// private int distribucionEquipos; // 5 es par/impar, 16 = 1,4,5,8,9 vs.
@@ -35,8 +35,8 @@ public class Partido {
 
 	public void distribuirEquipos(List<Jugador> jugadores) {
 
-		equipo1 = new Equipo();
-		equipo2 = new Equipo();
+		equipo1 = new ArrayList<Jugador>();
+		equipo2 = new ArrayList<Jugador>();
 		distribucionDeEquipos.distribuirEquipos(jugadores, equipo1, equipo2);
 	}
 
@@ -89,11 +89,11 @@ public class Partido {
 		this.distribucionDeEquipos = distribucionDeEquipos;
 	}
 
-	public Equipo getEquipo1() {
+	public List<Jugador>getEquipo1() {
 		return equipo1;
 	}
 
-	public Equipo getEquipo2() {
+	public List<Jugador> getEquipo2() {
 		return equipo2;
 	}
 
