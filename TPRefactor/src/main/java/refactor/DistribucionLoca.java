@@ -3,7 +3,7 @@ package refactor;
 import java.util.List;
 import refactor.utilitarios.Lists;
 
-public class OrdenamientoLoco implements DistribucionEquipos {
+public class DistribucionLoca implements DistribucionEquipos {
 
 	public void distribuirEquipos(List<Jugador> jugadores, Equipo equipo1,
 			Equipo equipo2) {

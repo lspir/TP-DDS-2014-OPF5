@@ -14,7 +14,7 @@ import refactor.ordenamiento.OrdenamientoPorHandicap;
 import refactor.utilitarios.Lists;
 import refactor.Partido;
 import refactor.Jugador;
-import refactor.OrdenamientoLoco;
+import refactor.DistribucionLoca;
 import refactor.ParImpar;
 
 public class TestGenerarEquipo {
@@ -46,7 +46,7 @@ public class TestGenerarEquipo {
 																			// cualquiera
 		}
 
-		OrdenamientoLoco ordenamiento = new OrdenamientoLoco();
+		DistribucionLoca ordenamiento = new DistribucionLoca();
 		partidoOk = new Partido();
 		partido1 = new Partido();
 		sytek = new Jugador("sytek", 3d, Lists.newArrayList(5d, 8d));
@@ -165,7 +165,7 @@ public class TestGenerarEquipo {
 
 	@Test
 	public void distribuirEquipos14589() {
-		partido1.setDistribucionEquipos(new OrdenamientoLoco());
+		partido1.setDistribucionEquipos(new DistribucionLoca());
 		partido1.cerrar();
 		partido1.generarEquipos();
 		Assert.assertEquals(Lists.newArrayList(ferme, dodi, lechu, sytek, leo),
