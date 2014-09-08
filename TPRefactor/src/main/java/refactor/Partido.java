@@ -11,17 +11,20 @@ import java.util.List;
 public class Partido {
 
 	private List<Jugador> inscriptos;
-	private Equipo equipo1;
-	private Equipo equipo2;
+	private List<Jugador> equipo1;
+	private List<Jugador>equipo2;
 	private EstadoDelPartido estado;
 	private CriterioOrdenamiento criterioOrdenamiento;
-	private int distribucionEquipos; // 5 es par/impar, 16 = 1,4,5,8,9 vs.
-										// 2,3,6,7,10
+	// private int distribucionEquipos; // 5 es par/impar, 16 = 1,4,5,8,9 vs.
+	// 2,3,6,7,10
+
+	private DistribucionEquipos distribucionDeEquipos;
 
 	public Partido() {
+		this.distribucionDeEquipos = distribucionDeEquipos;
 		inscriptos = new ArrayList<Jugador>();
 		estado = new Abierto();
-		distribucionEquipos = 5; // par/impar
+		distribucionDeEquipos =new ParImpar();
 		criterioOrdenamiento = new OrdenamientoPorHandicap();
 	}
 
@@ -31,28 +34,10 @@ public class Partido {
 	}
 
 	public void distribuirEquipos(List<Jugador> jugadores) {
-		equipo1 = new Equipo();
-		equipo2 = new Equipo();
-		//FIXME no ven nada mal en esto????
-		//Que es un "distribuciónEquipos"? 
-		if (distribucionEquipos == 5) {
-			equipo1.setJugadores(Lists.newArrayList(jugadores.get(0),
-					jugadores.get(2), jugadores.get(4), jugadores.get(6),
-					jugadores.get(8)));
 
-			equipo2.setJugadores(Lists.newArrayList(jugadores.get(1),
-					jugadores.get(3), jugadores.get(5), jugadores.get(7),
-					jugadores.get(9)));
-		} else {
-			// distribucionEquipos == 16 que ordena de esta manera
-			equipo1.setJugadores(Lists.newArrayList(jugadores.get(0),
-					jugadores.get(3), jugadores.get(4), jugadores.get(7),
-					jugadores.get(8)));
-
-			equipo2.setJugadores(Lists.newArrayList(jugadores.get(1),
-					jugadores.get(2), jugadores.get(5), jugadores.get(6),
-					jugadores.get(9)));
-		}
+		equipo1 = new ArrayList<Jugador>();
+		equipo2 = new ArrayList<Jugador>();
+		distribucionDeEquipos.distribuirEquipos(jugadores, equipo1, equipo2);
 	}
 
 	public List<Jugador> ordenarEquipos() {
@@ -100,15 +85,15 @@ public class Partido {
 		this.criterioOrdenamiento = criterioOrdenamiento;
 	}
 
-	public void setDistribucionEquipos(int distribucionEquipos) {
-		this.distribucionEquipos = distribucionEquipos;
+	public void setDistribucionEquipos(DistribucionEquipos distribucionDeEquipos) {
+		this.distribucionDeEquipos = distribucionDeEquipos;
 	}
 
-	public Equipo getEquipo1() {
+	public List<Jugador>getEquipo1() {
 		return equipo1;
 	}
 
-	public Equipo getEquipo2() {
+	public List<Jugador> getEquipo2() {
 		return equipo2;
 	}
 
