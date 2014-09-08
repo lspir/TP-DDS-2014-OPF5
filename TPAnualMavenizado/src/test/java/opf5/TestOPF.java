@@ -298,33 +298,22 @@ public class TestOPF {
 
 	@Test
 	public void aplicarAlgoritmoDivisionDeParesAListaDel1Al10() {
-		// FIXME esto (el criterio de división por pares) es parte de los
-		// requerimientos,
-		// por lo que esta lógica no debería ser parte de un tests sino estar
-		// implementada
-		// en el dominio
-		List<Integer> pares = new ArrayList<Integer>();
-		List<Integer> impares = new ArrayList<Integer>();
 		List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
 		List<Inscripcion> inscripcionesValidada = new ArrayList<Inscripcion>();
 		for (int i = 0; i < 10; i++) {
 			if (i % 2 == 0) {
-				pares.add(i);
 				inscripciones.add(inscripcionSolidario);
 				inscripcionesValidada.add(inscripcionSolidario);
 
 			} else {
-				impares.add(i);
 				inscripciones.add(inscripcionEstandar);
 
 			}
 
 		}
-		for (int j = 1; j < 11; j++) {
-			if (j % 2 == 1) {
-				inscripcionesValidada.add(inscripcionEstandar);
+		for (int j=0; j < 5; j++) {
+			inscripcionesValidada.add(inscripcionEstandar);
 			}
-		}
 		AlgoritmoDivisionDeEquipos divisionDePares = new DivisionPorPares();
 		assertEquals(inscripcionesValidada,
 				divisionDePares.dameLista(inscripciones));
