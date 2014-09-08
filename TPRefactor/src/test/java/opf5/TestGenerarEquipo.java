@@ -109,8 +109,7 @@ public class TestGenerarEquipo {
 	public void generarEquiposPorCalificacionUltimos2Partidos() {
 		partido1.setCriterioOrdenamiento(new OrdenamientoCalificacionUltimos2Partidos());
 		List<Jugador> jugadores=partido1.ordenarEquipos();
-		//FIXME no les hace ruido que haya tanta lógica dentro de un test?
-		//No se supone que los test existen para probar la lógica del sistema, en lugar de repetirla?
+		
 		for (Jugador jugador : jugadores) {
 		  
 			//Tomando los 2 últimos puntajes
@@ -119,16 +118,10 @@ public class TestGenerarEquipo {
 			if(!puntajes.isEmpty()){
 				misPuntajes.add(jugador.getPuntajes().get(puntajes.size()-1));
 			}
-			if(puntajes.size()>1){
+			else{
 				misPuntajes.add(jugador.getPuntajes().get(puntajes.size()-2));
 			}
 			
-			//Cálculo de promedio
-			Double promedio=0d;
-			for (Double puntaje : misPuntajes) {
-				promedio+=puntaje;
-			}
-			promedio/=misPuntajes.size();
 			
 		}
 		Assert.assertEquals(Lists.newArrayList(ferme, pato, lechu, roly, mike, chicho, dodi, rodri, sytek, leo),

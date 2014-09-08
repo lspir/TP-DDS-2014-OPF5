@@ -15,7 +15,7 @@ public class Jugador {
 	private List<Double> puntajes;
 	CriterioInscripcion criterioInscripcion;
 
-// SACO  MÉTODO JUGADOR() PORQUE YA NO SE USA 
+	// SACO MÉTODO JUGADOR() PORQUE YA NO SE USA
 
 	public Jugador(String nombre, double calificacion, List<Double> puntajes) {
 		this.calificacion = calificacion;
@@ -32,10 +32,8 @@ public class Jugador {
 		return (criterioInscripcion.dejaLugarAOtro());
 	}
 
-	//FIXME el código comentario ES un codesmell
 	public String toString() {
-		// "Jugador (" + calificacion + ") - modo " +
-		// criterioInscripcion.toString()
+
 		return nombre;
 	}
 
@@ -45,5 +43,10 @@ public class Jugador {
 
 	public List<Double> getPuntajes() {
 		return puntajes;
+	}
+
+	public Double promedio() {
+		return puntajes.stream().mapToDouble(i->i).average().orElse(0);
+	
 	}
 }
