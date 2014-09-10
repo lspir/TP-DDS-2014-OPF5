@@ -7,7 +7,7 @@ import opf5.jugador.*;
 public class CriterioHandicap implements CriterioOrdenamientoEquipos {
 
 	public double ponderate(Jugador jugador) {
-		return jugador.handicap();
+		return jugador.getHandicap();
 	}
 
 }

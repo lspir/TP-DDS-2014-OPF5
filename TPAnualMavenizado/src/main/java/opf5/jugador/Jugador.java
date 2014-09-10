@@ -26,11 +26,10 @@ public class Jugador {
 		this.handicap = handicap;
 	}
 
-	public int handicap() {
+	public int getHandicap() {
 		return this.handicap;
 	}
 
-	
 	public void agregarAmigo(Amigo amigo) {
 		this.amigos.add(amigo);
 	}
@@ -47,10 +46,10 @@ public class Jugador {
 		infracciones.add(infraccion);
 	}
 
-	public void criticar(Jugador jugador, int nota, String texto, Partido partido)
-			{
+	public void criticar(Jugador jugador, int nota, String texto,
+			Partido partido) {
 		if (partido.verificarSiJugo(this) && partido.verificarSiJugo(jugador)) {
-			Critica critica = new Critica(nota, texto,partido);
+			Critica critica = new Critica(nota, texto, partido);
 			jugador.agregarCritica(critica);
 		} else
 			throw new NoSePuedeCalificarException();
@@ -63,5 +62,12 @@ public class Jugador {
 
 	public List<Critica> criticas() {
 		return criticas;
+	}
+
+	public String nombre() {
+		return nombre;
+	}
+	public int edad(){
+		return edad;
 	}
 }
