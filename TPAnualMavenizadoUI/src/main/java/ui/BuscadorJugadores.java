@@ -45,7 +45,7 @@ public class BuscadorJugadores {
 		}
 
 		public Jugador getJugadorSeleccionado() {
-			return this.jugadorSeleccionado;
+			return this.jugadorSeleccionado ;
 		}
 
 		public void setJugadorSeleccionado(Jugador jugadorSeleccionado) {
