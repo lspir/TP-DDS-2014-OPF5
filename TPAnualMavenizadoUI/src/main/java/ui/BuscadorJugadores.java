@@ -44,7 +44,7 @@ public class BuscadorJugadores {
 			this.nombre = nombre;
 		}
 
-		public Jugador getCelularSeleccionado() {
+		public Jugador getJugadorSeleccionado() {
 			return this.jugadorSeleccionado;
 		}
 
