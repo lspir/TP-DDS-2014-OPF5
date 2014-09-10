@@ -58,8 +58,8 @@ public class ViewGeneracionEquipos extends Window<UnViewModelGeneracion>
 				new ObservableProperty(this.getModelObject(),
 						"criteriosOrdenamiento"));
 
-		// itemsBinding2.setAdapter(new
-		// PropertyAdapter(CriterioOrdenamientoEquipos.class, "nombre"));
+		 itemsBinding2.setAdapter(new
+		 PropertyAdapter(CriterioOrdenamientoEquipos.class, "nombre"));
 		new Label(mainPanel).setText("Equipo 1");
 		Table<Jugador> table = new Table<Jugador>(mainPanel, Jugador.class);
 		table.setHeigth(200);

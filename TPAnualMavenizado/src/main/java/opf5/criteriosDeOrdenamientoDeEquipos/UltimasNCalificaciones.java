@@ -10,10 +10,10 @@ import java.util.stream.Stream;
 import static java.util.stream.Collectors.toList;
 
 public class UltimasNCalificaciones extends PromedioDeUltimoPartido {
-
 	private int n;
 	
 	public UltimasNCalificaciones(int n){
+		super("Promedio Ultimas ".concat(String.valueOf(n)).concat(" Calificaciones"));
 		this.n= n;
 	}
 	public double ponderate(Jugador jugador) {

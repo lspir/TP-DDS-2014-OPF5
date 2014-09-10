@@ -8,11 +8,12 @@ import java.util.stream.*;
 import opf5.*;
 import static java.util.stream.Collectors.toList;
 
-public class MixDeCriterios implements CriterioOrdenamientoEquipos {
+public class MixDeCriterios extends CriterioOrdenamientoEquipos {
 
 	private List<CriterioOrdenamientoEquipos> criterios = new ArrayList<CriterioOrdenamientoEquipos>();
 
 	public MixDeCriterios(List<CriterioOrdenamientoEquipos> criterios){
+		super("Mix De Criterios");
 		this.criterios=criterios;
 	}
 	

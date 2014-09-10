@@ -11,9 +11,17 @@ import java.util.stream.*;
 
 import static java.util.stream.Collectors.toList;
 
-public class PromedioDeUltimoPartido implements CriterioOrdenamientoEquipos {
+public class PromedioDeUltimoPartido extends CriterioOrdenamientoEquipos {
 
-  	public double ponderate(Jugador jugador) {
+  	public PromedioDeUltimoPartido() {
+		super("Promedio Calificaciones Del Ultimo Partido");
+		}
+
+	public PromedioDeUltimoPartido(String string) {
+		super(string);
+	}
+
+	public double ponderate(Jugador jugador) {
 		return calcularPromedioOdevolver0(calcularCalificacionesDeUnaListaDeCriticas(obtenerListaDeCriticasUltimoPartido(jugador)));
 	}
 	
