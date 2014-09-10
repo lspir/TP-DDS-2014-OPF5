@@ -3,10 +3,15 @@ package opf5.AlgoritmosDivisionDeEquipos;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.uqbar.commons.utils.Observable;
+
 import opf5.inscripcion.*;
-
+@Observable
 public abstract class AlgoritmoDivisionDeEquipos {
-
+	private String nombre;
+	public AlgoritmoDivisionDeEquipos(String nombre){
+		this.setNombre(nombre);
+	}
 
 	public List<Inscripcion> dameLista(List<Inscripcion> lista) {
 		List<Inscripcion> listaAux = new ArrayList<Inscripcion>();
@@ -23,5 +28,13 @@ public abstract class AlgoritmoDivisionDeEquipos {
 	
 	abstract  List<Integer> getPosicionesLista1();
 	abstract List<Integer> getPosicionesLista2();
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
 }

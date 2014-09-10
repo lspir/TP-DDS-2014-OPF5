@@ -1,6 +1,7 @@
 package ui;
 
 import org.uqbar.arena.bindings.ObservableProperty;
+import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.layout.VerticalLayout;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.CheckBox;
@@ -43,8 +44,8 @@ public class ViewGeneracionEquipos extends Window<UnViewModelGeneracion>
 				new ObservableProperty(this.getModelObject(),
 						"algoritmosDivision"));
 
-		// itemsBinding.setAdapter(new
-		// PropertyAdapter(AlgoritmoDivisionDeEquipos.class, "nombre")); //nombre de la interfaz? 
+		 itemsBinding.setAdapter(new
+		 PropertyAdapter(AlgoritmoDivisionDeEquipos.class, "nombre")); //nombre de la interfaz? 
 
 		new Label(mainPanel).setText("Criterio Ordenamiento");
 		Selector<AlgoritmoDivisionDeEquipos> selectorOrdenamiento = new Selector<AlgoritmoDivisionDeEquipos>(

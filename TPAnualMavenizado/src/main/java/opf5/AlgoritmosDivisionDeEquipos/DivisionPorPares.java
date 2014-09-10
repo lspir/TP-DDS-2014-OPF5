@@ -6,6 +6,10 @@ import java.util.List;
 
 
 public class DivisionPorPares extends AlgoritmoDivisionDeEquipos{
+	public DivisionPorPares() {
+		super("Division Por Pares");
+		
+	}
 	private List<Integer> posicionesLista1 = new ArrayList<Integer>(Arrays.asList(new Integer[] { 0, 2,4,6,8 }));
 	private List<Integer> posicionesLista2 = new ArrayList<Integer>(Arrays.asList(new Integer[] { 1, 3,5,7,9 }));
 	
