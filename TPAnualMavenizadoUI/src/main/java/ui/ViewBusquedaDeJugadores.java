@@ -1,39 +1,8 @@
 package ui;
-
-//
-//import org.uqbar.arena.layout.VerticalLayout;
-//import org.uqbar.arena.widgets.Label;
-//import org.uqbar.arena.widgets.Panel;
-//import org.uqbar.arena.windows.MainWindow;
-//import org.uqbar.arena.windows.Window;
-//import org.uqbar.arena.layout.VerticalLayout;
-//import org.uqbar.arena.widgets.Button;
-//import org.uqbar.arena.widgets.Label;
-//import org.uqbar.arena.widgets.Panel;
-//import org.uqbar.arena.widgets.TextBox;
-//import org.uqbar.arena.windows.MainWindow;
-//import org.uqbar.arena.widgets.CheckBox;
-//import org.uqbar.arena.widgets.List;
-//
-//import domain.UnModel;
-//
-//public class ViewBusquedaDeJugadores extends Window<UnViewModelBusqueda> {
-//
-//	 public ViewBusquedaDeJugadores(Window owner) {
-//	 super(owner, new UnViewModelBusqueda());
-//	 }
-//
-//	public void createContents(Panel mainPanel) {
-//
-//		setTitle("Búsqueda de Jugadores");
-//		mainPanel.setLayout(new VerticalLayout());
-//
-//	}
-
-//}
-
 import java.awt.Color;
+
 import opf5.jugador.*;
+
 import org.uqbar.arena.actions.MessageSend;
 import org.uqbar.arena.bindings.NotNullObservable;
 import org.uqbar.arena.layout.ColumnLayout;
@@ -87,6 +56,22 @@ public class ViewBusquedaDeJugadores extends SimpleWindow<BuscadorJugadores> {
 		new Button(actionsPanel).setCaption("Buscar")
 				.onClick(new MessageSend(this.getModelObject(), "search"))
 				.setAsDefault().disableOnError();
+		
+
+		Button verDatos = new Button(actionsPanel);
+		verDatos.setCaption("Ver Datos");
+		verDatos.onClick(new MessageSend(this.getModelObject(), "verDatosDeJugador"));
+
+		NotNullObservable elementSelected = new NotNullObservable("jugadorSeleccionado");
+		verDatos.bindEnabled(elementSelected);
+		
+	
+	
+	}
+	
+	void algo()
+	{
+		
 	}
 
 	protected void createResultsGrid(Panel mainPanel) {
