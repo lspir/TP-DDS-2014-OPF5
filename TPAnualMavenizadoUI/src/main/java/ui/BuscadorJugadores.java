@@ -36,6 +36,7 @@ public class BuscadorJugadores {
 		public void setHandicap(Integer numero) {
 			this.handicap= numero;
 		}
+		
 		public String getNombre() {
 			return this.nombre;
 		}

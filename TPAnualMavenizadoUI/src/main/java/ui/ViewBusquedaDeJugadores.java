@@ -58,9 +58,12 @@ public class ViewBusquedaDeJugadores extends SimpleWindow<BuscadorJugadores> {
 				.setAsDefault().disableOnError();
 		
 
+		
 		Button verDatos = new Button(actionsPanel);
 		verDatos.setCaption("Ver Datos");
-		verDatos.onClick(new MessageSend(this.getModelObject(), "verDatosDeJugador"));
+		verDatos.onClick(()->new ViewDatosJugador(this,this.getModelObject().getJugadorSeleccionado()).open());
+		
+		
 
 		NotNullObservable elementSelected = new NotNullObservable("jugadorSeleccionado");
 		verDatos.bindEnabled(elementSelected);
@@ -104,9 +107,6 @@ public class ViewBusquedaDeJugadores extends SimpleWindow<BuscadorJugadores> {
 		actionsPanel.setLayout(new HorizontalLayout());
 	}
 
-	// ********************************************************
-	// ** Acciones
-	// ********************************************************
 
 	protected void openDialog(Dialog<?> dialog) {
 		dialog.onAccept(new MessageSend(this.getModelObject(), "search"));

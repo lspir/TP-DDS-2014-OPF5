@@ -9,18 +9,21 @@ import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.windows.MainWindow;
+import org.uqbar.arena.windows.SimpleWindow;
+import org.uqbar.arena.windows.WindowOwner;
 import org.uqbar.arena.widgets.Button;
 
 import opf5.jugador.*;
 
-public class ViewDatosJugador extends MainWindow<UnViewModelDatosJugador>{
+
+public class ViewDatosJugador extends SimpleWindow<UnViewModelDatosJugador>{
 	
-	public ViewDatosJugador(Jugador jugador) {
-	    super(new UnViewModelDatosJugador(jugador));
+	public ViewDatosJugador(WindowOwner owner, Jugador jugador) {
+	    super(owner,new UnViewModelDatosJugador(jugador));
 	  }
 
 	@Override
-	public void createContents(Panel mainPanel) {
+	public void createFormPanel(Panel mainPanel) {
 		setTitle("Datos del Jugador");
 	    mainPanel.setLayout(new VerticalLayout());
 	    new Label(mainPanel).setText("Nombre:");
@@ -29,14 +32,13 @@ public class ViewDatosJugador extends MainWindow<UnViewModelDatosJugador>{
 	    new Label(mainPanel).setBackground(Color.ORANGE).bindValueToProperty("handicap");
 	    new Label(mainPanel).setText("Infracciones:");
 	    new Table(mainPanel).bindItemsToProperty("infracciones");
-	    new Button(mainPanel).setCaption("Volver").onClick(()->this.close());
+	   
 	    
 	}
 	
-//	public static void main(String[] args) {
-//		Jugador jugador = new Jugador("pepe", 8);
-//		Infraccion infraccion = new Infraccion("momento",2);
-//		jugador.tePenalizaron(infraccion);
-//	new ViewDatosJugador(jugador).startApplication();
-//}
+	public void  addActions(Panel mainPanel)
+	{
+		new Button(mainPanel).setCaption("Volver").onClick(()->this.close());
+	}
+
 }
