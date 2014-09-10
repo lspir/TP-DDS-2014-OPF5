@@ -40,15 +40,15 @@ public class RepositorioJugadores implements Serializable {
 		this.data.add(jugador);
 	}
 
-	public List<Jugador> search(int numero) {
-		return this.search(numero, null);
-	}
+//	public List<Jugador> search(int numero) {
+//		return this.search(numero, null,null,null);
+//	}
 
-	public List<Jugador> search(int numero, String nombre) {
+	public List<Jugador> search(int numero, String nombre, int handicapDesde, int handicapHasta) {
 		List<Jugador> resultados = new ArrayList<Jugador>();
 
 		for (Jugador jugador : this.data) {
-			if (jugador.edad() > numero) {
+			if (jugador.edad() > numero || jugador.getHandicap()>= handicapDesde || jugador.getHandicap()<= handicapHasta) {
 				resultados.add(jugador); // BUSQUEDA ANIDADA *mentira, fallé en
 											// el intento :( *
 			}

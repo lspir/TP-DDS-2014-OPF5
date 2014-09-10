@@ -10,10 +10,27 @@ public class BuscadorJugadores {
 		private int handicap;
 		private List<Jugador> resultados;
 		private Jugador jugadorSeleccionado;
+		private int handicapDesde, handicapHasta;
 
+
+		public int getHandicapDesde() {
+			return handicapDesde;
+		}
+
+		public void setHandicapDesde(int handicapDesde) {
+			this.handicapDesde = handicapDesde;
+		}
+
+		public int getHandicapHasta() {
+			return handicapHasta;
+		}
+
+		public void setHandicapHasta(int handicapHasta) {
+			this.handicapHasta = handicapHasta;
+		}
 
 		public void search() {
-			this.resultados = RepositorioJugadores.getInstance().search(this.edad, this.nombre);
+			this.resultados = RepositorioJugadores.getInstance().search(this.edad, this.nombre,this.handicapDesde, this.handicapHasta);
 		}
 
 		public void clear() {

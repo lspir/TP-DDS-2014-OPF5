@@ -49,6 +49,12 @@ public class ViewBusquedaDeJugadores extends SimpleWindow<BuscadorJugadores> {
 		new Label(searchFormPanel).setText("Nombre").setForeground(Color.BLUE);
 		new TextBox(searchFormPanel).bindValueToProperty("nombre");
 		
+		new Label(searchFormPanel).setText("Handicap desde").setForeground(Color.BLUE);
+		new TextBox(searchFormPanel).bindValueToProperty("handicapDesde");
+		
+		new Label(searchFormPanel).setText("Handicap hasta").setForeground(Color.BLUE);
+		new TextBox(searchFormPanel).bindValueToProperty("handicapHasta");
+		
 	}
 
 	@Override
