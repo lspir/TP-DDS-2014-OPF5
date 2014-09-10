@@ -57,4 +57,7 @@ public class RepositorioJugadores implements Serializable {
 		return resultados;
 	}
 
+	public List<Jugador> getData() {
+		return this.data;
+	}
 }
