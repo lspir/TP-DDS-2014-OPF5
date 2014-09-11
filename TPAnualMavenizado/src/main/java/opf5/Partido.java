@@ -34,6 +34,7 @@ public class Partido {
 		this.horario = horario;
 		this.lugar = lugar;
 		this.estado = new SinOrdenar();
+		HomePartidos.getInstance().create(this);
 }
 
 	
