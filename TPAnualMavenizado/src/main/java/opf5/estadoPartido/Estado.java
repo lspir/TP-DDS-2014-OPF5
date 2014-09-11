@@ -17,4 +17,6 @@ public interface Estado {
 			Jugador jugador, TipoDeInscripcion tipo, Partido partido) ;
 	public void armarEquipos(CriterioOrdenamientoEquipos criterio, AlgoritmoDivisionDeEquipos algoritmo,Partido partido);
 	public void aceptarEquipos(Partido partido, FormacionPartido formacion);
+
+	public int jugo(Jugador jugador);
 }

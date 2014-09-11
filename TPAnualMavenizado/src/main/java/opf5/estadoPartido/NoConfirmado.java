@@ -71,4 +71,10 @@ public abstract class NoConfirmado implements Estado {
 		partido.setEstado(new SinOrdenar());
 		partido.limpiarFormaciones();
 	}
+	
+
+	public int jugo(Jugador jugador) {
+		return 0;
+	}
+
 }

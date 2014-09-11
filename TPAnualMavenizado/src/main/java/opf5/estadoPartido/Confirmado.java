@@ -1,5 +1,6 @@
 package opf5.estadoPartido;
 import java.util.ArrayList;
+import static java.util.stream.Collectors.toList;
 import java.util.List;
 
 import opf5.excepciones.*;
@@ -51,6 +52,17 @@ public class Confirmado implements Estado {
 		throw new ElPartidoYaEstaConfirmadoException();
 	}
 	public void aceptarEquipos(Partido partido,FormacionPartido formacion){
+	}
+
+	
+	public int jugo(Jugador jugador) {
+		if( loContiene(this.equipoA,jugador) || loContiene(this.equipoB,jugador)){
+			return 1;
+		}
+		return 0;
+	}
+	private Boolean loContiene(List<Inscripcion> lista, Jugador jugador){
+		return lista.stream().map(inscripcion->inscripcion.jugador()).collect(toList()).contains(jugador);
 	}
 }
 

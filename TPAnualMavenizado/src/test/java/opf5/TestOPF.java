@@ -43,9 +43,11 @@ public class TestOPF {
 	private Inscripcion inscripcionCondicional, inscripcionSolidario,inscripcionEstandar;
 	private Jugador jugador, jugadorConAmigos,jugadorCritico;
 	private Amigo luciano, leandro;
+	private HomePartidos homePartidos;
 	
 	@Before
 	public void setUp() {
+		homePartidos=HomePartidos.getInstance();
 		partidoCon5Estandares= new Partido(LocalDate.now(),LocalTime.now(), "Campus");
 		partidoCon10Solidarios= new Partido(LocalDate.now().plusDays(10), LocalTime.now(), "Campus");
 		partidoLleno = new Partido(LocalDate.of(2014, Month.AUGUST, 13),LocalTime.of(12,30), "Campus");
@@ -343,13 +345,31 @@ public void testAuxiliar() {
 	partidoCon8Estandares1Solidario1Condicional.intentarInscribirA(inscripcionEmi);
 }
 
+@Test
+public void jugadorJuegaUnPartidoSeLeConsultaALaHomePorCantidadPartidosJugados() {
+	AlgoritmoDivisionDeEquipos divisionDePares = new DivisionPorPares();
+	Jugador emiliano = new Jugador("Emiliano", 28);
+	CriterioHandicap criterioHandicap = new CriterioHandicap();
+	Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
+	partidoCon5Estandares.intentarInscribirA(inscripcionEstandar);
+	partidoCon5Estandares.intentarInscribirA(inscripcionEstandar);
+	partidoCon5Estandares.intentarInscribirA(inscripcionEstandar);
+	partidoCon5Estandares.intentarInscribirA(inscripcionEstandar);
+	partidoCon5Estandares.intentarInscribirA(inscripcionEmi);
+	partidoCon5Estandares.armarEquipos(criterioHandicap, divisionDePares);
+	partidoCon5Estandares.aceptarEquipos(partidoCon5Estandares.getFormacionesTentativas().get(0));
+	
+	assertEquals(1,
+			homePartidos.consultarCantidadDePartidosJugados(emiliano));
 
+}
 private void cargarPartido(Partido partido,TipoDeInscripcion tipoDeinscripcion,int cantidadJugadores){
 	for (int i = 0; i <cantidadJugadores; i++) {
 		Inscripcion inscripcion = new Inscripcion(new Jugador("nombre", 20), tipoDeinscripcion);
 		partido.intentarInscribirA(inscripcion);
 	}
 }
+
 
 }
 

@@ -211,4 +211,9 @@ public class Partido {
 		
 	}
 
+
+	public int jugo(Jugador jugador) {
+		return estado.jugo(jugador);
+	}
+
 }

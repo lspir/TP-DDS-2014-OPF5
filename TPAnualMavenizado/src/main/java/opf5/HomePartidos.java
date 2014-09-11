@@ -1,7 +1,11 @@
 package opf5;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import opf5.jugador.Jugador;
 
 public class HomePartidos {
 	
@@ -20,6 +24,10 @@ public class HomePartidos {
 
 		public void delete(Partido partido) {
 			this.partidos.remove(partido);
+		}
+		
+		public long consultarCantidadDePartidosJugados(Jugador jugador){
+			return partidos.stream().mapToInt(partido-> partido.jugo(jugador)).summaryStatistics().getSum();
 		}
 
 }

@@ -1,5 +1,6 @@
 package opf5.estadoPartido;
 import opf5.*;
+import opf5.jugador.Jugador;
 
 public class Ordenado extends NoConfirmado {
 
@@ -8,5 +9,6 @@ public class Ordenado extends NoConfirmado {
 		partido.setEstado(new Confirmado(formacion.getEquipoA(),formacion.getEquipoB()));
 
 	}
+
 
 }
