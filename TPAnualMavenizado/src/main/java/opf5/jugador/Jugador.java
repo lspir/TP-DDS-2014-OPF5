@@ -71,3 +71,4 @@ public class Jugador {
 		return edad;
 	}
 }
+	

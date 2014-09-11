@@ -22,35 +22,50 @@ public class RepositorioJugadores implements Serializable {
 
 	private RepositorioJugadores() {
 		Jugador jugador = new Jugador("Belén", 21);
-		jugador.handicap(4); // para ver si me lo muestra bien
+		jugador.handicap(4);
 		this.create(jugador);
-		this.create(new Jugador("Leandro", 20));
-		this.create(new Jugador("Emiliano", 21));
-		this.create(new Jugador("asd", 17));
-		this.create(new Jugador("fsa", 19));
-		this.create(new Jugador("afs", 28));
-		this.create(new Jugador("aet", 24));
-		this.create(new Jugador("awtgf", 35));
-		this.create(new Jugador("qetfas", 16));
-		this.create(new Jugador("astwaf", 15));
-
+		Jugador jugador2= new Jugador("Leandro", 20);
+		Jugador jugador3=new Jugador("Emiliano", 21);
+		Jugador jugador4=new Jugador("Alicia", 17);
+		Jugador jugador5=new Jugador("Noelia", 19);
+		Jugador jugador6=new Jugador("Tomasito", 28);
+		Jugador jugador7=new Jugador("Patricio", 24);
+		Jugador jugador8=new Jugador("Beto", 35);
+		Jugador jugador9=new Jugador("Genaro", 16);
+		Jugador jugador10=new Jugador("Kiara", 15);
+		jugador2.handicap(9);
+		jugador3.handicap(7);
+		jugador4.handicap(2);
+		jugador5.handicap(5);
+		jugador6.handicap(11);
+		jugador7.handicap(9);
+		jugador8.handicap(8);
+		jugador9.handicap(10);
+		jugador10.handicap(3);
+		this.create(jugador2);
+		this.create(jugador3);
+		this.create(jugador4);
+		this.create(jugador5);
+		this.create(jugador6);
+		this.create(jugador7);
+		this.create(jugador8);
+		this.create(jugador9);
+		this.create(jugador10);
+		
 	}
 
 	public void create(Jugador jugador) {
 		this.data.add(jugador);
 	}
 
-//	public List<Jugador> search(int numero) {
-//		return this.search(numero, null,null,null);
-//	}
-
-	public List<Jugador> search(int numero, String nombre, int handicapDesde, int handicapHasta) {
+	public List<Jugador> search(int numero, String nombre, int handicapDesde,
+			int handicapHasta) {
 		List<Jugador> resultados = new ArrayList<Jugador>();
 
 		for (Jugador jugador : this.data) {
-			if (jugador.edad() > numero || jugador.getHandicap()>= handicapDesde || jugador.getHandicap()<= handicapHasta) {
-				resultados.add(jugador); // BUSQUEDA ANIDADA *mentira, fallé en
-											// el intento :( *
+			if (jugador.edad() > numero
+					&& (jugador.getHandicap() >= handicapDesde)) {
+				resultados.add(jugador);
 			}
 		}
 

@@ -3,10 +3,10 @@ package opf5.AlgoritmosDivisionDeEquipos;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.uqbar.commons.utils.Observable;
+//import org.uqbar.commons.utils.Observable;
 
 import opf5.inscripcion.*;
-@Observable
+//@Observable
 public abstract class AlgoritmoDivisionDeEquipos {
 	private String nombre;
 	public AlgoritmoDivisionDeEquipos(String nombre){
