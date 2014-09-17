@@ -26,8 +26,8 @@ public class UnViewModelPpal {
 				partido.intentarInscribirA(inscripcionEstandar);
 			}
 			HomePartidos.getInstance().create(partido);
-			partido.armarEquipos(new CriterioHandicap(), new DivisionPorPares());
-			partido.aceptarEquipos(partido.getFormacionesTentativas().get(0));
+//			partido.armarEquipos(new CriterioHandicap(), new DivisionPorPares());
+//			partido.aceptarEquipos(partido.getFormacionesTentativas().get(0));
 	
 	 }
 

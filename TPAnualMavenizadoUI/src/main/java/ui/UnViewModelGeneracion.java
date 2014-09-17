@@ -31,11 +31,12 @@ public class UnViewModelGeneracion {
 	private List<CriterioOrdenamientoEquipos> criteriosOrdenamiento = new ArrayList<CriterioOrdenamientoEquipos>();
 	private Partido partido;
 	private Jugador jugadorSeleccionado;
-	private List<Jugador> equipo1;
-	private List <Jugador> equipo2;
+	private List<Jugador> equipo1 = new ArrayList<Jugador>();
+	private List <Jugador> equipo2=new ArrayList<Jugador>();
 	
 	public UnViewModelGeneracion(){
 		partido=HomePartidos.getInstance().getData().get(0);
+		
 //	partido.armarEquipos(new CriterioHandicap(), new DivisionPorPares());
 //	this.formacion=partido.getFormacionesTentativas().get(0);
 //	partido.aceptarEquipos(formacion);
@@ -50,25 +51,27 @@ public class UnViewModelGeneracion {
 	}
 
 	public List<Jugador> getEquipo1() {
-		if(partido.getFormacionesTentativas().size()==0){
-			return new ArrayList<Jugador>();
-		}
-		return this.formacion().getEquipoA().stream().map(inscrip -> inscrip.jugador()).collect(toList());
+//		if(partido.getFormacionesTentativas().size()==0){
+//			return new ArrayList<Jugador>();
+//		}
+//		return this.formacion().getEquipoA().stream().map(inscrip -> inscrip.jugador()).collect(toList());
+		return equipo1;
 }
 
 	public void setEquipo1(List<Jugador> equipo1) {
-//		this.equipo1 = equipo1;
+		this.equipo1 = equipo1;
 	}
 
 	public List<Jugador> getEquipo2() {
-		if(partido.getFormacionesTentativas().size()==0){
-			return new ArrayList<Jugador>();
-		}
-		return this.formacion().getEquipoB().stream().map(inscrip -> inscrip.jugador()).collect(toList());
+//		if(partido.getFormacionesTentativas().size()==0){
+//			return new ArrayList<Jugador>();
+//		}
+//		return this.formacion().getEquipoB().stream().map(inscrip -> inscrip.jugador()).collect(toList());
+		return equipo2;
 	}
 
 	public void setEquipo2(List<Jugador> equipo2) {
-//		this.equipo2 = equipo2;
+		this.equipo2 = equipo2;
 	}
 
 	public ArrayList<CriterioOrdenamientoEquipos> getCriteriosOrdenamiento() {
@@ -111,15 +114,17 @@ public class UnViewModelGeneracion {
 		this.criteriosOrdenamiento= criterios;
 	}
 	public void generacionEquipos(){
-		System.out.println("asd");
-//		partido.armarEquipos(criterioOrdenamiento, algoritmoDivision);
-//		
-//		ObservableUtils.firePropertyChanged(this, "getEquipo1", this.formacion().getEquipoA().stream().map(inscrip -> inscrip.jugador()).collect(toList()));
+		
+		partido.armarEquipos(new CriterioHandicap(), new DivisionPorPares());
+		equipo1 = this.formacion().getEquipoA().stream().map(inscrip -> inscrip.jugador()).collect(toList());
+		equipo2= this.formacion().getEquipoB().stream().map(inscrip -> inscrip.jugador()).collect(toList());
+		
+//		ObservableUtils.firePropertyChanged(this, "equipo1", "getEquipo1");
 //		ObservableUtils.firePropertyChanged(this, "getEquipo2", this.formacion().getEquipoA().stream().map(inscrip -> inscrip.jugador()).collect(toList()));
-//		
+		
 	}
 	public void confirmarEquipos(){
-		partido.aceptarEquipos(this.formacion());
+		partido.aceptarEquipos(partido.getFormacionesTentativas().get(0));
 	}
 
 	private FormacionPartido formacion() {

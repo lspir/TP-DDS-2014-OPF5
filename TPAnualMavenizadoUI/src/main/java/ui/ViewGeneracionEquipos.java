@@ -181,7 +181,7 @@ public class ViewGeneracionEquipos extends SimpleWindow<UnViewModelGeneracion> {
 
 	public ViewGeneracionEquipos(WindowOwner parent) {
 		super(parent, new UnViewModelGeneracion());
-		//this.getModelObject().search();
+		
 	}
 
 	@Override
@@ -235,8 +235,8 @@ public class ViewGeneracionEquipos extends SimpleWindow<UnViewModelGeneracion> {
 
 	@Override
 	protected void addActions(Panel actionsPanel) {
-		new Button(actionsPanel).setCaption("GENERAR").onClick(() -> new MessageSend(this.getModelObject(), "generacionEquipos"));
-		new Button(actionsPanel).setCaption("CONFIRMAR").onClick(()-> new MessageSend(this.getModelObject(), "confirmarEquipos"));
+		new Button(actionsPanel).setCaption("GENERAR").onClick(() -> this.getModelObject().generacionEquipos());
+		new Button(actionsPanel).setCaption("CONFIRMAR").onClick(()-> this.getModelObject().confirmarEquipos());
 		
 //		new Button(actionsPanel).setCaption("Buscar")
 //				.onClick(new MessageSend(this.getModelObject(), "search"))
