@@ -363,6 +363,8 @@ public void jugadorJuegaUnPartidoSeLeConsultaALaHomePorCantidadPartidosJugados()
 			homePartidos.consultarCantidadDePartidosJugados(emiliano));
 
 }
+
+
 private void cargarPartido(Partido partido,TipoDeInscripcion tipoDeinscripcion,int cantidadJugadores){
 	for (int i = 0; i <cantidadJugadores; i++) {
 		Inscripcion inscripcion = new Inscripcion(new Jugador("nombre", 20), tipoDeinscripcion);

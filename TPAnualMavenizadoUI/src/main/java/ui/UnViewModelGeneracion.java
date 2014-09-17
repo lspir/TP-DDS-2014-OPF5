@@ -1,11 +1,26 @@
 package ui;
 
+import java.time.LocalDate;
+
+import static java.util.stream.Collectors.toList;
+
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 
+import org.uqbar.arena.bindings.ObservableProperty;
+import org.uqbar.commons.model.ObservableUtils;
+
+import opf5.FormacionPartido;
+import opf5.HomePartidos;
+import opf5.Partido;
 import opf5.AlgoritmosDivisionDeEquipos.*;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
+import opf5.estadoPartido.Estado;
+import opf5.estadoPartido.SinOrdenar;
+import opf5.inscripcion.Estandar;
+import opf5.inscripcion.Inscripcion;
 import opf5.jugador.*;
 
 public class UnViewModelGeneracion {
@@ -14,9 +29,17 @@ public class UnViewModelGeneracion {
 	private CriterioOrdenamientoEquipos criterioOrdenamiento;
 	private List<AlgoritmoDivisionDeEquipos> algoritmosDivision = new ArrayList<AlgoritmoDivisionDeEquipos>();
 	private List<CriterioOrdenamientoEquipos> criteriosOrdenamiento = new ArrayList<CriterioOrdenamientoEquipos>();
-	private List <Jugador> equipo1 = new ArrayList<Jugador>();
-	private List <Jugador> equipo2 = new ArrayList<Jugador>();
+	private Partido partido;
 	private Jugador jugadorSeleccionado;
+	private List<Jugador> equipo1;
+	private List <Jugador> equipo2;
+	
+	public UnViewModelGeneracion(){
+		partido=HomePartidos.getInstance().getData().get(0);
+//	partido.armarEquipos(new CriterioHandicap(), new DivisionPorPares());
+//	this.formacion=partido.getFormacionesTentativas().get(0);
+//	partido.aceptarEquipos(formacion);
+	}
 	
 	public Jugador getJugadorSeleccionado() {
 		return jugadorSeleccionado;
@@ -27,19 +50,25 @@ public class UnViewModelGeneracion {
 	}
 
 	public List<Jugador> getEquipo1() {
-		return equipo1;
-	}
+		if(partido.getFormacionesTentativas().size()==0){
+			return new ArrayList<Jugador>();
+		}
+		return this.formacion().getEquipoA().stream().map(inscrip -> inscrip.jugador()).collect(toList());
+}
 
 	public void setEquipo1(List<Jugador> equipo1) {
-		this.equipo1 = equipo1;
+//		this.equipo1 = equipo1;
 	}
 
 	public List<Jugador> getEquipo2() {
-		return equipo2;
+		if(partido.getFormacionesTentativas().size()==0){
+			return new ArrayList<Jugador>();
+		}
+		return this.formacion().getEquipoB().stream().map(inscrip -> inscrip.jugador()).collect(toList());
 	}
 
 	public void setEquipo2(List<Jugador> equipo2) {
-		this.equipo2 = equipo2;
+//		this.equipo2 = equipo2;
 	}
 
 	public ArrayList<CriterioOrdenamientoEquipos> getCriteriosOrdenamiento() {
@@ -81,4 +110,19 @@ public class UnViewModelGeneracion {
 			ArrayList<CriterioOrdenamientoEquipos> criterios) {
 		this.criteriosOrdenamiento= criterios;
 	}
+	public void generacionEquipos(){
+		System.out.println("asd");
+//		partido.armarEquipos(criterioOrdenamiento, algoritmoDivision);
+//		
+//		ObservableUtils.firePropertyChanged(this, "getEquipo1", this.formacion().getEquipoA().stream().map(inscrip -> inscrip.jugador()).collect(toList()));
+//		ObservableUtils.firePropertyChanged(this, "getEquipo2", this.formacion().getEquipoA().stream().map(inscrip -> inscrip.jugador()).collect(toList()));
+//		
+	}
+	public void confirmarEquipos(){
+		partido.aceptarEquipos(this.formacion());
+	}
+
+	private FormacionPartido formacion() {
+		return partido.getFormacionesTentativas().get(0);
+		}
 }

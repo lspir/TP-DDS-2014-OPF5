@@ -64,7 +64,7 @@ public class RepositorioJugadores implements Serializable {
 
 		for (Jugador jugador : this.data) {
 			if (jugador.edad() > numero
-					&& (jugador.getHandicap() >= handicapDesde)) {
+					&& (jugador.getHandicap() >= handicapDesde) && (jugador.nombre().startsWith(nombre))) {
 				resultados.add(jugador);
 			}
 		}

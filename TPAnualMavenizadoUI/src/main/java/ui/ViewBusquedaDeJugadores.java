@@ -29,7 +29,7 @@ public class ViewBusquedaDeJugadores extends SimpleWindow<BuscadorJugadores> {
 
 	public ViewBusquedaDeJugadores(WindowOwner parent) {
 		super(parent, new BuscadorJugadores());
-		this.getModelObject().search();
+//		this.getModelObject().search();
 	}
 
 	@Override
@@ -62,7 +62,14 @@ public class ViewBusquedaDeJugadores extends SimpleWindow<BuscadorJugadores> {
 		
 		new Label(searchFormPanel).setText("Handicap hasta");
 		new TextBox(searchFormPanel).bindValueToProperty("handicapHasta");
+		
+		new Label(searchFormPanel).setText("Promedio último partido desde:");
+		new TextBox(searchFormPanel).bindValueToProperty("promedioDesde");
+		
+		new Label(searchFormPanel).setText("Promedio último partido hasta");
+		new TextBox(searchFormPanel).bindValueToProperty("promedioHasta");
 
+		//TODO sólo los que tuvieron infracciones, sólo los que no tuvieron infracciones
 	}
 
 	@Override

@@ -10,8 +10,24 @@ public class BuscadorJugadores {
 		private int handicap;
 		private List<Jugador> resultados;
 		private Jugador jugadorSeleccionado;
-		private int handicapDesde, handicapHasta;
+		private int handicapDesde, handicapHasta, promedioDesde, promedioHasta;
 
+
+		public int getPromedioDesde() {
+			return promedioDesde;
+		}
+
+		public void setPromedioDesde(int promedioDesde) {
+			this.promedioDesde = promedioDesde;
+		}
+
+		public int getPromedioHasta() {
+			return promedioHasta;
+		}
+
+		public void setPromedioHasta(int promedioHasta) {
+			this.promedioHasta = promedioHasta;
+		}
 
 		public int getHandicapDesde() {
 			return handicapDesde;
