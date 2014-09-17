@@ -60,6 +60,7 @@ public class ViewBusquedaDeJugadores extends SimpleWindow<BuscadorJugadores> {
 		new Label(searchFormPanel).setText("Handicap desde");
 		new TextBox(searchFormPanel).bindValueToProperty("handicapDesde");
 		
+		
 		new Label(searchFormPanel).setText("Handicap hasta");
 		new TextBox(searchFormPanel).bindValueToProperty("handicapHasta");
 		
@@ -121,6 +122,10 @@ public class ViewBusquedaDeJugadores extends SimpleWindow<BuscadorJugadores> {
 		columnaHandicap.setFixedSize(100);
 		columnaHandicap.bindContentsToProperty("handicap");
 
+		Column<Jugador> columnaPromedio= new Column<Jugador>(table);
+		columnaPromedio.setTitle("Promedio");
+		columnaPromedio.setFixedSize(100);
+		columnaPromedio.bindContentsToProperty("promedio");
 	}
 
 	protected void createGridActions(Panel mainPanel) {

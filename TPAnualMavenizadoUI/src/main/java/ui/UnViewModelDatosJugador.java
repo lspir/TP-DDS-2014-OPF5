@@ -15,7 +15,8 @@ import org.uqbar.commons.utils.Observable;
 public class UnViewModelDatosJugador {
 
 	private String nombre;
-	private int handicap, promedio, ultimoPromedio;
+	private int handicap;
+	private double promedio, ultimoPromedio;
 	private List<Infraccion> infracciones = new ArrayList<Infraccion>();
 	private long cantidadPartidos;
 	
@@ -32,6 +33,8 @@ public class UnViewModelDatosJugador {
 		this.handicap = jugador.getHandicap();
 		this.infracciones = jugador.infracciones();
 		this.cantidadPartidos = HomePartidos.getInstance().consultarCantidadDePartidosJugados(jugador);
+		this.promedio= jugador.getPromedio();
+		this.ultimoPromedio = jugador.getPromedioUltimoPartido();
 	}
 	
 	public String getNombre(){
@@ -48,19 +51,19 @@ public class UnViewModelDatosJugador {
 		return (this.infracciones);
 	}
 
-	public int getPromedio() {
+	public double getPromedio() {
 		return promedio;
 	}
 
-	public void setPromedio(int promedio) {
+	public void setPromedio(double promedio) {
 		this.promedio = promedio;
 	}
 
-	public int getUltimoPromedio() {
+	public double getUltimoPromedio() {
 		return ultimoPromedio;
 	}
 
-	public void setUltimoPromedio(int ultimoPromedio) {
+	public void setUltimoPromedio(double ultimoPromedio) {
 		this.ultimoPromedio = ultimoPromedio;
 	}
 

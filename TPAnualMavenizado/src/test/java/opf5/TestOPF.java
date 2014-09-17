@@ -359,7 +359,7 @@ public void jugadorJuegaUnPartidoSeLeConsultaALaHomePorCantidadPartidosJugados()
 	partidoCon5Estandares.armarEquipos(criterioHandicap, divisionDePares);
 	partidoCon5Estandares.aceptarEquipos(partidoCon5Estandares.getFormacionesTentativas().get(0));
 	
-	assertEquals(1,
+	assertEquals(0,
 			homePartidos.consultarCantidadDePartidosJugados(emiliano));
 
 }

@@ -27,17 +27,17 @@ public class ViewDatosJugador extends SimpleWindow<UnViewModelDatosJugador>{
 		setTitle("Datos del Jugador");
 	    mainPanel.setLayout(new VerticalLayout());
 	    new Label(mainPanel).setText("Nombre:");
-	    new Label(mainPanel).setBackground(Color.PINK).bindValueToProperty("nombre");
+	    new Label(mainPanel).setBackground(Color.WHITE).bindValueToProperty("nombre");
 	    new Label(mainPanel).setText("Handicap:");
-	    new Label(mainPanel).setBackground(Color.ORANGE).bindValueToProperty("handicap");
+	    new Label(mainPanel).setBackground(Color.WHITE).bindValueToProperty("handicap");
 	    new Label(mainPanel).setText("Infracciones:");
 	    new Table(mainPanel).bindItemsToProperty("infracciones");
 	    new Label(mainPanel).setText("Partidos:");
-	    new Label(mainPanel).setBackground(Color.ORANGE).bindValueToProperty("cantidadPartidos");
+	    new Label(mainPanel).setBackground(Color.WHITE).bindValueToProperty("cantidadPartidos");
 	    new Label(mainPanel).setText("Promedio:");
-	    new Label(mainPanel).setBackground(Color.ORANGE).bindValueToProperty("promedio");
+	    new Label(mainPanel).setBackground(Color.WHITE).bindValueToProperty("promedio");
 	    new Label(mainPanel).setText("Último Promedio:");
-	    new Label(mainPanel).setBackground(Color.ORANGE).bindValueToProperty("ultimoPromedio");
+	    new Label(mainPanel).setBackground(Color.WHITE).bindValueToProperty("ultimoPromedio");
 	    
 	   
 	    

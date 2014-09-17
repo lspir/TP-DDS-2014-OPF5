@@ -238,6 +238,11 @@ public class ViewGeneracionEquipos extends SimpleWindow<UnViewModelGeneracion> {
 		new Button(actionsPanel).setCaption("GENERAR").onClick(() -> this.getModelObject().generacionEquipos());
 		new Button(actionsPanel).setCaption("CONFIRMAR").onClick(()-> this.getModelObject().confirmarEquipos());
 		
+		Button verDatos = new Button(actionsPanel);
+		verDatos.setCaption("Ver Datos de Jugador");
+		verDatos.onClick(()->new ViewDatosJugador(this,this.getModelObject().getJugadorSeleccionado()).open());
+		NotNullObservable elementSelected = new NotNullObservable("jugadorSeleccionado");
+		verDatos.bindEnabled(elementSelected);
 //		new Button(actionsPanel).setCaption("Buscar")
 //				.onClick(new MessageSend(this.getModelObject(), "search"))
 //				.setAsDefault().disableOnError();
@@ -264,23 +269,19 @@ public class ViewGeneracionEquipos extends SimpleWindow<UnViewModelGeneracion> {
 
 	protected void createResultsGrid(Panel mainPanel) {
 
-		new Label(mainPanel).setText("Equipo 1");
-		Table<Jugador> tablaEquipo1 = new Table<Jugador>(mainPanel, Jugador.class);
-		tablaEquipo1 .setHeigth(200);
-		tablaEquipo1 .setWidth(450);
-		tablaEquipo1 .bindItemsToProperty("equipo1");
-	//	tablaEquipo1 .bindValueToProperty("equipo1");
-		this.describeResultsGrid(tablaEquipo1);
+		this.crearTablaEquipos("Equipo 1", "equipo1", mainPanel);
+		this.crearTablaEquipos("Equipo 2", "equipo2", mainPanel);
 		
-		new Label(mainPanel).setText("Equipo 2");
-		Table<Jugador> tablaEquipo2 = new Table<Jugador>(mainPanel, Jugador.class);
-		tablaEquipo2 .setHeigth(200);
-		tablaEquipo2 .setWidth(450);
-		tablaEquipo2 .bindItemsToProperty("equipo2");
-	//	tablaEquipo1 .bindValueToProperty("jugadorSeleccionado");
-		this.describeResultsGrid(tablaEquipo2);
 	}
-
+	private void crearTablaEquipos(String titulo,String equipo, Panel mainPanel){
+		new Label(mainPanel).setText(titulo);
+		Table<Jugador> tablaEquipo = new Table<Jugador>(mainPanel, Jugador.class);
+		tablaEquipo .setHeigth(200);
+		tablaEquipo .setWidth(450);
+		tablaEquipo .bindItemsToProperty(equipo);
+		tablaEquipo .bindValueToProperty("jugadorSeleccionado");
+		this.describeResultsGrid(tablaEquipo);
+	}
 	protected void describeResultsGrid(Table<Jugador> table) {
 		new Column<Jugador>(table)
 				//

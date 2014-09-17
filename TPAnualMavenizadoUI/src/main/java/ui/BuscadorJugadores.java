@@ -1,6 +1,9 @@
 package ui;
 import org.uqbar.commons.utils.Observable;
+
 import java.util.List;
+
+import opf5.criteriosDeOrdenamientoDeEquipos.UltimasNCalificaciones;
 import opf5.jugador.*;
 @Observable
 public class BuscadorJugadores {
@@ -8,10 +11,14 @@ public class BuscadorJugadores {
 		private String nombre;
 		private int edad;
 		private int handicap;
+		private double promedio;
 		private List<Jugador> resultados;
 		private Jugador jugadorSeleccionado;
 		private int handicapDesde, handicapHasta, promedioDesde, promedioHasta;
-
+		
+		public BuscadorJugadores(){
+			this.nombre="";			
+		}
 
 		public int getPromedioDesde() {
 			return promedioDesde;
@@ -93,5 +100,13 @@ public class BuscadorJugadores {
 		public void setResultados(List<Jugador> resultados) {
 			this.resultados = resultados;
 		}
-	
-}
+
+		public double getPromedio() {
+			return promedio;
+		}
+
+		public void setPromedio(double promedio) {
+			this.promedio = promedio;
+		}
+		
+	}

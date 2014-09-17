@@ -1,9 +1,13 @@
 package opf5.jugador;
 
 import java.util.ArrayList;
+
 import opf5.*;
 
 import java.util.List;
+
+import opf5.criteriosDeOrdenamientoDeEquipos.PromedioDeUltimoPartido;
+import opf5.criteriosDeOrdenamientoDeEquipos.UltimasNCalificaciones;
 import opf5.excepciones.*;
 
 public class Jugador {
@@ -13,6 +17,8 @@ public class Jugador {
 	private List<Infraccion> infracciones;
 	private List<Critica> criticas;
 	private int handicap;
+	private double promedio;
+	private double promedioUltimoPartido;
 
 	public Jugador(String nombre, int edad) {
 		this.nombre = nombre;
@@ -20,6 +26,7 @@ public class Jugador {
 		amigos = new ArrayList<Amigo>();
 		infracciones = new ArrayList<Infraccion>();
 		criticas = new ArrayList<Critica>();
+		this.setPromedio(0);
 	}
 
 	public void handicap(int handicap) {
@@ -58,6 +65,8 @@ public class Jugador {
 
 	public void agregarCritica(Critica critica) {
 		criticas.add(critica);
+		setPromedio(new UltimasNCalificaciones(criticas.size()).ponderate(this));
+		setPromedioUltimoPartido(new PromedioDeUltimoPartido().ponderate(this));
 	}
 
 	public List<Critica> criticas() {
@@ -69,6 +78,22 @@ public class Jugador {
 	}
 	public int edad(){
 		return edad;
+	}
+
+	public double getPromedio() {
+		return promedio;
+	}
+
+	public void setPromedio(double promedio) {
+		this.promedio = promedio;
+	}
+
+	public double getPromedioUltimoPartido() {
+		return promedioUltimoPartido;
+	}
+
+	public void setPromedioUltimoPartido(double promedioUltimoPartido) {
+		this.promedioUltimoPartido = promedioUltimoPartido;
 	}
 }
 	
