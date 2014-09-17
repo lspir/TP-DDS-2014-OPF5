@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import org.uqbar.arena.bindings.ObservableProperty;
 import org.uqbar.commons.model.ObservableUtils;
+import org.uqbar.commons.utils.Observable;
 
 import opf5.FormacionPartido;
 import opf5.HomePartidos;
@@ -22,7 +23,7 @@ import opf5.estadoPartido.SinOrdenar;
 import opf5.inscripcion.Estandar;
 import opf5.inscripcion.Inscripcion;
 import opf5.jugador.*;
-
+@Observable
 public class UnViewModelGeneracion {
 
 	private AlgoritmoDivisionDeEquipos algoritmoDivision;
@@ -78,6 +79,7 @@ public class UnViewModelGeneracion {
 		ArrayList<CriterioOrdenamientoEquipos> asd = new ArrayList<CriterioOrdenamientoEquipos>();
 		asd.add(new PromedioDeUltimoPartido());
 		asd.add(new UltimasNCalificaciones(3));
+		asd.add(new CriterioHandicap());
 		return asd;
 	}
 
@@ -115,12 +117,9 @@ public class UnViewModelGeneracion {
 	}
 	public void generacionEquipos(){
 		
-		partido.armarEquipos(new CriterioHandicap(), new DivisionPorPares());
+		partido.armarEquipos(criterioOrdenamiento,algoritmoDivision);
 		equipo1 = this.formacion().getEquipoA().stream().map(inscrip -> inscrip.jugador()).collect(toList());
 		equipo2= this.formacion().getEquipoB().stream().map(inscrip -> inscrip.jugador()).collect(toList());
-		
-//		ObservableUtils.firePropertyChanged(this, "equipo1", "getEquipo1");
-//		ObservableUtils.firePropertyChanged(this, "getEquipo2", this.formacion().getEquipoA().stream().map(inscrip -> inscrip.jugador()).collect(toList()));
 		
 	}
 	public void confirmarEquipos(){
@@ -128,6 +127,6 @@ public class UnViewModelGeneracion {
 	}
 
 	private FormacionPartido formacion() {
-		return partido.getFormacionesTentativas().get(0);
+		return partido.getFormacionesTentativas().get(partido.getFormacionesTentativas().size()-1);
 		}
 }

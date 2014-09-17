@@ -269,7 +269,7 @@ public class ViewGeneracionEquipos extends SimpleWindow<UnViewModelGeneracion> {
 		tablaEquipo1 .setHeigth(200);
 		tablaEquipo1 .setWidth(450);
 		tablaEquipo1 .bindItemsToProperty("equipo1");
-//		tablaEquipo1 .bindValueToProperty("jugadorSeleccionado");
+	//	tablaEquipo1 .bindValueToProperty("equipo1");
 		this.describeResultsGrid(tablaEquipo1);
 		
 		new Label(mainPanel).setText("Equipo 2");
@@ -305,7 +305,7 @@ public class ViewGeneracionEquipos extends SimpleWindow<UnViewModelGeneracion> {
 
 
 	protected void openDialog(Dialog<?> dialog) {
-		dialog.onAccept(new MessageSend(this.getModelObject(), "search"));
+		dialog.onAccept(new MessageSend(this.getModelObject(), "generarEquipos"));
 		dialog.open();
 	}
 
