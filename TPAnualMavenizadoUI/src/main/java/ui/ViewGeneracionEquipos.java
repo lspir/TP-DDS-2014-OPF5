@@ -1,3 +1,4 @@
+//FIXME no comenten código!
 //package ui;
 //
 //import org.uqbar.arena.actions.MessageSend;
@@ -228,6 +229,7 @@ public class ViewGeneracionEquipos extends SimpleWindow<UnViewModelGeneracion> {
 		verDatos.onClick(()->new ViewDatosJugador(this,this.getModelObject().getJugadorSeleccionado()).open());
 		NotNullObservable elementSelected = new NotNullObservable("jugadorSeleccionado");
 		verDatos.bindEnabled(elementSelected);
+//FIXME no comenten código!
 //		new Button(actionsPanel).setCaption("Buscar")
 //				.onClick(new MessageSend(this.getModelObject(), "search"))
 //				.setAsDefault().disableOnError();
@@ -247,6 +249,7 @@ public class ViewGeneracionEquipos extends SimpleWindow<UnViewModelGeneracion> {
 	
 	}
 	
+	//FIXME WTF?
 	void algo()
 	{
 		
@@ -273,7 +276,7 @@ public class ViewGeneracionEquipos extends SimpleWindow<UnViewModelGeneracion> {
 				.setTitle("Nombre").setFixedSize(400)
 				.bindContentsToProperty("nombre");
 
-		
+//FIXME no comenten código		
 //		Column<Jugador> columnaHandicap= new Column<Jugador>(table);
 //		columnaHandicap.setTitle("Handicap");
 //		columnaHandicap.setFixedSize(100);
