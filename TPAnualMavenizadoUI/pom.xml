@@ -3,7 +3,7 @@
 
    <modelVersion>4.0.0</modelVersion>
    <groupId>dds-templates</groupId>
-   <artifactId>arena-proof-of-concept-template</artifactId>
+   <artifactId>TPArenaMavenizadoUI</artifactId>
 
    <parent>
       <groupId>org.uqbar-project</groupId>
