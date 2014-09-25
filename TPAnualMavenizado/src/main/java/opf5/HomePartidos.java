@@ -1,11 +1,8 @@
 package opf5;
 
-import static java.util.stream.Collectors.toList;
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import opf5.jugador.Jugador;
+import opf5.jugador.*;
 
 public class HomePartidos {
 	

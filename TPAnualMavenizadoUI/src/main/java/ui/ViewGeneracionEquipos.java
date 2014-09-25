@@ -149,33 +149,18 @@
 
 
 package ui;
-import java.awt.Color;
-
-import opf5.AlgoritmosDivisionDeEquipos.AlgoritmoDivisionDeEquipos;
-import opf5.criteriosDeOrdenamientoDeEquipos.CriterioOrdenamientoEquipos;
+import opf5.AlgoritmosDivisionDeEquipos.*;
+import opf5.criteriosDeOrdenamientoDeEquipos.*;
 import opf5.jugador.*;
 
-import org.uqbar.arena.actions.MessageSend;
-import org.uqbar.arena.bindings.NotNullObservable;
-import org.uqbar.arena.bindings.ObservableProperty;
-import org.uqbar.arena.bindings.PropertyAdapter;
-import org.uqbar.arena.layout.ColumnLayout;
-import org.uqbar.arena.layout.HorizontalLayout;
-import org.uqbar.arena.widgets.Button;
-import org.uqbar.arena.widgets.Label;
-import org.uqbar.arena.widgets.Panel;
-import org.uqbar.arena.widgets.Selector;
-import org.uqbar.arena.widgets.TextBox;
-import org.uqbar.arena.widgets.tables.Column;
-import org.uqbar.arena.widgets.tables.Table;
-import org.uqbar.arena.windows.Dialog;
-import org.uqbar.arena.windows.SimpleWindow;
-import org.uqbar.arena.windows.WindowOwner;
-import org.uqbar.lacar.ui.model.ListBuilder;
-import org.uqbar.lacar.ui.model.bindings.Binding;
-
-import java.util.List;
-import java.util.ArrayList;
+import org.uqbar.arena.actions.*;
+import org.uqbar.arena.bindings.*;
+import org.uqbar.arena.layout.*;
+import org.uqbar.arena.widgets.*;
+import org.uqbar.arena.widgets.tables.*;
+import org.uqbar.arena.windows.*;
+import org.uqbar.lacar.ui.model.*;
+import org.uqbar.lacar.ui.model.bindings.*;
 
 public class ViewGeneracionEquipos extends SimpleWindow<UnViewModelGeneracion> {
 

@@ -1,5 +1,4 @@
 package opf5.observers;
-import opf5.*;
 import opf5.jugador.*;
 import opf5.mailSender.*;
 

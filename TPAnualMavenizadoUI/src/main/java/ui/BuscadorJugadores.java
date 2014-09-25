@@ -1,10 +1,9 @@
 package ui;
-import org.uqbar.commons.utils.Observable;
+import java.util.*;
 
-import java.util.List;
-
-import opf5.criteriosDeOrdenamientoDeEquipos.UltimasNCalificaciones;
 import opf5.jugador.*;
+
+import org.uqbar.commons.utils.Observable;
 @Observable
 public class BuscadorJugadores {
 	

@@ -1,14 +1,14 @@
 package opf5.estadoPartido;
-import java.util.ArrayList;
-import static java.util.stream.Collectors.toList;
-import java.util.List;
+import static java.util.stream.Collectors.*;
 
-import opf5.excepciones.*;
-import opf5.jugador.*;
-import opf5.criteriosDeOrdenamientoDeEquipos.*;
-import opf5.inscripcion.*;
+import java.util.*;
+
 import opf5.*;
 import opf5.AlgoritmosDivisionDeEquipos.*;
+import opf5.criteriosDeOrdenamientoDeEquipos.*;
+import opf5.excepciones.*;
+import opf5.inscripcion.*;
+import opf5.jugador.*;
 
 public class Confirmado implements Estado {
 	private List<Inscripcion> equipoA = new ArrayList<Inscripcion>();

@@ -1,13 +1,9 @@
 package opf5.jugador;
 
-import java.util.ArrayList;
+import java.util.*;
 
 import opf5.*;
-
-import java.util.List;
-
-import opf5.criteriosDeOrdenamientoDeEquipos.PromedioDeUltimoPartido;
-import opf5.criteriosDeOrdenamientoDeEquipos.UltimasNCalificaciones;
+import opf5.criteriosDeOrdenamientoDeEquipos.*;
 import opf5.excepciones.*;
 
 public class Jugador {

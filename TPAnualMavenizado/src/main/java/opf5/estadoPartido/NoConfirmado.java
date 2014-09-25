@@ -1,18 +1,15 @@
 package opf5.estadoPartido;
 
-import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.toList;
+import static java.util.Comparator.*;
+import static java.util.stream.Collectors.*;
 
-import java.util.List;
+import java.util.*;
 
+import opf5.*;
 import opf5.AlgoritmosDivisionDeEquipos.*;
-import opf5.FormacionPartido;
-import opf5.Partido;
-import opf5.criteriosDeOrdenamientoDeEquipos.CriterioOrdenamientoEquipos;
-import opf5.inscripcion.Inscripcion;
-import opf5.inscripcion.TipoDeInscripcion;
-import opf5.jugador.Infraccion;
-import opf5.jugador.Jugador;
+import opf5.criteriosDeOrdenamientoDeEquipos.*;
+import opf5.inscripcion.*;
+import opf5.jugador.*;
 
 public abstract class NoConfirmado implements Estado {
 

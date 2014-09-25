@@ -1,10 +1,9 @@
 package opf5;
 
-import java.time.LocalDate;
-import java.util.Date;
+import java.time.*;
 
-import opf5.jugador.*;
 import opf5.inscripcion.*;
+import opf5.jugador.*;
 
 public class Denegacion {
 	private String motivo;

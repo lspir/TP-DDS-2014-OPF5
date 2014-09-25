@@ -1,19 +1,15 @@
 package ui;
 
-import java.awt.Color;
-
-import org.uqbar.arena.layout.VerticalLayout;
-import org.uqbar.arena.widgets.Label;
-import org.uqbar.arena.widgets.Panel;
-import org.uqbar.arena.widgets.TextBox;
-import org.uqbar.arena.widgets.tables.Table;
-import org.uqbar.arena.widgets.tables.Column;
-import org.uqbar.arena.windows.MainWindow;
-import org.uqbar.arena.windows.SimpleWindow;
-import org.uqbar.arena.windows.WindowOwner;
-import org.uqbar.arena.widgets.Button;
+import java.awt.*;
 
 import opf5.jugador.*;
+
+import org.uqbar.arena.layout.*;
+import org.uqbar.arena.widgets.Button;
+import org.uqbar.arena.widgets.Label;
+import org.uqbar.arena.widgets.Panel;
+import org.uqbar.arena.widgets.tables.*;
+import org.uqbar.arena.windows.*;
 
 
 public class ViewDatosJugador extends SimpleWindow<UnViewModelDatosJugador>{

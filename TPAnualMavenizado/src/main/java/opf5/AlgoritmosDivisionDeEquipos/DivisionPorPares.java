@@ -1,8 +1,6 @@
 package opf5.AlgoritmosDivisionDeEquipos;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 
 public class DivisionPorPares extends AlgoritmoDivisionDeEquipos{

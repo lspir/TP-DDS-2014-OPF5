@@ -1,13 +1,8 @@
 package opf5.criteriosDeOrdenamientoDeEquipos;
-import java.util.List;
+import java.util.*;
+import java.util.stream.*;
 
 import opf5.jugador.*;
-import opf5.*;
-
-import java.util.ArrayList;
-import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.toList;
 
 public class UltimasNCalificaciones extends PromedioDeUltimoPartido {
 	private int n;

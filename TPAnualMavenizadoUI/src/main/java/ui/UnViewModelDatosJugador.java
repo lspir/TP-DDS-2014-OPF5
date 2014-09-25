@@ -1,13 +1,9 @@
 package ui;
 
-import opf5.HomePartidos;
+import java.util.*;
+
+import opf5.*;
 import opf5.jugador.*;
-
-import java.util.List;
-import java.util.ArrayList;
-import java.util.stream.*;
-
-import static java.util.stream.Collectors.toList;
 
 import org.uqbar.commons.utils.Observable;
 

@@ -1,10 +1,10 @@
 package ui;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.*;
+import java.util.*;
+
 import opf5.jugador.*;
-import org.uqbar.commons.model.UserException;
+
 import org.uqbar.commons.utils.Observable;
 
 @Observable

@@ -1,8 +1,6 @@
 package opf5.AlgoritmosDivisionDeEquipos;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 
 public class EquipoA03478EquipoB12569 extends AlgoritmoDivisionDeEquipos{

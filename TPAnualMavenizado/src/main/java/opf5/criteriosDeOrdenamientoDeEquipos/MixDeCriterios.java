@@ -1,12 +1,10 @@
 package opf5.criteriosDeOrdenamientoDeEquipos;
 
-import java.util.ArrayList;
+import static java.util.stream.Collectors.*;
+
+import java.util.*;
+
 import opf5.jugador.*;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.*;
-import opf5.*;
-import static java.util.stream.Collectors.toList;
 
 public class MixDeCriterios extends CriterioOrdenamientoEquipos {
 

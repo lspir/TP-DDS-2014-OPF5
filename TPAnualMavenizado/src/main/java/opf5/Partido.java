@@ -1,21 +1,16 @@
 package opf5;
-import opf5.excepciones.*;
-import opf5.jugador.*;
-import opf5.inscripcion.*;
-import opf5.observers.*;
+import static java.util.stream.Collectors.*;
+
+import java.time.*;
+import java.util.*;
+
+import opf5.AlgoritmosDivisionDeEquipos.*;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
 import opf5.estadoPartido.*;
-import opf5.AlgoritmosDivisionDeEquipos.*;
-import static java.util.Comparator.comparing;
-import static java.util.stream.Collectors.toList;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.*;
+import opf5.excepciones.*;
+import opf5.inscripcion.*;
+import opf5.jugador.*;
+import opf5.observers.*;
 
 
 public class Partido {

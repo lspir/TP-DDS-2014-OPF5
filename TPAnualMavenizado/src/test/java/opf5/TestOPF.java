@@ -1,30 +1,22 @@
 package opf5;
 
 import static org.junit.Assert.*;
-import opf5.jugador.*;
+import static org.mockito.Matchers.*;
+import static org.mockito.Mockito.*;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.Month;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.List;
-import java.util.ArrayList;
+import java.time.*;
+import java.util.*;
 
-import opf5.*;
 import opf5.AlgoritmosDivisionDeEquipos.*;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
 import opf5.estadoPartido.*;
-import opf5.inscripcion.*;
 import opf5.excepciones.*;
-import opf5.observers.*;
+import opf5.inscripcion.*;
+import opf5.jugador.*;
 import opf5.mailSender.*;
+import opf5.observers.*;
 
-import org.junit.Before;
-import org.junit.Test;
-
-import static org.mockito.Mockito.*;
+import org.junit.*;
 
 //FIXME es un buen momento para separar los tests en varias clases
 //FIXME no medieron bola. EL comentario de arriba es del 4 de Julio!!!

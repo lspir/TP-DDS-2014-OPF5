@@ -1,17 +1,10 @@
 package ui;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.List;
+import java.time.*;
 
-import opf5.HomePartidos;
-import opf5.Partido;
-import opf5.AlgoritmosDivisionDeEquipos.AlgoritmoDivisionDeEquipos;
-import opf5.AlgoritmosDivisionDeEquipos.DivisionPorPares;
-import opf5.criteriosDeOrdenamientoDeEquipos.CriterioHandicap;
-import opf5.inscripcion.Estandar;
-import opf5.inscripcion.Inscripcion;
-import opf5.jugador.Jugador;
-import domain.UnModel;
+import opf5.*;
+import opf5.inscripcion.*;
+import opf5.jugador.*;
+import domain.*;
 
 public class UnViewModelPpal {
 	

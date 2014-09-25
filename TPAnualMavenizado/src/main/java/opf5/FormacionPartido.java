@@ -1,9 +1,8 @@
 package opf5;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-import opf5.inscripcion.Inscripcion;
+import opf5.inscripcion.*;
 
 public class FormacionPartido {
 	private List<Inscripcion> equipoA = new ArrayList<Inscripcion>();

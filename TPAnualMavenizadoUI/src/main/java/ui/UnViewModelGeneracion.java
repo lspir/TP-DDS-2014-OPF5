@@ -1,28 +1,15 @@
 package ui;
 
-import java.time.LocalDate;
+import static java.util.stream.Collectors.*;
 
-import static java.util.stream.Collectors.toList;
+import java.util.*;
 
-import java.time.LocalTime;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
-
-import org.uqbar.arena.bindings.ObservableProperty;
-import org.uqbar.commons.model.ObservableUtils;
-import org.uqbar.commons.utils.Observable;
-
-import opf5.FormacionPartido;
-import opf5.HomePartidos;
-import opf5.Partido;
+import opf5.*;
 import opf5.AlgoritmosDivisionDeEquipos.*;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
-import opf5.estadoPartido.Estado;
-import opf5.estadoPartido.SinOrdenar;
-import opf5.inscripcion.Estandar;
-import opf5.inscripcion.Inscripcion;
 import opf5.jugador.*;
+
+import org.uqbar.commons.utils.Observable;
 @Observable
 public class UnViewModelGeneracion {
 

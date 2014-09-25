@@ -1,10 +1,7 @@
 package opf5.AlgoritmosDivisionDeEquipos;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.*;
 //import org.uqbar.commons.utils.Observable;
-
 import opf5.inscripcion.*;
 //@Observable
 public abstract class AlgoritmoDivisionDeEquipos {
