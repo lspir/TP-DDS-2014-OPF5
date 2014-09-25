@@ -24,7 +24,7 @@ public class HomePartidos {
 		}
 		
 		public long consultarCantidadDePartidosJugados(Jugador jugador){
-			return partidos.stream().mapToInt(partido-> partido.jugo(jugador)).summaryStatistics().getSum();
+			return partidos.stream().mapToInt(partido-> partido.jugo(jugador)).sum();
 		}
 		
 		public List<Partido> getData(){
