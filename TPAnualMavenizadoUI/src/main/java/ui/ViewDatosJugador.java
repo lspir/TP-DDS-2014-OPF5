@@ -11,7 +11,15 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.*;
 import org.uqbar.arena.windows.*;
 
-
+/*FIXME si bien arena no tiene grandes herramientas para hacer layouts,
+ * tiene el GridLayout, con el que pueden hacer que su formulario se vea un poco mejor 
+ * (etiquetas a la izquierda, componentes a la derecha). 
+ * 
+ * Si bien siempre insistimos en que no es objetivo de la materia reaalizar un diseño visual 
+ * "lindo" tal como lo haría un diseñador gráfico, con las herraientas que tienen pueden lograr
+ * algo mejor sin mucho esfuerzo. 
+ *
+ */
 public class ViewDatosJugador extends SimpleWindow<UnViewModelDatosJugador>{
 	
 	public ViewDatosJugador(WindowOwner owner, Jugador jugador) {
