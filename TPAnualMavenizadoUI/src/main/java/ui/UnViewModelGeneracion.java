@@ -11,6 +11,8 @@ import opf5.jugador.*;
 
 import org.uqbar.commons.utils.Observable;
 @Observable
+//FIXME porqué se llama "Un"ViewModelGeneracion? Lo de Un no es ninguna convensión, era
+//sólo un ejemplo para la prueba de concepto!
 public class UnViewModelGeneracion {
 
 	private AlgoritmoDivisionDeEquipos algoritmoDivision;

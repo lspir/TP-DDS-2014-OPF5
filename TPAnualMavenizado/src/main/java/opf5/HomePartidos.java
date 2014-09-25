@@ -6,9 +6,12 @@ import opf5.jugador.*;
 
 public class HomePartidos {
 	
-		private static HomePartidos instance;
 		private List<Partido> partidos = new ArrayList<Partido>();
 
+		//FIXME esta forma de crear singletons es engorrosa y no aporta nada. 
+		//hagan directamente private static final HomePartidos instance = new HomePartios(), sin la 
+		//inicilización lazy (si null inicializar)
+		private static HomePartidos instance;
 		public static synchronized HomePartidos getInstance() {
 			if (instance == null) {
 				instance = new HomePartidos();

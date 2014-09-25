@@ -8,10 +8,16 @@ import domain.*;
 
 public class UnViewModelPpal {
 	
+	
+	//FIXME para qué está esto?
 	 private UnModel unModel;
 	 
 	 
 	 public UnViewModelPpal(){
+		 //FIXME el problema de poner este código de inicialización acá
+		 //es que no podés instanciar esta ventana sin cargar datos de prueba. 
+		 //¿Qué podrían hacer para resolver esto? ¿Dónde podrían generar el fixture, sin que estorbe
+		 //al código productivo?
 		 Partido partido=new Partido(LocalDate.now(),LocalTime.now(),"Campus");
 			for(int i=0;i<10;i++){
 				Jugador jugador=RepositorioJugadores.getInstance().getData().get(i);

@@ -52,6 +52,7 @@ public class BuscadorJugadores {
 		}
 
 		public void search() {
+			//FIXME no faltan criterios de búsqueda acá?
 			this.resultados = RepositorioJugadores.getInstance().search(this.edad, this.nombre,this.handicapDesde, this.handicapHasta);
 		}
 

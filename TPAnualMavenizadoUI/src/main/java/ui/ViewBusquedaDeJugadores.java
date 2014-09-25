@@ -32,6 +32,11 @@ public class ViewBusquedaDeJugadores extends SimpleWindow<BuscadorJugadores> {
 		Panel searchFormPanel = new Panel(mainPanel);
 		searchFormPanel.setLayout(new ColumnLayout(2));
 
+		//FIXME noten que siempre hacen new Label(...), 
+		//setText, new TextBox. Acá hay lógica repetida. 
+		//Fíjense de extraer algún componente que represente la idea de untexto + una etiqueta, 
+		//útil para armar formularios. Este componente podría ser modelado 
+		//con un método o con una clase
 		new Label(searchFormPanel).setText("Edad Mínima");
 		TextBox boxEdad = new TextBox(searchFormPanel);
 		boxEdad.bindValueToProperty("edad");

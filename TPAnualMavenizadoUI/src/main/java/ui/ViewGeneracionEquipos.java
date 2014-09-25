@@ -327,6 +327,12 @@ public class ViewGeneracionEquipos extends SimpleWindow<UnViewModelGeneracion> {
 		
 	}
 	private void crearTablaEquipos(String titulo,String equipo, Panel mainPanel){
+		//FIXME ojo, en esta ventana esta tabla tiene una sola columna, pero 
+		//en la vista de búsqueda tiene tres columnas. Por consistencia, yo esperaría que en las dos
+		//ventanas se usara una tabla con la misma estructura. 
+		
+		//FIXME además, en ambos casos, no veo implementada en ninguna de las dos ventanas
+		//la funcionalidad de cambiar el color de la fila según el handicap
 		new Label(mainPanel).setText(titulo);
 		Table<Jugador> tablaEquipo = new Table<Jugador>(mainPanel, Jugador.class);
 		tablaEquipo .setHeigth(200);

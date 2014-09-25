@@ -1,3 +1,6 @@
+//FIXME para ser consistentes con los paquetes, 
+//el repositorio no debería ser parte del paquete de UI, dado que no es un componente
+//específico de la misma, sino que es nexo entre el modelo, la vista y persistencia
 package ui;
 
 import java.io.*;
@@ -21,6 +24,9 @@ public class RepositorioJugadores implements Serializable {
 	}
 
 	private RepositorioJugadores() {
+		//FIXME nuevamente, no coloquen el código de inicialización 
+		//con datos de prueba dentro del repositorio, porque eso evita que 
+		//este repositorio sea usado "de posta"
 		Jugador jugador = new Jugador("Belén", 21);
 		jugador.handicap(4);
 		this.create(jugador);
@@ -60,6 +66,8 @@ public class RepositorioJugadores implements Serializable {
 
 	public List<Jugador> search(int numero, String nombre, int handicapDesde,
 			int handicapHasta) {
+		//FIXME no usen fors e ifs!!!!!!!!!
+		//No estamos en C!!
 		List<Jugador> resultados = new ArrayList<Jugador>();
 		if (handicapHasta == 0) {
 			for (Jugador jugador : this.data) {
@@ -85,6 +93,7 @@ public class RepositorioJugadores implements Serializable {
 		return resultados;
 	}
 
+	//FIXME se les ocurre un mejor nombre que getData?
 	public List<Jugador> getData() {
 		return this.data;
 	}
