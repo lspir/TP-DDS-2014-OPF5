@@ -26,7 +26,8 @@ import org.junit.Test;
 
 import static org.mockito.Mockito.*;
 
-//FIXME es un buen momento para separar los tests en varias clases 
+//FIXME es un buen momento para separar los tests en varias clases
+//FIXME no medieron bola. EL comentario de arriba es del 4 de Julio!!!
 public class TestOPF {
 	private Partido partidoCon5Estandares;
 	private Partido partidoCon10Solidarios;
@@ -171,7 +172,7 @@ public class TestOPF {
 		partidoCon1Estandar.seDioDeBajaSinReemplazante(inscripcionEstandar);
 		assertEquals(1, inscripcionEstandar.jugador().infracciones().size());
 	}
-
+//FIXME no comenten código
 //	@Test(expected = ElPartidoYaEstaConfirmadoException.class)
 //	public void UnJugadorIntentaDarseDeBajaSinReemplzanteEnPartidoConfirmadoTiraError() {
 //		// FIXME que piensan de que esté seteando el estado desde afuera?
