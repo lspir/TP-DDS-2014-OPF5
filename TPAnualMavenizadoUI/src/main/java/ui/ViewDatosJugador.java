@@ -20,16 +20,16 @@ import org.uqbar.arena.windows.*;
  * algo mejor sin mucho esfuerzo. 
  *
  */
-public class ViewDatosJugador extends SimpleWindow<UnViewModelDatosJugador>{
+public class ViewDatosJugador extends SimpleWindow<ViewModelDatosJugador>{
 	
 	public ViewDatosJugador(WindowOwner owner, Jugador jugador) {
-	    super(owner,new UnViewModelDatosJugador(jugador));
+	    super(owner,new ViewModelDatosJugador(jugador));
 	  }
 
 	@Override
 	public void createFormPanel(Panel mainPanel) {
 		setTitle("Datos del Jugador");
-	    mainPanel.setLayout(new VerticalLayout());
+		mainPanel.setLayout(new VerticalLayout());
 	    new Label(mainPanel).setText("Nombre:");
 	    new Label(mainPanel).setBackground(Color.WHITE).bindValueToProperty("nombre");
 	    new Label(mainPanel).setText("Handicap:");

@@ -8,7 +8,7 @@ import opf5.jugador.*;
 import org.uqbar.commons.utils.Observable;
 
 @Observable
-public class UnViewModelDatosJugador {
+public class ViewModelDatosJugador {
 
 	private String nombre;
 	private int handicap;
@@ -24,7 +24,7 @@ public class UnViewModelDatosJugador {
 		this.cantidadPartidos = cantidadPartidos;
 	}
 
-	public UnViewModelDatosJugador(Jugador jugador) {
+	public ViewModelDatosJugador(Jugador jugador) {
 		this.nombre = jugador.nombre();
 		this.handicap = jugador.getHandicap();
 		this.infracciones = jugador.infracciones();

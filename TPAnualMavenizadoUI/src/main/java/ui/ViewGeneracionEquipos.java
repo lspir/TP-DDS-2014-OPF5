@@ -224,17 +224,17 @@ y ordenando por calificaiciones. Además, no genera nada y muestra un diálogo d
   
   
  */
-public class ViewGeneracionEquipos extends SimpleWindow<UnViewModelGeneracion> {
+public class ViewGeneracionEquipos extends Vista<ViewModelGeneracion> {
 
 	public ViewGeneracionEquipos(WindowOwner parent) {
-		super(parent, new UnViewModelGeneracion());
+		super(parent, new ViewModelGeneracion());
 		
 	}
 
 	@Override
 	protected void createMainTemplate(Panel mainPanel) {
 		this.setTitle("Generación de Equipos");
-	//	this.setTaskDescription("Ingrese los parámetros de búsqueda");
+	
 
 		super.createMainTemplate(mainPanel);
 
@@ -285,8 +285,7 @@ public class ViewGeneracionEquipos extends SimpleWindow<UnViewModelGeneracion> {
 		new Button(actionsPanel).setCaption("GENERAR").onClick(() -> this.getModelObject().generacionEquipos());
 		//FIXME esto parece estar funcionando, pero 
 		//1. No hay ningún feedback visual de que la acción se haya ejecutado. Le doy click y no sé si funcionó o no
-		//2. Si confirmo dos veces un partido debería fallar e informar que ya está cofirmado, o al menos, indicar visualizar de alguna forma
-		//que ya lo está, así el usuario es consciente de que va a confirmar un partido ya confirmado. 
+ 
 		new Button(actionsPanel).setCaption("CONFIRMAR").onClick(()-> this.getModelObject().confirmarEquipos());
 		
 		Button verDatos = new Button(actionsPanel);
@@ -294,23 +293,6 @@ public class ViewGeneracionEquipos extends SimpleWindow<UnViewModelGeneracion> {
 		verDatos.onClick(()->new ViewDatosJugador(this,this.getModelObject().getJugadorSeleccionado()).open());
 		NotNullObservable elementSelected = new NotNullObservable("jugadorSeleccionado");
 		verDatos.bindEnabled(elementSelected);
-//FIXME no comenten código!
-//		new Button(actionsPanel).setCaption("Buscar")
-//				.onClick(new MessageSend(this.getModelObject(), "search"))
-//				.setAsDefault().disableOnError();
-//		
-//
-//		
-//		Button verDatos = new Button(actionsPanel);
-//		verDatos.setCaption("Ver Datos");
-//		verDatos.onClick(()->new ViewDatosJugador(this,this.getModelObject().getJugadorSeleccionado()).open());
-//		
-//		
-//
-//		NotNullObservable elementSelected = new NotNullObservable("jugadorSeleccionado");
-//		verDatos.bindEnabled(elementSelected);
-		
-	
 	
 	}
 	
@@ -322,40 +304,9 @@ public class ViewGeneracionEquipos extends SimpleWindow<UnViewModelGeneracion> {
 
 	protected void createResultsGrid(Panel mainPanel) {
 
-		this.crearTablaEquipos("Equipo 1", "equipo1", mainPanel);
-		this.crearTablaEquipos("Equipo 2", "equipo2", mainPanel);
+		this.crearTablaEquipos(mainPanel,"Equipo 1", "equipo1","jugadorSeleccionado");
+		this.crearTablaEquipos(mainPanel,"Equipo 2", "equipo2", "jugadorSeleccionado");
 		
-	}
-	private void crearTablaEquipos(String titulo,String equipo, Panel mainPanel){
-		//FIXME ojo, en esta ventana esta tabla tiene una sola columna, pero 
-		//en la vista de búsqueda tiene tres columnas. Por consistencia, yo esperaría que en las dos
-		//ventanas se usara una tabla con la misma estructura. 
-		
-		//FIXME además, en ambos casos, no veo implementada en ninguna de las dos ventanas
-		//la funcionalidad de cambiar el color de la fila según el handicap
-		new Label(mainPanel).setText(titulo);
-		Table<Jugador> tablaEquipo = new Table<Jugador>(mainPanel, Jugador.class);
-		tablaEquipo .setHeigth(200);
-		tablaEquipo .setWidth(450);
-		tablaEquipo .bindItemsToProperty(equipo);
-		tablaEquipo .bindValueToProperty("jugadorSeleccionado");
-		this.describeResultsGrid(tablaEquipo);
-	}
-	protected void describeResultsGrid(Table<Jugador> table) {
-		new Column<Jugador>(table)
-				//
-				.setTitle("Nombre").setFixedSize(400)
-				.bindContentsToProperty("nombre");
-
-//FIXME no comenten código		
-//		Column<Jugador> columnaHandicap= new Column<Jugador>(table);
-//		columnaHandicap.setTitle("Handicap");
-//		columnaHandicap.setFixedSize(100);
-//		columnaHandicap.bindContentsToProperty("handicap");
-
-
-
-
 	}
 
 	protected void createGridActions(Panel mainPanel) {

@@ -52,6 +52,7 @@ public class Confirmado implements Estado {
 		throw new ElPartidoYaEstaConfirmadoException();
 	}
 	public void aceptarEquipos(Partido partido,FormacionPartido formacion){
+		throw new ElPartidoYaEstaConfirmadoException();
 	}
 
 	

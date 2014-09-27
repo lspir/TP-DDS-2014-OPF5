@@ -11,9 +11,8 @@ import opf5.jugador.*;
 
 import org.uqbar.commons.utils.Observable;
 @Observable
-//FIXME porqué se llama "Un"ViewModelGeneracion? Lo de Un no es ninguna convensión, era
-//sólo un ejemplo para la prueba de concepto!
-public class UnViewModelGeneracion {
+
+public class ViewModelGeneracion {
 
 	private AlgoritmoDivisionDeEquipos algoritmoDivision;
 	private CriterioOrdenamientoEquipos criterioOrdenamiento;
@@ -24,7 +23,7 @@ public class UnViewModelGeneracion {
 	private List<Jugador> equipo1 = new ArrayList<Jugador>();
 	private List <Jugador> equipo2=new ArrayList<Jugador>();
 	
-	public UnViewModelGeneracion(){
+	public ViewModelGeneracion(){
 		partido=HomePartidos.getInstance().getData().get(0);
 		
 //	partido.armarEquipos(new CriterioHandicap(), new DivisionPorPares());

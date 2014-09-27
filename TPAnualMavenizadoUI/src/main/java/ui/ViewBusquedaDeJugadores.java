@@ -8,11 +8,10 @@ import org.uqbar.arena.widgets.*;
 import org.uqbar.arena.widgets.tables.*;
 import org.uqbar.arena.windows.*;
 
-public class ViewBusquedaDeJugadores extends SimpleWindow<BuscadorJugadores> {
+public class ViewBusquedaDeJugadores extends Vista<BuscadorJugadores> {
 
 	public ViewBusquedaDeJugadores(WindowOwner parent) {
 		super(parent, new BuscadorJugadores());
-//		this.getModelObject().search();
 	}
 
 	@Override
@@ -88,32 +87,7 @@ public class ViewBusquedaDeJugadores extends SimpleWindow<BuscadorJugadores> {
 	}
 
 	protected void createResultsGrid(Panel mainPanel) {
-		Table<Jugador> table = new Table<Jugador>(mainPanel, Jugador.class);
-		table.setHeigth(200);
-		table.setWidth(450);
-
-		table.bindItemsToProperty("resultados");
-		table.bindValueToProperty("jugadorSeleccionado");
-
-		this.describeResultsGrid(table);
-	}
-
-	protected void describeResultsGrid(Table<Jugador> table) {
-		new Column<Jugador>(table)
-				//
-				.setTitle("Nombre").setFixedSize(150)
-				.bindContentsToProperty("nombre");
-
-		
-		Column<Jugador> columnaHandicap= new Column<Jugador>(table);
-		columnaHandicap.setTitle("Handicap");
-		columnaHandicap.setFixedSize(100);
-		columnaHandicap.bindContentsToProperty("handicap");
-
-		Column<Jugador> columnaPromedio= new Column<Jugador>(table);
-		columnaPromedio.setTitle("Promedio");
-		columnaPromedio.setFixedSize(100);
-		columnaPromedio.bindContentsToProperty("promedio");
+		this.crearTablaEquipos(mainPanel, "Resultados Busqueda", "resultados","jugadorSeleccionado");
 	}
 
 	protected void createGridActions(Panel mainPanel) {

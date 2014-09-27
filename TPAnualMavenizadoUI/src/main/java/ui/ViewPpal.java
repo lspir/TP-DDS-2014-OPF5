@@ -5,11 +5,11 @@ import org.uqbar.arena.widgets.*;
 import org.uqbar.arena.windows.*;
 
 //IMPORTANTE: correr con -Djava.system.class.loader=com.uqbar.apo.APOClassLoader
-public class ViewPpal extends MainWindow<UnViewModelPpal>{
+public class ViewPpal extends MainWindow<ViewModelPpal>{
 
 
 	public ViewPpal() {
-		super(new UnViewModelPpal());
+		super(new ViewModelPpal());
 	}
 
 	public void createContents(Panel mainPanel) {
