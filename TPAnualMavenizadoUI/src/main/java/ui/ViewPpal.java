@@ -5,20 +5,18 @@ import org.uqbar.arena.widgets.*;
 import org.uqbar.arena.windows.*;
 
 //IMPORTANTE: correr con -Djava.system.class.loader=com.uqbar.apo.APOClassLoader
-public class ViewPpal extends MainWindow<ViewModelPpal>{
+public class ViewPpal extends MainWindow<ViewModelPpalInterfaz>{
 
 
 	public ViewPpal() {
-		super(new ViewModelPpal());
+		super(new ViewModelPpalDecorador());
 	}
 
 	public void createContents(Panel mainPanel) {
 		setTitle("OPF 5 ");
 		mainPanel.setLayout(new VerticalLayout());
-		new Button(mainPanel).setCaption("Generación de Equipos").onClick(
-				() -> new ViewGeneracionEquipos(this).open());
-		new Button(mainPanel).setCaption("Búsqueda de Jugadores").onClick(
-				() -> new ViewBusquedaDeJugadores(this).open());
+		new Button(mainPanel).setCaption("Generación de Equipos").onClick(()->this.getModelObject().viewGeneracionEquipos(this));
+		new Button(mainPanel).setCaption("Búsqueda de Jugadores").onClick(()->this.getModelObject().viewBusquedaJugadores(this));
 	}
 
 	public static void main(String[] args) {

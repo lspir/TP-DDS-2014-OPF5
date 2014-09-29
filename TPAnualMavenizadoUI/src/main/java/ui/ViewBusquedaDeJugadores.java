@@ -30,33 +30,13 @@ public class ViewBusquedaDeJugadores extends Vista<BuscadorJugadores> {
 	protected void createFormPanel(Panel mainPanel) {
 		Panel searchFormPanel = new Panel(mainPanel);
 		searchFormPanel.setLayout(new ColumnLayout(2));
-
-		//FIXME noten que siempre hacen new Label(...), 
-		//setText, new TextBox. Acá hay lógica repetida. 
-		//Fíjense de extraer algún componente que represente la idea de untexto + una etiqueta, 
-		//útil para armar formularios. Este componente podría ser modelado 
-		//con un método o con una clase
-		new Label(searchFormPanel).setText("Edad Mínima");
-		TextBox boxEdad = new TextBox(searchFormPanel);
-		boxEdad.bindValueToProperty("edad");
-		boxEdad.setWidth(20);
-
-		new Label(searchFormPanel).setText("Nombre empieza con");
-		new TextBox(searchFormPanel).bindValueToProperty("nombre");
+		this.armarForm(searchFormPanel, "Edad Mínima", "edad");
+		this.armarForm(searchFormPanel, "Nombre empieza con", "nombre").setWidth(100);
+		this.armarForm(searchFormPanel, "Handicap desde", "handicapDesde");
+		this.armarForm(searchFormPanel, "Handicap hasta", "handicapHasta");
+		this.armarForm(searchFormPanel, "Promedio último partido desde:", "promedioDesde");
+		this.armarForm(searchFormPanel, "Promedio último partido hasta", "promedioHasta");
 		
-		new Label(searchFormPanel).setText("Handicap desde");
-		new TextBox(searchFormPanel).bindValueToProperty("handicapDesde");
-		
-		
-		new Label(searchFormPanel).setText("Handicap hasta");
-		new TextBox(searchFormPanel).bindValueToProperty("handicapHasta");
-		
-		new Label(searchFormPanel).setText("Promedio último partido desde:");
-		new TextBox(searchFormPanel).bindValueToProperty("promedioDesde");
-		
-		new Label(searchFormPanel).setText("Promedio último partido hasta");
-		new TextBox(searchFormPanel).bindValueToProperty("promedioHasta");
-
 		//TODO sólo los que tuvieron infracciones, sólo los que no tuvieron infracciones
 	}
 
@@ -65,26 +45,17 @@ public class ViewBusquedaDeJugadores extends Vista<BuscadorJugadores> {
 		new Button(actionsPanel).setCaption("Buscar")
 				.onClick(new MessageSend(this.getModelObject(), "search"))
 				.setAsDefault().disableOnError();
-		
-
-		
+				
 		Button verDatos = new Button(actionsPanel);
 		verDatos.setCaption("Ver Datos");
 		verDatos.onClick(()->new ViewDatosJugador(this,this.getModelObject().getJugadorSeleccionado()).open());
 		
 		
-
 		NotNullObservable elementSelected = new NotNullObservable("jugadorSeleccionado");
 		verDatos.bindEnabled(elementSelected);
-		
-	
-	
+			
 	}
 	
-	void algo()
-	{
-		
-	}
 
 	protected void createResultsGrid(Panel mainPanel) {
 		this.crearTablaEquipos(mainPanel, "Resultados Busqueda", "resultados","jugadorSeleccionado");
@@ -99,6 +70,14 @@ public class ViewBusquedaDeJugadores extends Vista<BuscadorJugadores> {
 	protected void openDialog(Dialog<?> dialog) {
 		dialog.onAccept(new MessageSend(this.getModelObject(), "search"));
 		dialog.open();
+	}
+	
+	private TextBox armarForm(Panel panel, String titulo, String valor){
+		new Label(panel).setText(titulo);
+		TextBox box= new TextBox(panel);
+		box.bindValueToProperty(valor);
+		box.setWidth(30);
+		return box;
 	}
 
 }
