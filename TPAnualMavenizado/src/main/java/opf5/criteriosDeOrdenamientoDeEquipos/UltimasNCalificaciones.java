@@ -17,8 +17,12 @@ public class UltimasNCalificaciones extends PromedioDeUltimoPartido {
 
 
 	public List<Integer> calcularUltimasNcalificaciones(Jugador jugador) {
-		Stream<Critica> ultimasNcriticas =jugador.criticas().stream().skip(n);
-		return calcularCalificacionesDeUnaListaDeCriticas(ultimasNcriticas);
+		if(n<jugador.criticas().size()){
+		Stream<Critica> ultimasNcriticas =jugador.criticas().stream().skip(jugador.criticas().size()-n);
+		return calcularCalificacionesDeUnaListaDeCriticas(ultimasNcriticas);}
+		else{
+			return calcularCalificacionesDeUnaListaDeCriticas(jugador.criticas().stream());
+		}
 	}
 	
 }

@@ -1,11 +1,11 @@
-package ui;
+package viewModels;
 import java.util.*;
 
 import opf5.jugador.*;
 
 import org.uqbar.commons.utils.Observable;
 @Observable
-public class BuscadorJugadores {
+public class ViewModelBuscadorJugadores {
 	
 		private String nombre;
 		private int edad;
@@ -15,7 +15,7 @@ public class BuscadorJugadores {
 		private Jugador jugadorSeleccionado;
 		private int handicapDesde, handicapHasta, promedioDesde, promedioHasta;
 		
-		public BuscadorJugadores(){
+		public ViewModelBuscadorJugadores(){
 			this.nombre="";			
 		}
 

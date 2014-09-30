@@ -1,4 +1,4 @@
-package ui;
+package viewModels;
 
 import java.util.*;
 

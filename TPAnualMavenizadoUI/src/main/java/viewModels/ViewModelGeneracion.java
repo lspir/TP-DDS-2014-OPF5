@@ -1,4 +1,4 @@
-package ui;
+package viewModels;
 
 import static java.util.stream.Collectors.*;
 
@@ -24,11 +24,7 @@ public class ViewModelGeneracion {
 	private List <Jugador> equipo2=new ArrayList<Jugador>();
 	
 	public ViewModelGeneracion(){
-		partido=HomePartidos.getInstance().getData().get(0);
-		
-//	partido.armarEquipos(new CriterioHandicap(), new DivisionPorPares());
-//	this.formacion=partido.getFormacionesTentativas().get(0);
-//	partido.aceptarEquipos(formacion);
+		partido=HomePartidos.getInstance().getPartidos().get(HomePartidos.getInstance().getPartidos().size()-1);
 	}
 	
 	public Jugador getJugadorSeleccionado() {
@@ -40,10 +36,6 @@ public class ViewModelGeneracion {
 	}
 
 	public List<Jugador> getEquipo1() {
-//		if(partido.getFormacionesTentativas().size()==0){
-//			return new ArrayList<Jugador>();
-//		}
-//		return this.formacion().getEquipoA().stream().map(inscrip -> inscrip.jugador()).collect(toList());
 		return equipo1;
 }
 
@@ -52,10 +44,6 @@ public class ViewModelGeneracion {
 	}
 
 	public List<Jugador> getEquipo2() {
-//		if(partido.getFormacionesTentativas().size()==0){
-//			return new ArrayList<Jugador>();
-//		}
-//		return this.formacion().getEquipoB().stream().map(inscrip -> inscrip.jugador()).collect(toList());
 		return equipo2;
 	}
 

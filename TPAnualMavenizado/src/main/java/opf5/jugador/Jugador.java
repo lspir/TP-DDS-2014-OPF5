@@ -2,10 +2,13 @@ package opf5.jugador;
 
 import java.util.*;
 
+import org.uqbar.commons.utils.Observable;
+
 import opf5.*;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
 import opf5.excepciones.*;
 
+@Observable
 public class Jugador {
 	private String nombre;
 	private int edad;
@@ -16,13 +19,14 @@ public class Jugador {
 	private double promedio;
 	private double promedioUltimoPartido;
 
-	public Jugador(String nombre, int edad) {
+	public Jugador(String nombre, int edad, int handicap) {
 		this.nombre = nombre;
 		this.edad = edad;
 		amigos = new ArrayList<Amigo>();
 		infracciones = new ArrayList<Infraccion>();
 		criticas = new ArrayList<Critica>();
 		this.setPromedio(0);
+		this.handicap=handicap;
 	}
 
 	public void handicap(int handicap) {
@@ -61,7 +65,7 @@ public class Jugador {
 
 	public void agregarCritica(Critica critica) {
 		criticas.add(critica);
-		setPromedio(new UltimasNCalificaciones(criticas.size()).ponderate(this));
+		setPromedio((new UltimasNCalificaciones(criticas.size()).ponderate(this)));
 		setPromedioUltimoPartido(new PromedioDeUltimoPartido().ponderate(this));
 	}
 
@@ -81,7 +85,7 @@ public class Jugador {
 	}
 
 	public void setPromedio(double promedio) {
-		this.promedio = promedio;
+		this.promedio = (double)Math.round(promedio*100)/100;
 	}
 
 	public double getPromedioUltimoPartido() {
@@ -89,7 +93,8 @@ public class Jugador {
 	}
 
 	public void setPromedioUltimoPartido(double promedioUltimoPartido) {
-		this.promedioUltimoPartido = promedioUltimoPartido;
+		this.promedioUltimoPartido = (double)Math.round(promedioUltimoPartido*100)/100;
 	}
+	
 }
 	

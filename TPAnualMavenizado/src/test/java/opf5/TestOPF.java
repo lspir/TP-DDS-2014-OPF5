@@ -65,12 +65,12 @@ public class TestOPF {
 		partidoCon8Estandares1Solidario1Condicional.agregarObservador(observadorJugador);
 		partidoLleno.agregarObservador(observadorAdmin);
 		partidoLleno.agregarObservador(observadorJugador);
-		jugador = new Jugador("nombre", 20);
-		jugadorCritico =new Jugador("critico",12);
+		jugador = new Jugador("nombre", 20, 2);
+		jugadorCritico =new Jugador("critico",12, 3);
 		inscripcionEstandar = new Inscripcion(jugador, estandar);
 		inscripcionSolidario = new Inscripcion(jugador, solidario);
 		inscripcionCondicional = new Inscripcion(jugador, condicional);
-		jugadorConAmigos = new Jugador("Cristiano Ronaldo", 28);
+		jugadorConAmigos = new Jugador("Cristiano Ronaldo", 28, 5);
 		luciano = new Amigo("lucho@gmail.com");
 		leandro = new Amigo("lean@gmail.com");
 		jugadorConAmigos.agregarAmigo(luciano);
@@ -86,7 +86,7 @@ public class TestOPF {
 
 	@Test
 	public void hay8Estandares1SolidarioY1CondicionalSiSeQuiereAnotarUnEstandarLaInscripcionSeRealiza() {
-		Jugador emiliano = new Jugador("Emiliano", 28);
+		Jugador emiliano = new Jugador("Emiliano", 28, 7);
 		Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
 		partidoCon8Estandares1Solidario1Condicional.intentarInscribirA(inscripcionEmi);
 		assertTrue(partidoCon8Estandares1Solidario1Condicional.getInscripciones().contains(inscripcionEmi));
@@ -103,7 +103,7 @@ public class TestOPF {
 
 	@Test
 	public void seInscribirseEnPartidoOrdenado() {
-		Jugador emiliano = new Jugador("Emiliano", 28);
+		Jugador emiliano = new Jugador("Emiliano", 28, 3);
 		Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
 		partidoCon8Estandares1Solidario1Condicional.setEstado(new Ordenado());
 		partidoCon8Estandares1Solidario1Condicional.intentarInscribirA(inscripcionEmi);
@@ -330,7 +330,7 @@ public void testAuxiliar() {
 
 	}
 	AlgoritmoDivisionDeEquipos divisionDePares = new DivisionPorPares();
-	Jugador emiliano = new Jugador("Emiliano", 28);
+	Jugador emiliano = new Jugador("Emiliano", 28, 1);
 	CriterioHandicap criterioHandicap = new CriterioHandicap();
 	Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
 	partidoCon8Estandares1Solidario1Condicional.armarEquipos(criterioHandicap, divisionDePares);
@@ -341,7 +341,7 @@ public void testAuxiliar() {
 @Test
 public void jugadorJuegaUnPartidoSeLeConsultaALaHomePorCantidadPartidosJugados() {
 	AlgoritmoDivisionDeEquipos divisionDePares = new DivisionPorPares();
-	Jugador emiliano = new Jugador("Emiliano", 28);
+	Jugador emiliano = new Jugador("Emiliano", 28, 2);
 	CriterioHandicap criterioHandicap = new CriterioHandicap();
 	Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
 	partidoCon5Estandares.intentarInscribirA(inscripcionEstandar);
@@ -351,7 +351,6 @@ public void jugadorJuegaUnPartidoSeLeConsultaALaHomePorCantidadPartidosJugados()
 	partidoCon5Estandares.intentarInscribirA(inscripcionEmi);
 	partidoCon5Estandares.armarEquipos(criterioHandicap, divisionDePares);
 	partidoCon5Estandares.aceptarEquipos(partidoCon5Estandares.getFormacionesTentativas().get(0));
-	
 	assertEquals(0,
 			homePartidos.consultarCantidadDePartidosJugados(emiliano));
 
@@ -360,7 +359,7 @@ public void jugadorJuegaUnPartidoSeLeConsultaALaHomePorCantidadPartidosJugados()
 
 private void cargarPartido(Partido partido,TipoDeInscripcion tipoDeinscripcion,int cantidadJugadores){
 	for (int i = 0; i <cantidadJugadores; i++) {
-		Inscripcion inscripcion = new Inscripcion(new Jugador("nombre", 20), tipoDeinscripcion);
+		Inscripcion inscripcion = new Inscripcion(new Jugador("nombre", 20, 10), tipoDeinscripcion);
 		partido.intentarInscribirA(inscripcion);
 	}
 }

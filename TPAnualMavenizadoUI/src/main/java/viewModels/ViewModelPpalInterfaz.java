@@ -1,4 +1,6 @@
-package ui;
+package viewModels;
+
+import vistas.ViewPpal;
 
 public interface ViewModelPpalInterfaz {
 	public void viewGeneracionEquipos(ViewPpal view);

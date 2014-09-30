@@ -1,8 +1,11 @@
-package ui;
+package vistas;
 
 import org.uqbar.arena.layout.*;
 import org.uqbar.arena.widgets.*;
 import org.uqbar.arena.windows.*;
+
+import viewModels.ViewModelPpalDecorador;
+import viewModels.ViewModelPpalInterfaz;
 
 //IMPORTANTE: correr con -Djava.system.class.loader=com.uqbar.apo.APOClassLoader
 public class ViewPpal extends MainWindow<ViewModelPpalInterfaz>{

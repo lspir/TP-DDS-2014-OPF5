@@ -24,7 +24,7 @@ public class HomePartidos {
 			return partidos.stream().mapToInt(partido-> partido.jugo(jugador)).sum();
 		}
 		
-		public List<Partido> getData(){
+		public List<Partido> getPartidos(){
 			return partidos;
 		}
 		

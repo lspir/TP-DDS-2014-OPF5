@@ -1,7 +1,8 @@
-package ui;
+package vistas;
 
 import opf5.jugador.Jugador;
 
+import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.Column;
@@ -41,10 +42,12 @@ public abstract class Vista<ViewModel> extends SimpleWindow<ViewModel> {
 		columnaHandicap.bindContentsToProperty("handicap");
 
 		Column<Jugador> columnaPromedio = new Column<Jugador>(table);
-		columnaPromedio.setTitle("Promedio");
-		columnaPromedio.setFixedSize(100);
+		columnaPromedio.setTitle("Promedio General");
+		columnaPromedio.setFixedSize(150);
 		columnaPromedio.bindContentsToProperty("promedio");
 
 	}
-
+	public void botonVolver(Panel mainPanel){
+		new Button(mainPanel).setCaption("Volver").onClick(()->this.close());
+	}
 }
