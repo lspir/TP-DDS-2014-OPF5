@@ -4,12 +4,14 @@ import java.awt.*;
 
 import opf5.jugador.*;
 
+import org.uqbar.arena.bindings.Adapter;
 import org.uqbar.arena.layout.*;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.*;
 import org.uqbar.arena.windows.*;
+import org.uqbar.lacar.ui.model.BindingBuilder;
 
 import com.uqbar.commons.collections.Transformer;
 
@@ -40,6 +42,9 @@ public class ViewDatosJugador extends Vista<ViewModelDatosJugador>{
 		this.mostarValor(panel, "Promedio Último Partido:", "ultimoPromedio");
 		new Label(panel).setText("Infracciones:");
 	    new Table(panel).bindItemsToProperty("infracciones");
+		new Label(panel).setText("Amigos:");
+	    new Table(panel).bindItemsToProperty("amigos");	
+	
 	   }
 	
 

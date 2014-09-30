@@ -1,5 +1,7 @@
 package viewModels;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.*;
 
 import opf5.*;
@@ -14,6 +16,7 @@ public class ViewModelDatosJugador {
 	private int handicap;
 	private double promedio, ultimoPromedio;
 	private List<Infraccion> infracciones = new ArrayList<Infraccion>();
+	private List<String> amigos = new ArrayList<String>();
 	private long cantidadPartidos;
 	
 	public long getCantidadPartidos() {
@@ -31,6 +34,7 @@ public class ViewModelDatosJugador {
 		this.cantidadPartidos = HomePartidos.getInstance().consultarCantidadDePartidosJugados(jugador);
 		this.promedio= jugador.getPromedio();
 		this.ultimoPromedio = jugador.getPromedioUltimoPartido();
+		this.amigos=jugador.amigos().stream().map((amigo)->amigo.direccion()).collect(toList());
 	}
 	
 	public String getNombre(){
@@ -61,6 +65,14 @@ public class ViewModelDatosJugador {
 
 	public void setUltimoPromedio(double ultimoPromedio) {
 		this.ultimoPromedio = ultimoPromedio;
+	}
+
+	public List<String> getAmigos() {
+		return amigos;
+	}
+
+	public void setAmigos(List<String> amigos) {
+		this.amigos = amigos;
 	}
 
 }

@@ -1,5 +1,8 @@
 package opf5.jugador;
 
+import org.uqbar.commons.utils.Observable;
+
+@Observable
 public class Amigo {
 
 	private String direccion;

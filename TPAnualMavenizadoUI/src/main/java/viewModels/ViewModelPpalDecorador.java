@@ -12,6 +12,7 @@ import opf5.AlgoritmosDivisionDeEquipos.DivisionPorPares;
 import opf5.criteriosDeOrdenamientoDeEquipos.CriterioHandicap;
 import opf5.inscripcion.Estandar;
 import opf5.inscripcion.Inscripcion;
+import opf5.jugador.Amigo;
 import opf5.jugador.Critica;
 import opf5.jugador.Jugador;
 import opf5.jugador.RepositorioJugadores;
@@ -34,15 +35,27 @@ public class ViewModelPpalDecorador implements ViewModelPpalInterfaz {
 		int maxEdad=100;
 		int minEdad=1;
 		for(int i=0;i<15;i++){
-			this.crearJugador(nombreJugadores.get(i),new Random().nextInt(maxEdad)+minEdad,i);
+			this.crearJugador(nombreJugadores.get(i),this.randomEntre(minEdad, maxEdad),i);
+		}
+		for(int i=0;i<15;i++){
+			this.amigar(RepositorioJugadores.getInstance().getJugadores().get(i),nombreJugadores.get(this.randomEntre(0, 15)));
+			this.amigar(RepositorioJugadores.getInstance().getJugadores().get(i),nombreJugadores.get(this.randomEntre(0, 15)));
 		}
 		this.armarPartidoConfirmado(0,10);
 		this.armarPartidoConfirmado(5,15);
 		this.armarPartidoSinConfirmar(0,10);
-		
+				
+	}
 	
+	private void amigar(Jugador jugador, String nombre) {
+		jugador.agregarAmigo(new Amigo(nombre.concat("@gmail.com")));
 		
 	}
+
+	private int randomEntre(int min, int max){
+		return new Random().nextInt(max)+min;
+	}
+
 
 	private Partido armarPartidoSinConfirmar(int posInicial, int posFinal) {
 		Partido partido=new Partido(LocalDate.now(),LocalTime.now(),"Campus");
