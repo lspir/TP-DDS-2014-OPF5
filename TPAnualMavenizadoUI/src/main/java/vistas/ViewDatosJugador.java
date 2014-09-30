@@ -11,6 +11,8 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.tables.*;
 import org.uqbar.arena.windows.*;
 
+import com.uqbar.commons.collections.Transformer;
+
 import viewModels.ViewModelDatosJugador;
 
 public class ViewDatosJugador extends Vista<ViewModelDatosJugador>{
@@ -40,10 +42,10 @@ public class ViewDatosJugador extends Vista<ViewModelDatosJugador>{
 	    new Table(panel).bindItemsToProperty("infracciones");
 	   }
 	
+
 	private void mostarValor(Panel panel, String titulo, String valor) {
 		new Label(panel).setText(titulo);
 	    new Label(panel).bindValueToProperty(valor);
-		
 	}
 
 
