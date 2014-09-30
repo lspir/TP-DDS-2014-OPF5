@@ -40,13 +40,17 @@ public class ViewDatosJugador extends Vista<ViewModelDatosJugador>{
 		this.mostarValor(panel, "Partidos:", "cantidadPartidos");
 		this.mostarValor(panel, "Promedio:", "promedio");
 		this.mostarValor(panel, "Promedio Último Partido:", "ultimoPromedio");
-		new Label(panel).setText("Infracciones:");
-	    new Table(panel).bindItemsToProperty("infracciones");
-		new Label(panel).setText("Amigos:");
-	    new Table(panel).bindItemsToProperty("amigos");	
+		this.crearTablaBasica(panel,"Infracciones:","infracciones");
+		this.crearTablaBasica(panel,"Amigos:","amigos");
 	
 	   }
 	
+
+	private void crearTablaBasica(Panel panel, String titulo, String valores) {
+		new Label(panel).setText(titulo);
+	    new Table(panel).bindItemsToProperty(valores);	
+	}
+
 
 	private void mostarValor(Panel panel, String titulo, String valor) {
 		new Label(panel).setText(titulo);

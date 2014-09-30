@@ -15,7 +15,7 @@ public class ViewModelDatosJugador {
 	private String nombre;
 	private int handicap;
 	private double promedio, ultimoPromedio;
-	private List<Infraccion> infracciones = new ArrayList<Infraccion>();
+	private List<String> infracciones = new ArrayList<String>();
 	private List<String> amigos = new ArrayList<String>();
 	private long cantidadPartidos;
 	
@@ -30,7 +30,7 @@ public class ViewModelDatosJugador {
 	public ViewModelDatosJugador(Jugador jugador) {
 		this.nombre = jugador.nombre();
 		this.handicap = jugador.getHandicap();
-		this.infracciones = jugador.infracciones();
+		this.infracciones = jugador.infracciones().stream().map((infraccion)->infraccion.getMomento()).collect(toList());
 		this.cantidadPartidos = HomePartidos.getInstance().consultarCantidadDePartidosJugados(jugador);
 		this.promedio= jugador.getPromedio();
 		this.ultimoPromedio = jugador.getPromedioUltimoPartido();
@@ -46,7 +46,7 @@ public class ViewModelDatosJugador {
 	}
 	
 	
-	public List<Infraccion> getInfracciones()
+	public List<String> getInfracciones()
 	{
 		return (this.infracciones);
 	}

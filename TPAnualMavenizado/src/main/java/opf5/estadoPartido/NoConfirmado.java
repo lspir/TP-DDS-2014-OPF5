@@ -46,7 +46,7 @@ public abstract class NoConfirmado implements Estado {
 	public void seDioDeBajaSinReemplazante(Inscripcion inscripcion,
 			Partido partido) {
 		partido.getInscripciones().remove(inscripcion);
-		Infraccion infraccion = new Infraccion("motivo",4);
+		Infraccion infraccion = new Infraccion("Se Bajó del partido sin poner un Reemplazante",1);
 		inscripcion.jugador().tePenalizaron(infraccion);
 		if (partido.getInscripciones().size() == 9) {
 			partido.getObservadores().forEach(

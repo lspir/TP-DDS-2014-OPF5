@@ -14,6 +14,7 @@ import opf5.inscripcion.Estandar;
 import opf5.inscripcion.Inscripcion;
 import opf5.jugador.Amigo;
 import opf5.jugador.Critica;
+import opf5.jugador.Infraccion;
 import opf5.jugador.Jugador;
 import opf5.jugador.RepositorioJugadores;
 import vistas.ViewPpal;
@@ -51,7 +52,7 @@ public class ViewModelPpalDecorador implements ViewModelPpalInterfaz {
 		jugador.agregarAmigo(new Amigo(nombre.concat("@gmail.com")));
 		
 	}
-
+	
 	private int randomEntre(int min, int max){
 		return new Random().nextInt(max)+min;
 	}
@@ -67,13 +68,20 @@ public class ViewModelPpalDecorador implements ViewModelPpalInterfaz {
 			jugador.agregarCritica(new Critica(this.calificacionRandom(), "Crack", partido));
 			jugador.agregarCritica(new Critica(this.calificacionRandom(), "Normal", partido));
 			jugador.agregarCritica(new Critica(this.calificacionRandom(), "Podria ser peor", partido));
+			if(this.randomEntre(0, 3)==1){
+				partido.seDioDeBajaSinReemplazante(inscripcionEstandar);
+				partido.intentarInscribirA(inscripcionEstandar);
+			}
+			if(this.randomEntre(0, 3)==1){
+				jugador.tePenalizaron(new Infraccion("Me caes Mal", 0));
+			}
 		}
 		HomePartidos.getInstance().create(partido);
 		return partido;
 	}
 	
 	private int calificacionRandom(){
-		return new Random().nextInt(10)+1;
+		return randomEntre(1, 10);
 	}
 
 	private void armarPartidoConfirmado(int posInicial, int posFinal) {
