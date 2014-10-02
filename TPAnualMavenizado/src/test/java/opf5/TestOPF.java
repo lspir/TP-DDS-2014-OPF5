@@ -21,19 +21,21 @@ import org.junit.*;
 //FIXME es un buen momento para separar los tests en varias clases
 //FIXME no medieron bola. EL comentario de arriba es del 4 de Julio!!!
 public class TestOPF {
-	private Partido partidoCon5Estandares;
-	private Partido partidoCon10Solidarios;
-	private	Partido partidoLleno;
-	private Partido partidoCon8Estandares1Solidario1Condicional;
+	protected Partido partidoCon5Estandares;
+	protected Partido partidoCon10Solidarios;
+	protected	Partido partidoLleno;
+	protected Partido partidoCon8Estandares1Solidario1Condicional;
 	private Partido partidoCon1Estandar;
-	private	Estandar estandar;
+	protected	Estandar estandar;
 	private Solidario solidario;
 	private Condicional condicional;
 	private ObservadorJugadorInscripto observadorJugador;
 	private ObservadorNotificarAdmin observadorAdmin;
 	private AdaptadorMailSender adaptadorMailSenderJugador;
 	private AdaptadorMailSender adaptadorMailSenderAdmin;
-	private Inscripcion inscripcionCondicional, inscripcionSolidario,inscripcionEstandar;
+	protected Inscripcion inscripcionCondicional;
+	protected Inscripcion inscripcionSolidario;
+	protected Inscripcion inscripcionEstandar;
 	private Jugador jugador, jugadorConAmigos,jugadorCritico;
 	private Amigo luciano, leandro;
 	private HomePartidos homePartidos;
@@ -84,13 +86,7 @@ public class TestOPF {
 		partidoCon1Estandar.intentarInscribirA(inscripcionEstandar);
 	}
 
-	@Test
-	public void hay8Estandares1SolidarioY1CondicionalSiSeQuiereAnotarUnEstandarLaInscripcionSeRealiza() {
-		Jugador emiliano = new Jugador("Emiliano", 28, 7);
-		Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
-		partidoCon8Estandares1Solidario1Condicional.intentarInscribirA(inscripcionEmi);
-		assertTrue(partidoCon8Estandares1Solidario1Condicional.getInscripciones().contains(inscripcionEmi));
-	}
+	
 
 //	@Test(expected = ElPartidoYaEstaConfirmadoException.class)
 //	public void intentaInscribirseEnPartidoConfirmado() {
@@ -110,36 +106,6 @@ public class TestOPF {
 
 	}
 
-	@Test
-	public void Hay5EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRealiza() {
-		partidoCon5Estandares.intentarInscribirA(inscripcionSolidario);
-		assertTrue(partidoCon5Estandares.getInscripciones().contains(inscripcionSolidario));
-	}
-
-	@Test
-	public void Hay10EstandarSeQuiereAnotarUnEstandarMasYLaInscripcionSeRechaza() {
-		partidoLleno.intentarInscribirA(inscripcionEstandar);
-		assertFalse(partidoLleno.getInscripciones().contains(inscripcionEstandar));
-	}
-
-	@Test
-	public void Hay10SolidariosSeQuiereAnotar1EstandarYLaInscripcionEsCorrecta() {
-		partidoCon10Solidarios.intentarInscribirA(inscripcionEstandar);
-		assertTrue(partidoCon10Solidarios.getInscripciones().contains(inscripcionEstandar));
-	}
-
-	@Test
-	public void Hay10EstandarSeQuiereAnotarUnSolidarioYLaInscripcionSeRechaza() {
-		partidoLleno.intentarInscribirA(inscripcionSolidario);
-		assertFalse(partidoLleno.getInscripciones().contains(inscripcionSolidario));
-	}
-
-	@Test
-	public void Hay8Estandares1CondicionalY1SolidarioCuandoSeAnotaUnEstandarSaleElCondicional() {
-
-		partidoCon8Estandares1Solidario1Condicional.intentarInscribirA(inscripcionEstandar);
-		assertFalse(partidoCon8Estandares1Solidario1Condicional.getInscripciones().contains(inscripcionCondicional));
-	}
 
 	@Test
 	public void UnJugadorCon2AmigosSeInscribeYSeEnvia1MailACadaAmigo() {
@@ -338,6 +304,7 @@ public void testAuxiliar() {
 	partidoCon8Estandares1Solidario1Condicional.intentarInscribirA(inscripcionEmi);
 }
 
+
 @Test
 public void jugadorJuegaUnPartidoSeLeConsultaALaHomePorCantidadPartidosJugados() {
 	AlgoritmoDivisionDeEquipos divisionDePares = new DivisionPorPares();
@@ -355,6 +322,7 @@ public void jugadorJuegaUnPartidoSeLeConsultaALaHomePorCantidadPartidosJugados()
 			homePartidos.consultarCantidadDePartidosJugados(emiliano));
 
 }
+
 
 private int randomEntre(int min, int max){
 	return new Random().nextInt(max)+min;

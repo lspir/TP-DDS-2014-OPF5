@@ -160,6 +160,12 @@ public class Partido {
 		estado = unEstado;
 
 	}
+	
+	public Estado getEstado() {
+		return estado;
+
+	}
+
 
 	public void tenes10Jugadores() {
 		if (getInscripciones().size() < 10) {
