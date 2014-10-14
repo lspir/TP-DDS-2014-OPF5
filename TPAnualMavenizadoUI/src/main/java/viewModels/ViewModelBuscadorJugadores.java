@@ -4,6 +4,10 @@ import java.util.*;
 import opf5.jugador.*;
 
 import org.uqbar.commons.utils.Observable;
+
+import utilitarios.CriterioBusqueda;
+import utilitarios.CriterioBusquedaDesde;
+import utilitarios.CriterioBusquedaHasta;
 @Observable
 public class ViewModelBuscadorJugadores {
 	
@@ -13,52 +17,27 @@ public class ViewModelBuscadorJugadores {
 		private double promedio;
 		private List<Jugador> resultados;
 		private Jugador jugadorSeleccionado;
-		private int handicapDesde, handicapHasta, promedioDesde, promedioHasta;
+		private CriterioBusqueda criterioBusquedaHandicap,criterioPromedio;
+		private List<CriterioBusqueda>criteriosBusquedaDesdeHasta= new ArrayList<CriterioBusqueda>();
 		
+		public List<CriterioBusqueda> getCriteriosBusquedaDesdeHasta() {
+			return criteriosBusquedaDesdeHasta;
+		}
+
+		public void setCriteriosBusquedaDesdeHasta(
+				List<CriterioBusqueda> criteriosBusquedaDesdeHasta) {
+			this.criteriosBusquedaDesdeHasta = criteriosBusquedaDesdeHasta;
+		}
+
 		public ViewModelBuscadorJugadores(){
-			this.nombre="";			
-		}
-
-		public int getPromedioDesde() {
-			return promedioDesde;
-		}
-
-		public void setPromedioDesde(int promedioDesde) {
-			this.promedioDesde = promedioDesde;
-		}
-
-		public int getPromedioHasta() {
-			return promedioHasta;
-		}
-
-		public void setPromedioHasta(int promedioHasta) {
-			this.promedioHasta = promedioHasta;
-		}
-
-		public int getHandicapDesde() {
-			return handicapDesde;
-		}
-
-		public void setHandicapDesde(int handicapDesde) {
-			this.handicapDesde = handicapDesde;
-		}
-
-		public int getHandicapHasta() {
-			return handicapHasta;
-		}
-
-		public void setHandicapHasta(int handicapHasta) {
-			this.handicapHasta = handicapHasta;
+			this.nombre="";
+			criteriosBusquedaDesdeHasta.add(new CriterioBusquedaDesde());
+			criteriosBusquedaDesdeHasta.add(new CriterioBusquedaHasta());
 		}
 
 		public void search() {
 			//FIXME no faltan criterios de búsqueda acá?
-			this.resultados = RepositorioJugadores.getInstance().search(this.edad, this.nombre,this.handicapDesde, this.handicapHasta);
-		}
-
-		public void clear() {
-			this.nombre = "";
-			this.edad= 0;
+			this.resultados = RepositorioJugadores.getInstance().search(this.edad, this.nombre,this.handicap, this.criterioBusquedaHandicap,this.promedio,this.criterioPromedio);
 		}
 
 		public Integer getEdad() {
@@ -66,7 +45,8 @@ public class ViewModelBuscadorJugadores {
 		}
 
 		public void setEdad(Integer numero) {
-			this.edad= numero;
+			if(numero==null) this.edad=0;
+			else this.edad= numero;
 		}
 
 		public Integer getHandicap() {
@@ -74,7 +54,8 @@ public class ViewModelBuscadorJugadores {
 		}
 
 		public void setHandicap(Integer numero) {
-			this.handicap= numero;
+			if(numero==null) this.handicap=0;
+			else this.handicap= numero;
 		}
 		
 		public String getNombre() {
@@ -107,6 +88,22 @@ public class ViewModelBuscadorJugadores {
 
 		public void setPromedio(double promedio) {
 			this.promedio = promedio;
+		}
+
+		public CriterioBusqueda getCriterioBusquedaHandicap() {
+			return criterioBusquedaHandicap;
+		}
+
+		public void setCriterioBusquedaHandicap(CriterioBusqueda criterioBusqueda) {
+			this.criterioBusquedaHandicap = criterioBusqueda;
+		}
+
+		public CriterioBusqueda getCriterioPromedio() {
+			return criterioPromedio;
+		}
+
+		public void setCriterioPromedio(CriterioBusqueda criterioPromedio) {
+			this.criterioPromedio = criterioPromedio;
 		}
 		
 	}

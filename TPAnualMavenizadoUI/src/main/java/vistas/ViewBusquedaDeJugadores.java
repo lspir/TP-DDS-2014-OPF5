@@ -1,4 +1,5 @@
 package vistas;
+import opf5.criteriosDeOrdenamientoDeEquipos.CriterioOrdenamientoEquipos;
 import opf5.jugador.*;
 
 import org.uqbar.arena.actions.*;
@@ -7,7 +8,10 @@ import org.uqbar.arena.layout.*;
 import org.uqbar.arena.widgets.*;
 import org.uqbar.arena.widgets.tables.*;
 import org.uqbar.arena.windows.*;
+import org.uqbar.lacar.ui.model.ListBuilder;
+import org.uqbar.lacar.ui.model.bindings.Binding;
 
+import utilitarios.CriterioBusqueda;
 import viewModels.ViewModelBuscadorJugadores;
 
 public class ViewBusquedaDeJugadores extends Vista<ViewModelBuscadorJugadores> {
@@ -34,12 +38,34 @@ public class ViewBusquedaDeJugadores extends Vista<ViewModelBuscadorJugadores> {
 		searchFormPanel.setLayout(new ColumnLayout(2));
 		this.armarForm(searchFormPanel, "Edad Mínima", "edad");
 		this.armarForm(searchFormPanel, "Nombre empieza con", "nombre").setWidth(100);
-		this.armarForm(searchFormPanel, "Handicap desde", "handicapDesde");
-		this.armarForm(searchFormPanel, "Handicap hasta", "handicapHasta");
-		this.armarForm(searchFormPanel, "Promedio último partido desde:", "promedioDesde");
-		this.armarForm(searchFormPanel, "Promedio último partido hasta", "promedioHasta");
+		this.armarForm(searchFormPanel, "Valor Promedio último partido:", "promedio");
+		this.armarSelectorDesdeHasta(searchFormPanel, "Criterio Busqueda Promedio", "criterioPromedio");
+		this.armarForm(searchFormPanel,"Valor de Handicap", "handicap");
+		this.armarSelectorDesdeHasta(searchFormPanel,"Criterio Busqueda Handicap","criterioBusquedaHandicap");
+	
+		
+		
 		
 		//TODO sólo los que tuvieron infracciones, sólo los que no tuvieron infracciones
+	}
+
+	private void armarSelectorDesdeHasta(Panel searchFormPanel,String titulo,String bindValue) {
+		
+		new Label(searchFormPanel).setText(titulo);
+		Selector<CriterioBusqueda> selectorOrdenamiento = new Selector<CriterioBusqueda>(
+				searchFormPanel)
+				.allowNull(true);
+		
+		selectorOrdenamiento.bindValueToProperty(bindValue);
+
+		Binding<ListBuilder<CriterioBusqueda>> itemsBinding2 = selectorOrdenamiento
+				.bindItems( 
+				new ObservableProperty(this.getModelObject(),
+						"criteriosBusquedaDesdeHasta"));
+
+		itemsBinding2.setAdapter(new PropertyAdapter(
+				CriterioBusqueda.class, "nombre"));
+		
 	}
 
 	@Override

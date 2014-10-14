@@ -87,13 +87,6 @@ public class TestOPF5 {
 }
 	
 
-
-
-private int randomEntre(int min, int max){
-	return new Random().nextInt(max)+min;
-}
-
-
 private void cargarPartido(Partido partido,TipoDeInscripcion tipoDeinscripcion,int cantidadJugadores){
 	for (int i = 0; i <cantidadJugadores; i++) {
 		Inscripcion inscripcion = new Inscripcion(new Jugador("nombre", 20, 10), tipoDeinscripcion);

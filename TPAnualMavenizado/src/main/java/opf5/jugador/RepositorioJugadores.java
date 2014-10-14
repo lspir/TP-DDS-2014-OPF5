@@ -8,6 +8,8 @@ import opf5.jugador.*;
 
 import org.uqbar.commons.utils.Observable;
 
+import utilitarios.CriterioBusqueda;
+
 @Observable
 public class RepositorioJugadores implements Serializable {
 
@@ -22,32 +24,18 @@ public class RepositorioJugadores implements Serializable {
 		this.jugadores.add(jugador);
 	}
 
-	public List<Jugador> search(int numero, String nombre, int handicapDesde,
-			int handicapHasta) {
+	public List<Jugador> search(int edad, String nombre, int handicap,
+			CriterioBusqueda criterioBusquedaHandicap, double promedio, CriterioBusqueda criterioPromedio) {
 		//FIXME no usen fors e ifs!!!!!!!!!
 		//No estamos en C!!
 		List<Jugador> resultados = new ArrayList<Jugador>();
-		if (handicapHasta == 0) {
-			for (Jugador jugador : this.jugadores) {
+		for (Jugador jugador : this.jugadores) {
 
-				if (jugador.edad() > numero
-						&& (jugador.getHandicap() >= handicapDesde)
-						&& (jugador.nombre().startsWith(nombre))) {
+				if (jugador.edad() > edad
+							&& (jugador.nombre().startsWith(nombre))&&((criterioPromedio!=null? criterioPromedio.teCumple(promedio,jugador):true)) && (criterioBusquedaHandicap!=null? criterioBusquedaHandicap.teCumple(handicap,jugador):true)) {
 					resultados.add(jugador);
 				}
 			}
-		} else {
-			if (handicapDesde == 0) {
-				for (Jugador jugador : this.jugadores) {
-
-					if (jugador.edad() > numero
-							&& (jugador.getHandicap() <= handicapHasta)
-							&& (jugador.nombre().startsWith(nombre))) {
-						resultados.add(jugador);
-					}
-				}
-			}
-		}
 		return resultados;
 	}
 
