@@ -19,6 +19,9 @@ public class Confirmado implements Estado {
 		this.equipoB=equipoB;
 	}
 
+	public Confirmado() {
+	}
+
 	public List<Inscripcion> getEquipoA() {
 		return equipoA;
 	}

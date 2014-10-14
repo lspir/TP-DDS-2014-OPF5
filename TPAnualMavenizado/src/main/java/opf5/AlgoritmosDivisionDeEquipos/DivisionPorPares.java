@@ -2,7 +2,9 @@ package opf5.AlgoritmosDivisionDeEquipos;
 
 import java.util.*;
 
+import org.uqbar.commons.utils.Observable;
 
+@Observable
 public class DivisionPorPares extends AlgoritmoDivisionDeEquipos{
 	public DivisionPorPares() {
 		super("Division Por Pares");

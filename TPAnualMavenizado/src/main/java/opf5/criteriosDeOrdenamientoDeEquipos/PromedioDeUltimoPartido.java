@@ -5,9 +5,11 @@ import static java.util.stream.Collectors.*;
 import java.util.*;
 import java.util.stream.*;
 
+import org.uqbar.commons.utils.Observable;
+
 import opf5.*;
 import opf5.jugador.*;
-
+@Observable
 public class PromedioDeUltimoPartido extends CriterioOrdenamientoEquipos {
 
   	public PromedioDeUltimoPartido() {

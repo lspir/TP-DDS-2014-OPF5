@@ -2,7 +2,9 @@ package opf5.AlgoritmosDivisionDeEquipos;
 
 import java.util.*;
 
+import org.uqbar.commons.utils.Observable;
 
+@Observable
 public class EquipoA03478EquipoB12569 extends AlgoritmoDivisionDeEquipos{
 	public EquipoA03478EquipoB12569() {
 		super("Equipo A: 1,4,5,8,9 Equipo B: 2,3,6,7,10");

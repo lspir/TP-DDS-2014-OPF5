@@ -4,8 +4,10 @@ import static java.util.stream.Collectors.*;
 
 import java.util.*;
 
-import opf5.jugador.*;
+import org.uqbar.commons.utils.Observable;
 
+import opf5.jugador.*;
+@Observable
 public class MixDeCriterios extends CriterioOrdenamientoEquipos {
 
 	private List<CriterioOrdenamientoEquipos> criterios = new ArrayList<CriterioOrdenamientoEquipos>();

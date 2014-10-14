@@ -1,8 +1,10 @@
 package opf5.criteriosDeOrdenamientoDeEquipos;
 
 
-import opf5.jugador.*;
+import org.uqbar.commons.utils.Observable;
 
+import opf5.jugador.*;
+@Observable
 public class CriterioHandicap extends CriterioOrdenamientoEquipos {
 	
 	

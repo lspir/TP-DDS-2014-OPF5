@@ -2,8 +2,10 @@ package opf5.criteriosDeOrdenamientoDeEquipos;
 import java.util.*;
 import java.util.stream.*;
 
-import opf5.jugador.*;
+import org.uqbar.commons.utils.Observable;
 
+import opf5.jugador.*;
+@Observable
 public class UltimasNCalificaciones extends PromedioDeUltimoPartido {
 	private int n;
 	
