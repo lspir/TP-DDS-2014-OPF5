@@ -56,10 +56,6 @@ public class ViewBusquedaDeJugadores extends Vista<ViewModelBuscadorJugadores> {
 		
 		itemsBinding.setAdapter(new PropertyAdapter(
 				CriterioBusquedaInfractores.class, "nombre"));
-		
-		
-		
-		//TODO sólo los que tuvieron infracciones, sólo los que no tuvieron infracciones
 	}
 
 	private void armarSelectorDesdeHasta(Panel searchFormPanel,String titulo,String bindValue) {
