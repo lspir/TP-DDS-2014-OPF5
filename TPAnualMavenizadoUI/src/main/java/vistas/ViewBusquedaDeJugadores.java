@@ -8,10 +8,12 @@ import org.uqbar.arena.layout.*;
 import org.uqbar.arena.widgets.*;
 import org.uqbar.arena.widgets.tables.*;
 import org.uqbar.arena.windows.*;
+import org.uqbar.lacar.ui.model.ItemsBindingBuilder;
 import org.uqbar.lacar.ui.model.ListBuilder;
 import org.uqbar.lacar.ui.model.bindings.Binding;
 
 import utilitarios.CriterioBusqueda;
+import utilitarios.CriterioBusquedaInfractores;
 import viewModels.ViewModelBuscadorJugadores;
 
 public class ViewBusquedaDeJugadores extends Vista<ViewModelBuscadorJugadores> {
@@ -42,7 +44,18 @@ public class ViewBusquedaDeJugadores extends Vista<ViewModelBuscadorJugadores> {
 		this.armarSelectorDesdeHasta(searchFormPanel, "Criterio Busqueda Promedio", "criterioPromedio");
 		this.armarForm(searchFormPanel,"Valor de Handicap", "handicap");
 		this.armarSelectorDesdeHasta(searchFormPanel,"Criterio Busqueda Handicap","criterioBusquedaHandicap");
-	
+		
+		new Label(searchFormPanel).setText("Criterio Infracciones");
+		RadioSelector<CriterioBusquedaInfractores> box= new RadioSelector<>(searchFormPanel, "criteriosInfractores");
+		box.bindValueToProperty("criterioInfractoresSeleccionado");
+		box.allowNull(true);
+		Binding<ListBuilder<CriterioBusquedaInfractores>> itemsBinding = box
+				.bindItems( 
+				new ObservableProperty(this.getModelObject(),
+						"criteriosInfractores"));
+		
+		itemsBinding.setAdapter(new PropertyAdapter(
+				CriterioBusquedaInfractores.class, "nombre"));
 		
 		
 		
@@ -65,7 +78,7 @@ public class ViewBusquedaDeJugadores extends Vista<ViewModelBuscadorJugadores> {
 
 		itemsBinding2.setAdapter(new PropertyAdapter(
 				CriterioBusqueda.class, "nombre"));
-		
+
 	}
 
 	@Override

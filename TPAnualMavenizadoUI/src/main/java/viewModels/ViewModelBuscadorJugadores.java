@@ -8,17 +8,23 @@ import org.uqbar.commons.utils.Observable;
 import utilitarios.CriterioBusqueda;
 import utilitarios.CriterioBusquedaDesde;
 import utilitarios.CriterioBusquedaHasta;
+import utilitarios.CriterioBusquedaInfractores;
+import utilitarios.CriterioBusquedaInfractoresAbstracta;
+import utilitarios.CriterioBusquedaNoInfractores;
+import utilitarios.CriterioBusquedaTodos;
 @Observable
 public class ViewModelBuscadorJugadores {
 	
 		private String nombre;
-		private int edad;
-		private int handicap;
+		private double edad;
+		private double handicap;
 		private double promedio;
 		private List<Jugador> resultados;
 		private Jugador jugadorSeleccionado;
 		private CriterioBusqueda criterioBusquedaHandicap,criterioPromedio;
 		private List<CriterioBusqueda>criteriosBusquedaDesdeHasta= new ArrayList<CriterioBusqueda>();
+		private List<CriterioBusquedaInfractoresAbstracta>criteriosInfractores=new ArrayList<CriterioBusquedaInfractoresAbstracta>();
+		private CriterioBusquedaInfractoresAbstracta criterioInfractoresSeleccionado;
 		
 		public List<CriterioBusqueda> getCriteriosBusquedaDesdeHasta() {
 			return criteriosBusquedaDesdeHasta;
@@ -33,29 +39,31 @@ public class ViewModelBuscadorJugadores {
 			this.nombre="";
 			criteriosBusquedaDesdeHasta.add(new CriterioBusquedaDesde());
 			criteriosBusquedaDesdeHasta.add(new CriterioBusquedaHasta());
+			criteriosInfractores.add(new CriterioBusquedaInfractores());
+			criteriosInfractores.add(new CriterioBusquedaNoInfractores());
+			criteriosInfractores.add(new CriterioBusquedaTodos());
+			
 		}
 
 		public void search() {
 			//FIXME no faltan criterios de búsqueda acá?
-			this.resultados = RepositorioJugadores.getInstance().search(this.edad, this.nombre,this.handicap, this.criterioBusquedaHandicap,this.promedio,this.criterioPromedio);
+			this.resultados = RepositorioJugadores.getInstance().search(this.edad, this.nombre,this.handicap, this.criterioBusquedaHandicap,this.promedio,this.criterioPromedio,this.criterioInfractoresSeleccionado);
 		}
 
-		public Integer getEdad() {
+		public double getEdad() {
 			return this.edad;
 		}
 
-		public void setEdad(Integer numero) {
-			if(numero==null) this.edad=0;
-			else this.edad= numero;
+		public void setEdad(double numero) {
+			this.edad= numero;
 		}
 
-		public Integer getHandicap() {
+		public double getHandicap() {
 			return this.handicap;
 		}
 
-		public void setHandicap(Integer numero) {
-			if(numero==null) this.handicap=0;
-			else this.handicap= numero;
+		public void setHandicap(double numero) {
+			this.handicap= numero;
 		}
 		
 		public String getNombre() {
@@ -104,6 +112,23 @@ public class ViewModelBuscadorJugadores {
 
 		public void setCriterioPromedio(CriterioBusqueda criterioPromedio) {
 			this.criterioPromedio = criterioPromedio;
+		}
+
+		public List<CriterioBusquedaInfractoresAbstracta> getCriteriosInfractores() {
+			return criteriosInfractores;
+		}
+
+		public void setCriteriosInfractores(List<CriterioBusquedaInfractoresAbstracta> criteriosInfractores) {
+			this.criteriosInfractores = criteriosInfractores;
+		}
+
+		public CriterioBusquedaInfractoresAbstracta getCriterioInfractoresSeleccionado() {
+			return criterioInfractoresSeleccionado;
+		}
+
+		public void setCriterioInfractoresSeleccionado(
+				CriterioBusquedaInfractoresAbstracta criterioInfractoresSeleccionado) {
+			this.criterioInfractoresSeleccionado = criterioInfractoresSeleccionado;
 		}
 		
 	}
