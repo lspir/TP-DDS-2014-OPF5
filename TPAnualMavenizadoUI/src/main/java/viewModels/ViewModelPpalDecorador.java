@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-import opf5.HomePartidos;
-import opf5.Partido;
-import opf5.AlgoritmosDivisionDeEquipos.DivisionPorPares;
+import opf5.algoritmosDivisionDeEquipos.DivisionPorPares;
 import opf5.criteriosDeOrdenamientoDeEquipos.CriterioHandicap;
 import opf5.inscripcion.Estandar;
 import opf5.inscripcion.Inscripcion;
@@ -17,6 +15,8 @@ import opf5.jugador.Critica;
 import opf5.jugador.Infraccion;
 import opf5.jugador.Jugador;
 import opf5.jugador.RepositorioJugadores;
+import opf5.partido.HomePartidos;
+import opf5.partido.Partido;
 import vistas.ViewPpal;
 
 public class ViewModelPpalDecorador implements ViewModelPpalInterfaz {

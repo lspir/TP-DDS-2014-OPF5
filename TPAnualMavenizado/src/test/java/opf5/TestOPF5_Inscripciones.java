@@ -3,7 +3,7 @@ package opf5;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import opf5.AlgoritmosDivisionDeEquipos.DivisionPorPares;
+import opf5.algoritmosDivisionDeEquipos.DivisionPorPares;
 import opf5.criteriosDeOrdenamientoDeEquipos.CriterioHandicap;
 import opf5.estadoPartido.Ordenado;
 import opf5.excepciones.ElPartidoYaEstaConfirmadoException;

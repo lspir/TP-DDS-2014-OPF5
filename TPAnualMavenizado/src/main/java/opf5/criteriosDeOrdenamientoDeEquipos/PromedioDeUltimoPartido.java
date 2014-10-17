@@ -7,8 +7,8 @@ import java.util.stream.*;
 
 import org.uqbar.commons.utils.Observable;
 
-import opf5.*;
 import opf5.jugador.*;
+import opf5.partido.*;
 @Observable
 public class PromedioDeUltimoPartido extends CriterioOrdenamientoEquipos {
 

@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import opf5.AlgoritmosDivisionDeEquipos.DivisionPorPares;
+import opf5.algoritmosDivisionDeEquipos.DivisionPorPares;
 import opf5.criteriosDeOrdenamientoDeEquipos.CriterioHandicap;
 import opf5.estadoPartido.Confirmado;
 import opf5.estadoPartido.Estado;
@@ -16,6 +16,7 @@ import opf5.excepciones.ElPartidoYaEstaConfirmadoException;
 import opf5.excepciones.NoSePuedeAceptarEquiposElPartidoNoEstaOrdenadoException;
 import opf5.inscripcion.Inscripcion;
 import opf5.jugador.Jugador;
+import opf5.partido.Partido;
 
 import org.junit.Test;
 

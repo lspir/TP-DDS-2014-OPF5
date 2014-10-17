@@ -1,4 +1,4 @@
-package opf5.AlgoritmosDivisionDeEquipos;
+package opf5.algoritmosDivisionDeEquipos;
 
 import java.util.*;
 

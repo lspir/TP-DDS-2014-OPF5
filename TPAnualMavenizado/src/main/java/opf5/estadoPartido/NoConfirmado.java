@@ -5,11 +5,11 @@ import static java.util.stream.Collectors.*;
 
 import java.util.*;
 
-import opf5.*;
-import opf5.AlgoritmosDivisionDeEquipos.*;
+import opf5.algoritmosDivisionDeEquipos.*;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
 import opf5.inscripcion.*;
 import opf5.jugador.*;
+import opf5.partido.*;
 
 public abstract class NoConfirmado implements Estado {
 

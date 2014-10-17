@@ -1,5 +1,5 @@
 package opf5.inscripcion;
-import opf5.*;
+import opf5.partido.*;
 
 
 public interface TipoDeInscripcion {

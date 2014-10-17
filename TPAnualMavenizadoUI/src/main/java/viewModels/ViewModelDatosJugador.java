@@ -4,8 +4,8 @@ import static java.util.stream.Collectors.toList;
 
 import java.util.*;
 
-import opf5.*;
 import opf5.jugador.*;
+import opf5.partido.*;
 
 import org.uqbar.commons.utils.Observable;
 

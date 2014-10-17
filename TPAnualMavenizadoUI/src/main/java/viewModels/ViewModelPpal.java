@@ -3,9 +3,9 @@ import java.time.*;
 
 import org.uqbar.commons.utils.Observable;
 
-import opf5.*;
 import opf5.inscripcion.*;
 import opf5.jugador.*;
+import opf5.partido.*;
 import vistas.ViewBusquedaDeJugadores;
 import vistas.ViewGeneracionEquipos;
 import vistas.ViewPpal;

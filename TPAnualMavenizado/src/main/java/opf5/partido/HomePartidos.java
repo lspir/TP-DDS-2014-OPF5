@@ -1,4 +1,4 @@
-package opf5;
+package opf5.partido;
 
 import java.util.*;
 

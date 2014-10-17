@@ -8,23 +8,8 @@ import java.util.List;
 import refactor.Jugador;
 import refactor.Partido;
 
-public class OrdenamientoCalificacionUltimos2Partidos implements CriterioOrdenamiento {
+public class OrdenamientoCalificacionUltimos2Partidos extends CriterioOrdenamiento {
 	
-	
-	public List<Jugador> ordenar(Partido partido) {
-		Collections.sort(partido.getInscriptos(), new Comparator<Jugador>() {
-			@Override
-			public int compare(Jugador jugador1, Jugador jugador2) {
-				return calcularValor(jugador1).compareTo(calcularValor(jugador2));
-			}
-		});
-
-		Collections.reverse(partido.getInscriptos());
-		
-		List<Jugador> jugadores=new ArrayList<Jugador>();
-		jugadores.addAll(partido.getInscriptos());
-		return jugadores;
-	}
 	
 	public Double calcularValor(Jugador jugador) {
 		List<Double> puntajes=jugador.getPuntajes();

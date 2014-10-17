@@ -6,8 +6,8 @@ import java.io.*;
 import java.util.*;
 import java.util.function.Predicate;
 
-import opf5.HomePartidos;
 import opf5.jugador.*;
+import opf5.partido.HomePartidos;
 
 import org.uqbar.commons.utils.Observable;
 
@@ -43,14 +43,14 @@ public class RepositorioJugadores implements Serializable {
 
 	private List<Jugador> noCumpleCriterioInfractores(
 			CriterioBusquedaInfractoresAbstracta criterioInfractoresSeleccionado,
-			List<Jugador> resultados) {
-		return this.filtrarJugadoresConCondicion(jugador->!(criterioInfractoresSeleccionado.teCumple(jugador)), resultados);
+			List<Jugador> jugadores) {
+		return this.filtrarJugadoresConCondicion(jugador->!(criterioInfractoresSeleccionado.teCumple(jugador)), jugadores);
 	}
 
 	private List<Jugador> noCumpleCriterioHandicap(
 			CriterioBusqueda criterioBusquedaHandicap, double handicap,
-			List<Jugador> resultados) {
-		return this.filtrarJugadoresConCondicion(jugador->!(criterioBusquedaHandicap.teCumpleHandicap(handicap, jugador)), resultados);
+			List<Jugador> jugadores) {
+		return this.filtrarJugadoresConCondicion(jugador->!(criterioBusquedaHandicap.teCumpleHandicap(handicap, jugador)), jugadores);
 	}
 
 	private List<Jugador> noCumpleCriterioPromedio(

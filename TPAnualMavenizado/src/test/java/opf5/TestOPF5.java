@@ -7,7 +7,7 @@ import static org.mockito.Mockito.*;
 import java.time.*;
 import java.util.*;
 
-import opf5.AlgoritmosDivisionDeEquipos.*;
+import opf5.algoritmosDivisionDeEquipos.*;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
 import opf5.estadoPartido.*;
 import opf5.excepciones.*;
@@ -15,6 +15,8 @@ import opf5.inscripcion.*;
 import opf5.jugador.*;
 import opf5.mailSender.*;
 import opf5.observers.*;
+import opf5.partido.HomePartidos;
+import opf5.partido.Partido;
 
 import org.junit.*;
 

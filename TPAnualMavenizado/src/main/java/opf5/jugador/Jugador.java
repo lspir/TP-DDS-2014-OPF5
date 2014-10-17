@@ -4,9 +4,9 @@ import java.util.*;
 
 import org.uqbar.commons.utils.Observable;
 
-import opf5.*;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
 import opf5.excepciones.*;
+import opf5.partido.*;
 
 @Observable
 public class Jugador {

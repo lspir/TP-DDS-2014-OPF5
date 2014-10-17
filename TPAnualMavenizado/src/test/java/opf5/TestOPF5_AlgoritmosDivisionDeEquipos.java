@@ -5,9 +5,9 @@ import static org.junit.Assert.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
-import opf5.AlgoritmosDivisionDeEquipos.AlgoritmoDivisionDeEquipos;
-import opf5.AlgoritmosDivisionDeEquipos.DivisionPorPares;
-import opf5.AlgoritmosDivisionDeEquipos.EquipoA03478EquipoB12569;
+import opf5.algoritmosDivisionDeEquipos.AlgoritmoDivisionDeEquipos;
+import opf5.algoritmosDivisionDeEquipos.DivisionPorPares;
+import opf5.algoritmosDivisionDeEquipos.EquipoA03478EquipoB12569;
 import opf5.inscripcion.Inscripcion;
 
 import org.junit.Test;

@@ -9,28 +9,12 @@ import java.util.List;
 import refactor.Jugador;
 import refactor.Partido;
 
-//FIXME no ven código repetido entre esa clase y los otros criterios de ordenamiento?
-public class OrdenamientoMix implements CriterioOrdenamiento {
+public class OrdenamientoMix extends CriterioOrdenamiento {
 	
 	List<CriterioOrdenamiento> criterios;
 	
 	public OrdenamientoMix() {
 		criterios = new ArrayList<CriterioOrdenamiento>();
-	}
-	
-	public List<Jugador> ordenar(Partido partido) {
-		Collections.sort(partido.getInscriptos(), new Comparator<Jugador>() {
-			@Override
-			public int compare(Jugador jugador1, Jugador jugador2) {
-				return calcularValor(jugador1).compareTo(calcularValor(jugador2));
-			}
-		});
-
-		Collections.reverse(partido.getInscriptos());
-		
-		List<Jugador> jugadores=new ArrayList<Jugador>();
-		jugadores.addAll(partido.getInscriptos());
-		return jugadores;
 	}
 	
 	public void addCriterio(CriterioOrdenamiento criterio) {

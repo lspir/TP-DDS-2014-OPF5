@@ -1,5 +1,5 @@
 package opf5.estadoPartido;
-import opf5.*;
+import opf5.partido.*;
 
 public class Ordenado extends NoConfirmado {
 
