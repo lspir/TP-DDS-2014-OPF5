@@ -1,7 +1,10 @@
 package opf5.jugador;
 
+import static java.util.stream.Collectors.toList;
+
 import java.io.*;
 import java.util.*;
+import java.util.function.Predicate;
 
 import opf5.HomePartidos;
 import opf5.jugador.*;
@@ -29,22 +32,45 @@ public class RepositorioJugadores implements Serializable {
 			CriterioBusqueda criterioBusquedaHandicap, double promedio,
 			CriterioBusqueda criterioPromedio,
 			CriterioBusquedaInfractoresAbstracta criterioInfractoresSeleccionado) {
-		// FIXME no usen fors e ifs!!!!!!!!!
-		// No estamos en C!!
 		List<Jugador> resultados = new ArrayList<Jugador>();
-		for (Jugador jugador : this.jugadores) {
-
-			if (jugador.edad() > edad
-					&& (jugador.nombre().startsWith(nombre))
-					&& ((criterioPromedio != null ? criterioPromedio.teCumple(
-							promedio, jugador) : true))
-					&& (criterioBusquedaHandicap != null ? criterioBusquedaHandicap
-							.teCumple(handicap, jugador) : true)
-							&& (criterioInfractoresSeleccionado!=null?criterioInfractoresSeleccionado.teCumple(jugador):true)) {
-				resultados.add(jugador);
-			}
-		}
+		resultados.addAll(this.cumpleEdadMinima(edad,this.getJugadores()));
+		resultados.removeAll(this.nombreNoEmpiezacon(nombre,resultados));
+		resultados.removeAll(this.noCumpleCriterioPromedio(criterioPromedio,promedio,resultados));
+		resultados.removeAll(this.noCumpleCriterioHandicap(criterioBusquedaHandicap,handicap,resultados));
+		resultados.removeAll(this.noCumpleCriterioInfractores(criterioInfractoresSeleccionado,resultados));
 		return resultados;
+	}
+
+	private List<Jugador> noCumpleCriterioInfractores(
+			CriterioBusquedaInfractoresAbstracta criterioInfractoresSeleccionado,
+			List<Jugador> resultados) {
+		return this.filtrarJugadoresConCondicion(jugador->!(criterioInfractoresSeleccionado.teCumple(jugador)), resultados);
+	}
+
+	private List<Jugador> noCumpleCriterioHandicap(
+			CriterioBusqueda criterioBusquedaHandicap, double handicap,
+			List<Jugador> resultados) {
+		return this.filtrarJugadoresConCondicion(jugador->!(criterioBusquedaHandicap.teCumpleHandicap(handicap, jugador)), resultados);
+	}
+
+	private List<Jugador> noCumpleCriterioPromedio(
+			CriterioBusqueda criterioPromedio, double promedio,
+			List<Jugador> jugadores) {
+		return this.filtrarJugadoresConCondicion((jugador)->!(criterioPromedio.teCumple(promedio, jugador)), jugadores);
+		}
+	
+
+	private List<Jugador> nombreNoEmpiezacon(String nombre,
+			List<Jugador> jugadores) {
+		return this.filtrarJugadoresConCondicion(jugador-> !(jugador.nombre().startsWith(nombre)), jugadores);
+	}
+
+	private List<Jugador> cumpleEdadMinima(double edad, List<Jugador> jugadores ) {
+		return this.filtrarJugadoresConCondicion((jugador)->jugador.edad()>=edad,jugadores);
+		}
+
+	private List<Jugador> filtrarJugadoresConCondicion(Predicate<Jugador> condicion, List<Jugador> jugadores) {
+		return jugadores.stream().filter((jugador)->condicion.test(jugador) ).collect(toList());
 	}
 
 	public List<Jugador> getJugadores() {

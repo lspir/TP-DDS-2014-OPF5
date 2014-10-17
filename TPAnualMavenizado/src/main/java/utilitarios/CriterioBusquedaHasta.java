@@ -11,15 +11,16 @@ public class CriterioBusquedaHasta extends CriterioBusqueda {
 		this.setNombre("Hasta");
 	}
 	
-	@Override
-	public Boolean teCumple(int valor, Jugador jugador) {
-		return jugador.getHandicap()<=valor;
-	
-	}
 
 	@Override
 	public boolean teCumple(double promedio, Jugador jugador) {
 		return jugador.getPromedioUltimoPartido()<=promedio;
+	}
+
+
+	@Override
+	public boolean teCumpleHandicap(double handicap, Jugador jugador) {
+		return jugador.getHandicap()<=handicap;
 	}
 
 }

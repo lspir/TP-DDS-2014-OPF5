@@ -33,7 +33,7 @@ public class ViewModelPpalDecorador implements ViewModelPpalInterfaz {
 		ArrayList<String> nombreJugadores = new ArrayList<String>(
 			    Arrays.asList("Belén", "Leandro", "Emiliano","Alicia","Noelia","Tomasito","Patricio","Beto","Genaro","Kiara","FM9","Negrita",
 			    		"Gringo","Mishimishi","Messias"));
-		int maxEdad=100;
+		int maxEdad=50;
 		int minEdad=1;
 		for(int i=0;i<15;i++){
 			this.crearJugador(nombreJugadores.get(i),this.randomEntre(minEdad, maxEdad),i);

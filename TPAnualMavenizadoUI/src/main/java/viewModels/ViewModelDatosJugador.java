@@ -13,7 +13,7 @@ import org.uqbar.commons.utils.Observable;
 public class ViewModelDatosJugador {
 
 	private String nombre;
-	private int handicap;
+	private int handicap,edad;
 	private double promedio, ultimoPromedio;
 	private List<String> infracciones = new ArrayList<String>();
 	private List<String> amigos = new ArrayList<String>();
@@ -29,6 +29,7 @@ public class ViewModelDatosJugador {
 
 	public ViewModelDatosJugador(Jugador jugador) {
 		this.nombre = jugador.nombre();
+		this.edad=jugador.edad();
 		this.handicap = jugador.getHandicap();
 		this.infracciones = jugador.infracciones().stream().map((infraccion)->infraccion.getMomento()).collect(toList());
 		this.cantidadPartidos = HomePartidos.getInstance().consultarCantidadDePartidosJugados(jugador);
@@ -73,6 +74,14 @@ public class ViewModelDatosJugador {
 
 	public void setAmigos(List<String> amigos) {
 		this.amigos = amigos;
+	}
+
+	public int getEdad() {
+		return edad;
+	}
+
+	public void setEdad(int edad) {
+		this.edad = edad;
 	}
 
 }

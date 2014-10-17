@@ -7,7 +7,6 @@ import org.uqbar.commons.utils.Observable;
 @Observable
 public abstract class CriterioBusqueda {
 	private String nombre;
-	public abstract Boolean teCumple(int valor, Jugador jugador);
 	public String getNombre() {
 		return nombre;
 	}
@@ -15,6 +14,6 @@ public abstract class CriterioBusqueda {
 		this.nombre = nombre;
 	}
 	public abstract boolean teCumple(double promedio, Jugador jugador);
-	
+	public abstract boolean teCumpleHandicap(double handicap, Jugador jugador);
 
 }

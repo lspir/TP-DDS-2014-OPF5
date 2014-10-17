@@ -42,12 +42,13 @@ public class ViewModelBuscadorJugadores {
 			criteriosInfractores.add(new CriterioBusquedaInfractores());
 			criteriosInfractores.add(new CriterioBusquedaNoInfractores());
 			criteriosInfractores.add(new CriterioBusquedaTodos());
-			
+			criterioBusquedaHandicap=new CriterioBusquedaDesde();
+			criterioPromedio=new CriterioBusquedaDesde();
+			criterioInfractoresSeleccionado=new CriterioBusquedaTodos();
 		}
 
 		public void search() {
-			//FIXME no faltan criterios de búsqueda acá?
-			this.resultados = RepositorioJugadores.getInstance().search(this.edad, this.nombre,this.handicap, this.criterioBusquedaHandicap,this.promedio,this.criterioPromedio,this.criterioInfractoresSeleccionado);
+				this.resultados = RepositorioJugadores.getInstance().search(this.edad, this.nombre,this.handicap, this.criterioBusquedaHandicap,this.promedio,this.criterioPromedio,this.criterioInfractoresSeleccionado);
 		}
 
 		public double getEdad() {

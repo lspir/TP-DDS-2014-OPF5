@@ -36,6 +36,7 @@ public class ViewDatosJugador extends Vista<ViewModelDatosJugador>{
 		Panel panel = new Panel(mainPanel);
 		panel.setLayout(new ColumnLayout(2));
 		this.mostarValor(panel,"Nombre","nombre");
+		this.mostarValor(panel,"Edad","edad");
 		this.mostarValor(panel, "Handicap:", "handicap");
 		this.mostarValor(panel, "Partidos:", "cantidadPartidos");
 		this.mostarValor(panel, "Promedio:", "promedio");
