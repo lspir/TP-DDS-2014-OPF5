@@ -188,5 +188,5 @@ public class TestGenerarEquipo {
 	public void inscribir(Partido partido, Jugador jugador) {
 		partido.inscribir(jugador);
 	}
-
 }
+

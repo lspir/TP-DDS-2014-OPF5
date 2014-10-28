@@ -11,5 +11,4 @@ public class ModoEstandar implements CriterioInscripcion {
 	public boolean dejaLugarAOtro() {
 		return false;
 	}
-		
-}
+}		
