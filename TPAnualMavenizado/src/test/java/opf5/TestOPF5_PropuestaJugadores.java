@@ -45,6 +45,5 @@ public class TestOPF5_PropuestaJugadores extends TestOPF5 {
 		partidoLleno.administradorAcepto(inscripcionPropuesta);
 		assertFalse(partidoLleno.getInscripciones().stream()
 				.anyMatch(inscripcion -> inscripcion.jugador().equals(jugador)));
-
 	}
 }

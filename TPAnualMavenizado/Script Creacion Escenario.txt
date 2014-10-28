@@ -1,0 +1,25 @@
+INSERT INTO Partidos (Estado) VALUES('Sin Ordenar')
+CALL cargarJugadorConAmigoYInscripcionEstandar('Belen',21,0,'pepe@gmail');
+CALL cargarJugadorConAmigoYInscripcionEstandar('Leandro',20,1,'enzo@gmail');
+CALL cargarJugadorConAmigoYInscripcionEstandar('Emiliano',29,2,'amigo@gmail');
+CALL cargarJugadorConAmigoYInscripcionEstandar('Alicia',51,3,'hola@gmail');
+CALL cargarJugadorConAmigoYInscripcionEstandar('Noelia',22,4,'foo@gmail');
+CALL cargarJugadorConAmigoYInscripcionEstandar('Tomasito',16,5,'pepita.vola@gmail');
+CALL cargarJugadorConAmigoYInscripcionEstandar('Patricio',32,6,'jose@gmail');
+CALL cargarJugadorConAmigoYInscripcionEstandar('Beto',34,7,'pedro@gmail');
+CALL cargarJugadorConAmigoYInscripcionEstandar('Genaro',13,8,'argentino@gmail');
+CALL cargarJugadorConAmigoYInscripcionEstandar('Kiara',46,9,'jose@hotmail');
+
+
+
+delimiter //
+CREATE PROCEDURE cargarJugadorConAmigoYInscripcionEstandar(IN NombreNuevo VARCHAR(50),IN EdadNuevo INTEGER,IN HandicapNuevo INTEGER,IN MailAmigoNuevo VARCHAR(50))
+    BEGIN
+    	INSERT INTO Jugadores (Nombre,Edad,Handicap) VALUES (NombreNuevo ,EdadNuevo ,HandicapNuevo);
+	INSERT INTO Amigos (Direccion) VALUES (MailAmigoNuevo);
+	INSERT INTO Amigos_Por_Jugador(id_Jugador,id_Amigo) VALUES(SELECT id_Jugador FROM Jugadores WHERE Nombre=NombreNuevo, SELECT LAST_INSERT_ID());
+	INSERT INTO Inscripciones (Jugador,Tipo_Inscripcion) VALUES(SELECT id_Jugador FROM Jugadores WHERE Nombre=NombreNuevo, 'Estandar');
+	INSERT INTO Inscripciones_Por_Partido(id_Partido,id_Inscripcion) VALUES(SELECT id_Partido FROM Partidos LIMIT 1,SELECT LAST_INSERT_ID());
+     END //
+
+delimiter ; 

@@ -122,8 +122,7 @@ public class Partido {
 	public void seRechazoInscripcion(Inscripcion inscripcion, String motivo) {
 
 		posiblesJugadores.remove(inscripcion);
-		Denegacion denegacion = new Denegacion(motivo, inscripcion, LocalDate.now(),
-				inscripcion.jugador());
+		Denegacion denegacion = new Denegacion(motivo, inscripcion, LocalDate.now());
 		denegaciones.add(denegacion);
 	}
 
