@@ -7,7 +7,9 @@ import org.uqbar.commons.utils.Observable;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
 import opf5.excepciones.*;
 import opf5.partido.*;
+import javax.persistence.Entity;
 
+@Entity
 @Observable
 public class Jugador {
 	private String nombre;

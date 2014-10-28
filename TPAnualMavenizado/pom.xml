@@ -29,7 +29,35 @@
   </build>
 
 
-  <dependencies>
+  <dependencies> 
+   <!-- JPA Persistence Dependencies -->
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-entitymanager</artifactId>
+      <version>4.2.6.Final</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.hibernate.javax.persistence</groupId>
+      <artifactId>hibernate-jpa-2.0-api</artifactId>
+      <version>1.0.1.Final</version>
+      <scope>compile</scope>
+    </dependency>    
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>4.2.6.Final</version>
+    </dependency>
+    
+    <!-- driver jdbc -->
+    <dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>5.1.26</version>
+	</dependency>
+            
+  
    <dependency>
       <groupId>org.uqbar-project</groupId>
       <artifactId>arena-jface</artifactId>
