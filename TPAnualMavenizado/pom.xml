@@ -30,6 +30,17 @@
 
 
   <dependencies>
+   <dependency>
+      <groupId>org.uqbar-project</groupId>
+      <artifactId>arena-jface</artifactId>
+      <version>3.3-SNAPSHOT</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>javassist</artifactId>
+          <groupId>javassist</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
     <dependency>
   <groupId>org.mockito</groupId>
   <artifactId>mockito-all</artifactId>
@@ -46,4 +57,21 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
+  <!-- Los repositorios son sólo necesarios si no fueron agregados ya al 
+    settings.xml como se explica en http://uqbar-wiki.org/index.php?title=Configuraci%C3%B3n_de_Maven_para_poder_utilizar_las_herramientas_de_Uqbar -->
+  <repositories>
+    <repository>
+      <id>uqbar-wiki.org-releases</id>
+      <name>uqbar-wiki.org-releases</name>
+      <url>http://uqbar-wiki.org/mvn/releases</url>
+    </repository>
+    <repository>
+      <snapshots />
+      <id>uqbar-wiki.org-snapshots</id>
+      <name>uqbar-wiki.org-snapshots</name>
+      <url>http://uqbar-wiki.org/mvn/snapshots</url>
+    </repository>
+  </repositories>
+  
 </project>
