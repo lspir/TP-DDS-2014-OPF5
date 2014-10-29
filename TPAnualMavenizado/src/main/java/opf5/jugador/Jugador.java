@@ -10,6 +10,9 @@ import opf5.partido.*;
 import db.PersistentEntity;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PostLoad;
 import javax.persistence.Transient;
 
@@ -19,11 +22,13 @@ public class Jugador extends PersistentEntity{
 	private String nombre;
 	private int edad;
 	private int handicap;
-	@Transient
+	@ManyToMany
 	private List<Amigo> amigos;
-	@Transient
+	@OneToMany
+	@JoinColumn(name="id")
 	private List<Infraccion> infracciones;
-	@Transient
+	@OneToMany
+	@JoinColumn(name="id")
 	private List<Critica> criticas;
 	@Transient
 	private double promedio;

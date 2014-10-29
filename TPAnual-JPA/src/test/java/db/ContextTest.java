@@ -5,6 +5,7 @@ import static db.EntityManagerHelper.*;
 
 import javax.persistence.criteria.CriteriaQuery;
 
+import opf5.jugador.Infraccion;
 import opf5.jugador.Jugador;
 import opf5.jugador.RepositorioJugadores;
 
@@ -31,7 +32,7 @@ public class ContextTest {
 		
 		@After
 	   public void tearDown() throws Exception {
-	      commit();
+	      rollback();
 	   }
 		
 	@Test
@@ -45,6 +46,7 @@ public class ContextTest {
 	public void persistirJugadorAtravesDelHome(){
 		Jugador jugador = new Jugador("Pepe",15,18);
 		RepositorioJugadores.getInstance().create(jugador);
+		jugador.tePenalizaron(new Infraccion("bobo", 2));
 
 		}
 	

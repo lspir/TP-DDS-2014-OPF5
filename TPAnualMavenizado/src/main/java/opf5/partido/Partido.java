@@ -4,6 +4,12 @@ import static java.util.stream.Collectors.*;
 import java.time.*;
 import java.util.*;
 
+import javax.persistence.Entity;
+import javax.persistence.PostLoad;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import db.PersistentEntity;
 import opf5.algoritmosDivisionDeEquipos.*;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
 import opf5.estadoPartido.*;
@@ -12,16 +18,23 @@ import opf5.inscripcion.*;
 import opf5.jugador.*;
 import opf5.observers.*;
 
-
-public class Partido {
+@Entity
+@Table(name="Partidos")
+public class Partido extends PersistentEntity {
   	private LocalDate fecha;
 	private LocalTime horario;
 	private String lugar;
+	@Transient
 	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
+	@Transient
 	private List<Observador> observadores = new ArrayList<Observador>();
+	@Transient
 	private List<Inscripcion> posiblesJugadores = new ArrayList<Inscripcion>();
+	@Transient
 	private List<Denegacion> denegaciones = new ArrayList<Denegacion>();
+	@Transient
 	private List<FormacionPartido> formacionesTentativas = new ArrayList<FormacionPartido>();
+	@Transient
 	private Estado estado;
 
 	public Partido(LocalDate fecha, LocalTime horario, String lugar) {

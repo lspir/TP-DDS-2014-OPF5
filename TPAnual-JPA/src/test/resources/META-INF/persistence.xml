@@ -9,8 +9,10 @@
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
     	
     	<class>opf5.jugador.Jugador</class>
-    
-    	 
+    	<class>opf5.jugador.Infraccion</class>
+  		 <class>opf5.jugador.Amigo</class>
+    	  <class>opf5.jugador.Critica</class>
+    	 <class>opf5.partido.Partido</class> 
     	 
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        
