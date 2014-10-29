@@ -7,18 +7,27 @@ import org.uqbar.commons.utils.Observable;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
 import opf5.excepciones.*;
 import opf5.partido.*;
+import db.PersistentEntity;
+
 import javax.persistence.Entity;
+import javax.persistence.PostLoad;
+import javax.persistence.Transient;
 
 @Entity
 @Observable
-public class Jugador {
+public class Jugador extends PersistentEntity{
 	private String nombre;
 	private int edad;
-	private List<Amigo> amigos;
-	private List<Infraccion> infracciones;
-	private List<Critica> criticas;
 	private int handicap;
+	@Transient
+	private List<Amigo> amigos;
+	@Transient
+	private List<Infraccion> infracciones;
+	@Transient
+	private List<Critica> criticas;
+	@Transient
 	private double promedio;
+	@Transient
 	private double promedioUltimoPartido;
 
 	public Jugador(String nombre, int edad, int handicap) {
@@ -29,6 +38,13 @@ public class Jugador {
 		criticas = new ArrayList<Critica>();
 		this.setPromedio(0);
 		this.handicap=handicap;
+	}
+	
+	
+	@PostLoad
+	public void postLoad(){
+		this.setearPromedioCalificaciones();
+		this.setearPromedioDelUltimoPartido();
 	}
 
 	public void handicap(int handicap) {
@@ -67,10 +83,17 @@ public class Jugador {
 
 	public void agregarCritica(Critica critica) {
 		criticas.add(critica);
-		setPromedio((new UltimasNCalificaciones(criticas.size()).ponderate(this)));
-		setPromedioUltimoPartido(new PromedioDeUltimoPartido().ponderate(this));
+		this.setearPromedioCalificaciones();
+		this.setearPromedioDelUltimoPartido();
 	}
 
+	public void setearPromedioCalificaciones(){
+		setPromedio((new UltimasNCalificaciones(criticas.size()).ponderate(this)));
+	}
+	
+	public void setearPromedioDelUltimoPartido(){
+		setPromedioUltimoPartido(new PromedioDeUltimoPartido().ponderate(this));
+	}
 	public List<Critica> criticas() {
 		return criticas;
 	}

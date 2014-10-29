@@ -1,31 +1,39 @@
 package opf5.jugador;
 
 import static java.util.stream.Collectors.toList;
+import static db.EntityManagerHelper.*;
 
 import java.io.*;
 import java.util.*;
 import java.util.function.Predicate;
 
+import javax.persistence.Entity;
+
 import opf5.jugador.*;
 import opf5.partido.HomePartidos;
 
+import org.hibernate.mapping.PersistentClass;
 import org.uqbar.commons.utils.Observable;
 
+import db.EntityManagerHelper;
+import db.PersistentEntity;
 import utilitarios.CriterioBusqueda;
 import utilitarios.CriterioBusquedaInfractoresAbstracta;
 
 @Observable
-public class RepositorioJugadores implements Serializable {
-
+public class RepositorioJugadores extends PersistentEntity {
+	
 	private List<Jugador> jugadores = new ArrayList<Jugador>();
 	private static final RepositorioJugadores instance = new RepositorioJugadores();
-
+	
+	
 	public static synchronized RepositorioJugadores getInstance() {
 		return instance;
 	}
 
 	public void create(Jugador jugador) {
 		this.jugadores.add(jugador);
+		persist(jugador);
 	}
 
 	public List<Jugador> search(double edad, String nombre, double handicap,

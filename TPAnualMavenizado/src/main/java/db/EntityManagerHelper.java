@@ -90,6 +90,8 @@ public class EntityManagerHelper {
     	}
     }
     
-    
+    public static void persist(Object o){
+        entityManager().persist(o);
+     }
 
 }
