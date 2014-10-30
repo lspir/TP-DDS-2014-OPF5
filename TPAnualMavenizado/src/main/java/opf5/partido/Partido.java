@@ -5,6 +5,7 @@ import java.time.*;
 import java.util.*;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -38,7 +39,8 @@ public class Partido extends PersistentEntity {
 	@OneToMany
 	@JoinColumn(name="id")
 	private List<Denegacion> denegaciones = new ArrayList<Denegacion>();
-	@Transient
+	@OneToMany
+	@JoinColumn(name="id")
 	private List<FormacionPartido> formacionesTentativas = new ArrayList<FormacionPartido>();
 	@Transient
 	private Estado estado;

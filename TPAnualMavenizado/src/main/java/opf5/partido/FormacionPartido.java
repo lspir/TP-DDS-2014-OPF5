@@ -2,10 +2,19 @@ package opf5.partido;
 
 import java.util.*;
 
-import opf5.inscripcion.*;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
-public class FormacionPartido {
+import db.PersistentEntity;
+import opf5.inscripcion.*;
+@Entity
+@Table(name="Formaciones")
+public class FormacionPartido extends PersistentEntity{
+	@ManyToMany
 	private List<Inscripcion> equipoA = new ArrayList<Inscripcion>();
+	@ManyToMany
 	private List<Inscripcion> equipoB = new ArrayList<Inscripcion>();
 	
 	public FormacionPartido(List<Inscripcion> equipoA, List<Inscripcion> equipoB) {

@@ -16,6 +16,8 @@
     	  <class>opf5.partido.Denegacion</class> 
     	  <class>opf5.inscripcion.Inscripcion</class> 
     	 <class>opf5.inscripcion.Condicion</class>	
+    	 <class>opf5.partido.FormacionPartido</class>	
+    	  
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        
         
