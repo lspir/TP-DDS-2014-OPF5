@@ -13,6 +13,7 @@
   		 <class>opf5.jugador.Amigo</class>
     	  <class>opf5.jugador.Critica</class>
     	 <class>opf5.partido.Partido</class> 
+    	  <class>opf5.partido.Denegacion</class> 
     	  <class>opf5.inscripcion.Inscripcion</class> 
     	 <class>opf5.inscripcion.Condicion</class>	
         <properties> 

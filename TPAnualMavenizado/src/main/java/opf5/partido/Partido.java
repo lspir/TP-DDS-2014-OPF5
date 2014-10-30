@@ -6,7 +6,10 @@ import java.util.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PostLoad;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -30,9 +33,10 @@ public class Partido extends PersistentEntity {
 	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
 	@Transient
 	private List<Observador> observadores = new ArrayList<Observador>();
-	@Transient
+	@ManyToMany
 	private List<Inscripcion> posiblesJugadores = new ArrayList<Inscripcion>();
-	@Transient
+	@OneToMany
+	@JoinColumn(name="id")
 	private List<Denegacion> denegaciones = new ArrayList<Denegacion>();
 	@Transient
 	private List<FormacionPartido> formacionesTentativas = new ArrayList<FormacionPartido>();
