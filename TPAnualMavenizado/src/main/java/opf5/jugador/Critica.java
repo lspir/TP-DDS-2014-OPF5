@@ -22,6 +22,10 @@ public class Critica extends PersistentEntity{
 		this.partido = partido;
 
 	}
+	
+	public Critica(){
+		
+	}
 
 	public Partido partido() {
 		return partido;

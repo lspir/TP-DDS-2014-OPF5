@@ -22,6 +22,10 @@ public class FormacionPartido extends PersistentEntity{
 		this.equipoB=equipoB;
 	}
 
+	public FormacionPartido(){
+		
+	}
+	
 	public List<Inscripcion> getEquipoA() {
 		return equipoA;
 	}

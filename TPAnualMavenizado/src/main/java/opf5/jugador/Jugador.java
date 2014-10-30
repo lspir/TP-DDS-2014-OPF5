@@ -37,6 +37,10 @@ public class Jugador extends PersistentEntity{
 	@Transient
 	private double promedioUltimoPartido;
 
+	public Jugador(){
+		
+	}
+	
 	public Jugador(String nombre, int edad, int handicap) {
 		this.nombre = nombre;
 		this.edad = edad;

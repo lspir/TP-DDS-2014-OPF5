@@ -5,6 +5,7 @@ import static db.EntityManagerHelper.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import javax.persistence.criteria.CriteriaQuery;
 
@@ -45,22 +46,27 @@ public class ContextTest {
 	public void persistirJugador(){
 		Jugador jugador = new Jugador("Pepe",15,18);
 		persist(jugador);
-		Jugador jugadorr= EntityManagerHelper.getEntityManager().find(Jugador.class, 1l);
+		Jugador jugadorPersistido= EntityManagerHelper.getEntityManager().find(Jugador.class, 1l);
+		assertEquals(jugador, jugadorPersistido);
 		}
 	
 	@Test
 	public void persistirJugadorAtravesDelHome(){
 		Jugador jugador = new Jugador("Pepe",15,18);
 		RepositorioJugadores.getInstance().create(jugador);
-		jugador.tePenalizaron(new Infraccion("bobo", 2));
+		jugador.tePenalizaron(new Infraccion("malo", 2));
 
 		} 
 	
 	@Test
-	public void persistirPartido(){
+	public void persistirPartidoConUnaInscripcion(){
 	Partido partido=new Partido(LocalDate.now(), LocalTime.now(), "Casa");
 	partido.intentarInscribirA(new Inscripcion(new Jugador("hola", 12, 2), new Estandar()));
 	persist(partido);
-
-		} 
+	Partido partidoPersistido=EntityManagerHelper.getEntityManager().find(Partido.class, 1l);
+	assertEquals(partido.getInscripciones(),partidoPersistido.getInscripciones());
+	assertEquals(partido.getEstado(),partidoPersistido.getEstado());
+	} 
+	
+	
 }

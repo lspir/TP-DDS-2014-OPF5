@@ -13,12 +13,9 @@ import opf5.jugador.*;
 import opf5.partido.*;
 
 public class Confirmado extends Estado {
-	@Transient
-	private FormacionPartido formacion;
-	
-	
+		
 	public Confirmado(FormacionPartido formacion) {
-		this.formacion=formacion;
+		this.setFormacionConfirmada(formacion);
 	}
 
 	public Confirmado() {
@@ -26,19 +23,19 @@ public class Confirmado extends Estado {
 	}
 
 	public List<Inscripcion> getEquipoA() {
-		return formacion.getEquipoA();
+		return getFormacionConfirmada().getEquipoA();
 	}
 
 	public void setEquipoA(List<Inscripcion> equipoA) {
-		formacion.setEquipoA(equipoA);
+		getFormacionConfirmada().setEquipoA(equipoA);
 	}
 
 	public List<Inscripcion> getEquipoB() {
-		return formacion.getEquipoB();
+		return getFormacionConfirmada().getEquipoB();
 	}
 
 	public void setEquipoB(List<Inscripcion> equipoB) {
-		formacion.setEquipoB(equipoB);;
+		getFormacionConfirmada().setEquipoB(equipoB);;
 	}
 	public void intentarInscribirA(Inscripcion inscripcion, Partido partido){
 		throw new ElPartidoYaEstaConfirmadoException();
@@ -63,7 +60,7 @@ public class Confirmado extends Estado {
 
 	
 	public int jugo(Jugador jugador) {
-		if( loContiene(formacion.getEquipoA(),jugador) || loContiene(formacion.getEquipoB(),jugador)){
+		if( loContiene(getFormacionConfirmada().getEquipoA(),jugador) || loContiene(getFormacionConfirmada().getEquipoB(),jugador)){
 			return 1;
 		}
 		return 0;

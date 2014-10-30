@@ -76,10 +76,5 @@ public class NoConfirmado extends Estado {
 		return 0;
 	}
 
-	@Override
-	public void aceptarEquipos(Partido partido, FormacionPartido formacion) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

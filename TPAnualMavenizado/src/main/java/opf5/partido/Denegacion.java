@@ -18,6 +18,9 @@ public class Denegacion extends PersistentEntity{
 	private Inscripcion inscripcion;
 	private LocalDate fecha;
 	
+	public Denegacion(){
+		
+	}
 
 	public Denegacion(String motivo, Inscripcion inscripcion, LocalDate fecha) {
 		this.motivo=motivo;

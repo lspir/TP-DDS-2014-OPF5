@@ -3,6 +3,9 @@ import javax.persistence.Embeddable;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.PostLoad;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -15,9 +18,15 @@ import opf5.partido.*;
 public class Inscripcion extends PersistentEntity{
 	@ManyToOne
 	Jugador jugador;
-	@Embedded
+	String nombreTipoDeInscripcion;
+	@ManyToOne
+	public Condicion condicion;
+	@Transient
 	TipoDeInscripcion tipoDeInscripcion;
-
+	
+	public Inscripcion(){ 
+		
+	}
 	public Inscripcion(Jugador jugador, TipoDeInscripcion tipoDeInscripcion) {
 		this.jugador = jugador;
 		this.tipoDeInscripcion = tipoDeInscripcion;
@@ -55,6 +64,24 @@ public class Inscripcion extends PersistentEntity{
 
 	public Boolean tipoDePrioridadMinima() {
 		return tipoDeInscripcion.prioridadMinima();
+	}
+	
+	@PrePersist
+	@PreUpdate
+	public void prepararParaPersist(){
+		this.nombreTipoDeInscripcion=tipoDeInscripcion.getNombre();
+		this.condicion=tipoDeInscripcion.getCondicion();
+	}
+	
+	@PostLoad
+	public void postLoad(){
+		switch(this.nombreTipoDeInscripcion){
+		case "Estandar": this.tipoDeInscripcion=new Estandar();
+		case "Solidario": this.tipoDeInscripcion=new Solidario();
+		case "Condicional": {this.tipoDeInscripcion=new Condicional();
+							this.tipoDeInscripcion.setCondicion(this.condicion);}
+		
+		}
 	}
 
 }

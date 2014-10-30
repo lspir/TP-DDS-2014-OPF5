@@ -2,6 +2,8 @@ package opf5.estadoPartido;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import opf5.algoritmosDivisionDeEquipos.*;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
@@ -9,10 +11,21 @@ import opf5.inscripcion.*;
 import opf5.jugador.*;
 import opf5.partido.*;
 
-@Embeddable
-public class Estado {
-	@Column(name = "Estado")
-	public String nombre;
+public abstract class Estado {
+	
+	protected String nombre;
+	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	
+	private FormacionPartido formacionConfirmada;
+	
 
 	public void intentarInscribirA(Inscripcion inscripcion,
 			Partido partido){};
@@ -31,5 +44,13 @@ public class Estado {
 
 	public int jugo(Jugador jugador){
 		return -1;
+	}
+
+	public FormacionPartido getFormacionConfirmada() {
+		return formacionConfirmada;
+	}
+
+	public void setFormacionConfirmada(FormacionPartido formacion) {
+		this.formacionConfirmada = formacion;
 	};
 }

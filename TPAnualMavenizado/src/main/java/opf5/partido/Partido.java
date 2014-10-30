@@ -11,7 +11,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.PostLoad;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -42,9 +45,16 @@ public class Partido extends PersistentEntity {
 	@OneToMany
 	@JoinColumn(name="id")
 	private List<FormacionPartido> formacionesTentativas = new ArrayList<FormacionPartido>();
-	@Embedded
+	@Transient
 	private Estado estado;
+	private String nombreEstado;
+	@OneToOne
+	private FormacionPartido formacionConfirmada;
 
+	
+	public Partido(){
+		
+	}
 	public Partido(LocalDate fecha, LocalTime horario, String lugar) {
 		this.fecha = fecha;
 		this.horario = horario;
@@ -234,6 +244,24 @@ public class Partido extends PersistentEntity {
 
 	public int jugo(Jugador jugador) {
 		return estado.jugo(jugador);
+	}
+	
+	@PrePersist
+	@PreUpdate
+	public void prePersistir(){
+	this.nombreEstado=this.estado.getNombre();
+	if(this.nombreEstado=="Confirmado"){
+	this.formacionConfirmada=this.estado.getFormacionConfirmada();	
+	}
+	}
+	
+	@PostLoad
+	public void cargarEstado(){
+		switch(this.nombreEstado){
+		case "Confirmado": this.estado=new Confirmado(this.formacionConfirmada);			
+		case "Ordenado": this.estado= new Ordenado();
+		case "Sin Ordenar":this.estado= new SinOrdenar();
+		}
 	}
 
 }
