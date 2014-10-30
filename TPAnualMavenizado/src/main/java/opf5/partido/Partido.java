@@ -4,6 +4,7 @@ import static java.util.stream.Collectors.*;
 import java.time.*;
 import java.util.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.PostLoad;

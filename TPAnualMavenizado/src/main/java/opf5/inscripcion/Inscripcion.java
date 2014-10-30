@@ -15,7 +15,7 @@ import opf5.partido.*;
 public class Inscripcion extends PersistentEntity{
 	@ManyToOne
 	Jugador jugador;
-	@Transient
+	@Embedded
 	TipoDeInscripcion tipoDeInscripcion;
 
 	public Inscripcion(Jugador jugador, TipoDeInscripcion tipoDeInscripcion) {
