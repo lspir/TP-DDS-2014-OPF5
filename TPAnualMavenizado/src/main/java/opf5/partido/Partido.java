@@ -42,7 +42,7 @@ public class Partido extends PersistentEntity {
 	@OneToMany
 	@JoinColumn(name="id")
 	private List<FormacionPartido> formacionesTentativas = new ArrayList<FormacionPartido>();
-	@Transient
+	@Embedded
 	private Estado estado;
 
 	public Partido(LocalDate fecha, LocalTime horario, String lugar) {

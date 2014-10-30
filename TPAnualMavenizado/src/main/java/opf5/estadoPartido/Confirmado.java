@@ -3,6 +3,8 @@ import static java.util.stream.Collectors.*;
 
 import java.util.*;
 
+import javax.persistence.Transient;
+
 import opf5.algoritmosDivisionDeEquipos.*;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
 import opf5.excepciones.*;
@@ -10,14 +12,17 @@ import opf5.inscripcion.*;
 import opf5.jugador.*;
 import opf5.partido.*;
 
-public class Confirmado implements Estado {
+public class Confirmado extends Estado {
+	@Transient
 	private FormacionPartido formacion;
+	
 	
 	public Confirmado(FormacionPartido formacion) {
 		this.formacion=formacion;
 	}
 
 	public Confirmado() {
+		this.nombre= "Confirmado";
 	}
 
 	public List<Inscripcion> getEquipoA() {

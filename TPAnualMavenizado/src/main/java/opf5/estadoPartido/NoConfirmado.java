@@ -5,13 +5,15 @@ import static java.util.stream.Collectors.*;
 
 import java.util.*;
 
+import javax.persistence.Embeddable;
+
 import opf5.algoritmosDivisionDeEquipos.*;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
 import opf5.inscripcion.*;
 import opf5.jugador.*;
 import opf5.partido.*;
 
-public abstract class NoConfirmado implements Estado {
+public class NoConfirmado extends Estado {
 
 	public void intentarInscribirA(Inscripcion inscripcion, Partido partido) {
 		if (partido.getInscripciones().size() < 10) {
@@ -72,6 +74,12 @@ public abstract class NoConfirmado implements Estado {
 
 	public int jugo(Jugador jugador) {
 		return 0;
+	}
+
+	@Override
+	public void aceptarEquipos(Partido partido, FormacionPartido formacion) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

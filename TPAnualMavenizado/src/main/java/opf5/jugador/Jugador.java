@@ -14,10 +14,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PostLoad;
+import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
 @Observable
+@Table(name="Jugadores")
 public class Jugador extends PersistentEntity{
 	private String nombre;
 	private int edad;
