@@ -1,7 +1,11 @@
 package opf5.inscripcion;
 import opf5.partido.*;
 
-public class Solidario implements TipoDeInscripcion {
+public class Solidario extends TipoDeInscripcion {
+	
+	public Solidario(){
+		this.nombre = "Solidario";
+	}
 	public Boolean dejasPasar() {
 		return true;
 	}

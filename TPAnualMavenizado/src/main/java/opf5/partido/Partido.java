@@ -5,6 +5,7 @@ import java.time.*;
 import java.util.*;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.PostLoad;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -24,7 +25,7 @@ public class Partido extends PersistentEntity {
   	private LocalDate fecha;
 	private LocalTime horario;
 	private String lugar;
-	@Transient
+	@ManyToMany
 	private List<Inscripcion> inscripciones = new ArrayList<Inscripcion>();
 	@Transient
 	private List<Observador> observadores = new ArrayList<Observador>();

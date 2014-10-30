@@ -2,13 +2,15 @@ package opf5.inscripcion;
 import opf5.partido.*;
 
 
-public interface TipoDeInscripcion {
-	public Boolean dejasPasar();
-
-	public Boolean tePodesInscribirA(Partido partido);
-
-	public Boolean prioridadMinima();
+public abstract class TipoDeInscripcion { 
+	public String nombre; 
 	
-	public Boolean teCumple(Partido partido);
+	public abstract Boolean dejasPasar();
 
-}
+	public abstract Boolean tePodesInscribirA(Partido partido);
+
+	public abstract Boolean prioridadMinima();
+	
+	public abstract Boolean teCumple(Partido partido);
+
+} 

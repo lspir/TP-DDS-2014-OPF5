@@ -2,7 +2,10 @@ package opf5.inscripcion;
 import opf5.partido.*;
 
 
-public class Estandar implements TipoDeInscripcion {
+public class Estandar extends  TipoDeInscripcion {
+	public Estandar(){
+		this.nombre= "Estandar";
+	}
 	public Boolean dejasPasar() {
 		return false;
 	}

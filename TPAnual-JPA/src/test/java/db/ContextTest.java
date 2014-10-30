@@ -48,6 +48,5 @@ public class ContextTest {
 		RepositorioJugadores.getInstance().create(jugador);
 		jugador.tePenalizaron(new Infraccion("bobo", 2));
 
-		}
-	
+		} 
 }

@@ -1,9 +1,13 @@
 package opf5.inscripcion;
 import opf5.partido.*;
 
-public class Condicional implements TipoDeInscripcion {
+public class Condicional extends  TipoDeInscripcion {
 
 	private Condicion condicion;
+	
+	public Condicional(){
+		this.nombre="Condicional";
+	}
 
 	public void setearCondicion(Condicion condicion) {
 		this.condicion = condicion;

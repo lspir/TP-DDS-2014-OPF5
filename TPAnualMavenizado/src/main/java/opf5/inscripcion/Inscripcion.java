@@ -1,12 +1,22 @@
 package opf5.inscripcion;
+import javax.persistence.Embeddable;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import db.PersistentEntity;
 import opf5.jugador.*;
 import opf5.partido.*;
 
-
-public class Inscripcion {
+@Entity
+@Table(name = "Inscripciones")
+public class Inscripcion extends PersistentEntity{
+	@ManyToOne
 	Jugador jugador;
+	@Transient
 	TipoDeInscripcion tipoDeInscripcion;
-	
 
 	public Inscripcion(Jugador jugador, TipoDeInscripcion tipoDeInscripcion) {
 		this.jugador = jugador;
