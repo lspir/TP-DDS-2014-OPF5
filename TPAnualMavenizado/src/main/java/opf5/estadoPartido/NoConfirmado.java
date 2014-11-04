@@ -43,6 +43,7 @@ public class NoConfirmado extends Estado {
 						.jugador()))).collect(toList()));
 		partido.agregarFormacion(new FormacionPartido(inscripcionesOrdenadas.stream().limit(5).collect(toList()),inscripcionesOrdenadas.stream().skip(5).collect(toList())));
 		partido.setEstado(new Ordenado());
+		partido.setFlagCambioEstado(true);
 	}
 
 	public void seDioDeBajaSinReemplazante(Inscripcion inscripcion,
@@ -68,6 +69,7 @@ public class NoConfirmado extends Estado {
 
 	private void cambiarEstadoASinOrdenar(Partido partido) {
 		partido.setEstado(new SinOrdenar());
+		partido.setFlagCambioEstado(true);
 		partido.limpiarFormaciones();
 	}
 	

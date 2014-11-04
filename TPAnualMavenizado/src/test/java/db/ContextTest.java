@@ -30,6 +30,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.uqbar.commons.exceptions.NestedException.SystemOutObserver;
+
 public class ContextTest {
 
 	@Test

@@ -16,10 +16,10 @@ public class Confirmado extends Estado {
 		
 	public Confirmado(FormacionPartido formacion) {
 		this.setFormacionConfirmada(formacion);
+		this.nombre= "Confirmado";
 	}
 
 	public Confirmado() {
-		this.nombre= "Confirmado";
 	}
 
 	public List<Inscripcion> getEquipoA() {
