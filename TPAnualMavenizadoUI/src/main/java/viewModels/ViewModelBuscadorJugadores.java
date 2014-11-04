@@ -48,7 +48,7 @@ public class ViewModelBuscadorJugadores {
 		}
 
 		public void search() {
-				this.resultados = RepositorioJugadores.getInstance().search(this.edad, this.nombre,this.handicap, this.criterioBusquedaHandicap,this.promedio,this.criterioPromedio,this.criterioInfractoresSeleccionado);
+				this.resultados = HomeJugadores.getInstance().search(this.edad, this.nombre,this.handicap, this.criterioBusquedaHandicap,this.promedio,this.criterioPromedio,this.criterioInfractoresSeleccionado);
 		}
 
 		public double getEdad() {

@@ -77,6 +77,11 @@
 
     </dependency>
     
+        <dependency>
+      <groupId>org.hsqldb</groupId>
+      <artifactId>hsqldb</artifactId>
+      <version>2.2.8</version>
+    </dependency>
     
     <dependency>
       <groupId>junit</groupId>
@@ -85,6 +90,16 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+  
+  	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.javassist</groupId>
+				<artifactId>javassist</artifactId>
+				<version>3.18.1-GA</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
   
   <!-- Los repositorios son sólo necesarios si no fueron agregados ya al 
     settings.xml como se explica en http://uqbar-wiki.org/index.php?title=Configuraci%C3%B3n_de_Maven_para_poder_utilizar_las_herramientas_de_Uqbar -->

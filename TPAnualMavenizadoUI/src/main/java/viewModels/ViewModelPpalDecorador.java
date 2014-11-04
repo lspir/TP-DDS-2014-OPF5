@@ -14,7 +14,7 @@ import opf5.jugador.Amigo;
 import opf5.jugador.Critica;
 import opf5.jugador.Infraccion;
 import opf5.jugador.Jugador;
-import opf5.jugador.RepositorioJugadores;
+import opf5.jugador.HomeJugadores;
 import opf5.partido.HomePartidos;
 import opf5.partido.Partido;
 import vistas.ViewPpal;
@@ -22,7 +22,7 @@ import vistas.ViewPpal;
 public class ViewModelPpalDecorador implements ViewModelPpalInterfaz {
 
 	private ViewModelPpalInterfaz viewModel = new ViewModelPpal();
-	private RepositorioJugadores repositorioJugadores = RepositorioJugadores
+	private HomeJugadores repositorioJugadores = HomeJugadores
 			.getInstance();
 
 	public ViewModelPpalDecorador() {
@@ -39,8 +39,8 @@ public class ViewModelPpalDecorador implements ViewModelPpalInterfaz {
 			this.crearJugador(nombreJugadores.get(i),this.randomEntre(minEdad, maxEdad),i);
 		}
 		for(int i=0;i<15;i++){
-			this.amigar(RepositorioJugadores.getInstance().getJugadores().get(i),nombreJugadores.get(this.randomEntre(0, 15)));
-			this.amigar(RepositorioJugadores.getInstance().getJugadores().get(i),nombreJugadores.get(this.randomEntre(0, 15)));
+			this.amigar(HomeJugadores.getInstance().getJugadores().get(i),nombreJugadores.get(this.randomEntre(0, 15)));
+			this.amigar(HomeJugadores.getInstance().getJugadores().get(i),nombreJugadores.get(this.randomEntre(0, 15)));
 		}
 		this.armarPartidoConfirmado(0,10);
 		this.armarPartidoConfirmado(5,15);
