@@ -14,7 +14,8 @@ public class Amigo extends PersistentEntity {
 
 	private String direccion;
 	
-	public Amigo(){};
+	public Amigo(){
+		};
 	public Amigo(String direccion)
 	{
 		this.direccion = direccion; 

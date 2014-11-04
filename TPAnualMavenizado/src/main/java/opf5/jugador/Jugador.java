@@ -27,10 +27,10 @@ public class Jugador extends PersistentEntity{
 	@ManyToMany
 	private List<Amigo> amigos;
 	@OneToMany
-	@JoinColumn(name="id")
+	@JoinColumn(name="id_jugador")
 	private List<Infraccion> infracciones;
 	@OneToMany
-	@JoinColumn(name="id")
+	@JoinColumn(name="id_jugador")
 	private List<Critica> criticas;
 	@Transient
 	private double promedio;
