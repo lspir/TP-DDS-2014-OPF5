@@ -42,7 +42,7 @@ public class NoConfirmado extends Estado {
 				.sorted(comparing(inscrip -> criterio.ponderate(inscrip
 						.jugador()))).collect(toList()));
 		partido.agregarFormacion(new FormacionPartido(inscripcionesOrdenadas.stream().limit(5).collect(toList()),inscripcionesOrdenadas.stream().skip(5).collect(toList())));
-	partido.setEstado(new Ordenado());
+		partido.setEstado(new Ordenado());
 	}
 
 	public void seDioDeBajaSinReemplazante(Inscripcion inscripcion,

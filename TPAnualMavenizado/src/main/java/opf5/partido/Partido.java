@@ -20,6 +20,8 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.annotations.IndexColumn;
+
 import db.EntityManagerHelper;
 import db.PersistentEntity;
 import opf5.algoritmosDivisionDeEquipos.*;
@@ -53,12 +55,14 @@ public class Partido extends PersistentEntity {
 	private List<Denegacion> denegaciones = new ArrayList<Denegacion>();
 	@OneToMany
 	@JoinColumn(name = "id_partido")
+	@IndexColumn(name="index_formacion")
 	private List<FormacionPartido> formacionesTentativas = new ArrayList<FormacionPartido>();
 	@Transient
 	private Estado estado;
 	private String nombreEstado;
 	@OneToOne
 	private FormacionPartido formacionConfirmada;
+
 
 	public Partido() {
 	}
@@ -235,12 +239,22 @@ public class Partido extends PersistentEntity {
 	}
 
 	public void agregarFormacion(FormacionPartido formacionPartido) {
+		EntityManagerHelper.getEntityManager().persist(formacionPartido);
 		this.formacionesTentativas.add(formacionPartido);
+		formacionPartido.setIndex(this.formacionesTentativas.size()-1);
 
 	}
 
 	public int jugo(Jugador jugador) {
 		return estado.jugo(jugador);
+	}
+	
+	public FormacionPartido getFormacionConfirmada() {
+		return formacionConfirmada;
+	}
+
+	public void setFormacionConfirmada(FormacionPartido formacionConfirmada) {
+		this.formacionConfirmada = formacionConfirmada;
 	}
 
 	@PrePersist
