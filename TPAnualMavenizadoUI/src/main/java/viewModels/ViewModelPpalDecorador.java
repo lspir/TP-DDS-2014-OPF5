@@ -18,6 +18,7 @@ import opf5.jugador.HomeJugadores;
 import opf5.partido.HomePartidos;
 import opf5.partido.Partido;
 import vistas.ViewPpal;
+import static db.EntityManagerHelper.*;
 
 public class ViewModelPpalDecorador implements ViewModelPpalInterfaz {
 
@@ -49,7 +50,9 @@ public class ViewModelPpalDecorador implements ViewModelPpalInterfaz {
 	}
 	
 	private void amigar(Jugador jugador, String nombre) {
-		jugador.agregarAmigo(new Amigo(nombre.concat("@gmail.com")));
+		Amigo amigo = new Amigo(nombre.concat("@gmail.com"));
+		persist(amigo);
+		jugador.agregarAmigo(amigo);
 		
 	}
 	
