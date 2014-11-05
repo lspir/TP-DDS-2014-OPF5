@@ -7,23 +7,30 @@ import opf5.inscripcion.Inscripcion;
 import opf5.jugador.Jugador;
 import opf5.jugador.HomeJugadores;
 import opf5.partido.HomePartidos;
+import static db.EntityManagerHelper.*;
 
 import org.junit.Test;
 
 public class TestOPF5_HomePartidos extends TestOPF5{
+	
 	@Test
 	public void jugadorJuegaUnPartidoSeLeConsultaALaHomePorCantidadPartidosJugados() {
 		Jugador emiliano = new Jugador("Emiliano", 28, 2);
 		HomeJugadores.getInstance().create(emiliano);	
+		HomeJugadores.getInstance().create(jugador);
 		HomePartidos.getInstance().create(partidoCon5Estandares);
 		Inscripcion inscripcionEmi = new Inscripcion(emiliano, estandar);
+		persist(inscripcionEmi);
+		
 		partidoCon5Estandares.intentarInscribirA(inscripcionEstandar);
 		partidoCon5Estandares.intentarInscribirA(inscripcionEstandar);
 		partidoCon5Estandares.intentarInscribirA(inscripcionEstandar);
 		partidoCon5Estandares.intentarInscribirA(inscripcionEstandar);
 		partidoCon5Estandares.intentarInscribirA(inscripcionEmi);
+		persist(inscripcionEstandar);
 		partidoCon5Estandares.armarEquipos(new CriterioHandicap(), new DivisionPorPares());
 		partidoCon5Estandares.aceptarEquipos(partidoCon5Estandares.getFormacionesTentativas().get(0));
+		
 		assertEquals(1,
 				homePartidos.consultarCantidadDePartidosJugados(emiliano));
 

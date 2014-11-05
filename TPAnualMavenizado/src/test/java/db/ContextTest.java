@@ -226,6 +226,29 @@ public class ContextTest {
 		assertEquals(0,HomePartidos.getInstance().consultarCantidadDePartidosJugados(jugador));
 	}
 	
+	@Test
+	public void persistirUnSoloJugadorYPreguntarPorLaCantidadDeJugadores(){
+		Jugador jugador = new Jugador("asd", 3, 4);
+		HomeJugadores.getInstance().create(jugador);
+		assertEquals(1, HomeJugadores.getInstance().getJugadores().size());
+	}
+	
+	@Test
+	public void persistirUnSoloJugadorDe3AñosYPreguntarPorLaCantidadDeJugadoresCon4AñosOMas(){
+		Jugador jugador = new Jugador("asd", 3, 4);
+		HomeJugadores.getInstance().create(jugador);
+		assertEquals(0, HomeJugadores.getInstance().cumpleEdadMinima(4, HomeJugadores.getInstance().getJugadores()).size());
+	}
+	
+	@Test
+	public void persistirDosJugadoresYPreguntarPorLosQueNoEmpiezanConB(){
+		Jugador jugador = new Jugador("asd", 3, 4);
+		HomeJugadores.getInstance().create(jugador);
+		Jugador jugador2 = new Jugador("basfj", 4, 5);
+		HomeJugadores.getInstance().create(jugador2);
+		assertEquals(1,HomeJugadores.getInstance().nombreNoEmpiezacon("b", HomeJugadores.getInstance().getJugadores()).size());
+	}
+	
 	private Inscripcion crearInscripcionPersistida(Jugador jugador,
 			TipoDeInscripcion tipoDeInscripcion) {
 		Inscripcion inscripcion = new Inscripcion(jugador, tipoDeInscripcion);
@@ -261,4 +284,6 @@ public class ContextTest {
 		persist(partido);
 		return partido;
 	}
+	
+
 }

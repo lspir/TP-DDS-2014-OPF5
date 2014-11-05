@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 
 import opf5.jugador.*;
 import opf5.partido.HomePartidos;
+import opf5.partido.Partido;
 
 import org.hibernate.mapping.PersistentClass;
 import org.uqbar.commons.utils.Observable;
@@ -22,8 +23,6 @@ import utilitarios.CriterioBusquedaInfractoresAbstracta;
 
 @Observable
 public class HomeJugadores {
-	
-	private List<Jugador> jugadores = new ArrayList<Jugador>();
 	private static final HomeJugadores instance = new HomeJugadores();
 	
 	
@@ -32,7 +31,7 @@ public class HomeJugadores {
 	}
 
 	public void create(Jugador jugador) {
-		this.jugadores.add(jugador);
+		persist(jugador);
 	}
 	
 
@@ -68,12 +67,12 @@ public class HomeJugadores {
 		}
 	
 
-	private List<Jugador> nombreNoEmpiezacon(String nombre,
+	public List<Jugador> nombreNoEmpiezacon(String nombre,
 			List<Jugador> jugadores) {
 		return this.filtrarJugadoresConCondicion(jugador-> !(jugador.nombre().startsWith(nombre)), jugadores);
 	}
 
-	private List<Jugador> cumpleEdadMinima(double edad, List<Jugador> jugadores ) {
+	public List<Jugador> cumpleEdadMinima(double edad, List<Jugador> jugadores ) {
 		return this.filtrarJugadoresConCondicion((jugador)->jugador.edad()>=edad,jugadores);
 		}
 
@@ -82,6 +81,7 @@ public class HomeJugadores {
 	}
 
 	public List<Jugador> getJugadores() {
-		return this.jugadores;
+		return entityManager().unwrap(org.hibernate.Session.class).createCriteria(Jugador.class).list();
 	}
+	
 }
