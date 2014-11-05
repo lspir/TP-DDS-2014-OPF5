@@ -4,6 +4,7 @@ import org.uqbar.arena.layout.*;
 import org.uqbar.arena.widgets.*;
 import org.uqbar.arena.windows.*;
 
+import db.EntityManagerHelper;
 import viewModels.ViewModelPpalDecorador;
 import viewModels.ViewModelPpalInterfaz;
 
@@ -23,6 +24,7 @@ public class ViewPpal extends MainWindow<ViewModelPpalInterfaz>{
 	}
 
 	public static void main(String[] args) {
+		EntityManagerHelper.beginTransaction();
 		new ViewPpal().startApplication();
 	}
 }
