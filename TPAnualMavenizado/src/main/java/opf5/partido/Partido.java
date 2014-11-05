@@ -267,11 +267,11 @@ public class Partido extends PersistentEntity {
 	public void cargarEstado() {
 		switch (this.nombreEstado) {
 		case "Confirmado":
-			this.estado = new Confirmado(this.formacionConfirmada);
+			this.estado = new Confirmado(this.formacionConfirmada);break;
 		case "Ordenado":
-			this.estado = new Ordenado();
+			this.estado = new Ordenado();break;
 		case "Sin Ordenar":
-			this.estado = new SinOrdenar();
+			this.estado = new SinOrdenar();break;
 		}
 	}
 
