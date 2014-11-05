@@ -24,6 +24,7 @@ import opf5.jugador.Critica;
 import opf5.jugador.Infraccion;
 import opf5.jugador.Jugador;
 import opf5.jugador.HomeJugadores;
+import opf5.partido.HomePartidos;
 import opf5.partido.Partido;
 
 import org.junit.After;
@@ -198,7 +199,39 @@ public class ContextTest {
 		Partido partidoLlenoPersistido=entityManager().find(partidoLleno.getClass(), partidoLleno.getId());
 		assertEquals(Confirmado.class,partidoLlenoPersistido.getEstado().getClass());
 		assertEquals(partidoLleno.getFormacionConfirmada(), partidoLlenoPersistido.getFormacionConfirmada());
+	//	assertEquals(1,HomePartidos.getInstance().consultarCantidadDePartidosJugados(entityManager().find(Jugador.class, 21l)));
 		}
+	
+//	@Test
+//	public void consultarCantPartidos(){
+//		Jugador jugador= this.crearJugadorPersistido("El jugador", 2, 1);
+//		Partido partido=new Partido(LocalDate.now(),LocalTime.now(), "Casa");
+//		Inscripcion inscripcion = this.crearInscripcionPersistida(jugador, new Estandar());
+//		Integer i;
+//		for (i = 0; i < 9; i++) {
+//			partido.intentarInscribirA(this.crearInscripcionPersistida(this
+//					.crearJugadorPersistido("Jugador".concat(i.toString()), i,
+//							i + 5), new Estandar()));
+//		}
+//		partido.intentarInscribirA(inscripcion);
+//		persist(partido);
+//		assertEquals(1,HomePartidos.getInstance().getPartidos().size());
+//		partido.armarEquipos(new CriterioHandicap(),new DivisionPorPares());
+//		assertEquals(0,partido.jugo(jugador));
+//		partido.aceptarEquipos(partido.getFormacionesTentativas().get(0));
+//		assertEquals(1,partido.jugo(jugador));
+//		assertEquals(1,HomePartidos.getInstance().getPartidos().get(0).jugo(jugador));
+//		assertEquals(1,HomePartidos.getInstance().consultarCantidadDePartidosJugados(jugador));
+//		Partido partidoPersistido=entityManager().find(Partido.class, partido.getId());
+//		assertEquals(1,partidoPersistido.jugo(jugador));
+//	
+//	}
+	
+	@Test
+	public void consultarCantidadDePartidosAlHome(){
+		Jugador jugador= this.crearJugadorPersistido("Coco", 20,20);
+		assertEquals(0,HomePartidos.getInstance().consultarCantidadDePartidosJugados(jugador));
+	}
 	
 	private Inscripcion crearInscripcionPersistida(Jugador jugador,
 			TipoDeInscripcion tipoDeInscripcion) {

@@ -34,6 +34,7 @@ public class PromedioDeUltimoPartido extends CriterioOrdenamientoEquipos {
 	}
 	
 	private Stream<Critica> obtenerListaDeCriticasUltimoPartido(Jugador jugador){
+		if (jugador.criticas().size()==0) return new ArrayList<Critica>().stream();
 		Partido ultimoPartidoJugado = jugador.criticas().get(jugador.criticas().size()-1).partido();
 		return jugador.criticas().stream().filter(critica-> critica.partido().equals(ultimoPartidoJugado));
 	}

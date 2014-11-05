@@ -2,30 +2,31 @@ package opf5.partido;
 
 import java.util.*;
 
+import db.EntityManagerHelper;
+import static db.EntityManagerHelper.*;
 import opf5.jugador.*;
 
 public class HomePartidos {
 	
-		private List<Partido> partidos = new ArrayList<Partido>();
 		private static final HomePartidos instance=new HomePartidos();
 
 		public static synchronized HomePartidos getInstance() {
 			return instance;
 		}
 		public void create(Partido partido) {
-			this.partidos.add(partido);
+			persist(partido);
 		}
 
 		public void delete(Partido partido) {
-			this.partidos.remove(partido);
+			entityManager().remove(partido);
 		}
 		
 		public long consultarCantidadDePartidosJugados(Jugador jugador){
-			return partidos.stream().mapToInt(partido-> partido.jugo(jugador)).sum();
+			return this.getPartidos().stream().mapToInt(partido-> partido.jugo(jugador)).sum();
 		}
 		
 		public List<Partido> getPartidos(){
-			return partidos;
+			return entityManager().unwrap(org.hibernate.Session.class).createCriteria(Partido.class).list();
 		}
 		
 

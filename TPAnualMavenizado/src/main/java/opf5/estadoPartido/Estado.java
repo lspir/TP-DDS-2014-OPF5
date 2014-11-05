@@ -23,6 +23,9 @@ public abstract class Estado {
 		this.nombre = nombre;
 	}
 
+	public void setearNombreEstadoPartido(Partido partido){
+		partido.setNombreEstado(partido.getEstado().getNombre());
+	}
 	
 	private FormacionPartido formacionConfirmada;
 	

@@ -59,8 +59,9 @@ public class Partido extends PersistentEntity {
 	private List<FormacionPartido> formacionesTentativas = new ArrayList<FormacionPartido>();
 	@Transient
 	private Estado estado;
-	private Boolean flagCambioEstado;
 	private String nombreEstado;
+
+
 	@OneToOne
 	private FormacionPartido formacionConfirmada;
 	
@@ -74,7 +75,8 @@ public class Partido extends PersistentEntity {
 		this.horario = horario;
 		this.lugar = lugar;
 		this.estado = new SinOrdenar();
-		this.flagCambioEstado=false;
+		this.nombreEstado=estado.getNombre();
+		
 	}
 
 	public void intentarInscribirA(Inscripcion inscripcion) {
@@ -260,15 +262,6 @@ public class Partido extends PersistentEntity {
 		this.formacionConfirmada = formacionConfirmada;
 	}
 
-	@PrePersist
-	@PreUpdate
-	public void prePersistir() {
-		this.nombreEstado = this.estado.getNombre();
-		if (this.nombreEstado == "Confirmado") {
-			this.formacionConfirmada = this.estado.getFormacionConfirmada();
-		}
-		this.flagCambioEstado=false;
-	}
 
 	@PostLoad
 	public void cargarEstado() {
@@ -282,12 +275,12 @@ public class Partido extends PersistentEntity {
 		}
 	}
 
-	public Boolean getFlagCambioEstado() {
-		return flagCambioEstado;
+	public String getNombreEstado() {
+		return nombreEstado;
 	}
 
-	public void setFlagCambioEstado(Boolean cambioEstado) {
-		this.flagCambioEstado = cambioEstado;
+	public void setNombreEstado(String nombreEstado) {
+		this.nombreEstado = nombreEstado;
 	}
 
 }
