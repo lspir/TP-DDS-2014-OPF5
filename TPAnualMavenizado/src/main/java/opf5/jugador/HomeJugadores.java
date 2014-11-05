@@ -21,19 +21,20 @@ import utilitarios.CriterioBusqueda;
 import utilitarios.CriterioBusquedaInfractoresAbstracta;
 
 @Observable
-public class HomeJugadores extends PersistentEntity {
+public class HomeJugadores {
 	
 	private List<Jugador> jugadores = new ArrayList<Jugador>();
 	private static final HomeJugadores instance = new HomeJugadores();
 	
 	
-	public static synchronized HomeJugadores getInstance() {
+	public static HomeJugadores getInstance() {
 		return instance;
 	}
 
 	public void create(Jugador jugador) {
 		this.jugadores.add(jugador);
 	}
+	
 
 	public List<Jugador> search(double edad, String nombre, double handicap,
 			CriterioBusqueda criterioBusquedaHandicap, double promedio,

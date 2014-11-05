@@ -10,7 +10,7 @@ public class HomePartidos {
 	
 		private static final HomePartidos instance=new HomePartidos();
 
-		public static synchronized HomePartidos getInstance() {
+		public static HomePartidos getInstance() {
 			return instance;
 		}
 		public void create(Partido partido) {
