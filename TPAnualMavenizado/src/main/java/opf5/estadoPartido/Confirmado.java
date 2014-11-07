@@ -68,5 +68,13 @@ public class Confirmado extends Estado {
 	private Boolean loContiene(List<Inscripcion> lista, Jugador jugador){
 		return lista.stream().map(inscripcion->inscripcion.jugador()).collect(toList()).contains(jugador);
 	}
+
+	public boolean confirmado() {
+		return true;
+	}
+
+	public boolean ordenado() {
+		return false;
+	}
 }
 

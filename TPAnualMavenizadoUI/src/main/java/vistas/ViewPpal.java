@@ -1,8 +1,11 @@
 package vistas;
 
+import org.eclipse.core.databinding.observable.set.SetDiff;
 import org.uqbar.arena.layout.*;
 import org.uqbar.arena.widgets.*;
 import org.uqbar.arena.windows.*;
+import org.uqbar.commons.utils.Observable;
+import org.uqbar.ui.view.ErrorViewer;
 
 import db.EntityManagerHelper;
 import viewModels.ViewModelPpalDecorador;
@@ -14,6 +17,8 @@ public class ViewPpal extends MainWindow<ViewModelPpalInterfaz>{
 
 	public ViewPpal() {
 		super(new ViewModelPpalDecorador());
+		
+		
 	}
 
 	public void createContents(Panel mainPanel) {
@@ -24,7 +29,8 @@ public class ViewPpal extends MainWindow<ViewModelPpalInterfaz>{
 	}
 
 	public static void main(String[] args) {
-		EntityManagerHelper.beginTransaction();
 		new ViewPpal().startApplication();
+	
 	}
+	
 }

@@ -13,6 +13,10 @@ public class Ordenado extends NoConfirmado {
 		this.setearNombreEstadoPartido(partido);
 		partido.setFormacionConfirmada(formacion);
 	}
+	
+	public boolean ordenado() {
+		return true;
+	}
 
 
 }

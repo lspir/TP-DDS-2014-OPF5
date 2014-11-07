@@ -55,5 +55,10 @@ public abstract class Estado {
 
 	public void setFormacionConfirmada(FormacionPartido formacion) {
 		this.formacionConfirmada = formacion;
-	};
+	}
+
+	public abstract boolean confirmado();
+
+	public abstract boolean ordenado();
+
 }

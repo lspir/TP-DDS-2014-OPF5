@@ -60,8 +60,6 @@ public class Partido extends PersistentEntity {
 	@Transient
 	private Estado estado;
 	private String nombreEstado;
-
-
 	@OneToOne
 	private FormacionPartido formacionConfirmada;
 	
@@ -281,6 +279,14 @@ public class Partido extends PersistentEntity {
 
 	public void setNombreEstado(String nombreEstado) {
 		this.nombreEstado = nombreEstado;
+	}
+
+	public boolean estaConfirmado() {
+		return estado.confirmado();
+	}
+
+	public boolean estaOrdenado() {
+		return estado.ordenado();
 	}
 
 }

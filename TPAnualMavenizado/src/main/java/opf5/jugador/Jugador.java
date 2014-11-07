@@ -7,6 +7,7 @@ import org.uqbar.commons.utils.Observable;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
 import opf5.excepciones.*;
 import opf5.partido.*;
+import db.EntityManagerHelper;
 import db.PersistentEntity;
 
 import javax.persistence.Entity;
@@ -79,6 +80,7 @@ public class Jugador extends PersistentEntity{
 	}
 
 	public void tePenalizaron(Infraccion infraccion) {
+		EntityManagerHelper.getEntityManager().persist(infraccion);
 		infracciones.add(infraccion);
 	}
 

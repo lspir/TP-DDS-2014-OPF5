@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
+import db.EntityManagerHelper;
 import opf5.algoritmosDivisionDeEquipos.DivisionPorPares;
 import opf5.criteriosDeOrdenamientoDeEquipos.CriterioHandicap;
 import opf5.inscripcion.Estandar;
@@ -27,7 +28,11 @@ public class ViewModelPpalDecorador implements ViewModelPpalInterfaz {
 			.getInstance();
 
 	public ViewModelPpalDecorador() {
+		if(HomePartidos.getInstance().getPartidos().size()==0){
+		EntityManagerHelper.beginTransaction();
 		this.armarFixture();
+		EntityManagerHelper.commit();
+		}
 	}
 
 	private void armarFixture() {
@@ -63,26 +68,35 @@ public class ViewModelPpalDecorador implements ViewModelPpalInterfaz {
 
 	private Partido armarPartidoSinConfirmar(int posInicial, int posFinal) {
 		Partido partido=new Partido(LocalDate.now(),LocalTime.now(),"Campus");
+		HomePartidos.getInstance().create(partido);
 		for(int i=posInicial;i<posFinal;i++){
 			Jugador jugador=repositorioJugadores.getJugadores().get(i);
 			Inscripcion inscripcionEstandar=new Inscripcion(jugador, new Estandar());
+			persist(inscripcionEstandar);
 			partido.intentarInscribirA(inscripcionEstandar);
-			jugador.agregarCritica(new Critica(this.calificacionRandom(), "Podria ser peor", partido));
-			jugador.agregarCritica(new Critica(this.calificacionRandom(), "Crack", partido));
-			jugador.agregarCritica(new Critica(this.calificacionRandom(), "Normal", partido));
-			jugador.agregarCritica(new Critica(this.calificacionRandom(), "Podria ser peor", partido));
+			jugador.agregarCritica(this.criticaPersistente(this.calificacionRandom(), "Podria ser peor", partido));
+			jugador.agregarCritica(this.criticaPersistente(this.calificacionRandom(), "Crack", partido));
+			jugador.agregarCritica(this.criticaPersistente(this.calificacionRandom(), "Normal", partido));
+			jugador.agregarCritica(this.criticaPersistente(this.calificacionRandom(), "Podria ser mejor", partido));
 			if(this.randomEntre(0, 3)==1){
 				partido.seDioDeBajaSinReemplazante(inscripcionEstandar);
 				partido.intentarInscribirA(inscripcionEstandar);
 			}
 			if(this.randomEntre(0, 3)==1){
-				jugador.tePenalizaron(new Infraccion("Me caes Mal", 0));
+				Infraccion infraccion=new Infraccion("Me caes Mal", 0);
+				jugador.tePenalizaron(infraccion);
 			}
 		}
-		HomePartidos.getInstance().create(partido);
 		return partido;
 	}
 	
+	private Critica criticaPersistente(int calificacionRandom, String texto,
+			Partido partido) {
+		Critica critica= new Critica(calificacionRandom, texto, partido);
+		persist(critica);
+		return critica;
+	}
+
 	private int calificacionRandom(){
 		return randomEntre(1, 10);
 	}

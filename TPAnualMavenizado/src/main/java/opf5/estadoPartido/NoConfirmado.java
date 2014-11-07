@@ -13,7 +13,7 @@ import opf5.inscripcion.*;
 import opf5.jugador.*;
 import opf5.partido.*;
 
-public class NoConfirmado extends Estado {
+public abstract class NoConfirmado extends Estado {
 
 	public void intentarInscribirA(Inscripcion inscripcion, Partido partido) {
 		if (partido.getInscripciones().size() < 10) {
@@ -78,5 +78,8 @@ public class NoConfirmado extends Estado {
 		return 0;
 	}
 
+	public boolean confirmado() {
+		return false;
+	}
 
 }

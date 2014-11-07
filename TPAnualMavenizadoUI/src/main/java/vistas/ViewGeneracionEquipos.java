@@ -2,6 +2,9 @@ package vistas;
 
 import opf5.algoritmosDivisionDeEquipos.*;
 import opf5.criteriosDeOrdenamientoDeEquipos.*;
+import opf5.excepciones.ElPartidoNoEstaCompleto;
+import opf5.excepciones.ElPartidoYaEstaConfirmadoException;
+import opf5.excepciones.NoSePuedeAceptarEquiposElPartidoNoEstaOrdenadoException;
 import opf5.jugador.*;
 
 import org.uqbar.arena.actions.*;
@@ -72,10 +75,10 @@ public class ViewGeneracionEquipos extends Vista<ViewModelGeneracion> {
 	@Override
 	protected void addActions(Panel actionsPanel) {
 		new Button(actionsPanel).setCaption("GENERAR").onClick(
-				() -> this.getModelObject().generacionEquipos());
-		new Button(actionsPanel).setCaption("CONFIRMAR").onClick(() -> {
-			this.getModelObject().confirmarEquipos();
-			new VistaConfirmacionGeneracionEquipos(this).open();
+				() -> this.generarEquipos());
+		new Button(actionsPanel).setCaption("CONFIRMAR").onClick(() -> {this.aceptarEquipos()
+			;
+			
 		});
 		Button verDatos = new Button(actionsPanel);
 		verDatos.setCaption("Ver Datos de Jugador");
@@ -85,6 +88,39 @@ public class ViewGeneracionEquipos extends Vista<ViewModelGeneracion> {
 				"jugadorSeleccionado");
 		verDatos.bindEnabled(elementSelected);
 
+	}
+
+	private void generarEquipos() {
+		try{
+			this.getModelObject().generacionEquipos();
+		}
+		catch (ElPartidoYaEstaConfirmadoException exception){
+			this.showError(exception.getMessage());			
+		}
+		catch (ElPartidoNoEstaCompleto exception){
+			this.showError(exception.getMessage());
+		}
+		catch(NullPointerException exception){
+			this.showError("Faltan completar campos para poder realizar la generacion de equipos");
+		}
+		
+	}
+	
+	private void aceptarEquipos() {
+		try{
+			this.getModelObject().confirmarEquipos();
+			new VistaConfirmacionGeneracionEquipos(this).open();
+		}
+		catch (ElPartidoYaEstaConfirmadoException exception){
+			this.showError(exception.getMessage());			
+		}
+		catch (ElPartidoNoEstaCompleto exception){
+			this.showError(exception.getMessage());
+		}
+		catch (NoSePuedeAceptarEquiposElPartidoNoEstaOrdenadoException exception){
+			this.showError(exception.getMessage());
+		}
+		
 	}
 
 	protected void createResultsGrid(Panel mainPanel) {

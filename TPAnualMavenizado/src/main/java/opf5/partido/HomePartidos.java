@@ -29,5 +29,15 @@ public class HomePartidos {
 			return entityManager().unwrap(org.hibernate.Session.class).createCriteria(Partido.class).list();
 		}
 		
+		public List<Partido> getPartidosOrdenados(){
+			List<Partido> partidosAOrdenar=this.getPartidos();
+			Collections.sort(partidosAOrdenar,new Comparator<Partido>() {
+				public int compare(Partido p1, Partido p2) {
+				    return Long.compare(p1.getId(), p2.getId());
+				}
+				});
+			return partidosAOrdenar;
+		}
+		
 
 }
