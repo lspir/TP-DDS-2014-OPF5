@@ -35,6 +35,10 @@ public class ViewModelPpalDecorador implements ViewModelPpalInterfaz {
 		}
 	}
 
+	//FIXME esto deberían llevarlo a una clase aparte, llamémosla Bootstrap,
+	//que inicialice a la aplicación con datos de prueba. De lo contrario, queda harcodeado en el código
+	//que levante datos de juguete, pero sería deseable que uno pueda levantar la aplicación 
+	//sin estos datos en un contexto productivo (es decir, cuando hay que usarla de posta)
 	private void armarFixture() {
 		ArrayList<String> nombreJugadores = new ArrayList<String>(
 			    Arrays.asList("Belén", "Leandro", "Emiliano","Alicia","Noelia","Tomasito","Patricio","Beto","Genaro","Kiara","FM9","Negrita",

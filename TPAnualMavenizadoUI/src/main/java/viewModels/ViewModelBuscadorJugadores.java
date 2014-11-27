@@ -48,6 +48,8 @@ public class ViewModelBuscadorJugadores {
 		}
 
 		public void search() {
+		   //FIXME podŕian extraer un objeto que represente a la búsqueda. 
+		   //noten que están incurriendo en el clásico long parameter list
 				this.resultados = HomeJugadores.getInstance().search(this.edad, this.nombre,this.handicap, this.criterioBusquedaHandicap,this.promedio,this.criterioPromedio,this.criterioInfractoresSeleccionado);
 		}
 

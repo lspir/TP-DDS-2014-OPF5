@@ -94,6 +94,11 @@ public class ViewGeneracionEquipos extends Vista<ViewModelGeneracion> {
 		try{
 			this.getModelObject().generacionEquipos();
 		}
+		//FIXME pueden evitar repetir la lógica , pueden usar pipes en el tipo de la excepción. 
+		//Algo así:     catch (ElPartidoYaEstaConfirmadoException|ElPartidoNoEstaCompleto exception){
+		//También pueden crear una expceción que generalice a todas las excepciones de partido
+		//(es decir, 
+		//que sea la excepción padre de todas estas excepciones) , y capturar sólo esa
 		catch (ElPartidoYaEstaConfirmadoException exception){
 			this.showError(exception.getMessage());			
 		}
@@ -138,6 +143,8 @@ public class ViewGeneracionEquipos extends Vista<ViewModelGeneracion> {
 	}
 
 	protected void openDialog(Dialog<?> dialog) {
+	   //FIXME no es necesario usar messageSend. Con las lambdas resuelven el mismo problema
+	   //de una manera tipada estátiamente
 		dialog.onAccept(new MessageSend(this.getModelObject(), "generarEquipos"));
 		dialog.open();
 	}

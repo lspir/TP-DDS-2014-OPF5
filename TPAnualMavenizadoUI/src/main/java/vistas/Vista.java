@@ -14,6 +14,9 @@ import org.uqbar.arena.windows.WindowOwner;
 
 import com.uqbar.commons.collections.Transformer;
 
+//FIXME nombre bastante genérico, pero no tan generico como los métodos que tiene
+//todas las vistas pueden crear una tabla de equipos? todas las vistas tienen una tabla de jugadores?
+//no me cierra la abstracción. Suena a que derivará en un refused bequest
 public abstract class Vista<ViewModel> extends SimpleWindow<ViewModel> {
 
 	public Vista(WindowOwner parent, ViewModel model) {
